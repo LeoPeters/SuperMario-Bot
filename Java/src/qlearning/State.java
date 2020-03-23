@@ -1,5 +1,6 @@
 package qlearning;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -9,16 +10,7 @@ import qlearning.exceptions.ActionNotAvailableException;
 
 public class State {
 	private Map<Action, Double> score = new LinkedHashMap<Action, Double>();
-
-	/**
-	 * All actions that are assigned to this constructor will be available for the state.
-	 * @param actions
-	 */
-	public State(Action... actions) {
-		for(Action a : actions) {
-			score.put(a, new Double(-1));
-		}
-	}
+	private ArrayList<Action> availableActions;
 	
 	/**
 	 * All actions from the Action-Enum will be available for the state.
@@ -39,11 +31,25 @@ public class State {
 	public Action getLowestScore() {
 		Entry<Action, Double> min = null;
 		for (Entry<Action, Double> entry : score.entrySet()) {
+			if(!availableActions.contains(entry.getKey())) {
+				continue;
+			}
 			if (min == null || min.getValue() > entry.getValue()) {
 				min = entry;
 			}
 		}
 		return min.getKey();
+	}
+	
+	public void setAvailableActions(Action... actions) {
+		availableActions = new ArrayList<Action>();
+		for(int i = 0; i < actions.length; i++) {
+			availableActions.add(actions[i]);
+		}
+	}
+	
+	public double getScore(Action a) {
+		return score.get(a);
 	}
 
 	public void setScore(Action action, double value) {
@@ -57,10 +63,22 @@ public class State {
 			e.printStackTrace();
 		}
 	}
+	
+	public double getMaxReward() {
+		double max = score.get(Action.RUN);
+		for(double d : score.values()) {
+			if(d > max) {
+				max = d;
+			}
+		}
+		return max;
+	}
 
 	@Override
 	public String toString() {
 //		score.keySet().forEach(arg0))
 		return super.toString();
 	}
+
+
 }
