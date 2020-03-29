@@ -1,0 +1,2 @@
+C:\Users\Luisn\source\repos\InOutputMachineLerning\Debug\InOutputMachineLerning.exe
+C:\Users\Luisn\source\repos\InOutputMachineLerning\Debug\InOutputMachineLerning.pdb
