@@ -21,6 +21,9 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="QLearning.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -28,6 +31,9 @@
     </ClCompile>
     <ClCompile Include="Super Mario Bot.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QLearning.cpp">
+      <Filter>Source Files\Q-Learning</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
