@@ -1,5 +1,5 @@
 #pragma once
-enum class action {
+enum class marioAction {
 	moveLeft,
 	moveRight,
 	jump,

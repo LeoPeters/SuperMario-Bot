@@ -1,6 +1,6 @@
 #include "AppControlDummy.h"
 
-void AppControlDummy::makeAction(action)
+void AppControlDummy::makeAction(marioAction action)
 {
 }
 

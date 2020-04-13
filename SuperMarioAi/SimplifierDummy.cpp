@@ -1,11 +1,11 @@
-#include "ImageScanDummy.h"
+#include "SimplifierDummy.h"
 #include "Globals.h"
 
 
-ImageScanDummy::ImageScanDummy() {
+SimplifierDummy::SimplifierDummy() {
 }
 
-bool ImageScanDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBITMAP image)
+bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBITMAP image)
 {
 	simply->clear();
 	int ergArray[GRIDRADIUS][GRIDRADIUS];

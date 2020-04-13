@@ -11,7 +11,7 @@ AiController::AiController(int argc, char** argv) :
 	aiAlgo(NULL),
 	appControl(NULL),
 	currentState(0),
-	nextAction(action())
+	nextAction(marioAction())
 {
 	gui = new AiGui(argc, argv, this);
 }
@@ -19,7 +19,7 @@ AiController::AiController(int argc, char** argv) :
 void AiController::run() {
 	bool playerAlive;
 
-	std::vector<action> possibleActions;
+	std::vector<marioAction> possibleActions;
 
 	while (gui->mainWindowIsVisible()) {
 		while (isGameStarted) {

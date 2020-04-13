@@ -2,7 +2,7 @@
 
 #include <QMainWindow>
 #include "IGuiObserver.h"
-#include "ActionEnum.h"
+#include "MarioAction.h"
 #include "ui_MainWindow.h"
 
 class MainWindow : public QMainWindow
@@ -16,7 +16,7 @@ public:
 	bool isActivated();
 	void updateGameView(HBITMAP);
 	void updateSimplifyView(std::vector<std::vector<int>> simpleView);
-	void updateAction(action nextAction);
+	void updateAction(marioAction nextAction);
 	void updateState(int);
 	bool getIsPaused();
 

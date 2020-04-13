@@ -1,10 +1,10 @@
 #pragma once
 #include <mutex>
 #include <condition_variable>
-#include "IAiAlgorithm.h"
+#include "IAgent.h"
 #include "IAppControl.h"
 #include "IEnviroment.h"
-#include "IImageScan.h"
+#include "ISimplifier.h"
 #include "IScreenCapture.h"
 #include "IGuiObserver.h"
 #include "AiFactory.h"
@@ -25,8 +25,8 @@ private:
 	IScreenCapture* screenCapture;
 	IAppControl* appControl;
 	IEnviroment* enviroment;
-	IImageScan* imageScan;
-	IAiAlgorithm* aiAlgo;
+	ISimplifier* imageScan;
+	IAgent* aiAlgo;
 	AiGui* gui;
 	bool isPause=false;
 	bool isGameStarted = false;
@@ -34,7 +34,7 @@ private:
 	std::condition_variable cv;
 	HBITMAP gameCapture=HBITMAP();
 	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
-	action nextAction;
+	marioAction nextAction;
 	int currentState;
 };
 

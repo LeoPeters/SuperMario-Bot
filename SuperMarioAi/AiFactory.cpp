@@ -1,13 +1,13 @@
 #include "MarioWindow.h"
 #include "ScreenCaptureDummy.h"
 #include "ScreenCapture.h"
-#include "ImageScanDummy.h"
+#include "SimplifierDummy.h"
 #include "EnviromentDummy.h"
-#include "AiAlgoDummy.h"
+#include "AgentDummy.h"
 #include "AppControlDummy.h"
 #include "MarioController.h"
 #include "AiFactory.h"
-bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool imageScanDummy, bool enviromentDummy, bool aiAlgoDummy, bool appControlDummy)
+bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, bool enviromentDummy, bool aiAlgoDummy, bool appControlDummy)
 {
 	if (appControlDummy) {
 		this->appControl = new AppControlDummy();
@@ -21,8 +21,8 @@ bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool imageScanDummy, b
 	if (screenCaptureDummy) {
 		this->screenCapture = new ScreenCaptureDummy();
 	}else{ this->screenCapture = new ScreenCapture(window);}
-	if (imageScanDummy) {
-		this->imageScan = new ImageScanDummy();
+	if (simplifierDummy) {
+		this->imageScan = new SimplifierDummy();
 	}
 	else {}
 	if (enviromentDummy) {
@@ -30,7 +30,7 @@ bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool imageScanDummy, b
 	}
 	else {}
 	if (aiAlgoDummy) {
-		this->aiAlgo = new AiAlgoDummy();
+		this->aiAlgo = new AgentDummy();
 	}
 	else {}
 	return true;
@@ -57,12 +57,12 @@ IEnviroment* AiFactory::getEnviroment()
 	return enviroment;
 }
 
-IImageScan* AiFactory::getImageScan()
+ISimplifier* AiFactory::getImageScan()
 {
 	return imageScan;
 }
 
-IAiAlgorithm* AiFactory::getAiAlgo()
+IAgent* AiFactory::getAiAlgo()
 {
 	return aiAlgo;
 }

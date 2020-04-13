@@ -46,6 +46,6 @@
 //Paths
 #define PNG_NAME "pictures/Input/input.png"
 #define PNG_LNAME L"pictures/Input/input.png"
-#define SUPER_MARIO_PATH L"C:/Users/Luisn/OneDrive/Desktop/Mesen.exe"
+#define SUPER_MARIO_PATH L"C:/Users/Luisn/OneDrive/Dokumente/Mesen/Mesen.exe"
 
 #endif

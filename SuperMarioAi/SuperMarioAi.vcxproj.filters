@@ -64,16 +64,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AiAlgoDummy.cpp">
-      <Filter>Source Files\Dummy</Filter>
-    </ClCompile>
     <ClCompile Include="AppControlDummy.cpp">
       <Filter>Source Files\Dummy</Filter>
     </ClCompile>
     <ClCompile Include="EnviromentDummy.cpp">
-      <Filter>Source Files\Dummy</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageScanDummy.cpp">
       <Filter>Source Files\Dummy</Filter>
     </ClCompile>
     <ClCompile Include="ScreenCaptureDummy.cpp">
@@ -133,6 +127,12 @@
     <ClCompile Include="PngImage.cpp">
       <Filter>Source Files\Simplifier</Filter>
     </ClCompile>
+    <ClCompile Include="SimplifierDummy.cpp">
+      <Filter>Source Files\Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentDummy.cpp">
+      <Filter>Source Files\Dummy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui">
@@ -140,22 +140,10 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActionEnum.h">
-      <Filter>Header Files\Structs/Enum/Defines</Filter>
-    </ClInclude>
-    <ClInclude Include="AiAlgoDummy.h">
-      <Filter>Header Files\Dummy</Filter>
-    </ClInclude>
-    <ClInclude Include="IAiAlgorithm.h">
-      <Filter>Header Files\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="IAppControl.h">
       <Filter>Header Files\Interface</Filter>
     </ClInclude>
     <ClInclude Include="IEnviroment.h">
-      <Filter>Header Files\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="IImageScan.h">
       <Filter>Header Files\Interface</Filter>
     </ClInclude>
     <ClInclude Include="IScreenCapture.h">
@@ -168,9 +156,6 @@
       <Filter>Header Files\Dummy</Filter>
     </ClInclude>
     <ClInclude Include="EnviromentDummy.h">
-      <Filter>Header Files\Dummy</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageScanDummy.h">
       <Filter>Header Files\Dummy</Filter>
     </ClInclude>
     <ClInclude Include="KeyboardDefines.h">
@@ -232,6 +217,21 @@
     </ClInclude>
     <ClInclude Include="PngImage.h">
       <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="SimplifierDummy.h">
+      <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="ISimplifier.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentDummy.h">
+      <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="IAgent.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="MarioAction.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

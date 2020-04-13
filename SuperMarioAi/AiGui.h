@@ -1,12 +1,12 @@
 #pragma once
 #include "ScreenCapture.h"
 #include "MainWindow.h"
-#include "ActionEnum.h"
+#include "MarioAction.h"
 class AiGui
 {
 public:
 	AiGui(int argc, char** argv, IGuiObserver*);
-	void update(HBITMAP gameView, std::vector<std::vector<int>> simpleView, action nextaction, int state);
+	void update(HBITMAP gameView, std::vector<std::vector<int>> simpleView, marioAction nextaction, int state);
 	bool mainWindowIsVisible();
 	MainWindow* getMainWindow();
 	bool isPaused();

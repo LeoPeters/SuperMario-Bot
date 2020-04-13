@@ -3,8 +3,8 @@
 #include "IScreenCapture.h"
 #include "IAppControl.h"
 #include "IEnviroment.h"
-#include "IImageScan.h"
-#include "IAiAlgorithm.h"
+#include "ISimplifier.h"
+#include "IAgent.h"
 class AiFactory
 {
 public:
@@ -13,14 +13,14 @@ public:
 	IScreenCapture* getScreenCapture();
 	IAppControl* getAppControl();
 	IEnviroment* getEnviroment();
-	IImageScan* getImageScan();
-	IAiAlgorithm* getAiAlgo();
+	ISimplifier* getImageScan();
+	IAgent* getAiAlgo();
 private:
 	HWND window;
 	IScreenCapture* screenCapture;
 	IAppControl* appControl;
 	IEnviroment* enviroment;
-	IImageScan* imageScan;
-	IAiAlgorithm* aiAlgo;
+	ISimplifier* imageScan;
+	IAgent* aiAlgo;
 };
 
