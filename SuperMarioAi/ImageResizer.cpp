@@ -148,9 +148,9 @@ void ImageResizer::resize_png_file(int x_start, int y_start, int x_end, int y_en
     png_write_image(png, new_row_pointers);
     png_write_end(png, NULL);
     //Clean
-    /*for(int y = 0; y <= new_height; y++) {
+    for(int y = 0; y < new_height; y++) {
         free(new_row_pointers[y]); //NOT WORKING?
-    }*/ 
+    }
     free(new_row_pointers);
 
     //free(new_row_pointers);
