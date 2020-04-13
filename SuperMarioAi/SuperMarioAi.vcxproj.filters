@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Header Files\Dummy">
+      <UniqueIdentifier>{43c07368-a20d-47fd-8753-4d9112f067e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interface">
+      <UniqueIdentifier>{13fe6259-654c-4a15-a53c-3ef4f59098f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GUI">
+      <UniqueIdentifier>{cb8b6cdf-5ee3-4050-9869-49f30c40512c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Dummy">
+      <UniqueIdentifier>{41216c94-d6dc-4d6a-9ea2-8de3cf46f27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{3dcfb028-aaa3-4c13-9022-3191a9bb173b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game I/O">
+      <UniqueIdentifier>{72dfca91-80f9-48e8-8fdf-de58f00e35c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game I/O">
+      <UniqueIdentifier>{973d4bff-bd1d-47cc-ae39-4214393d449d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Structs/Enum/Defines">
+      <UniqueIdentifier>{afd7cf3e-d24b-43fd-8a1c-383da20d4e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ControlUnit">
+      <UniqueIdentifier>{263ea152-105f-4304-854c-605f51a8d427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ControlUnit">
+      <UniqueIdentifier>{7d0bc679-cad1-413b-875f-6e9287f53711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Simplifier">
+      <UniqueIdentifier>{d75c13d5-97cb-4542-9d2b-55573889b81c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Simplifier">
+      <UniqueIdentifier>{754f7e1a-e2a9-4b4d-9316-820684ee0a48}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AiAlgoDummy.cpp">
+      <Filter>Source Files\Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="AppControlDummy.cpp">
+      <Filter>Source Files\Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnviromentDummy.cpp">
+      <Filter>Source Files\Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageScanDummy.cpp">
+      <Filter>Source Files\Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenCaptureDummy.cpp">
+      <Filter>Source Files\Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Source Files\Game I/O</Filter>
+    </ClCompile>
+    <ClCompile Include="MarioController.cpp">
+      <Filter>Source Files\Game I/O</Filter>
+    </ClCompile>
+    <ClCompile Include="MarioWindow.cpp">
+      <Filter>Source Files\Game I/O</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenCapture.cpp">
+      <Filter>Source Files\Game I/O</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AiController.cpp">
+      <Filter>Source Files\ControlUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="AiFactory.cpp">
+      <Filter>Source Files\ControlUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="AiGui.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Environment.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+    <ClCompile Include="FinderThread.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+    <ClCompile Include="GridScanner.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageDistributor.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLibrary.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResizer.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+    <ClCompile Include="Mapper.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+    <ClCompile Include="MarioFinder.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TemplateMatcher.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+    <ClCompile Include="PngImage.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="MainWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ActionEnum.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="AiAlgoDummy.h">
+      <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="IAiAlgorithm.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IAppControl.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnviroment.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IImageScan.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IScreenCapture.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenCaptureDummy.h">
+      <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="AppControlDummy.h">
+      <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnviromentDummy.h">
+      <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageScanDummy.h">
+      <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardDefines.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenCapture.h">
+      <Filter>Header Files\Game I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="MarioWindow.h">
+      <Filter>Header Files\Game I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="MarioController.h">
+      <Filter>Header Files\Game I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Header Files\Game I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="AiFactory.h">
+      <Filter>Header Files\ControlUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="AiController.h">
+      <Filter>Header Files\ControlUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="AiGui.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="IGuiObserver.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment.h">
+      <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="FinderThread.h">
+      <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="GridScanner.h">
+      <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageDistributor.h">
+      <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLibrary.h">
+      <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageResizer.h">
+      <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Mapper.h">
+      <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="MarioFinder.h">
+      <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="TemplateMatcher.h">
+      <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="PngImage.h">
+      <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="MainWindow.h">
+      <Filter>Header Files\GUI</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
