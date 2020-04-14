@@ -1,9 +1,9 @@
 #ifndef environmentdummy_h
 #define environmentdummy_h
 
-#include "IEnviroment.h"
+#include "IEnvironment.h"
 
-class EnviromentDummy:public IEnviroment
+class EnvironmentDummy:public IEnvironment
 {
 
 	 void calculateStateAndActions(std::vector<std::vector<int>>, std::vector<marioAction>* possibleActions, int* state) override;

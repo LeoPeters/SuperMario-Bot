@@ -2,12 +2,12 @@
 #include "ScreenCaptureDummy.h"
 #include "ScreenCapture.h"
 #include "SimplifierDummy.h"
-#include "EnviromentDummy.h"
+#include "EnvironmentDummy.h"
 #include "AgentDummy.h"
 #include "AppControlDummy.h"
 #include "MarioController.h"
 #include "AiFactory.h"
-bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, bool enviromentDummy, bool aiAlgoDummy, bool appControlDummy)
+bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, bool environmentDummy, bool aiAlgoDummy, bool appControlDummy)
 {
 	if (appControlDummy) {
 		this->appControl = new AppControlDummy();
@@ -25,8 +25,8 @@ bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, 
 		this->imageScan = new SimplifierDummy();
 	}
 	else {}
-	if (enviromentDummy) {
-		this->enviroment = new EnviromentDummy();
+	if (environmentDummy) {
+		this->environment = new EnvironmentDummy();
 	}
 	else {}
 	if (aiAlgoDummy) {
@@ -52,9 +52,9 @@ IAppControl* AiFactory::getAppControl()
 	return appControl;
 }
 
-IEnviroment* AiFactory::getEnviroment()
+IEnvironment* AiFactory::getEnvironment()
 {
-	return enviroment;
+	return environment;
 }
 
 ISimplifier* AiFactory::getImageScan()

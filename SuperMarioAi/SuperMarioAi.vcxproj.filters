@@ -152,9 +152,6 @@
     <ClInclude Include="AppControlDummy.h">
       <Filter>Header Files\Dummy</Filter>
     </ClInclude>
-    <ClInclude Include="EnviromentDummy.h">
-      <Filter>Header Files\Dummy</Filter>
-    </ClInclude>
     <ClInclude Include="KeyboardDefines.h">
       <Filter>Header Files\Structs/Enum/Defines</Filter>
     </ClInclude>
@@ -232,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="IEnvironment.h">
       <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="EnvironmentDummy.h">
+      <Filter>Header Files\Dummy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

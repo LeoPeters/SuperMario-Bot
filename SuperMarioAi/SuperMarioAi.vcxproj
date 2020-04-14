@@ -123,7 +123,7 @@
     <ClInclude Include="AiFactory.h" />
     <ClInclude Include="AiGui.h" />
     <ClInclude Include="AppControlDummy.h" />
-    <ClInclude Include="EnviromentDummy.h" />
+    <ClInclude Include="EnvironmentDummy.h" />
     <ClInclude Include="Environment.h" />
     <ClInclude Include="FinderThread.h" />
     <ClInclude Include="Globals.h" />

@@ -7,7 +7,7 @@
 AiController::AiController(int argc, char** argv) :
 	screenCapture(NULL),
 	simplifier(NULL),
-	enviroment(NULL),
+	environment(NULL),
 	aiAlgo(NULL),
 	appControl(NULL),
 	currentState(0),
@@ -26,7 +26,7 @@ void AiController::run() {
 			gameCapture = screenCapture->captureScreen(PNG_LNAME);
 			if (!gui->getMainWindow()->getIsPaused()) {
 				simplifier->simplifyImage(simplifyVec, gameCapture);
-				enviroment->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
+				environment->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
 				nextAction = aiAlgo->calculateAction(currentState, possibleActions);
 				appControl->makeAction(nextAction);
 			}
@@ -91,7 +91,7 @@ void AiController::startSuperMario()
 	if (factory.loadSuperMarioAi()) {
 		this->screenCapture = factory.getScreenCapture();
 		this->simplifier = factory.getImageScan();
-		this->enviroment = factory.getEnviroment();
+		this->environment = factory.getEnvironment();
 		this->aiAlgo = factory.getAiAlgo();
 		this->appControl = factory.getAppControl();
 		isGameStarted = true;

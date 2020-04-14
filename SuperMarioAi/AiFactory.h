@@ -3,24 +3,24 @@
 
 #include "IScreenCapture.h"
 #include "IAppControl.h"
-#include "IEnviroment.h"
+#include "IEnvironment.h"
 #include "ISimplifier.h"
 #include "IAgent.h"
 class AiFactory
 {
 public:
-	bool loadSuperMarioAi(bool screenCaptureDummy, bool imageScanDummy, bool enviromentDummy, bool aiAlgoDummy, bool appControlDummy);
+	bool loadSuperMarioAi(bool screenCaptureDummy, bool imageScanDummy, bool environmentDummy, bool aiAlgoDummy, bool appControlDummy);
 	bool loadSuperMarioAi();
 	IScreenCapture* getScreenCapture();
 	IAppControl* getAppControl();
-	IEnviroment* getEnviroment();
+	IEnvironment* getEnvironment();
 	ISimplifier* getImageScan();
 	IAgent* getAiAlgo();
 private:
 	HWND window;
 	IScreenCapture* screenCapture;
 	IAppControl* appControl;
-	IEnviroment* enviroment;
+	IEnvironment* environment;
 	ISimplifier* imageScan;
 	IAgent* aiAlgo;
 };

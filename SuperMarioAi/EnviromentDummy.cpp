@@ -1,10 +1,10 @@
-#include "EnviromentDummy.h"
+#include "EnvironmentDummy.h"
 
-void EnviromentDummy::calculateStateAndActions(std::vector<std::vector<int>>, std::vector<marioAction>* possibleActions, int* state)
+void EnvironmentDummy::calculateStateAndActions(std::vector<std::vector<int>>, std::vector<marioAction>* possibleActions, int* state)
 {
 	*state = rand()%300;
 }
 
-void EnviromentDummy::gameOver()
+void EnvironmentDummy::gameOver()
 {
 }

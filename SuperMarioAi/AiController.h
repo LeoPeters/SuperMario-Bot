@@ -4,7 +4,7 @@
 #include <condition_variable>
 #include "IAgent.h"
 #include "IAppControl.h"
-#include "IEnviroment.h"
+#include "IEnvironment.h"
 #include "ISimplifier.h"
 #include "IScreenCapture.h"
 #include "IGuiObserver.h"
@@ -29,7 +29,7 @@ private:
 	AiFactory factory=AiFactory();
 	IScreenCapture* screenCapture;
 	IAppControl* appControl;
-	IEnviroment* enviroment;
+	IEnvironment* environment;
 	ISimplifier* simplifier;
 	IAgent* aiAlgo;
 	AiGui* gui;
