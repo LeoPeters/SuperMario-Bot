@@ -1,15 +1,25 @@
 #include <QtWin>
 #include "Globals.h"
-#include "MainWindow.h"
 #include <iostream>
+#include "AiGui.h"
+#include "MainWindow.h"
 MainWindow::MainWindow(IGuiObserver* observer)
 	: QMainWindow(Q_NULLPTR),
 	observer(observer)
 {
+
 	ui.setupUi(this);
 	connect(ui.btn_start, SIGNAL(clicked()), this, SLOT(pressStartBtn()));
 	connect(ui.btn_pause, SIGNAL(clicked()), this, SLOT(pressPauseBtn()));
+	connect(ui.btn_exit, SIGNAL(clicked()), this, SLOT(pressExitBtn()));
+	connect(this, SIGNAL(updateView()), this, SLOT(updateGUi()));
 	original = ui.highJumpLbl->palette();
+	gameScene = new QGraphicsScene();
+	simpleScene = new QGraphicsScene();
+	ui.viewGame->setScene(gameScene);
+	ui.viewSimplify->setScene(simpleScene);
+
+
 }
 MainWindow::~MainWindow()
 {
@@ -21,97 +31,71 @@ bool MainWindow::isActivated()
 	return ui.centralwidget->isVisible();
 }
 
-void MainWindow::updateGameView(HBITMAP bitmap)
-{
-	QPixmap pixmap = QtWin::fromHBITMAP(bitmap);
-	QGraphicsScene* scene=new QGraphicsScene();
-	scene->addPixmap(pixmap);
-	ui.viewGame->setScene(scene);
-}
 
-void MainWindow::updateSimplifyView(std::vector<std::vector<int>> simpleView)
+
+void MainWindow::updateGUi()
 {
-	QImage image = generateSimpleImage(simpleView);
-	QPixmap pixmap = QPixmap::fromImage(image);
-	QGraphicsScene* scene= new QGraphicsScene();
-	scene->addPixmap(pixmap.scaled((ui.viewSimplify->width() * 0.995),(ui.viewSimplify->height()*0.995)));
-	ui.viewSimplify->setScene(scene);
-}
-void MainWindow::updateAction(marioAction nextAction) {
-	QPalette pal;
-	pal.setColor(QPalette::Window, QColor(Qt::blue));
-	switch (nextAction) {
-	case marioAction::highJump:
-		ui.jumpLbl->setPalette(original);
-		ui.shootLbl->setPalette(original);
-		ui.leftLbl->setPalette(original);
-		ui.rightLbl->setPalette(original);
-		ui.highJumpLbl->setPalette(pal);
-		break;
-	case marioAction::jump:
-		ui.jumpLbl->setPalette(pal);
-		ui.shootLbl->setPalette(original);
-		ui.leftLbl->setPalette(original);
-		ui.rightLbl->setPalette(original);
-		ui.highJumpLbl->setPalette(original);
-		break;
-	case marioAction::shoot:
-		ui.jumpLbl->setPalette(original);
-		ui.shootLbl->setPalette(pal);
-		ui.leftLbl->setPalette(original);
-		ui.rightLbl->setPalette(original);
-		ui.highJumpLbl->setPalette(original);
-		break;
-	case marioAction::moveLeft:
-		ui.jumpLbl->setPalette(original);
-		ui.shootLbl->setPalette(original);
-		ui.leftLbl->setPalette(pal);
-		ui.rightLbl->setPalette(original);
-		ui.highJumpLbl->setPalette(original);
-		break;
-	case marioAction::moveRight:
-		ui.jumpLbl->setPalette(original);
-		ui.shootLbl->setPalette(original);
-		ui.leftLbl->setPalette(original);
-		ui.rightLbl->setPalette(pal);
-		ui.highJumpLbl->setPalette(original);
-		break;
+	if (!simplePixmap.isNull()) {
+		QPixmap scale;
+		scale =(simplePixmap.scaled((ui.viewSimplify->width() * 0.995), (ui.viewSimplify->height() * 0.995)));
+		simpleScene->clear();
+		simpleScene->addPixmap(scale);
 	}
-}
-void MainWindow::updateState(int state) {
+	if (!gamePixmap.isNull()) {
+		gameScene->clear();
+		gameScene->addPixmap(gamePixmap);
+	}
+	setActionLabel();
 	ui.currentState->setText(QString::number(state));
 }
 
 
-QImage MainWindow::generateSimpleImage(std::vector<std::vector<int>> simpleView)
-{
-	QImage image(simpleView[0].size(), simpleView.size(), QImage::Format_RGB32);
-	for (int y = 0; y < simpleView.size(); y++) {
-		for (int x = 0; x < simpleView[y].size(); x++) {
-			switch (simpleView[y][x]) {
-			case SKY:
-				image.setPixel(x, y, skyColor);
-				break;
-			case MARIO:
-				image.setPixel(x, y, marioColor);
-				break;
-			case BLOCK:
-				image.setPixel(x, y, blockColor);
-				break;
-			case ENEMY:
-				image.setPixel(x, y, enemyColor);
-				break;
-			case ITEM:
-				image.setPixel(x, y, itemColor);
-				break;
-			default:
-				image.setPixel(x, y, blockColor);
-				break;
-			}
-		}
-	}
-	return image;
+void MainWindow::setAction(marioAction nextAction) {
+	action = nextAction;
+
 }
+
+void MainWindow::setActionLabelPalette( QPalette left,QPalette jump,QPalette highJump, QPalette shootl, QPalette right)
+{
+	ui.jumpLbl->setPalette(jump);
+	ui.shootLbl->setPalette(shootl);
+	ui.leftLbl->setPalette(left);
+	ui.rightLbl->setPalette(right);
+	ui.highJumpLbl->setPalette(highJump);
+}
+
+void MainWindow::setActionLabel()
+{
+	QPalette pal;
+	pal.setColor(QPalette::Window, QColor(Qt::blue));
+	switch (action) {
+	case marioAction::highJump:
+
+		setActionLabelPalette(original, original, pal, original, original);
+		break;
+	case marioAction::jump:
+		setActionLabelPalette(original, pal, original, original, original);
+		break;
+	case marioAction::shoot:
+
+		setActionLabelPalette(original, original, original, pal, original);
+		break;
+	case marioAction::moveLeft:
+		setActionLabelPalette(pal, original, original, original, original);
+		break;
+	case marioAction::moveRight:
+		setActionLabelPalette(original, original, original, original, pal);
+		break;
+	}
+}
+
+void MainWindow::setState(int state) {
+	this->state = state;
+}
+
+
+
+
 
 void MainWindow::pressStartBtn()
 {
@@ -131,6 +115,20 @@ void MainWindow::pressPauseBtn()
 	Sleep(500);
 	observer->notifyPausePressed();
 }
+void MainWindow::pressExitBtn()
+{
+	observer->notifyEndApp();
+}
 bool MainWindow::getIsPaused() {
 	return isPaused;
+}
+
+void MainWindow::setGamePixmap(QPixmap pixmap)
+{
+	gamePixmap = pixmap;
+}
+
+void MainWindow::setSimplePixmap(QPixmap pixmap)
+{
+	simplePixmap = pixmap;
 }

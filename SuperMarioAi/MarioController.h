@@ -1,4 +1,5 @@
-#pragma once
+#ifndef mariocontroller_h
+#define mariocontroller_h
 #include <windows.h>
 #include "IAppControl.h"
 #include "Keyboard.h"
@@ -32,3 +33,4 @@ private:
 	
 };
 
+#endif

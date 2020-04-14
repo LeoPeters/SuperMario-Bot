@@ -5,8 +5,9 @@
 HWND MarioWindow::getMarioWindow(LPCTSTR path) {
 	MarioWindow::closeMarioApp();
 	HWND mwindow=NULL;
+	//Sleep(1000);
 	ShellExecute(mwindow, L"OPEN", path, NULL, NULL, SW_SHOWNORMAL);
-	Sleep(3000);
+	Sleep(2000);
 	
 	HWND window = MarioWindow::findMarioWindow();
 	std::cout << "Windowm Nr: " << mwindow << std::endl;
@@ -17,7 +18,7 @@ HWND MarioWindow::getMarioWindow(LPCTSTR path) {
 }
 
 HWND MarioWindow::findMarioWindow() {
-	HWND mainWindow = ::FindWindow(L"WindowsForms10.Window.8.app.0.1e84ccb_r6_ad1", NULL);
+	HWND mainWindow = ::FindWindow(NULL, L"Mesen");
 	HWND window = FindWindowEx(mainWindow, NULL, NULL, NULL);
 	HWND window2 = FindWindowEx(mainWindow, window, NULL, NULL);
 	window = FindWindowEx(window2, NULL, NULL, NULL);

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef mariowindow_h
+#define mariowindow_h
 #include <windows.h>
 class MarioWindow
 {
@@ -8,3 +9,4 @@ public:
 	static void closeMarioApp();
 
 };
+#endif

@@ -130,8 +130,7 @@ void MarioController::jump()
 void MarioController::highJump()
 {
 	if (isStarted) {
-		keyboard->pressAndReleaseKey(NUM3, 600);
-		std::cout << "Jump High" << std::endl;
+		keyboard->pressAndReleaseKey(NUM3, 500);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef iappcontrol_h
+#define iappcontrol_h
 
 #include "MarioAction.h"
 #include <Windows.h>
@@ -11,3 +12,4 @@ public:
 	virtual void unpauseGame()=0;
 	virtual void restartGame()=0;
 };
+#endif

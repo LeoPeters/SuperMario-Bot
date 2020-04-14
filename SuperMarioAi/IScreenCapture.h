@@ -1,4 +1,5 @@
-#pragma once
+#ifndef iscreencapture_h
+#define iscreencapture_h
 #include <windows.h>
 
 class IScreenCapture{
@@ -10,3 +11,4 @@ public:
 	virtual HBITMAP captureScreen(LPCTSTR fileName)=0;
 	virtual HBITMAP captureScreen()=0;
 };
+#endif

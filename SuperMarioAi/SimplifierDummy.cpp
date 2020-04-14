@@ -7,13 +7,15 @@ SimplifierDummy::SimplifierDummy() {
 
 bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBITMAP image)
 {
-	simply->clear();
+
 	int ergArray[GRIDRADIUS][GRIDRADIUS];
 	for (int y = 0; y < GRIDRADIUS; y++) {
 		for (int x = 0; x < GRIDRADIUS; x++) {
-			ergArray[x][y]=0;
+			if(simply->size()>0)
+			ergArray[x][y]=simply->at(y).at(x);
 		}
 	}
+	simply->clear();
 	env.environment_interface(PNG_NAME,ergArray);
 	for (int y = 0; y < GRIDRADIUS;y++) {
 		std::vector<int> vecX;
@@ -22,5 +24,7 @@ bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBIT
 		}
 		simply->push_back(vecX);
 	}
+
+
 	return false;
 }

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef aifactory_h
+#define aifactory_h
 
 #include "IScreenCapture.h"
 #include "IAppControl.h"
@@ -24,3 +25,4 @@ private:
 	IAgent* aiAlgo;
 };
 
+#endif

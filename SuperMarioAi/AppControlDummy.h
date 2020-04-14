@@ -1,4 +1,6 @@
-#pragma once
+#ifndef appcontrolldummy_h
+#define appcontrolldummy_h
+
 #include "IAppControl.h"
 class AppControlDummy: public IAppControl
 {
@@ -11,3 +13,4 @@ public:
 	virtual void restartGame() override;
 };
 
+#endif

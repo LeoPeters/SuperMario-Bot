@@ -1,8 +1,9 @@
-#pragma once
-
+#ifndef mainwindow_h
+#define mainwindow_h
 #include <QMainWindow>
 #include "IGuiObserver.h"
 #include "MarioAction.h"
+
 #include "ui_MainWindow.h"
 
 class MainWindow : public QMainWindow
@@ -11,27 +12,34 @@ class MainWindow : public QMainWindow
 
 public:
 
-	MainWindow(IGuiObserver* observer);
+	MainWindow(IGuiObserver*);
 	~MainWindow();
 	bool isActivated();
-	void updateGameView(HBITMAP);
-	void updateSimplifyView(std::vector<std::vector<int>> simpleView);
-	void updateAction(marioAction nextAction);
-	void updateState(int);
+	void setAction(marioAction nextAction);
+	void setState(int);
 	bool getIsPaused();
+	void setGamePixmap(QPixmap);
+	void setSimplePixmap(QPixmap);
+signals:
+	void updateView();
 
 private:
-	QImage generateSimpleImage(std::vector<std::vector<int>> simpleView);
+	void setActionLabelPalette(QPalette jump, QPalette left, QPalette right, QPalette highJump, QPalette shoot);
+	void setActionLabel();
 	Ui::MainWindow ui;
+	QPixmap gamePixmap;
+	QPixmap simplePixmap;
 	IGuiObserver* observer;
 	QPalette original;
-	const QRgb marioColor = qRgb(255, 49, 32);
-	const QRgb skyColor= qRgb(146, 144, 255);
-	const QRgb blockColor = qRgb(153, 78, 0);
-	const QRgb enemyColor = qRgb(0, 0, 0);
-	const QRgb itemColor = qRgb(255, 245, 57);
+	QGraphicsScene* gameScene;
+	QGraphicsScene* simpleScene;
 	bool isPaused = false;
+	marioAction action;
+	int state=0;
 private slots:
 	void pressStartBtn();
 	void pressPauseBtn();
+	void pressExitBtn();
+	void updateGUi();
 };
+#endif

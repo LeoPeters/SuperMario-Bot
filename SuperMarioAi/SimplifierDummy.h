@@ -1,4 +1,5 @@
-#pragma once
+#ifndef simplifierDummy_h
+#define simplifierDummy_h
 #include "Environment.h"
 #include "ISimplifier.h"
 class SimplifierDummy:public ISimplifier
@@ -13,3 +14,4 @@ private:
 
 };
 
+#endif

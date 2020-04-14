@@ -1,4 +1,5 @@
-#pragma once
+#ifndef keyboarddefines_h
+#define keyboarddefines_h
 constexpr char NUM0 = 'ú';
 constexpr char NUM1 = 'û';
 constexpr char NUM2 = 'ù';
@@ -14,3 +15,5 @@ constexpr char NUMKOM = 'Û';
 constexpr char NUMMIN = 'Ó';
 constexpr char NUMMUL = 'Ò';
 constexpr char NUMDIV = 'Ô';
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef marioaction_h
+#define marioaction_h
 enum class marioAction {
 	moveLeft,
 	moveRight,
@@ -6,3 +7,4 @@ enum class marioAction {
 	highJump,
 	shoot
 };
+#endif

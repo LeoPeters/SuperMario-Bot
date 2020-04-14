@@ -1,4 +1,6 @@
-#pragma once
+#ifndef environmentdummy_h
+#define environmentdummy_h
+
 #include "IEnviroment.h"
 
 class EnviromentDummy:public IEnviroment
@@ -8,3 +10,4 @@ class EnviromentDummy:public IEnviroment
 	 void gameOver() override;
 };
 
+#endif

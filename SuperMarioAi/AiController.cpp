@@ -6,7 +6,7 @@
 
 AiController::AiController(int argc, char** argv) :
 	screenCapture(NULL),
-	imageScan(NULL),
+	simplifier(NULL),
 	enviroment(NULL),
 	aiAlgo(NULL),
 	appControl(NULL),
@@ -21,39 +21,34 @@ void AiController::run() {
 
 	std::vector<marioAction> possibleActions;
 
-	while (gui->mainWindowIsVisible()) {
+	while (isGuiRunning) {
 		while (isGameStarted) {
-  
 			gameCapture = screenCapture->captureScreen(PNG_LNAME);
-			if (!gui->isPaused()) {
-				imageScan->simplifyImage(simplifyVec, gameCapture);
+			if (!gui->getMainWindow()->getIsPaused()) {
+				simplifier->simplifyImage(simplifyVec, gameCapture);
 				enviroment->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
-				//nextAction = aiAlgo->calculateAction(currentState, possibleActions);
-				//appControl->makeAction(nextAction);
+				nextAction = aiAlgo->calculateAction(currentState, possibleActions);
+				appControl->makeAction(nextAction);
 			}
+				gui->update();
 		}
-		if (isGameStarted) {
-			std::unique_lock<std::mutex> lock(mx);
-			cv.wait(lock);
-		}
+		Sleep(300);
 	}
 }
 
 void AiController::runGui() {
-	while (gui->mainWindowIsVisible()) {
-		gui->update(gameCapture, *simplifyVec, nextAction,currentState);
-		Sleep(1);
-	}
+
+	gui->runGui();
+	isGuiRunning = false;
 	isGameStarted = false;
-	cv.notify_all();
 }
 
 void AiController::notifyPausePressed()
 {
 	if (appControl != NULL) {
-		std::lock_guard<std::mutex> lg(mx);
+
 		appControl->pauseGame();
-		cv.notify_all();
+
 	}
 	else {
 		std::cout << "No Window exists Please Start Game" << std::endl;
@@ -61,30 +56,47 @@ void AiController::notifyPausePressed()
 }
 
 void AiController::notifyStartPressed() {
-	std::lock_guard<std::mutex> lg(mx);
 	startSuperMario();
-	cv.notify_all();
 }
 
 void AiController::notifyEndApp()
 {
-	isGameStarted = false;
-	cv.notify_all();
+	gui->end();
+
+}
+
+int* AiController::getState()
+{
+	return &currentState;
+}
+
+std::vector<std::vector<int>>* AiController::getSimpleView()
+{
+	return simplifyVec;
+}
+
+HBITMAP* AiController::getGameView()
+{
+	return &gameCapture;
+}
+
+marioAction* AiController::getAction()
+{
+	return &nextAction;
 }
 
 void AiController::startSuperMario()
 {
 	isGameStarted = false;
-		if (factory.loadSuperMarioAi()) {
-			this->screenCapture = factory.getScreenCapture();
-			this->imageScan = factory.getImageScan();
-			this->enviroment = factory.getEnviroment();
-			this->aiAlgo = factory.getAiAlgo();
-			this->appControl = factory.getAppControl();
-			isGameStarted = true;
-		}	
+	if (factory.loadSuperMarioAi()) {
+		this->screenCapture = factory.getScreenCapture();
+		this->simplifier = factory.getImageScan();
+		this->enviroment = factory.getEnviroment();
+		this->aiAlgo = factory.getAiAlgo();
+		this->appControl = factory.getAppControl();
+		isGameStarted = true;
 	}
-
+}
 
 AiController::~AiController()
 {

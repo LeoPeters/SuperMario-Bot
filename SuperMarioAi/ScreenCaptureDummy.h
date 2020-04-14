@@ -1,4 +1,5 @@
-#pragma once
+#ifndef screencaptureDummy_h
+#define screencaptureDummy_h
 #include "IScreenCapture.h"
 class ScreenCaptureDummy:public IScreenCapture
 {
@@ -8,3 +9,4 @@ public:
 	 HBITMAP captureScreen() override;
 };
 
+#endif

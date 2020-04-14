@@ -1,4 +1,5 @@
-#pragma once
+#ifndef iagent_h
+#define iagent_h
 #include "MarioAction.h"
 #include <vector>
 class IAgent {
@@ -6,3 +7,4 @@ public:
 	virtual marioAction calculateAction(int state,std::vector<marioAction> possibleActions) = 0;
 	virtual void gameOver() = 0;
 };
+#endif
