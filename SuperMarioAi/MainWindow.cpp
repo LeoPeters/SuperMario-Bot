@@ -50,7 +50,7 @@ void MainWindow::updateGUi()
 }
 
 
-void MainWindow::setAction(marioAction nextAction) {
+void MainWindow::setAction(MarioAction nextAction) {
 	action = nextAction;
 
 }
@@ -69,21 +69,21 @@ void MainWindow::setActionLabel()
 	QPalette pal;
 	pal.setColor(QPalette::Window, QColor(Qt::blue));
 	switch (action) {
-	case marioAction::highJump:
+	case MarioAction::highJump:
 
 		setActionLabelPalette(original, original, pal, original, original);
 		break;
-	case marioAction::jump:
+	case MarioAction::jump:
 		setActionLabelPalette(original, pal, original, original, original);
 		break;
-	case marioAction::shoot:
+	case MarioAction::shoot:
 
 		setActionLabelPalette(original, original, original, pal, original);
 		break;
-	case marioAction::moveLeft:
+	case MarioAction::moveLeft:
 		setActionLabelPalette(pal, original, original, original, original);
 		break;
-	case marioAction::moveRight:
+	case MarioAction::moveRight:
 		setActionLabelPalette(original, original, original, original, pal);
 		break;
 	}

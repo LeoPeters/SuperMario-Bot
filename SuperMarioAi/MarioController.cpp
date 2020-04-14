@@ -9,29 +9,29 @@ MarioController::MarioController() :
 	keyboardThread(NULL)
 {}
 
-void MarioController::makeAction(marioAction nextAction)
+void MarioController::makeAction(MarioAction nextAction)
 {
 	if (keyboardThread!=NULL) {
 	keyboardThread->join();
 	}
 	switch (nextAction) {
-	case marioAction::moveLeft:
+	case MarioAction::moveLeft:
 		keyboardThread= new std::thread(&MarioController::moveLeft,this);
 		//moveLeft();
 		break;
-	case marioAction::moveRight:
+	case MarioAction::moveRight:
 		keyboardThread = new std::thread(&MarioController::moveRight, this);
 		//moveRight();
 		break;
-	case marioAction::jump:
+	case MarioAction::jump:
 		//jump();
 		keyboardThread = new std::thread(&MarioController::jump, this);
 		break;
-	case marioAction::highJump:
+	case MarioAction::highJump:
 		//highJump();
 		keyboardThread = new std::thread(&MarioController::highJump, this);
 		break;
-	case marioAction::shoot:
+	case MarioAction::shoot:
 		//shoot();
 		keyboardThread = new std::thread(&MarioController::shoot, this);
 		break;

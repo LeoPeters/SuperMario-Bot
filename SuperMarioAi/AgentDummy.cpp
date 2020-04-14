@@ -1,6 +1,6 @@
 #include "AgentDummy.h"
 #include <iostream>
-marioAction AgentDummy::calculateAction(int state, std::vector<marioAction> possibleActions)
+MarioAction AgentDummy::calculateAction(int state, std::vector<MarioAction> possibleActions)
 {
 	jumpcnt++;
 	
@@ -12,7 +12,7 @@ marioAction AgentDummy::calculateAction(int state, std::vector<marioAction> poss
 		if (cnt2 == 2 || cnt2 == 3) {
 			jumpcnt = 0;
 		}
-	return marioAction(cnt2);
+	return MarioAction(cnt2);
 }
 
 void AgentDummy::gameOver()

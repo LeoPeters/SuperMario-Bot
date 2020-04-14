@@ -1,10 +1,11 @@
 #ifndef marioaction_h
 #define marioaction_h
-enum class marioAction {
+enum class MarioAction {
 	moveLeft,
 	moveRight,
 	jump,
 	highJump,
-	shoot
+	shoot,
+	ACTION_MAX
 };
 #endif

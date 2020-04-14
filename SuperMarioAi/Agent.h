@@ -2,19 +2,19 @@
 #include <array>
 #include <cstdlib>
 #include "Globals.h"
-#include "IAiAlgorithm.h"
+#include "IAgent.h"
 #include "State.h"
 #include "PolicyEnum.h"
 
 class State;
 
-class AIAlgorithm :public IAiAlgorithm
+class Agent :public IAgent
 {
 public:
-	AIAlgorithm();
-	~AIAlgorithm();
+	Agent();
+	~Agent();
 
-	Action calculateAction(int state, std::vector<Action> possibleActions) override;
+	MarioAction calculateAction(int state, std::vector<MarioAction> possibleActions) override;
 	void gameOver() override;
 
 private:
@@ -22,8 +22,8 @@ private:
 	Policy policy;
 
 	std::array<State, NUMBER_OF_STATES> states;
-	Action chooseAction(State state);
-	Action getRandomAction();
+	MarioAction chooseAction(State state);
+	MarioAction getRandomAction();
 
 };
 

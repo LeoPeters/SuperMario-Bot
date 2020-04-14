@@ -11,7 +11,7 @@ class MarioController: public IAppControl
 {
 public:
 	MarioController();
-	void makeAction(marioAction nextAction) override;
+	void makeAction(MarioAction nextAction) override;
 
 	void endGame() override;
 	HWND startGame() override;

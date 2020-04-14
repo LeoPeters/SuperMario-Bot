@@ -59,6 +59,12 @@
     <Filter Include="Header Files\Simplifier">
       <UniqueIdentifier>{754f7e1a-e2a9-4b4d-9316-820684ee0a48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Agent">
+      <UniqueIdentifier>{c6b117ba-3b87-4f06-bac6-ef1c222eba0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Agent">
+      <UniqueIdentifier>{99d04957-a11b-43f8-ac0c-ec3b2d6f45dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -132,6 +138,12 @@
     </ClCompile>
     <ClCompile Include="AgentDummy.cpp">
       <Filter>Source Files\Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Source Files\Agent</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\Agent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +244,15 @@
     </ClInclude>
     <ClInclude Include="EnvironmentDummy.h">
       <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Header Files\Agent</Filter>
+    </ClInclude>
+    <ClInclude Include="PolicyEnum.h">
+      <Filter>Header Files\Agent</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\Agent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,19 +1,19 @@
-#include "AIAlgorithm.h"
+#include "Agent.h"
 
-AIAlgorithm::AIAlgorithm() :
+Agent::Agent() :
 	lastState(0)
 {
 
 }
 
-AIAlgorithm::~AIAlgorithm() {
+Agent::~Agent() {
 
 }
 
-Action AIAlgorithm::calculateAction(int stateIndex, std::vector<Action> possibleActions) {
+MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions) {
 	State state = states[stateIndex];
 	state.setPossibleActions(possibleActions);
-	Action action = chooseAction(state);
+	MarioAction action = chooseAction(state);
 
 
 
@@ -25,13 +25,13 @@ Action AIAlgorithm::calculateAction(int stateIndex, std::vector<Action> possible
 		return action;
 }
 
-void AIAlgorithm::gameOver() {
+void Agent::gameOver() {
 
 }
 
-Action AIAlgorithm::chooseAction(State state) {
+MarioAction Agent::chooseAction(State state) {
 	double rnd = std::rand() / RAND_MAX;
-	Action a = Action::moveRight;
+	MarioAction a = MarioAction::moveRight;
 
 	switch (policy) {
 	case Policy::greedy:
@@ -48,6 +48,6 @@ Action AIAlgorithm::chooseAction(State state) {
 	return a;
 }
 
-Action AIAlgorithm::getRandomAction() {
-	return  (Action) (rand() % (int) Action::ACTION_MAX);
+MarioAction Agent::getRandomAction() {
+	return  (MarioAction) (rand() % (int)MarioAction::ACTION_MAX);
 }

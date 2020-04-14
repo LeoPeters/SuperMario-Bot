@@ -1383,7 +1383,16 @@
     <RewindSpeed>100</RewindSpeed>
     <RunAheadFrames>0</RunAheadFrames>
   </EmulationInfo>
-  <RecentFiles />
+  <RecentFiles>
+    <RecentItem>
+      <RomFile>
+        <Path>G:\Programmierzeug\Git\Super Mario Bot\Mesen\Super_mario_brothers.nes</Path>
+        <InnerFile />
+        <InnerFileIndex>0</InnerFileIndex>
+      </RomFile>
+      <PatchFile xsi:nil="true" />
+    </RecentItem>
+  </RecentFiles>
   <Cheats />
   <DisableAllCheats>false</DisableAllCheats>
   <Region>Auto</Region>
@@ -1850,8 +1859,8 @@
   </HistoryViewerInfo>
   <GameSpecificSettings />
   <WindowLocation>
-    <X>-1421</X>
-    <Y>61</Y>
+    <X>295</X>
+    <Y>313</Y>
   </WindowLocation>
   <WindowSize>
     <Width>340</Width>

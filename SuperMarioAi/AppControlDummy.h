@@ -5,7 +5,7 @@
 class AppControlDummy: public IAppControl
 {
 public:
-	void makeAction(marioAction) override;
+	void makeAction(MarioAction) override;
 	virtual void endGame() override;
 	virtual HWND startGame() override;
 	virtual void pauseGame() override;

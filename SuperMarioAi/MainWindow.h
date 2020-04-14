@@ -15,7 +15,7 @@ public:
 	MainWindow(IGuiObserver*);
 	~MainWindow();
 	bool isActivated();
-	void setAction(marioAction nextAction);
+	void setAction(MarioAction nextAction);
 	void setState(int);
 	bool getIsPaused();
 	void setGamePixmap(QPixmap);
@@ -34,7 +34,7 @@ private:
 	QGraphicsScene* gameScene;
 	QGraphicsScene* simpleScene;
 	bool isPaused = false;
-	marioAction action;
+	MarioAction action;
 	int state=0;
 private slots:
 	void pressStartBtn();

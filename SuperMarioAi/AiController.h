@@ -23,7 +23,7 @@ public:
 	 int* getState() override;
 	 std::vector <std::vector<int>>* getSimpleView()override;
 	 HBITMAP* getGameView() override;
-	 marioAction* getAction() override;
+	 MarioAction* getAction() override;
 private:
 	void startSuperMario();
 	AiFactory factory=AiFactory();
@@ -40,7 +40,7 @@ private:
 	std::condition_variable cv;
 	HBITMAP gameCapture=HBITMAP();
 	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
-	marioAction nextAction;
+	MarioAction nextAction;
 	int currentState;
 };
 

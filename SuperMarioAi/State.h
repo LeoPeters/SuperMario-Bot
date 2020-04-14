@@ -1,22 +1,22 @@
 #pragma once
 #include <array>
 #include <vector>
-#include "ActionEnum.h"
+#include "MarioAction.h"
 
-class AIAlgorithm;
+class Agent;
 
 class State
 {
 public:
 	State();
 	~State();
-	Action getBestAction();
-	double getValue(Action action);
-	void setScore(Action action, double value);
+	MarioAction getBestAction();
+	double getValue(MarioAction action);
+	void setScore(MarioAction action, double value);
 	double getBestReward();
-	void State::setPossibleActions(std::vector<Action> possibleActions);
+	void State::setPossibleActions(std::vector<MarioAction> possibleActions);
 private:
-	std::vector<Action> possibleActions;
-	std::array<double, (int)Action::ACTION_MAX> scores;
+	std::vector<MarioAction> possibleActions;
+	std::array<double, (int)MarioAction::ACTION_MAX> scores;
 };
 

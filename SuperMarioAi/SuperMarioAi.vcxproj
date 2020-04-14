@@ -85,6 +85,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AgentDummy.cpp" />
+    <ClCompile Include="Agent.cpp" />
     <ClCompile Include="AiController.cpp" />
     <ClCompile Include="AiFactory.cpp" />
     <ClCompile Include="AiGui.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="PngImage.cpp" />
     <ClCompile Include="ScreenCapture.cpp" />
     <ClCompile Include="ScreenCaptureDummy.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="TemplateMatcher.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +118,7 @@
     <QtMoc Include="MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Agent.h" />
     <ClInclude Include="IEnvironment.h" />
     <ClInclude Include="MarioAction.h" />
     <ClInclude Include="AgentDummy.h" />
@@ -135,6 +138,7 @@
     <ClInclude Include="ImageDistributor.h" />
     <ClInclude Include="ImageLibrary.h" />
     <ClInclude Include="ImageResizer.h" />
+    <ClInclude Include="PolicyEnum.h" />
     <ClInclude Include="SimplifierDummy.h" />
     <ClInclude Include="IScreenCapture.h" />
     <ClInclude Include="Keyboard.h" />
@@ -146,6 +150,7 @@
     <ClInclude Include="PngImage.h" />
     <ClInclude Include="ScreenCapture.h" />
     <ClInclude Include="ScreenCaptureDummy.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="TemplateMatcher.h" />
   </ItemGroup>
   <ItemGroup>
