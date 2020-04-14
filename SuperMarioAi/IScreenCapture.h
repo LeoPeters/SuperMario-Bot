@@ -2,7 +2,7 @@
 #define iscreencapture_h
 #include <windows.h>
 
-class IScreenCapture{
+class IScreenCapture {
 protected:
 	IScreenCapture() {}
 public:
