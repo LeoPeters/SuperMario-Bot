@@ -143,9 +143,6 @@
     <ClInclude Include="IAppControl.h">
       <Filter>Header Files\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="IEnviroment.h">
-      <Filter>Header Files\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="IScreenCapture.h">
       <Filter>Header Files\Interface</Filter>
     </ClInclude>

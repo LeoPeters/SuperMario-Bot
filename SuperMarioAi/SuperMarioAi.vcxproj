@@ -129,7 +129,6 @@
     <ClInclude Include="GridScanner.h" />
     <ClInclude Include="IAgent.h" />
     <ClInclude Include="IAppControl.h" />
-    <ClInclude Include="IEnviroment.h" />
     <ClInclude Include="IGuiObserver.h" />
     <ClInclude Include="ISimplifier.h" />
     <ClInclude Include="ImageDistributor.h" />
