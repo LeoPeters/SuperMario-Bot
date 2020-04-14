@@ -42,7 +42,7 @@ void AiController::run() {
 void AiController::runGui() {
 	while (gui->mainWindowIsVisible()) {
 		gui->update(gameCapture, *simplifyVec, nextAction,currentState);
-		Sleep(10);
+		Sleep(1);
 	}
 	isGameStarted = false;
 	cv.notify_all();

@@ -388,3 +388,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+
+!Mesen.exe
+!MesenUpdater.exe
+!MesenCore.dll

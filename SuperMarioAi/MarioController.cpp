@@ -48,7 +48,7 @@ HWND MarioController::startGame()
 {
 	window = MarioWindow::getMarioWindow(SUPER_MARIO_PATH);
 	if (window == NULL) {
-		std::cout << "Couldnt found Window: Please Close Super-Mario and press Restart" << std::endl;
+		std::cout << "Cant find Window: Please Close Super-Mario and press Restart" << std::endl;
 		return NULL;
 	}
 	keyboard = new Keyboard(window);
