@@ -390,6 +390,8 @@ MigrationBackup/
 .ionide/
 
 
+# Mesen
 !Mesen.exe
 !MesenUpdater.exe
 !MesenCore.dll
+Super_mario_brothers.rgd
