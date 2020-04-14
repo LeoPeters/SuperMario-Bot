@@ -116,6 +116,7 @@
     <QtMoc Include="MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IEnvironment.h" />
     <ClInclude Include="MarioAction.h" />
     <ClInclude Include="AgentDummy.h" />
     <ClInclude Include="AiController.h" />
