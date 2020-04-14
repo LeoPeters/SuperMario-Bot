@@ -1,7 +1,7 @@
 #pragma once
 #include <windows.h>
 
-class IScreenCapture{
+class IScreenCapture {
 protected:
 	IScreenCapture() {}
 public:

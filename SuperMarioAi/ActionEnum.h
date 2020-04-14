@@ -1,8 +1,9 @@
 #pragma once
-enum class action {
+enum class Action {
 	moveLeft,
 	moveRight,
 	jump,
 	highJump,
-	shoot
+	shoot,
+	ACTION_MAX
 };

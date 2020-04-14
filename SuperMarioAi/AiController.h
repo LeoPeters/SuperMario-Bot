@@ -3,7 +3,7 @@
 #include <condition_variable>
 #include "IAiAlgorithm.h"
 #include "IAppControl.h"
-#include "IEnviroment.h"
+#include "IEnvironment.h"
 #include "IImageScan.h"
 #include "IScreenCapture.h"
 #include "IGuiObserver.h"
@@ -24,7 +24,7 @@ private:
 	AiFactory factory=AiFactory();
 	IScreenCapture* screenCapture;
 	IAppControl* appControl;
-	IEnviroment* enviroment;
+	IEnvironment* environment;
 	IImageScan* imageScan;
 	IAiAlgorithm* aiAlgo;
 	AiGui* gui;
@@ -34,7 +34,7 @@ private:
 	std::condition_variable cv;
 	HBITMAP gameCapture=HBITMAP();
 	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
-	action nextAction;
+	Action nextAction;
 	int currentState;
 };
 

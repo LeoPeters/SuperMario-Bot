@@ -37,39 +37,39 @@ void MainWindow::updateSimplifyView(std::vector<std::vector<int>> simpleView)
 	scene->addPixmap(pixmap.scaled((ui.viewSimplify->width() * 0.995),(ui.viewSimplify->height()*0.995)));
 	ui.viewSimplify->setScene(scene);
 }
-void MainWindow::updateAction(action nextAction) {
+void MainWindow::updateAction(Action nextAction) {
 	QPalette pal;
 	pal.setColor(QPalette::Window, QColor(Qt::blue));
 	switch (nextAction) {
-	case action::highJump:
+	case Action::highJump:
 		ui.jumpLbl->setPalette(original);
 		ui.shootLbl->setPalette(original);
 		ui.leftLbl->setPalette(original);
 		ui.rightLbl->setPalette(original);
 		ui.highJumpLbl->setPalette(pal);
 		break;
-	case action::jump:
+	case Action::jump:
 		ui.jumpLbl->setPalette(pal);
 		ui.shootLbl->setPalette(original);
 		ui.leftLbl->setPalette(original);
 		ui.rightLbl->setPalette(original);
 		ui.highJumpLbl->setPalette(original);
 		break;
-	case action::shoot:
+	case Action::shoot:
 		ui.jumpLbl->setPalette(original);
 		ui.shootLbl->setPalette(pal);
 		ui.leftLbl->setPalette(original);
 		ui.rightLbl->setPalette(original);
 		ui.highJumpLbl->setPalette(original);
 		break;
-	case action::moveLeft:
+	case Action::moveLeft:
 		ui.jumpLbl->setPalette(original);
 		ui.shootLbl->setPalette(original);
 		ui.leftLbl->setPalette(pal);
 		ui.rightLbl->setPalette(original);
 		ui.highJumpLbl->setPalette(original);
 		break;
-	case action::moveRight:
+	case Action::moveRight:
 		ui.jumpLbl->setPalette(original);
 		ui.shootLbl->setPalette(original);
 		ui.leftLbl->setPalette(original);

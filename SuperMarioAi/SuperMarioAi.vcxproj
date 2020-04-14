@@ -88,6 +88,7 @@
     <ClCompile Include="AiController.cpp" />
     <ClCompile Include="AiFactory.cpp" />
     <ClCompile Include="AiGui.cpp" />
+    <ClCompile Include="AIAlgorithm.cpp" />
     <ClCompile Include="AppControlDummy.cpp" />
     <ClCompile Include="EnviromentDummy.cpp" />
     <ClCompile Include="Environment.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="PngImage.cpp" />
     <ClCompile Include="ScreenCapture.cpp" />
     <ClCompile Include="ScreenCaptureDummy.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="TemplateMatcher.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -121,15 +123,17 @@
     <ClInclude Include="AiController.h" />
     <ClInclude Include="AiFactory.h" />
     <ClInclude Include="AiGui.h" />
+    <ClInclude Include="AIAlgorithm.h" />
     <ClInclude Include="AppControlDummy.h" />
     <ClInclude Include="EnviromentDummy.h" />
     <ClInclude Include="Environment.h" />
     <ClInclude Include="FinderThread.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="GridScanner.h" />
+    <ClInclude Include="PolicyEnum.h" />
     <ClInclude Include="IAiAlgorithm.h" />
     <ClInclude Include="IAppControl.h" />
-    <ClInclude Include="IEnviroment.h" />
+    <ClInclude Include="IEnvironment.h" />
     <ClInclude Include="IGuiObserver.h" />
     <ClInclude Include="IImageScan.h" />
     <ClInclude Include="ImageDistributor.h" />
@@ -144,12 +148,17 @@
     <ClInclude Include="MarioFinder.h" />
     <ClInclude Include="MarioWindow.h" />
     <ClInclude Include="PngImage.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ScreenCapture.h" />
     <ClInclude Include="ScreenCaptureDummy.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="TemplateMatcher.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SuperMarioAi.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

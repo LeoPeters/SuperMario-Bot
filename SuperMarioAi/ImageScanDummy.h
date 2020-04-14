@@ -4,7 +4,7 @@
 class ImageScanDummy:public IImageScan
 {
 public:	
-	bool simplifyImage(std::vector <std::vector<int>>* simpleView,HBITMAP image) override;
+	bool simplifyImage(std::vector<std::vector<int>>* simpleView, HBITMAP image) override;
 	ImageScanDummy::ImageScanDummy();
 private:
 	int calls;

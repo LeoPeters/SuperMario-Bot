@@ -7,11 +7,11 @@
 AiController::AiController(int argc, char** argv) :
 	screenCapture(NULL),
 	imageScan(NULL),
-	enviroment(NULL),
+	environment(NULL),
 	aiAlgo(NULL),
 	appControl(NULL),
 	currentState(0),
-	nextAction(action())
+	nextAction(Action())
 {
 	gui = new AiGui(argc, argv, this);
 }
@@ -19,7 +19,7 @@ AiController::AiController(int argc, char** argv) :
 void AiController::run() {
 	bool playerAlive;
 
-	std::vector<action> possibleActions;
+	std::vector<Action> possibleActions;
 
 	while (gui->mainWindowIsVisible()) {
 		while (isGameStarted) {
@@ -27,7 +27,7 @@ void AiController::run() {
 			gameCapture = screenCapture->captureScreen(PNG_LNAME);
 			if (!gui->isPaused()) {
 				imageScan->simplifyImage(simplifyVec, gameCapture);
-				enviroment->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
+				environment->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
 				//nextAction = aiAlgo->calculateAction(currentState, possibleActions);
 				//appControl->makeAction(nextAction);
 			}
@@ -41,7 +41,7 @@ void AiController::run() {
 
 void AiController::runGui() {
 	while (gui->mainWindowIsVisible()) {
-		gui->update(gameCapture, *simplifyVec, nextAction,currentState);
+		gui->update(gameCapture, *simplifyVec, nextAction, currentState);
 		Sleep(1);
 	}
 	isGameStarted = false;
@@ -78,7 +78,7 @@ void AiController::startSuperMario()
 		if (factory.loadSuperMarioAi()) {
 			this->screenCapture = factory.getScreenCapture();
 			this->imageScan = factory.getImageScan();
-			this->enviroment = factory.getEnviroment();
+			this->environment = factory.getEnviroment();
 			this->aiAlgo = factory.getAiAlgo();
 			this->appControl = factory.getAppControl();
 			isGameStarted = true;

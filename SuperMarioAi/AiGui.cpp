@@ -6,7 +6,7 @@ AiGui::AiGui(int argc, char** argv, IGuiObserver* observer){
 	mWindow->show();
 }
 
-void AiGui::update(HBITMAP gameView, std::vector<std::vector<int>> simpleView, action nextaction,int state)
+void AiGui::update(HBITMAP gameView, std::vector<std::vector<int>> simpleView, Action nextaction,int state)
 {
 	if (gameView != NULL) {
 	mWindow->updateGameView(gameView);

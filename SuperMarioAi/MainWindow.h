@@ -16,7 +16,7 @@ public:
 	bool isActivated();
 	void updateGameView(HBITMAP);
 	void updateSimplifyView(std::vector<std::vector<int>> simpleView);
-	void updateAction(action nextAction);
+	void updateAction(Action nextAction);
 	void updateState(int);
 	bool getIsPaused();
 

@@ -7,32 +7,40 @@
 #include "AppControlDummy.h"
 #include "MarioController.h"
 #include "AiFactory.h"
+#include "AIAlgorithm.h"
+
 bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool imageScanDummy, bool enviromentDummy, bool aiAlgoDummy, bool appControlDummy)
 {
 	if (appControlDummy) {
 		this->appControl = new AppControlDummy();
 	}
 	else { this->appControl = new MarioController(); }
+
 	window = this->appControl->startGame();
+
 	if (window == NULL) {
 		return false;
 	}
 
 	if (screenCaptureDummy) {
 		this->screenCapture = new ScreenCaptureDummy();
-	}else{ this->screenCapture = new ScreenCapture(window);}
+	}
+	else { this->screenCapture = new ScreenCapture(window); }
+
 	if (imageScanDummy) {
 		this->imageScan = new ImageScanDummy();
 	}
 	else {}
+
 	if (enviromentDummy) {
-		this->enviroment = new EnviromentDummy();
+		this->enviroment = new EnvironmentDummy();
 	}
 	else {}
+
 	if (aiAlgoDummy) {
 		this->aiAlgo = new AiAlgoDummy();
 	}
-	else {}
+	else { this->aiAlgo = new AIAlgorithm(); }
 	return true;
 
 }
@@ -52,7 +60,7 @@ IAppControl* AiFactory::getAppControl()
 	return appControl;
 }
 
-IEnviroment* AiFactory::getEnviroment()
+IEnvironment* AiFactory::getEnviroment()
 {
 	return enviroment;
 }

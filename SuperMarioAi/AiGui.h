@@ -6,7 +6,7 @@ class AiGui
 {
 public:
 	AiGui(int argc, char** argv, IGuiObserver*);
-	void update(HBITMAP gameView, std::vector<std::vector<int>> simpleView, action nextaction, int state);
+	void update(HBITMAP gameView, std::vector<std::vector<int>> simpleView, Action nextaction, int state);
 	bool mainWindowIsVisible();
 	MainWindow* getMainWindow();
 	bool isPaused();

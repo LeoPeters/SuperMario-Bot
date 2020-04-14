@@ -59,6 +59,12 @@
     <Filter Include="Header Files\Simplifier">
       <UniqueIdentifier>{754f7e1a-e2a9-4b4d-9316-820684ee0a48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\QLearning">
+      <UniqueIdentifier>{1250d86a-584c-4759-b97b-abe14307c78a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\QLearning">
+      <UniqueIdentifier>{53729f48-9c9f-47c5-af1b-c393320277e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -133,6 +139,12 @@
     <ClCompile Include="PngImage.cpp">
       <Filter>Source Files\Simplifier</Filter>
     </ClCompile>
+    <ClCompile Include="AIAlgorithm.cpp">
+      <Filter>Source Files\QLearning</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\QLearning</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui">
@@ -150,9 +162,6 @@
       <Filter>Header Files\Interface</Filter>
     </ClInclude>
     <ClInclude Include="IAppControl.h">
-      <Filter>Header Files\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="IEnviroment.h">
       <Filter>Header Files\Interface</Filter>
     </ClInclude>
     <ClInclude Include="IImageScan.h">
@@ -233,6 +242,21 @@
     <ClInclude Include="PngImage.h">
       <Filter>Header Files\Simplifier</Filter>
     </ClInclude>
+    <ClInclude Include="IEnvironment.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="AIAlgorithm.h">
+      <Filter>Header Files\QLearning</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\QLearning</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PolicyEnum.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainWindow.h">
@@ -241,5 +265,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SuperMarioAi.rc" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "AiAlgoDummy.h"
 #include <iostream>
-action AiAlgoDummy::calculateAction(int state, std::vector<action> possibleActions)
+
+Action AiAlgoDummy::calculateAction(int state, std::vector<Action> possibleActions)
 {
 	jumpcnt++;
 	
@@ -12,7 +13,7 @@ action AiAlgoDummy::calculateAction(int state, std::vector<action> possibleActio
 		if (cnt2 == 2 || cnt2 == 3) {
 			jumpcnt = 0;
 		}
-	return action(cnt2);
+	return Action(cnt2);
 }
 
 void AiAlgoDummy::gameOver()

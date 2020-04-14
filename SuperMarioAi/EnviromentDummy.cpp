@@ -1,10 +1,10 @@
 #include "EnviromentDummy.h"
 
-void EnviromentDummy::calculateStateAndActions(std::vector<std::vector<int>>, std::vector<action>* possibleActions, int* state)
+void EnvironmentDummy::calculateStateAndActions(std::vector<std::vector<int>>, std::vector<Action>* possibleActions, int* state)
 {
 	*state = rand()%300;
 }
 
-void EnviromentDummy::gameOver()
+void EnvironmentDummy::gameOver()
 {
 }

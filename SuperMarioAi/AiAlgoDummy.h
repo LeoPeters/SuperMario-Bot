@@ -1,9 +1,10 @@
 #pragma once
 #include "IAiAlgorithm.h"
+
 class AiAlgoDummy:public IAiAlgorithm
 {
 public:
-	 action calculateAction(int state, std::vector<action> possibleActions) override;
+	 Action calculateAction(int state, std::vector<Action> possibleActions) override;
 	 void gameOver() override;
 private:
 	int cnt = 0;

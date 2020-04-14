@@ -2,7 +2,7 @@
 
 #include "IScreenCapture.h"
 #include "IAppControl.h"
-#include "IEnviroment.h"
+#include "IEnvironment.h"
 #include "IImageScan.h"
 #include "IAiAlgorithm.h"
 class AiFactory
@@ -12,14 +12,14 @@ public:
 	bool loadSuperMarioAi();
 	IScreenCapture* getScreenCapture();
 	IAppControl* getAppControl();
-	IEnviroment* getEnviroment();
+	IEnvironment* getEnviroment();
 	IImageScan* getImageScan();
 	IAiAlgorithm* getAiAlgo();
 private:
 	HWND window;
 	IScreenCapture* screenCapture;
 	IAppControl* appControl;
-	IEnviroment* enviroment;
+	IEnvironment* enviroment;
 	IImageScan* imageScan;
 	IAiAlgorithm* aiAlgo;
 };
