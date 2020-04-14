@@ -48,4 +48,10 @@
 #define PNG_LNAME L"pictures/Input/input.png"
 #define SUPER_MARIO_PATH L"..\\Mesen\\Mesen.exe"
 
+//QLearning
+#define NUMBER_OF_STATES 20
+#define ALPHA 0.4 //Learning rate
+#define GAMMA 0.9 //Discount factor
+#define EPSILON 0.1 //Propability of choosing a random action
+
 #endif
