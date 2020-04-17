@@ -22,7 +22,7 @@ private:
 	IAppControl* appControl;
 	IEnvironment* environment;
 	ISimplifier* imageScan;
-	IAgent* aiAlgo;
+	IAgent* agent;
 };
 
 #endif

@@ -201,4 +201,3 @@ static int  print_different_rgbs_for_testing(int height, int width, png_bytep* r
 }
 */
 
-

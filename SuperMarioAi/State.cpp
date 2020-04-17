@@ -18,7 +18,7 @@ MarioAction State::getBestAction() {
 	return best;
 }
 
-double State::getBestReward() {
+double State::getMaxReward() {
 	double max = scores[0];
 	for (auto i = 1; i < scores.size(); i++) {
 		if (scores[i] > max) max = scores[i];

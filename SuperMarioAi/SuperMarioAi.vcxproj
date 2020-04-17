@@ -97,6 +97,7 @@
     <ClCompile Include="ImageDistributor.cpp" />
     <ClCompile Include="ImageLibrary.cpp" />
     <ClCompile Include="ImageResizer.cpp" />
+    <ClCompile Include="Features.cpp" />
     <ClCompile Include="SimplifierDummy.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
@@ -119,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="MarioObject.h" />
     <ClInclude Include="IEnvironment.h" />
     <ClInclude Include="MarioAction.h" />
     <ClInclude Include="AgentDummy.h" />
@@ -138,7 +140,8 @@
     <ClInclude Include="ImageDistributor.h" />
     <ClInclude Include="ImageLibrary.h" />
     <ClInclude Include="ImageResizer.h" />
-    <ClInclude Include="PolicyEnum.h" />
+    <ClInclude Include="Features.h" />
+    <ClInclude Include="Policy.h" />
     <ClInclude Include="SimplifierDummy.h" />
     <ClInclude Include="IScreenCapture.h" />
     <ClInclude Include="Keyboard.h" />

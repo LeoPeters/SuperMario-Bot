@@ -4,10 +4,11 @@
 #include "SimplifierDummy.h"
 #include "EnvironmentDummy.h"
 #include "AgentDummy.h"
+#include "Agent.h"
 #include "AppControlDummy.h"
 #include "MarioController.h"
 #include "AiFactory.h"
-bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, bool environmentDummy, bool aiAlgoDummy, bool appControlDummy)
+bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, bool environmentDummy, bool agentDummy, bool appControlDummy)
 {
 	if (appControlDummy) {
 		this->appControl = new AppControlDummy();
@@ -29,17 +30,17 @@ bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, 
 		this->environment = new EnvironmentDummy();
 	}
 	else {}
-	if (aiAlgoDummy) {
-		this->aiAlgo = new AgentDummy();
+	if (agentDummy) {
+		this->agent = new AgentDummy();
 	}
-	else {}
+	else { this->agent = new Agent(); }
 	return true;
 
 }
 
 bool AiFactory::loadSuperMarioAi()
 {
-	return loadSuperMarioAi(false, true, true, true, false);
+	return loadSuperMarioAi(false, true, true, false, false);
 }
 
 IScreenCapture* AiFactory::getScreenCapture()
@@ -64,5 +65,5 @@ ISimplifier* AiFactory::getImageScan()
 
 IAgent* AiFactory::getAiAlgo()
 {
-	return aiAlgo;
+	return agent;
 }

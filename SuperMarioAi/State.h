@@ -13,7 +13,7 @@ public:
 	MarioAction getBestAction();
 	double getValue(MarioAction action);
 	void setScore(MarioAction action, double value);
-	double getBestReward();
+	double getMaxReward();
 	void State::setPossibleActions(std::vector<MarioAction> possibleActions);
 private:
 	std::vector<MarioAction> possibleActions;

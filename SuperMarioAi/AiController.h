@@ -21,7 +21,7 @@ public:
 	void notifyStartPressed() override;
 	void notifyEndApp() override;
 	 int* getState() override;
-	 std::vector <std::vector<int>>* getSimpleView()override;
+	 std::vector <std::vector<int>>* getSimpleView() override;
 	 HBITMAP* getGameView() override;
 	 MarioAction* getAction() override;
 private:

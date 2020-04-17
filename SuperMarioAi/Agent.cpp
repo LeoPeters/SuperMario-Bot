@@ -1,7 +1,9 @@
 #include "Agent.h"
 
 Agent::Agent() :
-	lastState(0)
+	lastState(0),
+	policy(Policy::greedy),
+	lastAction(MarioAction::moveLeft)
 {
 
 }
@@ -14,20 +16,20 @@ MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> poss
 	State state = states[stateIndex];
 	state.setPossibleActions(possibleActions);
 	MarioAction action = chooseAction(state);
+	
+	double newScore = states[lastState].getValue(action) +  ALPHA * (REWARDSTEP + GAMMA * state.getMaxReward() - states[lastState].getValue(action));
+	states[lastState].setScore(lastAction, newScore);
 
-
-
-
-
-
-	double newScore = states[lastState].getValue(action);
-
-		return action;
+	lastAction = action;
+	lastState = stateIndex;
+	return action;
 }
 
 void Agent::gameOver() {
-
+	
 }
+
+
 
 MarioAction Agent::chooseAction(State state) {
 	double rnd = std::rand() / RAND_MAX;
@@ -44,10 +46,12 @@ MarioAction Agent::chooseAction(State state) {
 	case Policy::soft:
 		
 		break;
+	case Policy::softMax:
+		break;
 	}
 	return a;
 }
 
 MarioAction Agent::getRandomAction() {
-	return  (MarioAction) (rand() % (int)MarioAction::ACTION_MAX);
+	return  (MarioAction) (rand() % ((int)MarioAction::ACTION_MAX - 1));
 }

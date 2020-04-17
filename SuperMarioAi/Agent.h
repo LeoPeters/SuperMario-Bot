@@ -4,11 +4,11 @@
 #include "Globals.h"
 #include "IAgent.h"
 #include "State.h"
-#include "PolicyEnum.h"
+#include "Policy.h"
 
 class State;
 
-class Agent :public IAgent
+class Agent : public IAgent
 {
 public:
 	Agent();
@@ -20,7 +20,7 @@ public:
 private:
 	int lastState;
 	Policy policy;
-
+	MarioAction lastAction;
 	std::array<State, NUMBER_OF_STATES> states;
 	MarioAction chooseAction(State state);
 	MarioAction getRandomAction();
