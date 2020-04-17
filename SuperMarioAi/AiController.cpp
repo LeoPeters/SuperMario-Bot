@@ -28,7 +28,7 @@ void AiController::run() {
 				simplifier->simplifyImage(simplifyVec, gameCapture);
 				environment->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
 				nextAction = aiAlgo->calculateAction(currentState, possibleActions);
-				//appControl->makeAction(nextAction);
+				appControl->makeAction(nextAction);
 			}
 				gui->update();
 		}

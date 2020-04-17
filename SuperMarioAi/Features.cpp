@@ -19,7 +19,8 @@
 Features::Features() :
     marioPositionX(-1),
     marioPositionY(-1),
-    statesSize(0)
+    statesSize(0),
+    jumpBlocked(false)
 {
 
 }
@@ -51,7 +52,6 @@ void Features::setMarioPosition() {
     }
 }
 
-
 std::vector<MarioAction> Features::getPossibleActions() {
 
     //TODO MarioAction::shoot        
@@ -66,18 +66,21 @@ std::vector<MarioAction> Features::getPossibleActions() {
         possibleActions.push_back(MarioAction::moveRight);
     }
 
-    if (marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) && 
+    if (jumpBlocked && 
+        marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) && 
         marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) {
         possibleActions.push_back(MarioAction::jump);
         possibleActions.push_back(MarioAction::highJump);
     }
+
     return possibleActions;
 }
 
 int Features::isUnderBlock(){
 	//TODO Wertebereich
     if ((marioPositionY >= 1 && marioArray[marioPositionY - 1][marioPositionX] == int(MarioObject::ground)) || 
-        (marioPositionY >= 2 && marioArray[marioPositionY - 2][marioPositionX] == int(MarioObject::ground))) {
+        (marioPositionY >= 2 && marioArray[marioPositionY - 2][marioPositionX] == int(MarioObject::ground)) ||
+        (marioPositionY >= 2 && marioArray[marioPositionY - 3][marioPositionX] == int(MarioObject::ground))) {
         return 1;
     }
     else{
@@ -127,8 +130,8 @@ std::vector<int> Features::getFeatureVector() {
 }
 
 int Features::calculateStateNumber() {
-    std::vector<int> state;
-    for (int i = 0; i < statesSize; i++) {
+    std::vector<int> state = getFeatureVector();
+    for (int i = 0; i < NUMBER_OF_STATES; i++) {
         if (states[i] == state) {
             statesSize++;
             return i;

@@ -30,10 +30,10 @@ public:
 private:
     std::vector<std::vector<int>> marioArray;
     std::array<std::vector<int>, NUMBER_OF_STATES> states;
-    std::array<int, NUMBER_OF_FEATURES> featureSize = { 2, (GRIDRADIUS / 2) + 1, GRIDRADIUS, GRIDRADIUS }; //TODO Bei mehr Features Wertebereich eintragen
     int statesSize;
     int marioPositionX;
     int marioPositionY;
+    bool jumpBlocked;
     
     int isUnderBlock();
     std::array<int, 2> closestEnemy();

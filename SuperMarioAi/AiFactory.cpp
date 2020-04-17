@@ -8,6 +8,7 @@
 #include "AppControlDummy.h"
 #include "MarioController.h"
 #include "AiFactory.h"
+#include "Features.h"
 bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, bool environmentDummy, bool agentDummy, bool appControlDummy)
 {
 	if (appControlDummy) {
@@ -29,7 +30,7 @@ bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, 
 	if (environmentDummy) {
 		this->environment = new EnvironmentDummy();
 	}
-	else {}
+	else { this->environment = new Features(); };
 	if (agentDummy) {
 		this->agent = new AgentDummy();
 	}
@@ -40,7 +41,7 @@ bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, 
 
 bool AiFactory::loadSuperMarioAi()
 {
-	return loadSuperMarioAi(false, true, true, false, false);
+	return loadSuperMarioAi(false, true, false, false, false);
 }
 
 IScreenCapture* AiFactory::getScreenCapture()
