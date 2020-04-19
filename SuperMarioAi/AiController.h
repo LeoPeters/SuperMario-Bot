@@ -24,14 +24,16 @@ public:
 	 std::vector <std::vector<int>>* getSimpleView() override;
 	 HBITMAP* getGameView() override;
 	 MarioAction* getAction() override;
+	 std::vector<MarioAction>* getpossibleAction() override;
 private:
+	std::vector<MarioAction> possibleActions;
 	void startSuperMario();
 	AiFactory factory=AiFactory();
 	IScreenCapture* screenCapture;
 	IAppControl* appControl;
-	IEnvironment* environment;
+	IEnvironment* features;
 	ISimplifier* simplifier;
-	IAgent* aiAlgo;
+	IAgent* agent;
 	AiGui* gui;
 	bool isPause=false;
 	bool isGameStarted = false;

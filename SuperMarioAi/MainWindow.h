@@ -3,7 +3,7 @@
 #include <QMainWindow>
 #include "IGuiObserver.h"
 #include "MarioAction.h"
-
+#include <QStandardItemModel>
 #include "ui_MainWindow.h"
 
 class MainWindow : public QMainWindow
@@ -15,7 +15,9 @@ public:
 	MainWindow(IGuiObserver*);
 	~MainWindow();
 	bool isActivated();
+	void setUpTable();
 	void setAction(MarioAction nextAction);
+	void setPossibleAction(std::vector<MarioAction> nextAction);
 	void setState(int);
 	bool getIsPaused();
 	void setGamePixmap(QPixmap);
@@ -25,6 +27,7 @@ signals:
 
 private:
 	void setActionLabelPalette(QPalette jump, QPalette left, QPalette right, QPalette highJump, QPalette shoot);
+	void setPossibleActionLabel();
 	void setActionLabel();
 	Ui::MainWindow ui;
 	QPixmap gamePixmap;
@@ -35,6 +38,7 @@ private:
 	QGraphicsScene* simpleScene;
 	bool isPaused = false;
 	MarioAction action;
+	std::vector<MarioAction> possibleActions;
 	int state=0;
 private slots:
 	void pressStartBtn();

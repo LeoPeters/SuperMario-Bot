@@ -6,6 +6,7 @@
 #define BLOCK 2
 #define ENEMY 3
 #define ITEM 4
+#define WINNINGCONDS 5
 #define GRIDRADIUS 15 //5x5grid
 #define MAPPINGDATA 4 //positions from to where
 #define X_Start 0 //For Mappings Array 
@@ -19,19 +20,27 @@
 #define tilesize_mario_big_y 8
 #define tilesize_mario_x 7
 #define tilesize_mario_y 5
-//genauigkeitsformel. MATCH hängt intern noch von ABWEICHUNG ab
+//STATUS RETURN:
+#define NOT_FOUND 0
+#define GEWONNEN 1
+#define TOT 2
+//genauigkeitsformel. MATCH hï¿½ngt intern noch von ABWEICHUNG ab
 //zb: es kan 180 raus ==> ismatch(180) = 256/2 < 180-32 = 128<148
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) / 2) < x-(TILESIZE*2) )
 #define MAX_FEHLER 8 //bei 4 kann mario small nicht gefunden werden?
-#define MAX_FEHLER_BLOECKE 10//34//wegen Pipe
+#define MAX_FEHLER_BLOECKE 25//34//wegen Pipe
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) - MAX_FEHLER_BLOECKE <= x ))
 #define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) - MAX_FEHLER_BLOECKE <= x ))
 #define IS_A_MARIO_MATCH(x) ( (tilesize_mario_x*tilesize_mario_y)-MAX_FEHLER<=x )
 #define IS_A_BIG_MARIO_MATCH(x) ((tilesize_mario_big_x*tilesize_mario_big_y)-MAX_FEHLER<=x  )
 #define IS_A_PIPE_MATCH(x) ( 220 <= x >= 260)
+#define IS_A_DEATHSCREEN(x) (x==15840)
+#define IS_A_FLAGPOLE(x) (50 <= x && x <= 54)
 //FOR GRIDS:
 #define BLOCK_UNTERE_FLANKE ((TILESIZE*TILESIZE)-MAX_FEHLER_BLOECKE)
 #define BLOCK_OBERE_FLANKE ((TILESIZE*TILESIZE)+MAX_FEHLER_BLOECKE)
+#define WINNINGCONDITIONS_UNTERE_FLANKE 50
+#define WINNINGCONDITIONS_OBERE_FLANKE 60
 #define PIPES_UNTERE_FLANKE 220
 #define PIPES_OBERE_FLANKE 260
 #define ENEMY_UNTERE_FLANKE 175

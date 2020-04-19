@@ -15,13 +15,11 @@ GridScanner::GridScanner(): resized(distr.grab_resized_img()), matcher(distr.gra
     
 }
 
-GridScanner::~GridScanner(){
-
-}
+GridScanner::~GridScanner()=default;
 
 bool GridScanner::grid_matching_static(int grid_x, int grid_y, PngImage &matchingImg, int untere_flanke, int obere_flanke){
     int erg = matcher.match_tilesize_on_pixel(grid_x*TILESIZE,grid_y*TILESIZE,matchingImg);
-    //printf("%2d,",erg);
+    //printf("%d,",erg);
     return (untere_flanke<=erg && erg <=obere_flanke);
 }
 

@@ -90,6 +90,7 @@
     <ClCompile Include="AiFactory.cpp" />
     <ClCompile Include="AiGui.cpp" />
     <ClCompile Include="AppControlDummy.cpp" />
+    <ClCompile Include="Deathcondition.cpp" />
     <ClCompile Include="EnviromentDummy.cpp" />
     <ClCompile Include="Environment.cpp" />
     <ClCompile Include="FinderThread.cpp" />
@@ -111,6 +112,7 @@
     <ClCompile Include="ScreenCaptureDummy.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TemplateMatcher.cpp" />
+    <ClCompile Include="Wincondition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui" />
@@ -120,6 +122,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="Deathcondition.h" />
+    <ClInclude Include="FeatureNames.h" />
     <ClInclude Include="MarioObject.h" />
     <ClInclude Include="IEnvironment.h" />
     <ClInclude Include="MarioAction.h" />
@@ -155,6 +159,7 @@
     <ClInclude Include="ScreenCaptureDummy.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="TemplateMatcher.h" />
+    <ClInclude Include="Wincondition.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

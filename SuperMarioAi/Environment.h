@@ -11,8 +11,8 @@ private:
     Mapper mapper;
 public:
     Environment();
-    int give_Input(PngImage& new_input, int arr[GRIDRADIUS][GRIDRADIUS]);
-    int environment_interface(const char* filename, int arr[GRIDRADIUS][GRIDRADIUS]);
+    int give_Input(PngImage& new_input, int arr[GRIDRADIUS][GRIDRADIUS], int* status);
+    int environment_interface(const char* filename, int arr[GRIDRADIUS][GRIDRADIUS], int* status);
     ~Environment();
 };  
 #endif 

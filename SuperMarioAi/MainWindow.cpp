@@ -2,6 +2,8 @@
 #include "Globals.h"
 #include <iostream>
 #include "AiGui.h"
+
+
 #include "MainWindow.h"
 MainWindow::MainWindow(IGuiObserver* observer)
 	: QMainWindow(Q_NULLPTR),
@@ -19,6 +21,11 @@ MainWindow::MainWindow(IGuiObserver* observer)
 	ui.viewGame->setScene(gameScene);
 	ui.viewSimplify->setScene(simpleScene);
 
+	ui.tableWidget->setColumnCount(2);
+	ui.tableWidget->setColumnWidth(0,(ui.tableWidget->geometry().width() * 0.499));
+	ui.tableWidget->setColumnWidth(1, (ui.tableWidget->geometry().width() *0.499));
+	ui.tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Feature-Name"));
+	ui.tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Value"));
 
 }
 MainWindow::~MainWindow()
@@ -31,7 +38,9 @@ bool MainWindow::isActivated()
 	return ui.centralwidget->isVisible();
 }
 
+void MainWindow::setUpTable() {
 
+}
 
 void MainWindow::updateGUi()
 {
@@ -52,7 +61,9 @@ void MainWindow::updateGUi()
 
 void MainWindow::setAction(MarioAction nextAction) {
 	action = nextAction;
-
+}
+void MainWindow::setPossibleAction(std::vector<MarioAction> possibleActions) {
+	this->possibleActions = possibleActions;
 }
 
 void MainWindow::setActionLabelPalette( QPalette left,QPalette jump,QPalette highJump, QPalette shootl, QPalette right)
@@ -64,8 +75,24 @@ void MainWindow::setActionLabelPalette( QPalette left,QPalette jump,QPalette hig
 	ui.highJumpLbl->setPalette(highJump);
 }
 
+void MainWindow::setPossibleActionLabel() {
+	ui.highJumpLbl->hide();
+	ui.jumpLbl->hide();
+	ui.shootLbl->hide();
+	ui.leftLbl->hide();
+	ui.rightLbl->hide();
+	for (int i = 0; i < possibleActions.size(); i++) {
+		if (possibleActions[i] == MarioAction::highJump) ui.highJumpLbl->show() ;
+		if (possibleActions[i] == MarioAction::jump) ui.jumpLbl->show();
+		if (possibleActions[i] == MarioAction::moveLeft) ui.leftLbl->show();
+		if (possibleActions[i] == MarioAction::moveRight) ui.rightLbl->show();
+		if (possibleActions[i] == MarioAction::shoot) ui.shootLbl->show();
+	}
+}
+
 void MainWindow::setActionLabel()
 {
+	setPossibleActionLabel();
 	QPalette pal;
 	pal.setColor(QPalette::Window, QColor(Qt::blue));
 	switch (action) {

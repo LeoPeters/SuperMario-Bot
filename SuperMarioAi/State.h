@@ -11,6 +11,7 @@ public:
 	State();
 	~State();
 	MarioAction getBestAction();
+	MarioAction getRandomAction();
 	double getValue(MarioAction action);
 	void setScore(MarioAction action, double value);
 	double getMaxReward();

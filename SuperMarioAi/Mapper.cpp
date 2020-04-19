@@ -6,6 +6,7 @@
 #include <thread>
 #include <mutex>
 #include <cmath>
+#include "Wincondition.h"
 /*    int ErgebnisArray[GRIDRADIUS][GRIDRADIUS];
     int MappingArray[MAPPINGDATA];
     int last_mario_pos_x;
@@ -38,9 +39,7 @@ Mapper::Mapper(): last_mario_pos_x(0), last_mario_pos_y(0){
     //ErgebnisArray.resize(GRIDRADIUS, std::vector<int>(GRIDRADIUS, 0));
 }
 
-Mapper::~Mapper(){
-
-}
+Mapper::~Mapper()=default;
 
 int Mapper::print_erg_radius(){
     for(int y = 0; y<GRIDRADIUS;y++){
@@ -86,7 +85,6 @@ bool Mapper::Map_Mario(){
         end_y = (last_mario_pos_y + TILESIZE*GRIDRADIUS/2);
     }
 
-
     //Randüberprüfungen
     if(start_x<0)start_x=0;
     if(start_y<0)start_y=0;
@@ -101,9 +99,6 @@ bool Mapper::Map_Mario(){
         bools[i]=false;
         threads[i] = std::thread(&MarioFinder::search_for_Mario_threaded,
                     &finders[i],start_x,end_x,start_y,(end_y/MARIOFINDERTHREADS)*(i+1),&bools[i]);
-
-                    //printf(" %d-%d,",start_y,(end_y/MARIOFINDERTHREADS)*(i+1));
-
         start_y = end_y/MARIOFINDERTHREADS*(i+1)-tilesize_mario_big_y;
     }
     for(int i = 0; i<MARIOFINDERTHREADS;i++){
@@ -111,14 +106,37 @@ bool Mapper::Map_Mario(){
     }
     for(int i = 0; i<MARIOFINDERTHREADS;i++){
         if(bools[i]){
-            //std::cout << "MARIO FOUND ON X:"<<finders[i].return_x_pos()<<" AND Y:"
-            //            <<finders[i].return_y_pos()<<"\n";
             last_mario_pos_x = finders[i].return_x_pos();
             last_mario_pos_y = finders[i].return_y_pos();
             Create_Array_Around_Mario(finders[i].return_is_big());
             return true;
         }
     }
+    //-------------------------------------------------------------------------------------
+    //such am Rand vom Input IMG, vlt ist er out of resized img
+    start_x = 0;
+    start_y = 0;
+    end_x = TILESIZE;
+    end_y = height - TILESIZE;
+    for (int i = 0; i < MARIOFINDERTHREADS; i++) {
+        bools[i] = false;
+        if (start_y < 0)start_y = 0;
+        threads[i] = std::thread(&MarioFinder::search_for_Mario_threaded_in_input_img,
+            &finders[i], start_x, end_x, start_y, (end_y / MARIOFINDERTHREADS) * (i + 1), &bools[i]);
+        start_y = end_y / MARIOFINDERTHREADS * (i + 1) - tilesize_mario_big_y;
+    }
+    for (int i = 0; i < MARIOFINDERTHREADS; i++) {
+        threads[i].join();
+    }
+    for (int i = 0; i < MARIOFINDERTHREADS; i++) {
+        if (bools[i]) {
+            last_mario_pos_x = finders[i].return_x_pos();
+            last_mario_pos_y = finders[i].return_y_pos();
+            Create_Array_Around_Mario(finders[i].return_is_big());
+            return true;
+        }
+    }
+
     //-------------------------------------------------------------------------------------
     //such im ganzen foto nochmal, vielleicht ist er gestorben und seine near position ist weg
     start_x = 0;
@@ -130,9 +148,6 @@ bool Mapper::Map_Mario(){
         if (start_y < 0)start_y = 0;
         threads[i] = std::thread(&MarioFinder::search_for_Mario_threaded,
                     &finders[i],start_x,end_x,start_y,(end_y/MARIOFINDERTHREADS)*(i+1),&bools[i]);
-
-                    //printf(" %d-%d,",start_y,(end_y/MARIOFINDERTHREADS)*(i+1));
-
         start_y = end_y/MARIOFINDERTHREADS*(i+1)-tilesize_mario_big_y;
     }
     for(int i = 0; i<MARIOFINDERTHREADS;i++){
@@ -140,15 +155,12 @@ bool Mapper::Map_Mario(){
     }
     for(int i = 0; i<MARIOFINDERTHREADS;i++){
         if(bools[i]){
-            //std::cout << "MARIO FOUND ON X:"<<finders[i].return_x_pos()<<" AND Y:"
-            //            <<finders[i].return_y_pos()<<"\n";
             last_mario_pos_x = finders[i].return_x_pos();
             last_mario_pos_y = finders[i].return_y_pos();
             Create_Array_Around_Mario(finders[i].return_is_big());
             return true;
         }
     }
-
     return false;
 }
 
@@ -180,25 +192,7 @@ int Mapper::Create_Array_Around_Mario(bool bigflag){
 
     mariogrid_x+=runden_x;
     mariogrid_y+=runden_y;
-    //mariogrid_y = 11;
-    /*
-    int array_x = GRIDRADIUS/2;
-    int array_y = GRIDRADIUS/2;
-    if(mariogrid_x<array_x){
-       array_x=mariogrid_x;
-    }
-    if(mariogrid_y<array_y){
-       array_y=mariogrid_y;
-    }
-    if(mariogrid_y > (height/TILESIZE)-(GRIDRADIUS/2)-1){
-        array_y=(height/TILESIZE) -(GRIDRADIUS/2) - mariogrid_y + GRIDRADIUS/2 + array_y-1;
-    }
-    //printf("%d,,,,",array_y);
-    if(mariogrid_x>(width/TILESIZE)-(GRIDRADIUS/2)-1){
-        array_x=(width/TILESIZE)-(GRIDRADIUS/2) - mariogrid_x + GRIDRADIUS/2 + array_x-1;
-    }
-    */
-    //neue idee: mario nach unten links packen und nach oben um grid/2 dann nach rechts um grid/2
+
     int array_x = 0;
 
     int array_y = 0;
@@ -222,7 +216,6 @@ int Mapper::Create_Array_Around_Mario(bool bigflag){
         array_y = GRIDRADIUS/2;
     }
 
-    //printf("%d %d\n%d %d\n ",mariogrid_x,mariogrid_y,array_x,array_y);
     ErgebnisArray[array_x][array_y]=MARIO;
 
     if(bigflag){
@@ -236,14 +229,7 @@ int Mapper::Create_Array_Around_Mario(bool bigflag){
     MappingArray[Y_Start] = mariogrid_y - array_y; 
     MappingArray[X_End] = MappingArray[X_Start] + GRIDRADIUS-1;
     MappingArray[Y_End] = MappingArray[Y_Start] + GRIDRADIUS-1;
-    //std::cout<<"MARIO POS IN REAL MAP IN GRIDS: (X)(Y):"<<mariogrid_x<<" " 
-    //    << mariogrid_y<<" \n";
-    //std::cout<<"MARIO POS IN ARRAY: (X)(Y):"<<array_x<<" " << array_y<<" \n";
-    //std::cout<<"ERG ARRAY ON REAL MAP: (X)(Y) bis (XEND)(YEND):"<<
-    //    MappingArray[X_Start]<<" " << MappingArray[Y_Start]<<" " 
-    //    <<MappingArray[X_End]<<" " <<MappingArray[Y_End]<<" \n";
 
-    //print_erg_radius();
     return 0;
 }
 
@@ -252,7 +238,6 @@ int Mapper::Map_Blocks_Threaded(){
     int start_y=MappingArray[Y_Start];
     int end_y=MappingArray[Y_End];
     int end_x=MappingArray[X_End];
-
     std::thread threads[FINDERTHREADS];
     std::vector<FinderThread> blocks(FINDERTHREADS, FinderThread(BLOCK));
     for(int i = 0; i < FINDERTHREADS;i++){
@@ -267,13 +252,10 @@ int Mapper::Map_Blocks_Threaded(){
 }
 
 int Mapper::Map_Enemys_Threaded(){
-    /*FinderThread enemys(ENEMY);
-    enemys.search(MappingArray[X_Start],MappingArray[X_End],MappingArray[Y_Start],MappingArray[Y_End],this);*/
     int start_x=MappingArray[X_Start];
     int start_y=MappingArray[Y_Start];
     int end_y=MappingArray[Y_End];
     int end_x=MappingArray[X_End];
-
     std::thread threads[FINDERTHREADS];
     std::vector<FinderThread> enemys(FINDERTHREADS, FinderThread(ENEMY));
     for(int i = 0; i < FINDERTHREADS;i++){
@@ -287,12 +269,55 @@ int Mapper::Map_Enemys_Threaded(){
     return 0;
 }
 
+bool Mapper::Map_Winning_Conditions_Threaded()
+{
+    /*
+    int start_x = MappingArray[X_Start];
+    int start_y = MappingArray[Y_Start];
+    int end_y = MappingArray[Y_End];
+    int end_x = MappingArray[X_End];
+    std::thread threads[FINDERTHREADS];
+    std::vector<FinderThread> winningconds(FINDERTHREADS, FinderThread(WINNINGCONDS));
+    for (int i = 0; i < FINDERTHREADS; i++) {
+        threads[i] = std::thread(&FinderThread::search,
+            &winningconds[i], start_x, end_x, start_y, start_y, this);
+        start_y += 1;
+    }
+    for (int i = 0; i < FINDERTHREADS; i++) {
+        threads[i].join();
+    }*/
+    Wincondition wincond;
+    bool erg = wincond.search_for_wincond();
+    bool gewonnen = false;
+    if(erg){//wincond found. now put in Array
+        int pole_grid_x = wincond.return_flag_top_x()/TILESIZE;
+        int pole_grid_y = wincond.return_flag_top_y()/TILESIZE;
+        printf("GRID LOCATION OF FLAGPOLE TOP: %d %d",pole_grid_x,pole_grid_y);
+        //Fill Array with flagpoledata
+        if(MappingArray[X_Start] <= pole_grid_x && MappingArray[X_End] >= pole_grid_x){
+            //pole x is in Erg Array range
+            for(int y = MappingArray[Y_Start]; y<=MappingArray[Y_End];y++){
+                if(y>=pole_grid_y){
+                    if(check_if_free(pole_grid_x,y)){
+                        write_to_output_array(pole_grid_x,y,WINNINGCONDS);//TODO: hier muss winning conds stehen aber als test enemy
+                    }
+                    else{
+                        if(ErgebnisArray[pole_grid_x-MappingArray[X_Start]][y-MappingArray[Y_Start]] == MARIO){
+                            gewonnen = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return gewonnen;
+}
+
 int Mapper::Map_Items_Threaded(){
     int start_x=MappingArray[X_Start];
     int start_y=MappingArray[Y_Start];
     int end_y=MappingArray[Y_End];
     int end_x=MappingArray[X_End];
-
     std::thread threads[FINDERTHREADS];
     std::vector<FinderThread> items(FINDERTHREADS, FinderThread(ITEM));
     for(int i = 0; i < FINDERTHREADS;i++){

@@ -43,15 +43,22 @@ PngImage& ImageDistributor::grab_next_block_img(bool* done){
                                     &ImgLib_ptr->Ground_Images);
 }
 
+/*PngImage& ImageDistributor::grab_next_winningconditions_img(bool* done) {
+    return img_grabber(ImgLib_ptr->return_winningconditions_img_count(),
+                                    &tmp_winningconditions_count, done,
+                                    &ImgLib_ptr->Winningconditions_Imgages);
+}*/
+
 ImageDistributor::ImageDistributor():tmp_mario_Small_img_count(0), tmp_mario_Shroom_img_count(0),
-    tmp_mario_Fire_img_count(0),tmp_enemy_img_count(0),tmp_item_Non_Static_img_count(0),
-    tmp_item_Static_img_count(0),tmp_block_img_count(0), tmp_pipe_img_count(0){
+        tmp_mario_Fire_img_count(0),tmp_enemy_img_count(0),tmp_item_Non_Static_img_count(0),
+        tmp_item_Static_img_count(0),tmp_block_img_count(0), tmp_pipe_img_count(0)/*,
+        tmp_winningconditions_count(0)*/{
+
     ImgLib_ptr = ImageLibrary::getInstance();
 }
 
-ImageDistributor::~ImageDistributor(){
 
-}
+ImageDistributor::~ImageDistributor()=default;
 
 PngImage& ImageDistributor::grab_input_img(){
     return ImgLib_ptr->Input_Img;
@@ -60,6 +67,15 @@ PngImage& ImageDistributor::grab_input_img(){
 PngImage& ImageDistributor::grab_resized_img(){
     return ImgLib_ptr->Resized_Img;
 }
+
+PngImage& ImageDistributor::grab_deathscreen_img(){
+    return ImgLib_ptr->Deathscreen_Img;
+}
+
+PngImage& ImageDistributor::grab_flagpole_img(){
+    return ImgLib_ptr->Flagpole_Img;
+}
+
 
 PngImage& ImageDistributor::img_grabber(int max_count, int* counter, bool* done, std::vector<PngImage> *vec){
     if(*counter >= max_count){

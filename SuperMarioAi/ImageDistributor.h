@@ -17,6 +17,7 @@ class ImageDistributor{
         int tmp_item_Static_img_count;
         int tmp_block_img_count;
         int tmp_pipe_img_count;
+        //int tmp_winningconditions_count;
         PngImage& img_grabber(int modi, int* counter, bool* done, std::vector<PngImage> *vec);
     public:
         PngImage& grab_next_mario_Small_img(bool* done);
@@ -29,6 +30,9 @@ class ImageDistributor{
         PngImage& grab_next_pipe_img(bool* done);
         PngImage& grab_input_img();
         PngImage& grab_resized_img();
+        PngImage& grab_deathscreen_img();
+        PngImage& grab_flagpole_img();
+        //PngImage& grab_next_winningconditions_img(bool* done);
         ImageDistributor();
         ~ImageDistributor();
 };

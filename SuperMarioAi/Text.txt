@@ -1,0 +1,10 @@
+Todo:
+
+Um Anzeige zu verbessern vielleicht: Wenn mario nicht gefunden wird: Mappe around last position den Rest und benutze das selbe Grid wieder. Um Mario not found zu vermeiden.
+Also lasse mario wenn nicht gefunden auf der Selben Position im selben grid aber remappe alle statischen Objekte?
+
+Änder Die ErgArray Werte auf ENUMS
+
+Code Refractoring
+
+Maybe Simultanious Multithreading der Mapping Suche. Also großes Threadarray.

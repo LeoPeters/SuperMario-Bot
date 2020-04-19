@@ -36,6 +36,7 @@ void AiGui::update()
 	}
 	mWindow->setState(*observer->getState());
 	mWindow->setAction(*observer->getAction());
+	mWindow->setPossibleAction(*observer->getpossibleAction());
 	mWindow->updateView();
 }
 

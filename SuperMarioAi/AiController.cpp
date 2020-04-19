@@ -7,8 +7,8 @@
 AiController::AiController(int argc, char** argv) :
 	screenCapture(NULL),
 	simplifier(NULL),
-	environment(NULL),
-	aiAlgo(NULL),
+	features(NULL),
+	agent(NULL),
 	appControl(NULL),
 	currentState(0),
 	nextAction(MarioAction())
@@ -19,16 +19,23 @@ AiController::AiController(int argc, char** argv) :
 void AiController::run() {
 	bool playerAlive;
 
-	std::vector<MarioAction> possibleActions;
+
 
 	while (isGuiRunning) {
 		while (isGameStarted) {
 			gameCapture = screenCapture->captureScreen(PNG_LNAME);
 			if (!gui->getMainWindow()->getIsPaused()) {
-				simplifier->simplifyImage(simplifyVec, gameCapture);
-				environment->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
-				nextAction = aiAlgo->calculateAction(currentState, possibleActions);
-				appControl->makeAction(nextAction);
+				playerAlive=simplifier->simplifyImage(simplifyVec, gameCapture);
+				if (playerAlive) {
+				features->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
+				nextAction = agent->calculateAction(currentState, possibleActions);
+				//appControl->makeAction(nextAction); //auscomment to gain access
+				}
+				else {
+					features->gameOver();
+					agent->gameOver();
+					//appControl->restartGame(); //auscomment to gain access
+				}
 			}
 				gui->update();
 		}
@@ -85,14 +92,19 @@ MarioAction* AiController::getAction()
 	return &nextAction;
 }
 
+std::vector<MarioAction>* AiController::getpossibleAction()
+{
+	return &possibleActions;
+}
+
 void AiController::startSuperMario()
 {
 	isGameStarted = false;
 	if (factory.loadSuperMarioAi()) {
 		this->screenCapture = factory.getScreenCapture();
 		this->simplifier = factory.getImageScan();
-		this->environment = factory.getEnvironment();
-		this->aiAlgo = factory.getAiAlgo();
+		this->features = factory.getEnvironment();
+		this->agent = factory.getAiAlgo();
 		this->appControl = factory.getAppControl();
 		isGameStarted = true;
 	}

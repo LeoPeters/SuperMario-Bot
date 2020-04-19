@@ -15,7 +15,7 @@
 #include "Features.h"
 #include "MarioObject.h"
 #include "MarioAction.h"
-
+#include <iostream>
 Features::Features() :
     marioPositionX(-1),
     marioPositionY(-1),
@@ -33,6 +33,7 @@ Features::~Features() {
 void Features::calculateStateAndActions(std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state) {
     marioArray = tempArray;
     setMarioPosition();
+    calculateJumpBlocked();
     *possibleActions = getPossibleActions();
     *state = calculateStateNumber(); 
 }
@@ -66,26 +67,32 @@ std::vector<MarioAction> Features::getPossibleActions() {
         possibleActions.push_back(MarioAction::moveRight);
     }
 
-    if (jumpBlocked && 
+    if (!jumpBlocked && 
         marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) && 
         marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) {
+        
         possibleActions.push_back(MarioAction::jump);
         possibleActions.push_back(MarioAction::highJump);
     }
+
+
 
     return possibleActions;
 }
 
 int Features::isUnderBlock(){
 	//TODO Wertebereich
+    /*
     if ((marioPositionY >= 1 && marioArray[marioPositionY - 1][marioPositionX] == int(MarioObject::ground)) || 
-        (marioPositionY >= 2 && marioArray[marioPositionY - 2][marioPositionX] == int(MarioObject::ground)) ||
+        (marioPositionY >= 2 && marioArray[marioPositionY - 2][marioPositionX] == int(MarioObject::ground)) ||//TODO: Error hier
         (marioPositionY >= 2 && marioArray[marioPositionY - 3][marioPositionX] == int(MarioObject::ground))) {
         return 1;
     }
     else{
         return 0;
     }
+    */
+    return 0;//NUR ZUM TESTEN
 }
 std::array<int, 2> Features::closestEnemy() {
     std::array<int, 2> closest = { GRIDRADIUS, GRIDRADIUS };
@@ -139,6 +146,23 @@ int Features::calculateStateNumber() {
     }
     states[statesSize] = state;
     return statesSize;
+}
+
+void Features::calculateJumpBlocked()
+{
+    if (marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground)){
+        onGroundCounter++;
+    }
+    else {
+        onGroundCounter = 0;
+    }
+    if (onGroundCounter >= 0) {
+        jumpBlocked = false;
+    }
+    else {
+        jumpBlocked = true;
+    }
+    
 }
 
 /*
