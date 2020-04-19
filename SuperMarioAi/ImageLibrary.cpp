@@ -20,6 +20,10 @@ ImageLibrary::ImageLibrary() : mario_Small_img_count(0), mario_Shroom_img_count(
     const char *path_to_input = "pictures/Input/input.png";
     Input_Img = PngImage(path_to_input);
 
+    //init deathscreen
+    const char *path_to_deathscreen = "pictures/Deathscreen/deathscreen.png";
+    Deathscreen_Img = PngImage(path_to_deathscreen);
+
     //init enemys
     init_vector("pictures/Enemys",&enemy_img_count,&Enemy_Images);
 
@@ -35,6 +39,9 @@ ImageLibrary::ImageLibrary() : mario_Small_img_count(0), mario_Shroom_img_count(
     //init blocks
     init_vector("pictures/Ground/bloecke",&block_img_count,&Ground_Images);
     init_vector("pictures/Ground/pipes",&pipes_img_count,&Pipe_Images);
+
+    
+
 }
 
 int ImageLibrary::return_mario_Small_img_count(){
@@ -89,6 +96,4 @@ int ImageLibrary::init_vector(const char* pathchar, int* imgcounter,
     return 0;
 }
 
-ImageLibrary::~ImageLibrary(){
-
-}
+ImageLibrary::~ImageLibrary()=default;

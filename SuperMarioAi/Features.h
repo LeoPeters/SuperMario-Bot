@@ -34,6 +34,7 @@ private:
     int marioPositionX;
     int marioPositionY;
     bool jumpBlocked;
+    int onGroundCounter=0;
     
     int isUnderBlock();
     std::array<int, 2> closestEnemy();
@@ -43,6 +44,8 @@ private:
     std::vector<int> getFeatureVector();
     std::vector<MarioAction> getPossibleActions();
     int Features::calculateStateNumber();
+    void Features::calculateJumpBlocked();
+
 };
 
 #endif /* MARIOSTATEFEATURES_H */

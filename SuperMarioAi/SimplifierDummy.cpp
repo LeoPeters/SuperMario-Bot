@@ -16,7 +16,8 @@ bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBIT
 		}
 	}
 	simply->clear();
-	env.environment_interface(PNG_NAME,ergArray);
+	int status;
+	env.environment_interface(PNG_NAME,ergArray,&status);
 	for (int y = 0; y < GRIDRADIUS;y++) {
 		std::vector<int> vecX;
 		for (int x = 0; x < GRIDRADIUS; x++){
@@ -26,5 +27,5 @@ bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBIT
 	}
 
 
-	return false;
+	return status!=TOT;
 }

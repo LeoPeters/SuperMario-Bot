@@ -15,7 +15,7 @@
 #include "Features.h"
 #include "MarioObject.h"
 #include "MarioAction.h"
-
+#include <iostream>
 Features::Features() :
     marioPositionX(-1),
     marioPositionY(-1),
@@ -33,6 +33,7 @@ Features::~Features() {
 void Features::calculateStateAndActions(std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state) {
     marioArray = tempArray;
     setMarioPosition();
+    calculateJumpBlocked();
     *possibleActions = getPossibleActions();
     *state = calculateStateNumber(); 
 }
@@ -66,12 +67,15 @@ std::vector<MarioAction> Features::getPossibleActions() {
         possibleActions.push_back(MarioAction::moveRight);
     }
 
-    if (jumpBlocked && 
+    if (!jumpBlocked && 
         marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) && 
         marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) {
+        
         possibleActions.push_back(MarioAction::jump);
         possibleActions.push_back(MarioAction::highJump);
     }
+
+
 
     return possibleActions;
 }
@@ -139,6 +143,23 @@ int Features::calculateStateNumber() {
     }
     states[statesSize] = state;
     return statesSize;
+}
+
+void Features::calculateJumpBlocked()
+{
+    if (marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground)){
+        onGroundCounter++;
+    }
+    else {
+        onGroundCounter = 0;
+    }
+    if (onGroundCounter >= 0) {
+        jumpBlocked = false;
+    }
+    else {
+        jumpBlocked = true;
+    }
+    
 }
 
 /*

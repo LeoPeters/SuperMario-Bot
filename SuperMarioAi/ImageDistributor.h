@@ -29,6 +29,7 @@ class ImageDistributor{
         PngImage& grab_next_pipe_img(bool* done);
         PngImage& grab_input_img();
         PngImage& grab_resized_img();
+        PngImage& grab_deathscreen_img();
         ImageDistributor();
         ~ImageDistributor();
 };

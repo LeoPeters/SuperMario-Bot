@@ -1,5 +1,5 @@
 #include "Agent.h"
-
+#include <iostream>
 Agent::Agent() :
 	lastState(0),
 	policy(Policy::greedy),
@@ -22,6 +22,15 @@ MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> poss
 
 	lastAction = action;
 	lastState = stateIndex;
+
+	for (int i = 0; i < possibleActions.size(); i++) {
+		if ((int)possibleActions[i] == 0) std::cout << "moveLeft" << std::endl;
+		if ((int)possibleActions[i] == 1) std::cout << "moveRight" << std::endl;
+		if ((int)possibleActions[i] == 2) std::cout << "jump" << std::endl;
+		if ((int)possibleActions[i] == 3) std::cout << "highJump" << std::endl;
+		if ((int)possibleActions[i] == 4) std::cout << "shoot" << std::endl;
+	}
+
 	return action;
 }
 
@@ -38,7 +47,7 @@ MarioAction Agent::chooseAction(State state) {
 	switch (policy) {
 	case Policy::greedy:
 		if (rnd <= EPSILON) {
-			a = getRandomAction();
+			a = state.getRandomAction();
 		} else {
 			a = state.getBestAction();
 		}
@@ -53,5 +62,5 @@ MarioAction Agent::chooseAction(State state) {
 }
 
 MarioAction Agent::getRandomAction() {
-	return  (MarioAction) (rand() % ((int)MarioAction::ACTION_MAX - 1));
+	return (MarioAction) (rand() % ((int)MarioAction::ACTION_MAX - 1));
 }

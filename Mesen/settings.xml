@@ -1386,6 +1386,14 @@
   <RecentFiles>
     <RecentItem>
       <RomFile>
+        <Path>C:\Users\Luisn\OneDrive\Desktop\SuperMario-Bot\Mesen\Super_mario_brothers.nes</Path>
+        <InnerFile />
+        <InnerFileIndex>0</InnerFileIndex>
+      </RomFile>
+      <PatchFile xsi:nil="true" />
+    </RecentItem>
+    <RecentItem>
+      <RomFile>
         <Path>G:\Programmierzeug\Git\Super Mario Bot\Mesen\Super_mario_brothers.nes</Path>
         <InnerFile />
         <InnerFileIndex>0</InnerFileIndex>

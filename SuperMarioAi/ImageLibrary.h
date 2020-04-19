@@ -45,6 +45,8 @@ public:
 
     PngImage Input_Img;
     PngImage Resized_Img;
+    PngImage Deathscreen_Img;
+
     int return_mario_Small_img_count();
     int return_mario_Shroom_img_count();
     int return_mario_Fire_img_count();
