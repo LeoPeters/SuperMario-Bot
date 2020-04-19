@@ -23,7 +23,5 @@ private:
 	MarioAction lastAction;
 	std::array<State, NUMBER_OF_STATES> states;
 	MarioAction chooseAction(State state);
-	MarioAction getRandomAction();
-
 };
 

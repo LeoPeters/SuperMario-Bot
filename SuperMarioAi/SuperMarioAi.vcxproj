@@ -113,6 +113,7 @@
     <ClCompile Include="ScreenCaptureDummy.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TemplateMatcher.cpp" />
+    <ClCompile Include="Wincondition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui" />
@@ -160,6 +161,7 @@
     <ClInclude Include="ScreenCaptureDummy.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="TemplateMatcher.h" />
+    <ClInclude Include="Wincondition.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

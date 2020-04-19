@@ -1,5 +1,6 @@
 #include "FinderThread.h"
 #include "GridScanner.h"
+#include <iostream>
 /*class FinderThread{
     private:
         ImageDistributor distr;
@@ -59,6 +60,8 @@ FinderThread::FinderThread(int TYP): resized(distr.grab_resized_img()) , gridsc(
 }
 
 FinderThread::~FinderThread()=default;
+
+int maxx = 0;
 
 bool FinderThread::search(int xstart, int xend, int ystart, int yend, Mapper *mapper){
   bool am_i_done = false;
@@ -137,6 +140,22 @@ bool FinderThread::search(int xstart, int xend, int ystart, int yend, Mapper *ma
         }
       }
     break;
+    /*case WINNINGCONDS:
+        while (true) {
+            PngImage& img = distr.grab_next_winningconditions_img(&am_i_done);
+            if (am_i_done)break;
+            printf("\n\n\n");
+            for (int x = xstart; x <= xend; x++) {
+                for (int y = ystart; y <= yend; y++) {
+                    if (mapper->check_if_free(x, y)) {
+                        bool x = gridsc.grid_matching_static(x, y, img, WINNINGCONDITIONS_UNTERE_FLANKE, WINNINGCONDITIONS_OBERE_FLANKE);
+                        if (x) {
+                            mapper->write_to_output_array(x, y, ENEMY);//nur zum �testen
+                        }
+                    }
+                }
+            }
+        }*/
     }
   return false;
 }
