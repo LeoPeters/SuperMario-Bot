@@ -14,6 +14,7 @@ private:
     int item_Static_img_count;
     int block_img_count;
     int pipes_img_count;
+    int winningconditions_img_count;
     int init_vector(const char* pathchar, int* imgcounter, std::vector<PngImage> *vec);
 
     //For Singleton Desing Pattern
@@ -42,12 +43,16 @@ public:
     //PngImage *Ground_Images;
     std::vector <PngImage> Ground_Images;
     std::vector <PngImage> Pipe_Images;
+    //PngImage *Winning_Conditions;
+    //std::vector <PngImage> Winningconditions_Imgages;
 
     PngImage Input_Img;
     PngImage Resized_Img;
     PngImage Deathscreen_Img;
+    PngImage Flagpole_Img;
 
     int return_mario_Small_img_count();
+    //int return_winningconditions_img_count();
     int return_mario_Shroom_img_count();
     int return_mario_Fire_img_count();
     int return_item_Static_img_count();

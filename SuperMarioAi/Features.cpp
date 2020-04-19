@@ -82,14 +82,17 @@ std::vector<MarioAction> Features::getPossibleActions() {
 
 int Features::isUnderBlock(){
 	//TODO Wertebereich
+    /*
     if ((marioPositionY >= 1 && marioArray[marioPositionY - 1][marioPositionX] == int(MarioObject::ground)) || 
-        (marioPositionY >= 2 && marioArray[marioPositionY - 2][marioPositionX] == int(MarioObject::ground)) ||
+        (marioPositionY >= 2 && marioArray[marioPositionY - 2][marioPositionX] == int(MarioObject::ground)) ||//TODO: Error hier
         (marioPositionY >= 2 && marioArray[marioPositionY - 3][marioPositionX] == int(MarioObject::ground))) {
         return 1;
     }
     else{
         return 0;
     }
+    */
+    return 0;//NUR ZUM TESTEN
 }
 std::array<int, 2> Features::closestEnemy() {
     std::array<int, 2> closest = { GRIDRADIUS, GRIDRADIUS };

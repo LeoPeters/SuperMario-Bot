@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "AiController.h"
 #include <thread>
@@ -6,20 +5,20 @@
 FILE* fDummy;
 void CreateConsole();
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-    if(DEBUG){
-    CreateConsole();
+    if (DEBUG) {
+        CreateConsole();
     }
-    AiController controller(argc,argv);
+    AiController controller(argc, argv);
     std::thread controllerThread(&AiController::run, &controller);
     controller.runGui();
     controllerThread.join();
     if (DEBUG) {
-    fclose(fDummy);
-    FreeConsole();
+        fclose(fDummy);
+        FreeConsole();
     }
-	return 0;
+    return 0;
 }
 void CreateConsole()
 {

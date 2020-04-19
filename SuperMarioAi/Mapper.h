@@ -17,6 +17,7 @@ public:
     int Map_Blocks_Threaded();
     int Map_Items_Threaded();
     int Map_Enemys_Threaded();
+    bool Map_Winning_Conditions_Threaded();
     bool check_if_free(int grid_x, int grid_y);
     bool write_to_output_array(int grid_x, int grid_y, int DISTR_IMAGES);
     int return_erg_array(int arr[GRIDRADIUS][GRIDRADIUS]);

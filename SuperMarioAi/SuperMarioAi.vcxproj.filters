@@ -157,6 +157,9 @@
     <ClCompile Include="Deathcondition.cpp">
       <Filter>Source Files\Simplifier</Filter>
     </ClCompile>
+    <ClCompile Include="Wincondition.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui">
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="FeatureNames.h">
       <Filter>Header Files\Structs/Enum/Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="Wincondition.h">
+      <Filter>Header Files\Simplifier</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
