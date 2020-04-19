@@ -2,8 +2,6 @@
 #include "Globals.h"
 
 
-SimplifierDummy::SimplifierDummy() {
-}
 
 bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBITMAP image)
 {
@@ -17,7 +15,7 @@ bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBIT
 	}
 	simply->clear();
 	int status;
-	env.environment_interface(PNG_NAME,ergArray,&status);
+	env->environment_interface(PNG_NAME,ergArray,&status);
 	for (int y = 0; y < GRIDRADIUS;y++) {
 		std::vector<int> vecX;
 		for (int x = 0; x < GRIDRADIUS; x++){
@@ -28,4 +26,9 @@ bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBIT
 
 
 	return status!=TOT;
+}
+
+void SimplifierDummy::init()
+{
+	env = new Environment();
 }

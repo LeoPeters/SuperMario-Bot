@@ -2,35 +2,51 @@
 #include "Globals.h"
 #include <iostream>
 #include "AiGui.h"
-
-
+#include "FeatureNames.h"
 #include "MainWindow.h"
+
 MainWindow::MainWindow(IGuiObserver* observer)
 	: QMainWindow(Q_NULLPTR),
-	observer(observer)
+	observer(observer),
+	gameScene(new QGraphicsScene()),
+	simpleScene(new QGraphicsScene())
 {
-
 	ui.setupUi(this);
-	connect(ui.btn_start, SIGNAL(clicked()), this, SLOT(pressStartBtn()));
-	connect(ui.btn_pause, SIGNAL(clicked()), this, SLOT(pressPauseBtn()));
-	connect(ui.btn_exit, SIGNAL(clicked()), this, SLOT(pressExitBtn()));
-	connect(this, SIGNAL(updateView()), this, SLOT(updateGUi()));
+	signalSetup();
 	original = ui.highJumpLbl->palette();
-	gameScene = new QGraphicsScene();
-	simpleScene = new QGraphicsScene();
 	ui.viewGame->setScene(gameScene);
 	ui.viewSimplify->setScene(simpleScene);
-
-	ui.tableWidget->setColumnCount(2);
-	ui.tableWidget->setColumnWidth(0,(ui.tableWidget->geometry().width() * 0.499));
-	ui.tableWidget->setColumnWidth(1, (ui.tableWidget->geometry().width() *0.499));
-	ui.tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Feature-Name"));
-	ui.tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Value"));
-
+	setUpFeatureGrid();
+	
 }
 MainWindow::~MainWindow()
 {
 	observer->notifyEndApp();
+}
+
+void MainWindow::setUpFeatureGrid()
+{
+	ui.gridLayout->setSpacing(1);
+	FeatureWidget* currentState=new FeatureWidget();
+	featureWidgets.push_back(currentState);
+	ui.gridLayout->addWidget(currentState);
+	for (int i = 0; i < (int)FeatureNames::SIZE_FEATURE_NAMES; i++) {
+		FeatureWidget* wg = new FeatureWidget();
+		featureWidgets.push_back(wg);
+		ui.gridLayout->addWidget(wg);
+	}
+	featureWidgets[0]->setFeatureName("Current State:");
+	featureWidgets[1]->setFeatureName("Under Block: ");
+	featureWidgets[2]->setFeatureName("Enemy X:");
+	featureWidgets[3]->setFeatureName("Enemy Y:");
+	featureWidgets[4]->setFeatureName("Obstacle:");
+
+}
+void MainWindow::signalSetup() {
+	connect(ui.btn_start, SIGNAL(clicked()), this, SLOT(pressStartBtn()));
+	connect(ui.btn_pause, SIGNAL(clicked()), this, SLOT(pressPauseBtn()));
+	connect(ui.btn_exit, SIGNAL(clicked()), this, SLOT(pressExitBtn()));
+	connect(this, SIGNAL(updateView()), this, SLOT(updateGUi()));
 }
 
 bool MainWindow::isActivated()
@@ -54,13 +70,23 @@ void MainWindow::updateGUi()
 		gameScene->clear();
 		gameScene->addPixmap(gamePixmap);
 	}
+
 	setActionLabel();
-	ui.currentState->setText(QString::number(state));
+	featureWidgets[0]->setFeatureValue(state);
+	for (int i = 0; i < featureVector.size(); i++) {
+		featureWidgets[i+1]->setFeatureValue(featureVector[i]);
+	}
+
+	
 }
 
 
 void MainWindow::setAction(MarioAction nextAction) {
 	action = nextAction;
+}
+void MainWindow::setFeatureVector(std::vector<int> featureVector)
+{
+	this->featureVector = featureVector;
 }
 void MainWindow::setPossibleAction(std::vector<MarioAction> possibleActions) {
 	this->possibleActions = possibleActions;
@@ -115,6 +141,7 @@ void MainWindow::setActionLabel()
 		break;
 	}
 }
+
 
 void MainWindow::setState(int state) {
 	this->state = state;

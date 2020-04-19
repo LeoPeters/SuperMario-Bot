@@ -93,6 +93,7 @@
     <ClCompile Include="Deathcondition.cpp" />
     <ClCompile Include="EnviromentDummy.cpp" />
     <ClCompile Include="Environment.cpp" />
+    <ClCompile Include="FeatureWidget.cpp" />
     <ClCompile Include="FinderThread.cpp" />
     <ClCompile Include="GridScanner.cpp" />
     <ClCompile Include="ImageDistributor.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="Agent.h" />
     <ClInclude Include="Deathcondition.h" />
     <ClInclude Include="FeatureNames.h" />
+    <ClInclude Include="FeatureWidget.h" />
     <ClInclude Include="MarioObject.h" />
     <ClInclude Include="IEnvironment.h" />
     <ClInclude Include="MarioAction.h" />

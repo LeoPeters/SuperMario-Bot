@@ -20,11 +20,12 @@ public:
 	void notifyPausePressed() override;
 	void notifyStartPressed() override;
 	void notifyEndApp() override;
-	 int* getState() override;
-	 std::vector <std::vector<int>>* getSimpleView() override;
-	 HBITMAP* getGameView() override;
-	 MarioAction* getAction() override;
-	 std::vector<MarioAction>* getpossibleAction() override;
+	 int getState() override;
+	 std::vector <std::vector<int>> getSimpleView() override;
+	 HBITMAP getGameView() override;
+	 MarioAction getAction() override;
+	 std::vector<MarioAction> getpossibleAction() override;
+	 std::vector<int> getFeatureVector();
 private:
 	std::vector<MarioAction> possibleActions;
 	void startSuperMario();
@@ -44,6 +45,7 @@ private:
 	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
 	MarioAction nextAction;
 	int currentState;
+	std::vector<int> featureVector;
 };
 
 #endif

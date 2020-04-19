@@ -6,11 +6,11 @@ class SimplifierDummy:public ISimplifier
 {
 public:	
 	bool simplifyImage(std::vector <std::vector<int>>* simpleView,HBITMAP image) override;
-	SimplifierDummy::SimplifierDummy();
+	void init() override;
 private:
 	int calls;
 	int pos;
-	Environment env;
+	Environment* env;
 
 };
 
