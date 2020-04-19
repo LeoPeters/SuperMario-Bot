@@ -17,6 +17,7 @@ class PngImage{
         png_bytep *row_pointers = NULL;
         PngImage(const char *filename);
         PngImage();//? ist das ok?
+        void free_my_data();
         ~PngImage();
         int return_height();
         int return_width();

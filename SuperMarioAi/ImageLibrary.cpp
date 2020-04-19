@@ -20,7 +20,6 @@ ImageLibrary::ImageLibrary() : mario_Small_img_count(0), mario_Shroom_img_count(
     //Init Input
     const char *path_to_input = "pictures/Input/input.png";
     Input_Img = PngImage(path_to_input);
-
     //init deathscreen
     const char *path_to_deathscreen = "pictures/Deathscreen/deathscreen.png";
     Deathscreen_Img = PngImage(path_to_deathscreen);
@@ -82,11 +81,13 @@ int ImageLibrary::return_pipe_img_count(){
 }
 
 int ImageLibrary::set_input_image(PngImage input){
+    Input_Img.free_my_data(); //clear malloc data
     Input_Img=input;
     return 0;
 }
 
 int ImageLibrary::set_resized_image(PngImage resized){
+    Resized_Img.free_my_data();
     Resized_Img=resized;
     return 0;
 }
