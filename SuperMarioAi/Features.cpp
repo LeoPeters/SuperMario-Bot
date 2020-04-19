@@ -82,17 +82,13 @@ std::vector<MarioAction> Features::getPossibleActions() {
 
 int Features::isUnderBlock(){
 	//TODO Wertebereich
-    /*
+    
     if ((marioPositionY >= 1 && marioArray[marioPositionY - 1][marioPositionX] == int(MarioObject::ground)) || 
-        (marioPositionY >= 2 && marioArray[marioPositionY - 2][marioPositionX] == int(MarioObject::ground)) ||//TODO: Error hier
-        (marioPositionY >= 2 && marioArray[marioPositionY - 3][marioPositionX] == int(MarioObject::ground))) {
+        (marioPositionY >= 2 && marioArray[marioPositionY - 2][marioPositionX] == int(MarioObject::ground)) ||
+        (marioPositionY >= 3 && marioArray[marioPositionY - 3][marioPositionX] == int(MarioObject::ground))) {
         return 1;
     }
-    else{
-        return 0;
-    }
-    */
-    return 0;//NUR ZUM TESTEN
+    return 0;
 }
 std::array<int, 2> Features::closestEnemy() {
     std::array<int, 2> closest = { GRIDRADIUS, GRIDRADIUS };
@@ -164,59 +160,3 @@ void Features::calculateJumpBlocked()
     }
     
 }
-
-/*
-int Features::distanceToEnemyX(){
-    // possible x : -2,-1,0,1,2
-    // Anfang vom feld
-    int startX = marioPositionX - (2 * marioPositionX);
-    for (int x = marioPositionX; x < GRIDRADIUS; x++){
-        if (marioArray[marioPositionY][x] == int(MarioObject::enemy)){
-            return x + startX;
-        }
-    }
-    for (int y = 0; y < GRIDRADIUS;y++){
-        for (int x = (GRIDRADIUS - 1); x >= 0; x--){
-            if (marioArray[y][x] == int(MarioObject::enemy)){
-                return x + startX;
-            }
-        }
-    }
-    return -99;
-}
-*/
-
-/*
-int Features::distanceToEnemyY(){
-    int startY = (GRIDRADIUS /2)* -1;
-     for (int x = marioPositionX; x < GRIDRADIUS; x++){
-        if (marioArray[marioPositionY][x] == int(MarioObject::enemy)){
-            return marioPositionY + startY;
-        }
-    }
-
-    for (int y = 0; y < GRIDRADIUS;y++){
-        for (int x = (GRIDRADIUS - 1); x >= 0; x--){
-            if (marioArray[y][x] == int(MarioObject::enemy)){
-                return (y + startY);
-            }
-        }
-    }
-    // not found
-    return -99;
-}
-
-int Features::distanceToObstacle() {
-    // possible x : -2,-1,0,1,2
-    // Anfang von feld
-    int startX = marioPositionX - (2 * marioPositionX);
-
-    for (int x = marioPositionX; x < GRIDRADIUS; x++){
-        if (marioArray[marioPositionY][x] == int(MarioObject::ground)){
-            return x + startX;
-        }
-    }
-    // not found
-    return -99;
-}
-*/
