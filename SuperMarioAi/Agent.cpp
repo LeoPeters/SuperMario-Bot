@@ -60,7 +60,3 @@ MarioAction Agent::chooseAction(State state) {
 	}
 	return a;
 }
-
-MarioAction Agent::getRandomAction() {
-	return (MarioAction) (rand() % ((int)MarioAction::ACTION_MAX - 1));
-}
