@@ -79,12 +79,13 @@ int PngImage::return_width(){
     return PngImage::width;
 }
 
-PngImage::~PngImage(){
-    //Check if Image was created, to free the mallocated row pointers
-   /* if(created_flag){
-        for(int y = 0; y < height; y++) {
+void PngImage::free_my_data() {
+    if (created_flag) {
+        for (int y = 0; y < height; y++) {
             free(row_pointers[y]);
         }
         free(row_pointers);
-    }*/
+    }
 }
+
+PngImage::~PngImage() = default;

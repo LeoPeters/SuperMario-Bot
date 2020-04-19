@@ -110,6 +110,7 @@
     <ClCompile Include="PngImage.cpp" />
     <ClCompile Include="ScreenCapture.cpp" />
     <ClCompile Include="ScreenCaptureDummy.cpp" />
+    <ClCompile Include="Testing.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TemplateMatcher.cpp" />
     <ClCompile Include="Wincondition.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="Agent.h" />
     <ClInclude Include="Deathcondition.h" />
     <ClInclude Include="FeatureNames.h" />
+    <ClInclude Include="testing.h" />
     <ClInclude Include="MarioObject.h" />
     <ClInclude Include="IEnvironment.h" />
     <ClInclude Include="MarioAction.h" />

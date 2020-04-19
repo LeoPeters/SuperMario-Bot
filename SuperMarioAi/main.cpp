@@ -18,6 +18,7 @@ int main(int argc, char* argv[])
         fclose(fDummy);
         FreeConsole();
     }
+
     return 0;
 }
 void CreateConsole()
