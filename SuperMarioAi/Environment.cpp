@@ -6,14 +6,15 @@
 #include "Mapper.h"
 #include "TemplateMatcher.h"
 #include "MarioFinder.h"
+#include "Deathcondition.h"
 #include <iostream>
 #include <chrono>
 #include <ctime>  
 
 
-int Environment::environment_interface(const char* filename, int arr[GRIDRADIUS][GRIDRADIUS]){
+int Environment::environment_interface(const char* filename, int arr[GRIDRADIUS][GRIDRADIUS], int* status){
     PngImage inp(filename);
-    give_Input(inp,arr);
+    give_Input(inp,arr,status);
     return 0;
 }
 
@@ -22,11 +23,9 @@ Environment::Environment(){
     image_library = ImageLibrary::getInstance(); 
 }
 
-Environment::~Environment(){
+Environment::~Environment()=default;
 
-}
-
-int Environment::give_Input(PngImage& new_input,int arr[GRIDRADIUS][GRIDRADIUS]){
+int Environment::give_Input(PngImage& new_input,int arr[GRIDRADIUS][GRIDRADIUS], int* status){
     image_library->set_input_image(new_input);
     auto start = std::chrono::system_clock::now();
     if(resize.resize()){
@@ -59,5 +58,12 @@ int Environment::give_Input(PngImage& new_input,int arr[GRIDRADIUS][GRIDRADIUS])
         }
     
     }
+    //kein block wurde gefunden. Check if Deathscreen
+    Deathcondition deathcond;
+    bool isdead = deathcond.return_Is_Dead();
+    if(isdead){
+        *status = TOT;
+    }
+    std::cout<<"\nMario is dead == "<<isdead<<"\n";
     return -1;
 }

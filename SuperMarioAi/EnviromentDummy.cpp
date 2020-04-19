@@ -1,10 +1,12 @@
-#include "EnviromentDummy.h"
+#include "Globals.h"
+#include "EnvironmentDummy.h"
 
-void EnviromentDummy::calculateStateAndActions(std::vector<std::vector<int>>, std::vector<action>* possibleActions, int* state)
+void EnvironmentDummy::calculateStateAndActions(std::vector<std::vector<int>>, std::vector<MarioAction>* possibleActions, int* state)
 {
-	*state = rand()%300;
+	*state = rand() % (NUMBER_OF_STATES - 1);
+	*possibleActions = { MarioAction::highJump, MarioAction::moveRight, MarioAction::jump };
 }
 
-void EnviromentDummy::gameOver()
+void EnvironmentDummy::gameOver()
 {
 }

@@ -2,9 +2,8 @@
 #include "Globals.h"
 
 
-TemplateMatcher::~TemplateMatcher(){
-    
-}
+TemplateMatcher::~TemplateMatcher()=default;
+
 int TemplateMatcher::match_tilesize_on_pixel(int x_pos, int y_pos, PngImage sprite){
     return match_tilesize_on_pixel(x_pos,y_pos,sprite,TILESIZE,TILESIZE);
 }

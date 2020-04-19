@@ -38,9 +38,7 @@ Mapper::Mapper(): last_mario_pos_x(0), last_mario_pos_y(0){
     //ErgebnisArray.resize(GRIDRADIUS, std::vector<int>(GRIDRADIUS, 0));
 }
 
-Mapper::~Mapper(){
-
-}
+Mapper::~Mapper()=default;
 
 int Mapper::print_erg_radius(){
     for(int y = 0; y<GRIDRADIUS;y++){

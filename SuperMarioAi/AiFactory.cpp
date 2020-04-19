@@ -1,13 +1,15 @@
 #include "MarioWindow.h"
 #include "ScreenCaptureDummy.h"
 #include "ScreenCapture.h"
-#include "ImageScanDummy.h"
-#include "EnviromentDummy.h"
-#include "AiAlgoDummy.h"
+#include "SimplifierDummy.h"
+#include "EnvironmentDummy.h"
+#include "AgentDummy.h"
+#include "Agent.h"
 #include "AppControlDummy.h"
 #include "MarioController.h"
 #include "AiFactory.h"
-bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool imageScanDummy, bool enviromentDummy, bool aiAlgoDummy, bool appControlDummy)
+#include "Features.h"
+bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, bool environmentDummy, bool agentDummy, bool appControlDummy)
 {
 	if (appControlDummy) {
 		this->appControl = new AppControlDummy();
@@ -21,25 +23,25 @@ bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool imageScanDummy, b
 	if (screenCaptureDummy) {
 		this->screenCapture = new ScreenCaptureDummy();
 	}else{ this->screenCapture = new ScreenCapture(window);}
-	if (imageScanDummy) {
-		this->imageScan = new ImageScanDummy();
+	if (simplifierDummy) {
+		this->imageScan = new SimplifierDummy();
 	}
 	else {}
-	if (enviromentDummy) {
-		this->enviroment = new EnviromentDummy();
+	if (environmentDummy) {
+		this->environment = new EnvironmentDummy();
 	}
-	else {}
-	if (aiAlgoDummy) {
-		this->aiAlgo = new AiAlgoDummy();
+	else { this->environment = new Features(); };
+	if (agentDummy) {
+		this->agent = new AgentDummy();
 	}
-	else {}
+	else { this->agent = new Agent(); }
 	return true;
 
 }
 
 bool AiFactory::loadSuperMarioAi()
 {
-	return loadSuperMarioAi(false, true, true, true, false);
+	return loadSuperMarioAi(false, true, false, false, false);
 }
 
 IScreenCapture* AiFactory::getScreenCapture()
@@ -52,17 +54,17 @@ IAppControl* AiFactory::getAppControl()
 	return appControl;
 }
 
-IEnviroment* AiFactory::getEnviroment()
+IEnvironment* AiFactory::getEnvironment()
 {
-	return enviroment;
+	return environment;
 }
 
-IImageScan* AiFactory::getImageScan()
+ISimplifier* AiFactory::getImageScan()
 {
 	return imageScan;
 }
 
-IAiAlgorithm* AiFactory::getAiAlgo()
+IAgent* AiFactory::getAiAlgo()
 {
-	return aiAlgo;
+	return agent;
 }

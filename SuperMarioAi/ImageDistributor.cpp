@@ -49,9 +49,7 @@ ImageDistributor::ImageDistributor():tmp_mario_Small_img_count(0), tmp_mario_Shr
     ImgLib_ptr = ImageLibrary::getInstance();
 }
 
-ImageDistributor::~ImageDistributor(){
-
-}
+ImageDistributor::~ImageDistributor()=default;
 
 PngImage& ImageDistributor::grab_input_img(){
     return ImgLib_ptr->Input_Img;
@@ -59,6 +57,10 @@ PngImage& ImageDistributor::grab_input_img(){
 
 PngImage& ImageDistributor::grab_resized_img(){
     return ImgLib_ptr->Resized_Img;
+}
+
+PngImage& ImageDistributor::grab_deathscreen_img(){
+    return ImgLib_ptr->Deathscreen_Img;
 }
 
 PngImage& ImageDistributor::img_grabber(int max_count, int* counter, bool* done, std::vector<PngImage> *vec){

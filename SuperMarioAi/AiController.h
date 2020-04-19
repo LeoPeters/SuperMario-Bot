@@ -1,10 +1,11 @@
-#pragma once
+#ifndef aicontroller_h
+#define aicontroller_h
 #include <mutex>
 #include <condition_variable>
-#include "IAiAlgorithm.h"
+#include "IAgent.h"
 #include "IAppControl.h"
-#include "IEnviroment.h"
-#include "IImageScan.h"
+#include "IEnvironment.h"
+#include "ISimplifier.h"
 #include "IScreenCapture.h"
 #include "IGuiObserver.h"
 #include "AiFactory.h"
@@ -19,22 +20,30 @@ public:
 	void notifyPausePressed() override;
 	void notifyStartPressed() override;
 	void notifyEndApp() override;
+	 int* getState() override;
+	 std::vector <std::vector<int>>* getSimpleView() override;
+	 HBITMAP* getGameView() override;
+	 MarioAction* getAction() override;
+	 std::vector<MarioAction>* getpossibleAction() override;
 private:
+	std::vector<MarioAction> possibleActions;
 	void startSuperMario();
 	AiFactory factory=AiFactory();
 	IScreenCapture* screenCapture;
 	IAppControl* appControl;
-	IEnviroment* enviroment;
-	IImageScan* imageScan;
-	IAiAlgorithm* aiAlgo;
+	IEnvironment* features;
+	ISimplifier* simplifier;
+	IAgent* agent;
 	AiGui* gui;
 	bool isPause=false;
 	bool isGameStarted = false;
+	bool isGuiRunning = true;
 	std::mutex mx;
 	std::condition_variable cv;
 	HBITMAP gameCapture=HBITMAP();
 	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
-	action nextAction;
+	MarioAction nextAction;
 	int currentState;
 };
 
+#endif

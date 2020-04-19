@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>740</width>
-    <height>386</height>
+    <height>584</height>
    </rect>
   </property>
   <property name="palette">
@@ -3144,6 +3144,16 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>350</y>
+      <width>521</width>
+      <height>191</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -3989,22 +3999,5 @@
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>btn_exit</sender>
-   <signal>released()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>370</x>
-     <y>246</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>369</x>
-     <y>149</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

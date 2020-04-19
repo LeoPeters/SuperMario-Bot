@@ -19,6 +19,8 @@
 #define tilesize_mario_big_y 8
 #define tilesize_mario_x 7
 #define tilesize_mario_y 5
+#define GEWONNEN 1
+#define TOT 2
 //genauigkeitsformel. MATCH hängt intern noch von ABWEICHUNG ab
 //zb: es kan 180 raus ==> ismatch(180) = 256/2 < 180-32 = 128<148
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) / 2) < x-(TILESIZE*2) )
@@ -29,6 +31,7 @@
 #define IS_A_MARIO_MATCH(x) ( (tilesize_mario_x*tilesize_mario_y)-MAX_FEHLER<=x )
 #define IS_A_BIG_MARIO_MATCH(x) ((tilesize_mario_big_x*tilesize_mario_big_y)-MAX_FEHLER<=x  )
 #define IS_A_PIPE_MATCH(x) ( 220 <= x >= 260)
+#define IS_A_DEATHSCREEN(x) (x==15840)
 //FOR GRIDS:
 #define BLOCK_UNTERE_FLANKE ((TILESIZE*TILESIZE)-MAX_FEHLER_BLOECKE)
 #define BLOCK_OBERE_FLANKE ((TILESIZE*TILESIZE)+MAX_FEHLER_BLOECKE)
@@ -46,6 +49,15 @@
 //Paths
 #define PNG_NAME "pictures/Input/input.png"
 #define PNG_LNAME L"pictures/Input/input.png"
-#define SUPER_MARIO_PATH L"C:/Mesen/Mesen.exe"
+#define SUPER_MARIO_PATH L"..\\Mesen\\Mesen.exe"
 
+//QLearning
+#define NUMBER_OF_STATES 3 * ((GRIDRADIUS / 2) + 1) * GRIDRADIUS * GRIDRADIUS
+#define ALPHA 0.4 //Learning rate
+#define GAMMA 0.9 //Discount factor
+#define EPSILON 0.1 //Propability of choosing a random action
+#define REWARDSTEP -0.05
+
+//Features
+#define NUMBER_OF_FEATURES 4
 #endif

@@ -9,29 +9,29 @@ MarioController::MarioController() :
 	keyboardThread(NULL)
 {}
 
-void MarioController::makeAction(action nextAction)
+void MarioController::makeAction(MarioAction nextAction)
 {
 	if (keyboardThread!=NULL) {
 	keyboardThread->join();
 	}
 	switch (nextAction) {
-	case action::moveLeft:
+	case MarioAction::moveLeft:
 		keyboardThread= new std::thread(&MarioController::moveLeft,this);
 		//moveLeft();
 		break;
-	case action::moveRight:
+	case MarioAction::moveRight:
 		keyboardThread = new std::thread(&MarioController::moveRight, this);
 		//moveRight();
 		break;
-	case action::jump:
+	case MarioAction::jump:
 		//jump();
 		keyboardThread = new std::thread(&MarioController::jump, this);
 		break;
-	case action::highJump:
+	case MarioAction::highJump:
 		//highJump();
 		keyboardThread = new std::thread(&MarioController::highJump, this);
 		break;
-	case action::shoot:
+	case MarioAction::shoot:
 		//shoot();
 		keyboardThread = new std::thread(&MarioController::shoot, this);
 		break;
@@ -48,7 +48,7 @@ HWND MarioController::startGame()
 {
 	window = MarioWindow::getMarioWindow(SUPER_MARIO_PATH);
 	if (window == NULL) {
-		std::cout << "Couldnt found Window: Please Close Super-Mario and press Restart" << std::endl;
+		std::cout << "Cant find Window: Please Close Super-Mario and press Restart" << std::endl;
 		return NULL;
 	}
 	keyboard = new Keyboard(window);
@@ -131,7 +131,6 @@ void MarioController::highJump()
 {
 	if (isStarted) {
 		keyboard->pressAndReleaseKey(NUM3, 600);
-		std::cout << "Jump High" << std::endl;
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;

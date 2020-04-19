@@ -59,21 +59,27 @@
     <Filter Include="Header Files\Simplifier">
       <UniqueIdentifier>{754f7e1a-e2a9-4b4d-9316-820684ee0a48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Agent">
+      <UniqueIdentifier>{c6b117ba-3b87-4f06-bac6-ef1c222eba0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Agent">
+      <UniqueIdentifier>{99d04957-a11b-43f8-ac0c-ec3b2d6f45dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Features">
+      <UniqueIdentifier>{9c84cdf4-f14d-496a-9f7f-bab57f297c85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Features">
+      <UniqueIdentifier>{1eb4c394-d3be-4cc0-9f6f-b33ac4cec935}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AiAlgoDummy.cpp">
-      <Filter>Source Files\Dummy</Filter>
-    </ClCompile>
     <ClCompile Include="AppControlDummy.cpp">
       <Filter>Source Files\Dummy</Filter>
     </ClCompile>
     <ClCompile Include="EnviromentDummy.cpp">
-      <Filter>Source Files\Dummy</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageScanDummy.cpp">
       <Filter>Source Files\Dummy</Filter>
     </ClCompile>
     <ClCompile Include="ScreenCaptureDummy.cpp">
@@ -133,6 +139,24 @@
     <ClCompile Include="PngImage.cpp">
       <Filter>Source Files\Simplifier</Filter>
     </ClCompile>
+    <ClCompile Include="SimplifierDummy.cpp">
+      <Filter>Source Files\Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentDummy.cpp">
+      <Filter>Source Files\Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Source Files\Agent</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\Agent</Filter>
+    </ClCompile>
+    <ClCompile Include="Features.cpp">
+      <Filter>Source Files\Features</Filter>
+    </ClCompile>
+    <ClCompile Include="Deathcondition.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui">
@@ -140,22 +164,7 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActionEnum.h">
-      <Filter>Header Files\Structs/Enum/Defines</Filter>
-    </ClInclude>
-    <ClInclude Include="AiAlgoDummy.h">
-      <Filter>Header Files\Dummy</Filter>
-    </ClInclude>
-    <ClInclude Include="IAiAlgorithm.h">
-      <Filter>Header Files\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="IAppControl.h">
-      <Filter>Header Files\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="IEnviroment.h">
-      <Filter>Header Files\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="IImageScan.h">
       <Filter>Header Files\Interface</Filter>
     </ClInclude>
     <ClInclude Include="IScreenCapture.h">
@@ -165,12 +174,6 @@
       <Filter>Header Files\Dummy</Filter>
     </ClInclude>
     <ClInclude Include="AppControlDummy.h">
-      <Filter>Header Files\Dummy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnviromentDummy.h">
-      <Filter>Header Files\Dummy</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageScanDummy.h">
       <Filter>Header Files\Dummy</Filter>
     </ClInclude>
     <ClInclude Include="KeyboardDefines.h">
@@ -232,6 +235,48 @@
     </ClInclude>
     <ClInclude Include="PngImage.h">
       <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="SimplifierDummy.h">
+      <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="ISimplifier.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentDummy.h">
+      <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="IAgent.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="MarioAction.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnvironment.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="EnvironmentDummy.h">
+      <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Header Files\Agent</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\Agent</Filter>
+    </ClInclude>
+    <ClInclude Include="Features.h">
+      <Filter>Header Files\Features</Filter>
+    </ClInclude>
+    <ClInclude Include="MarioObject.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="Policy.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="Deathcondition.h">
+      <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="FeatureNames.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

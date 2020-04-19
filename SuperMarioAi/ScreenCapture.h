@@ -5,7 +5,7 @@
 class ScreenCapture: public IScreenCapture{
 public:
 	ScreenCapture(HWND window);
-	 void captureScreen(byte* image, int* lenght) override;
+	 void captureScreen(byte* image, int* length) override;
 	 HBITMAP captureScreen(LPCTSTR fileName) override;
 	 HBITMAP captureScreen() override;
 private:

@@ -58,6 +58,7 @@ HBITMAP ScreenCapture::captureScreen(LPCTSTR fileName) {
 		//auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
 		//auto fps = duration.count();
 		//printf("FPS: %d !\n", 1000000 / (int)fps);
+
 	}
 	else {
 		cout << "Can't Capture Image - window  doesn't exist" << endl;

@@ -39,9 +39,7 @@ ImageResizer::ImageResizer(){
     
 }
 
-ImageResizer::~ImageResizer(){
-
-}
+ImageResizer::~ImageResizer()=default;
 
 bool ImageResizer::find_mapping_data(){
     while( resizing_data[X_Start] - TILESIZE >= 0 ){
@@ -149,7 +147,7 @@ void ImageResizer::resize_png_file(int x_start, int y_start, int x_end, int y_en
     png_write_end(png, NULL);
     //Clean
     for(int y = 0; y < new_height; y++) {
-        free(new_row_pointers[y]); //NOT WORKING?
+        free(new_row_pointers[y]); 
     }
     free(new_row_pointers);
 

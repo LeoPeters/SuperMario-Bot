@@ -26,9 +26,7 @@ MarioFinder::MarioFinder(): is_big(false),x_pos(0), y_pos(0), resized(distr.grab
     //resized = distr.grab_resized_img();
 }
 
-MarioFinder::~MarioFinder(){
-
-}
+MarioFinder::~MarioFinder()=default;
 
 
 bool MarioFinder::search_for_Mario(){

@@ -388,3 +388,15 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+
+# Mesen
+!Mesen.exe
+!MesenUpdater.exe
+!MesenCore.dll
+Super_mario_brothers.rgd
+*.mst
+
+#Pictures
+input.png
+resized.png

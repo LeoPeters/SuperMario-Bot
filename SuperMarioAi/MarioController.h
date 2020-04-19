@@ -1,4 +1,5 @@
-#pragma once
+#ifndef mariocontroller_h
+#define mariocontroller_h
 #include <windows.h>
 #include "IAppControl.h"
 #include "Keyboard.h"
@@ -10,7 +11,7 @@ class MarioController: public IAppControl
 {
 public:
 	MarioController();
-	void makeAction(action nextAction) override;
+	void makeAction(MarioAction nextAction) override;
 
 	void endGame() override;
 	HWND startGame() override;
@@ -32,3 +33,4 @@ private:
 	
 };
 
+#endif

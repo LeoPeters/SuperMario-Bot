@@ -1,9 +1,11 @@
-#pragma once
+#ifndef appcontrolldummy_h
+#define appcontrolldummy_h
+
 #include "IAppControl.h"
 class AppControlDummy: public IAppControl
 {
 public:
-	void makeAction(action) override;
+	void makeAction(MarioAction) override;
 	virtual void endGame() override;
 	virtual HWND startGame() override;
 	virtual void pauseGame() override;
@@ -11,3 +13,4 @@ public:
 	virtual void restartGame() override;
 };
 
+#endif

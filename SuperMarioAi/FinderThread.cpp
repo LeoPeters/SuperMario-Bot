@@ -58,9 +58,7 @@ FinderThread::FinderThread(int TYP): resized(distr.grab_resized_img()) , gridsc(
   this->typ = TYP;
 }
 
-FinderThread::~FinderThread(){
-
-}
+FinderThread::~FinderThread()=default;
 
 bool FinderThread::search(int xstart, int xend, int ystart, int yend, Mapper *mapper){
   bool am_i_done = false;

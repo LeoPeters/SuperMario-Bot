@@ -84,11 +84,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AiAlgoDummy.cpp" />
+    <ClCompile Include="AgentDummy.cpp" />
+    <ClCompile Include="Agent.cpp" />
     <ClCompile Include="AiController.cpp" />
     <ClCompile Include="AiFactory.cpp" />
     <ClCompile Include="AiGui.cpp" />
     <ClCompile Include="AppControlDummy.cpp" />
+    <ClCompile Include="Deathcondition.cpp" />
     <ClCompile Include="EnviromentDummy.cpp" />
     <ClCompile Include="Environment.cpp" />
     <ClCompile Include="FinderThread.cpp" />
@@ -96,7 +98,8 @@
     <ClCompile Include="ImageDistributor.cpp" />
     <ClCompile Include="ImageLibrary.cpp" />
     <ClCompile Include="ImageResizer.cpp" />
-    <ClCompile Include="ImageScanDummy.cpp" />
+    <ClCompile Include="Features.cpp" />
+    <ClCompile Include="SimplifierDummy.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
@@ -107,6 +110,7 @@
     <ClCompile Include="PngImage.cpp" />
     <ClCompile Include="ScreenCapture.cpp" />
     <ClCompile Include="ScreenCaptureDummy.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="TemplateMatcher.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -116,26 +120,32 @@
     <QtMoc Include="MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActionEnum.h" />
-    <ClInclude Include="AiAlgoDummy.h" />
+    <ClInclude Include="Agent.h" />
+    <ClInclude Include="Deathcondition.h" />
+    <ClInclude Include="FeatureNames.h" />
+    <ClInclude Include="MarioObject.h" />
+    <ClInclude Include="IEnvironment.h" />
+    <ClInclude Include="MarioAction.h" />
+    <ClInclude Include="AgentDummy.h" />
     <ClInclude Include="AiController.h" />
     <ClInclude Include="AiFactory.h" />
     <ClInclude Include="AiGui.h" />
     <ClInclude Include="AppControlDummy.h" />
-    <ClInclude Include="EnviromentDummy.h" />
+    <ClInclude Include="EnvironmentDummy.h" />
     <ClInclude Include="Environment.h" />
     <ClInclude Include="FinderThread.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="GridScanner.h" />
-    <ClInclude Include="IAiAlgorithm.h" />
+    <ClInclude Include="IAgent.h" />
     <ClInclude Include="IAppControl.h" />
-    <ClInclude Include="IEnviroment.h" />
     <ClInclude Include="IGuiObserver.h" />
-    <ClInclude Include="IImageScan.h" />
+    <ClInclude Include="ISimplifier.h" />
     <ClInclude Include="ImageDistributor.h" />
     <ClInclude Include="ImageLibrary.h" />
     <ClInclude Include="ImageResizer.h" />
-    <ClInclude Include="ImageScanDummy.h" />
+    <ClInclude Include="Features.h" />
+    <ClInclude Include="Policy.h" />
+    <ClInclude Include="SimplifierDummy.h" />
     <ClInclude Include="IScreenCapture.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="KeyboardDefines.h" />
@@ -146,6 +156,7 @@
     <ClInclude Include="PngImage.h" />
     <ClInclude Include="ScreenCapture.h" />
     <ClInclude Include="ScreenCaptureDummy.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="TemplateMatcher.h" />
   </ItemGroup>
   <ItemGroup>
