@@ -25,7 +25,7 @@
 //zb: es kan 180 raus ==> ismatch(180) = 256/2 < 180-32 = 128<148
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) / 2) < x-(TILESIZE*2) )
 #define MAX_FEHLER 8 //bei 4 kann mario small nicht gefunden werden?
-#define MAX_FEHLER_BLOECKE 10//34//wegen Pipe
+#define MAX_FEHLER_BLOECKE 20//34//wegen Pipe
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) - MAX_FEHLER_BLOECKE <= x ))
 #define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) - MAX_FEHLER_BLOECKE <= x ))
 #define IS_A_MARIO_MATCH(x) ( (tilesize_mario_x*tilesize_mario_y)-MAX_FEHLER<=x )
