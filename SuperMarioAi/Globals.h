@@ -58,11 +58,13 @@
 #define SUPER_MARIO_PATH L"..\\Mesen\\Mesen.exe"
 
 //QLearning
-#define NUMBER_OF_STATES 3 * ((GRIDRADIUS / 2) + 1) * GRIDRADIUS * GRIDRADIUS
+#define NUMBER_OF_STATES 3 * ((GRIDRADIUS / 2) + 1) * GRIDRADIUS * GRIDRADIUS + 1
 #define ALPHA 0.4 //Learning rate
 #define GAMMA 0.9 //Discount factor
 #define EPSILON 0.1 //Propability of choosing a random action
 #define REWARDSTEP -0.05
+#define REWARDLOSE -20
+#define REWARDWIN 20
 
 //Features
 #define NUMBER_OF_FEATURES 4

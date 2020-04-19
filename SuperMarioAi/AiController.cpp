@@ -29,12 +29,12 @@ void AiController::run() {
 				if (playerAlive) {
 				features->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
 				nextAction = agent->calculateAction(currentState, possibleActions);
-				//appControl->makeAction(nextAction); //auscomment to gain access
+				appControl->makeAction(nextAction); //auscomment to gain access
 				}
 				else {
 					features->gameOver();
 					agent->gameOver();
-					//appControl->restartGame(); //auscomment to gain access
+					appControl->restartGame(); //auscomment to gain access
 				}
 			}
 				gui->update();

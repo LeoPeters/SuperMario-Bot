@@ -16,6 +16,7 @@
 #include "MarioObject.h"
 #include "MarioAction.h"
 #include <iostream>
+
 Features::Features() :
     marioPositionX(-1),
     marioPositionY(-1),
@@ -67,22 +68,18 @@ std::vector<MarioAction> Features::getPossibleActions() {
         possibleActions.push_back(MarioAction::moveRight);
     }
 
-    if (!jumpBlocked && 
-        marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) && 
+    if (!jumpBlocked && validPosition(marioPositionY, 1, GRIDRADIUS - 2) && 
+        marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) &&
         marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) {
         
         possibleActions.push_back(MarioAction::jump);
         possibleActions.push_back(MarioAction::highJump);
     }
-
-
-
     return possibleActions;
 }
 
-int Features::isUnderBlock(){
-	//TODO Wertebereich
-    
+int Features::isUnderBlock()
+{
     if ((marioPositionY >= 1 && marioArray[marioPositionY - 1][marioPositionX] == int(MarioObject::ground)) || 
         (marioPositionY >= 2 && marioArray[marioPositionY - 2][marioPositionX] == int(MarioObject::ground)) ||
         (marioPositionY >= 3 && marioArray[marioPositionY - 3][marioPositionX] == int(MarioObject::ground))) {
@@ -134,7 +131,7 @@ std::vector<int> Features::getFeatureVector() {
 
 int Features::calculateStateNumber() {
     std::vector<int> state = getFeatureVector();
-    for (int i = 0; i < NUMBER_OF_STATES; i++) {
+    for (int i = 1; i <= statesSize; i++) {
         if (states[i] == state) {
             statesSize++;
             return i;
@@ -146,17 +143,19 @@ int Features::calculateStateNumber() {
 
 void Features::calculateJumpBlocked()
 {
-    if (marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground)){
+    if (validPosition(marioPositionY, 0, GRIDRADIUS - 2) &&
+        marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground)){
         onGroundCounter++;
-    }
-    else {
+    } else {
         onGroundCounter = 0;
     }
     if (onGroundCounter >= 0) {
         jumpBlocked = false;
-    }
-    else {
+    } else {
         jumpBlocked = true;
     }
-    
+}
+
+bool Features::validPosition(int value, int lowBorder, int highBorder) {
+    return (value >= lowBorder && value <= highBorder);
 }

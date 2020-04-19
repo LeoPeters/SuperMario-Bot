@@ -36,6 +36,7 @@ private:
     bool jumpBlocked;
     int onGroundCounter=0;
     
+    bool validPosition(int value, int lowBorder, int highBorder);
     int isUnderBlock();
     std::array<int, 2> closestEnemy();
     int distance(int x, int y);
