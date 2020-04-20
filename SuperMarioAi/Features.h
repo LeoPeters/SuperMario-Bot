@@ -42,7 +42,7 @@ private:
     int distance(int x, int y);
     int distanceToObstacleRight();
     void setMarioPosition();
-    std::vector<int> getFeatureVector();
+    std::vector<int> getFeatureVector() override;
     std::vector<MarioAction> getPossibleActions();
     int Features::calculateStateNumber();
     void Features::calculateJumpBlocked();

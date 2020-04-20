@@ -6,6 +6,7 @@ class AgentDummy:public IAgent
 public:
 	 MarioAction calculateAction(int state, std::vector<MarioAction> possibleActions) override;
 	 void gameOver() override;
+	 void win() override;
 private:
 	int cnt = 0;
 	int cnt2 = 0;

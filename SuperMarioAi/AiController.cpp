@@ -17,24 +17,33 @@ AiController::AiController(int argc, char** argv) :
 }
 
 void AiController::run() {
-	bool playerAlive;
 
 
 
 	while (isGuiRunning) {
 		while (isGameStarted) {
-			gameCapture = screenCapture->captureScreen(PNG_LNAME);
+		gameCapture = screenCapture->captureScreen(PNG_LNAME);
+			
 			if (!gui->getMainWindow()->getIsPaused()) {
-				playerAlive=simplifier->simplifyImage(simplifyVec, gameCapture);
-				if (playerAlive) {
-				features->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
-				nextAction = agent->calculateAction(currentState, possibleActions);
-				appControl->makeAction(nextAction); //auscomment to gain access
-				}
-				else {
+				gameState=simplifier->simplifyImage(simplifyVec, gameCapture);
+				switch (gameState) {
+				case GameState::MarioAlive:
+					features->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
+					featureVector = features->getFeatureVector();
+					nextAction = agent->calculateAction(currentState, possibleActions);
+					//appControl->makeAction(nextAction);
+					break;
+				case GameState::GameOver:
 					features->gameOver();
 					agent->gameOver();
-					appControl->restartGame(); //auscomment to gain access
+					appControl->restartGame();
+					break;
+				case GameState::Win:
+					agent->win();
+					appControl->restartGame();
+					break;
+				default:
+					break;
 				}
 			}
 				gui->update();
@@ -72,29 +81,39 @@ void AiController::notifyEndApp()
 
 }
 
-int* AiController::getState()
+int AiController::getState()
 {
-	return &currentState;
+	return currentState;
 }
 
-std::vector<std::vector<int>>* AiController::getSimpleView()
+std::vector<std::vector<int>> AiController::getSimpleView()
 {
-	return simplifyVec;
+	return *simplifyVec;
 }
 
-HBITMAP* AiController::getGameView()
+HBITMAP AiController::getGameView()
 {
-	return &gameCapture;
+	return gameCapture;
 }
 
-MarioAction* AiController::getAction()
+MarioAction AiController::getAction()
 {
-	return &nextAction;
+	return nextAction;
 }
 
-std::vector<MarioAction>* AiController::getpossibleAction()
+std::vector<MarioAction> AiController::getpossibleAction()
 {
-	return &possibleActions;
+	return possibleActions;
+}
+
+std::vector<int> AiController::getFeatureVector()
+{
+	return featureVector;
+}
+
+GameState AiController::getGameState()
+{
+	return gameState;
 }
 
 void AiController::startSuperMario()
@@ -106,6 +125,8 @@ void AiController::startSuperMario()
 		this->features = factory.getEnvironment();
 		this->agent = factory.getAiAlgo();
 		this->appControl = factory.getAppControl();
+		this->screenCapture->captureScreen(PNG_LNAME);
+		this->simplifier->init();
 		isGameStarted = true;
 	}
 }
