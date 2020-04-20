@@ -1,6 +1,6 @@
 #include "SimplifierDummy.h"
 #include "Globals.h"
-
+#include <iostream>
 
 
 GameState SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBITMAP image)
@@ -26,6 +26,7 @@ GameState SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply,
 	switch (status) {
 	case 0:
 		gameState = GameState::MarioNotFound;
+		std::cout << "Not Found: " << status << std::endl;
 		break;
 	case 1:
 		gameState = GameState::Win;
@@ -37,6 +38,7 @@ GameState SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply,
 		gameState = GameState::MarioAlive;
 		break;
 	default:
+		std::cout << "Default: " << status << std::endl;
 		gameState = GameState::MarioNotFound;
 	}
 

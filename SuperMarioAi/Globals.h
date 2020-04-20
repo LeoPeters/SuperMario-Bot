@@ -27,7 +27,7 @@
 //genauigkeitsformel. MATCH h�ngt intern noch von ABWEICHUNG ab
 //zb: es kan 180 raus ==> ismatch(180) = 256/2 < 180-32 = 128<148
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) / 2) < x-(TILESIZE*2) )
-#define MAX_FEHLER 8 //bei 4 kann mario small nicht gefunden werden?
+#define MAX_FEHLER 16 //bei 4 kann mario small nicht gefunden werden? //TODO wieder auf 8
 #define MAX_FEHLER_BLOECKE 25//34//wegen Pipe
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) - MAX_FEHLER_BLOECKE <= x ))
 #define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) - MAX_FEHLER_BLOECKE <= x ))

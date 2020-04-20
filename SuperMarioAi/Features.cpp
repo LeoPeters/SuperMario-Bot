@@ -58,7 +58,9 @@ std::vector<MarioAction> Features::getPossibleActions() {
 
     //TODO MarioAction::shoot        
     std::vector<MarioAction> possibleActions;
-
+    possibleActions.push_back(MarioAction::moveLeft);
+    possibleActions.push_back(MarioAction::moveRight);
+    /*
     if (marioPositionX != 0 && marioArray[marioPositionY][marioPositionX - 1] != int(MarioObject::ground)) {
         possibleActions.push_back(MarioAction::moveLeft);
     }
@@ -67,6 +69,7 @@ std::vector<MarioAction> Features::getPossibleActions() {
     if (marioArray[marioPositionY][marioPositionX + 1] != int(MarioObject::ground)) {
         possibleActions.push_back(MarioAction::moveRight);
     }
+    */
 
     if (!jumpBlocked && validPosition(marioPositionY, 1, GRIDRADIUS - 2) && 
         marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) &&
