@@ -34,7 +34,6 @@ void AiController::run() {
 					//appControl->makeAction(nextAction);
 					break;
 				case GameState::GameOver:
-					features->gameOver();
 					agent->gameOver();
 					appControl->restartGame();
 					break;

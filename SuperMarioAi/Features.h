@@ -25,7 +25,7 @@ public:
     Features();
     ~Features();
     void Features::calculateStateAndActions(std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state) override;
-    void gameOver() override;
+    std::array<std::vector<int>, NUMBER_OF_STATES> getStates() override;
 
 private:
     std::vector<std::vector<int>> marioArray;

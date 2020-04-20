@@ -23,3 +23,8 @@ void AgentDummy::gameWin()
 {
 }
 
+std::array<State, NUMBER_OF_STATES> AgentDummy::getStates()
+{
+	return std::array<State, NUMBER_OF_STATES>();
+}
+

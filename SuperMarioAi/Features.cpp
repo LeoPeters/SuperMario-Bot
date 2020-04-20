@@ -30,6 +30,9 @@ Features::~Features() {
 
 }
 
+std::array<std::vector<int>, NUMBER_OF_STATES> Features::getStates() {
+    return states;
+}
 
 void Features::calculateStateAndActions(std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state) {
     marioArray = tempArray;
@@ -37,10 +40,6 @@ void Features::calculateStateAndActions(std::vector<std::vector<int>> tempArray,
     calculateJumpBlocked();
     *possibleActions = getPossibleActions();
     *state = calculateStateNumber(); 
-}
-
-void Features::gameOver() {
-
 }
 
 void Features::setMarioPosition() {

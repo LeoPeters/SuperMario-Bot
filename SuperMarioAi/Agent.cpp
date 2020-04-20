@@ -13,14 +13,16 @@ Agent::~Agent() {
 
 }
 
+std::array<State, NUMBER_OF_STATES> Agent::getStates() {
+	return states;
+}
+
 MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions) {
 	states[stateIndex].setPossibleActions(possibleActions);
 	MarioAction action = chooseAction(states[stateIndex]);
-	//rewardRight = (lastAction == MarioAction::moveRight) ? 10 : 0;
 
 	double newScore = states[lastState].getValue(action) +  ALPHA * (REWARDSTEP + rewardRight + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(action));
 	states[lastState].setScore(lastAction, (states[lastState].getValue(lastAction) + newScore));
-	//std::cout << "Set new Score: " << states[lastState].getValue(lastAction) << std::endl;
 	lastAction = action;
 	lastState = stateIndex;
 
