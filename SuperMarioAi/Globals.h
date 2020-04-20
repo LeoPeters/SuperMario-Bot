@@ -15,7 +15,7 @@
 #define Y_End 3
 #define STATIC 0
 #define NONSTATIC 1
-#define ABWEICHUNG 30 // umso kleiner umso genauer: => Abweichung von pixelwerten //bei 50 wird mario richtig detektiert mit momentaner lib
+#define ABWEICHUNG 25 // umso kleiner umso genauer: => Abweichung von pixelwerten //bei 50 wird mario richtig detektiert mit momentaner lib
 #define tilesize_mario_big_x 9
 #define tilesize_mario_big_y 8
 #define tilesize_mario_x 7
@@ -27,12 +27,13 @@
 //genauigkeitsformel. MATCH h�ngt intern noch von ABWEICHUNG ab
 //zb: es kan 180 raus ==> ismatch(180) = 256/2 < 180-32 = 128<148
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) / 2) < x-(TILESIZE*2) )
-#define MAX_FEHLER 16 //bei 4 kann mario small nicht gefunden werden? //TODO wieder auf 8
+#define MAX_FEHLER_SMALL 8 //ab 16 gehts immer, aber big mario wird als small erkannt.
+#define MAX_FEHLER 8
 #define MAX_FEHLER_BLOECKE 25//34//wegen Pipe
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) - MAX_FEHLER_BLOECKE <= x ))
 #define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) - MAX_FEHLER_BLOECKE <= x ))
-#define IS_A_MARIO_MATCH(x) ( (tilesize_mario_x*tilesize_mario_y)-MAX_FEHLER<=x )
-#define IS_A_BIG_MARIO_MATCH(x) ((tilesize_mario_big_x*tilesize_mario_big_y)-MAX_FEHLER<=x  )
+#define IS_A_MARIO_MATCH(x) (((tilesize_mario_x*tilesize_mario_y)>=x) && x>=28  )//( (tilesize_mario_x*tilesize_mario_y)-MAX_FEHLER_SMALL<=x )
+#define IS_A_BIG_MARIO_MATCH(x) (45<=x && x<=tilesize_mario_big_x*tilesize_mario_big_y )//(52<=x && x<=tilesize_mario_big_x*tilesize_mario_big_y )//((tilesize_mario_big_x*tilesize_mario_big_y)-MAX_FEHLER<=x  )
 #define IS_A_PIPE_MATCH(x) ( 220 <= x >= 260)
 #define IS_A_DEATHSCREEN(x) (x==15840)
 #define IS_A_FLAGPOLE(x) (50 <= x && x <= 54)
