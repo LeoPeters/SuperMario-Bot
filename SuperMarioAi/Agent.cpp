@@ -17,8 +17,8 @@ MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> poss
 	MarioAction action = chooseAction(states[stateIndex]);
 	
 	double newScore = states[lastState].getValue(action) +  ALPHA * (REWARDSTEP + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(action));
-	states[lastState].setScore(lastAction, newScore);
-
+	states[lastState].setScore(lastAction, (states[lastState].getValue(lastAction) + newScore));
+	//std::cout << "Set new Score: " << states[lastState].getValue(lastAction) << std::endl;
 	lastAction = action;
 	lastState = stateIndex;
 
