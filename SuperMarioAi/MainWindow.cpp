@@ -26,20 +26,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::setUpFeatureGrid()
 {
-	ui.gridLayout->setSpacing(1);
+	ui.gridLayout->setSpacing(0);
 	FeatureWidget* currentState=new FeatureWidget();
 	featureWidgets.push_back(currentState);
 	ui.gridLayout->addWidget(currentState);
-	for (int i = 0; i < (int)FeatureNames::SIZE_FEATURE_NAMES; i++) {
+	for (int i = 0; i < (int)FeatureNames::SIZE_FEATURE_NAMES-1; i++) {
 		FeatureWidget* wg = new FeatureWidget();
 		featureWidgets.push_back(wg);
 		ui.gridLayout->addWidget(wg);
 	}
-	featureWidgets[0]->setFeatureName("Current State:");
-	featureWidgets[1]->setFeatureName("Under Block: ");
-	featureWidgets[2]->setFeatureName("Enemy X:");
-	featureWidgets[3]->setFeatureName("Enemy Y:");
-	featureWidgets[4]->setFeatureName("Obstacle:");
+	featureWidgets[0]->setFeatureName("Under Block: ");
+	featureWidgets[1]->setFeatureName("Enemy X:");
+	featureWidgets[2]->setFeatureName("Enemy Y:");
+	featureWidgets[3]->setFeatureName("Obstacle:");
 
 }
 void MainWindow::signalSetup() {
@@ -54,30 +53,53 @@ bool MainWindow::isActivated()
 	return ui.centralwidget->isVisible();
 }
 
-void MainWindow::setUpTable() {
-
-}
-
-void MainWindow::updateGUi()
-{
+void MainWindow::updateSimpleViewGui() {
 	if (!simplePixmap.isNull()) {
 		QPixmap scale;
-		scale =(simplePixmap.scaled((ui.viewSimplify->width() * 0.995), (ui.viewSimplify->height() * 0.995)));
+		scale = (simplePixmap.scaled((ui.viewSimplify->width() * 0.995), (ui.viewSimplify->height() * 0.995)));
 		simpleScene->clear();
 		simpleScene->addPixmap(scale);
 	}
+}
+void MainWindow::updateGameViewGui() {
 	if (!gamePixmap.isNull()) {
 		gameScene->clear();
 		gameScene->addPixmap(gamePixmap);
 	}
+}
+
+void MainWindow::updateGUi()
+{
+	updateSimpleViewGui();
+	updateGameViewGui();
 
 	setActionLabel();
-	featureWidgets[0]->setFeatureValue(state);
+	ui.AgentState->setText(QString::number(state));
+	updateFeatureView();
+	updateGameStateGui();
+}
+void MainWindow::updateFeatureView() {
 	for (int i = 0; i < featureVector.size(); i++) {
-		featureWidgets[i+1]->setFeatureValue(featureVector[i]);
+		featureWidgets[i]->setFeatureValue(featureVector[i]);
 	}
-
-	
+}
+void MainWindow::updateGameStateGui() {
+	switch (gameState) {
+	case GameState::MarioAlive:
+		ui.GameState->setText("Mario Alive");
+		break;
+	case GameState::GameOver:
+		ui.GameState->setText("Game Over");
+		break;
+	case GameState::Win:
+		ui.GameState->setText("Win");
+		break;
+	case GameState::MarioNotFound:
+		ui.GameState->setText("Mario not Found");
+		break;
+	default:
+		break;
+	}
 }
 
 
@@ -185,4 +207,9 @@ void MainWindow::setGamePixmap(QPixmap pixmap)
 void MainWindow::setSimplePixmap(QPixmap pixmap)
 {
 	simplePixmap = pixmap;
+}
+
+void MainWindow::setGameState(GameState gameState)
+{
+	this->gameState = gameState;
 }

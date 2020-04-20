@@ -126,6 +126,7 @@
     <ClInclude Include="Deathcondition.h" />
     <ClInclude Include="FeatureNames.h" />
     <ClInclude Include="FeatureWidget.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="MarioObject.h" />
     <ClInclude Include="IEnvironment.h" />
     <ClInclude Include="MarioAction.h" />

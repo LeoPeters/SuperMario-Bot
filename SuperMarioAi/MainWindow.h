@@ -6,6 +6,7 @@
 #include <QStandardItemModel>
 #include "FeatureWidget.h"
 #include "FeatureNames.h"
+#include "GameState.h"
 #include "ui_MainWindow.h"
 class MainWindow : public QMainWindow
 {
@@ -17,7 +18,7 @@ public:
 	~MainWindow();
 	
 	bool isActivated();
-	void setUpTable();
+	
 	void setAction(MarioAction nextAction);
 	void setFeatureVector(std::vector<int> featureVector);
 	void setPossibleAction(std::vector<MarioAction> nextAction);
@@ -25,6 +26,7 @@ public:
 	bool getIsPaused();
 	void setGamePixmap(QPixmap);
 	void setSimplePixmap(QPixmap);
+	void setGameState(GameState);
 signals:
 	void updateView();
 
@@ -35,6 +37,7 @@ private:
 	void setActionLabel();
 	void setUpFeatureGrid();
 	Ui::MainWindow ui;
+	GameState gameState;
 	QPixmap gamePixmap;
 	QPixmap simplePixmap;
 	IGuiObserver* observer;
@@ -47,12 +50,17 @@ private:
 	std::vector<int> featureVector;
 	std::vector<FeatureWidget*> featureWidgets;
 	int state=0;
-
+	void updateGameStateGui();
+	void updateSimpleViewGui();
+	void updateGameViewGui();
+	void updateFeatureView();
 
 private slots:
 	void pressStartBtn();
 	void pressPauseBtn();
 	void pressExitBtn();
 	void updateGUi();
+
+	
 };
 #endif

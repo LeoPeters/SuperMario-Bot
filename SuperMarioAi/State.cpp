@@ -18,7 +18,13 @@ MarioAction State::getBestAction() {
 	return best;
 }
 MarioAction State::getRandomAction() {
-	MarioAction random = possibleActions[rand() % possibleActions.size() - 1]; //TODO: integer division by zero error
+	MarioAction random;
+	int rnd= rand();
+	int rndom;
+	if (possibleActions.size()>0) {
+		rndom =rnd% possibleActions.size();
+			random= possibleActions[rndom]; //TODO: integer division by zero error
+		}
 
 	return random;
 }

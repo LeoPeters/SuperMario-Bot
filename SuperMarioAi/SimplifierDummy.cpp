@@ -3,9 +3,9 @@
 
 
 
-bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBITMAP image)
+GameState SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBITMAP image)
 {
-
+	GameState gameState;
 	int ergArray[GRIDRADIUS][GRIDRADIUS];
 	for (int y = 0; y < GRIDRADIUS; y++) {
 		for (int x = 0; x < GRIDRADIUS; x++) {
@@ -14,7 +14,7 @@ bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBIT
 		}
 	}
 	simply->clear();
-	int status;
+	int status=3;
 	env->environment_interface(PNG_NAME,ergArray,&status);
 	for (int y = 0; y < GRIDRADIUS;y++) {
 		std::vector<int> vecX;
@@ -23,9 +23,24 @@ bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBIT
 		}
 		simply->push_back(vecX);
 	}
+	switch (status) {
+	case 0:
+		gameState = GameState::MarioNotFound;
+		break;
+	case 1:
+		gameState = GameState::Win;
+		break;
+	case 2:
+		gameState = GameState::GameOver;
+		break;
+	case 3:
+		gameState = GameState::MarioAlive;
+		break;
+	default:
+		gameState = GameState::MarioNotFound;
+	}
 
-
-	return status!=TOT;
+	return gameState;
 }
 
 void SimplifierDummy::init()

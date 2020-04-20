@@ -30,6 +30,10 @@ void Agent::gameOver() {
 	
 }
 
+void Agent::win()
+{
+}
+
 
 
 MarioAction Agent::chooseAction(State state) {

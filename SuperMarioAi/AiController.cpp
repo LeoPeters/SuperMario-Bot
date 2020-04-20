@@ -17,7 +17,6 @@ AiController::AiController(int argc, char** argv) :
 }
 
 void AiController::run() {
-	bool playerAlive;
 
 
 
@@ -26,17 +25,25 @@ void AiController::run() {
 		gameCapture = screenCapture->captureScreen(PNG_LNAME);
 			
 			if (!gui->getMainWindow()->getIsPaused()) {
-				playerAlive=simplifier->simplifyImage(simplifyVec, gameCapture);
-				if (playerAlive) {
-				features->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
-				featureVector=features->getFeatureVector();
-				nextAction = agent->calculateAction(currentState, possibleActions);
-				//appControl->makeAction(nextAction);
-				}
-				else {
+				gameState=simplifier->simplifyImage(simplifyVec, gameCapture);
+				switch (gameState) {
+				case GameState::MarioAlive:
+					features->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
+					featureVector = features->getFeatureVector();
+					nextAction = agent->calculateAction(currentState, possibleActions);
+					//appControl->makeAction(nextAction);
+					break;
+				case GameState::GameOver:
 					features->gameOver();
 					agent->gameOver();
 					appControl->restartGame();
+					break;
+				case GameState::Win:
+					agent->win();
+					appControl->restartGame();
+					break;
+				default:
+					break;
 				}
 			}
 				gui->update();
@@ -102,6 +109,11 @@ std::vector<MarioAction> AiController::getpossibleAction()
 std::vector<int> AiController::getFeatureVector()
 {
 	return featureVector;
+}
+
+GameState AiController::getGameState()
+{
+	return gameState;
 }
 
 void AiController::startSuperMario()

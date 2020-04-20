@@ -38,6 +38,7 @@ void AiGui::update()
 	mWindow->setAction(observer->getAction());
 	mWindow->setPossibleAction(observer->getpossibleAction());
 	mWindow->setFeatureVector(observer->getFeatureVector());
+	mWindow->setGameState(observer->getGameState());
 	mWindow->updateView();
 }
 
@@ -71,6 +72,9 @@ QImage AiGui::generateSimpleImage(std::vector<std::vector<int>> simpleView)
 				break;
 			case ITEM:
 				image.setPixel(x, y, itemColor);
+				break;
+			case WINNINGCONDS:
+				image.setPixel(x, y, winningColor);
 				break;
 			default:
 				image.setPixel(x, y, blockColor);

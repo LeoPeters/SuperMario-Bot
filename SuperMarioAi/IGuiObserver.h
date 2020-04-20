@@ -1,6 +1,7 @@
 #ifndef iguiobserver_h
 #define iguiobserver_h
 #include "MarioAction.h"
+#include "GameState.h"
 class IGuiObserver {
 public:	
 	virtual void notifyStartPressed() = 0;
@@ -12,5 +13,6 @@ public:
 	virtual MarioAction getAction() = 0;
 	virtual std::vector<MarioAction> getpossibleAction() = 0;
 	virtual std::vector<int> getFeatureVector() =0;
+	virtual GameState getGameState() = 0;
 };
 #endif
