@@ -22,6 +22,8 @@ public:
 private:
 	int lastState;
 	int rewardRight;
+	int counterRight;
+	int counterLeft;
 	Policy policy;
 	MarioAction lastAction;
 	std::array<State, NUMBER_OF_STATES> states;

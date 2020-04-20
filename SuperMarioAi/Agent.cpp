@@ -4,7 +4,9 @@ Agent::Agent() :
 	lastState(0),
 	policy(Policy::greedy),
 	lastAction(MarioAction::moveLeft),
-	rewardRight(0)
+	rewardRight(0),
+	counterRight(0),
+	counterLeft(0)
 {
 
 }
@@ -45,7 +47,7 @@ void Agent::gameWin() {
 
 
 MarioAction Agent::chooseAction(State state) {
-	double rnd = std::rand() / RAND_MAX;
+	double rnd = std::rand() / (double) RAND_MAX;
 	MarioAction a = MarioAction::moveRight;
 
 	switch (policy) {
@@ -57,10 +59,25 @@ MarioAction Agent::chooseAction(State state) {
 		}
 		break;
 	case Policy::soft:
-		
+		if (rnd <= 1 - EPSILON) {
+			a = state.getBestAction();
+		}
+		else {
+			a = state.getRandomAction();
+		}
 		break;
 	case Policy::softMax:
+		if (rnd <= 1 - EPSILON) {
+			a = state.getBestAction();
+		}
+		else {
+			a = state.getRandomActionWeighted(); //TODO get random action Weighted implementing
+		}
 		break;
 	}
+	if (a == MarioAction::moveRight) counterRight++;
+	if (a == MarioAction::moveLeft) counterLeft++;
+	printf("Rand: %f", rnd);
+	std::cout << " Left: " << counterLeft << " Right: " << counterRight << std::endl;
 	return a;
 }
