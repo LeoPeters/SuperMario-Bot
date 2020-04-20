@@ -3,7 +3,8 @@
 Agent::Agent() :
 	lastState(0),
 	policy(Policy::greedy),
-	lastAction(MarioAction::moveLeft)
+	lastAction(MarioAction::moveLeft),
+	rewardRight(0)
 {
 
 }
@@ -15,8 +16,9 @@ Agent::~Agent() {
 MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions) {
 	states[stateIndex].setPossibleActions(possibleActions);
 	MarioAction action = chooseAction(states[stateIndex]);
-	
-	double newScore = states[lastState].getValue(action) +  ALPHA * (REWARDSTEP + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(action));
+	//rewardRight = (lastAction == MarioAction::moveRight) ? 10 : 0;
+
+	double newScore = states[lastState].getValue(action) +  ALPHA * (REWARDSTEP + rewardRight + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(action));
 	states[lastState].setScore(lastAction, (states[lastState].getValue(lastAction) + newScore));
 	//std::cout << "Set new Score: " << states[lastState].getValue(lastAction) << std::endl;
 	lastAction = action;

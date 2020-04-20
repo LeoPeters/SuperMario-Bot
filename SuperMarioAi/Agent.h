@@ -5,6 +5,7 @@
 #include "IAgent.h"
 #include "State.h"
 #include "Policy.h"
+#include "MarioAction.h"
 
 class State;
 
@@ -20,6 +21,7 @@ public:
 
 private:
 	int lastState;
+	int rewardRight;
 	Policy policy;
 	MarioAction lastAction;
 	std::array<State, NUMBER_OF_STATES> states;
