@@ -23,6 +23,8 @@ private:
 	const QRgb blockColor = qRgb(153, 78, 0);
 	const QRgb enemyColor = qRgb(0, 0, 0);
 	const QRgb itemColor = qRgb(255, 245, 57);
+	const QRgb winningColor = qRgb(53, 84, 0);
+
 };
 #endif
 

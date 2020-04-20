@@ -292,7 +292,7 @@ bool Mapper::Map_Winning_Conditions_Threaded()
     if(erg){//wincond found. now put in Array
         int pole_grid_x = wincond.return_flag_top_x()/TILESIZE;
         int pole_grid_y = wincond.return_flag_top_y()/TILESIZE;
-        printf("GRID LOCATION OF FLAGPOLE TOP: %d %d",pole_grid_x,pole_grid_y);
+        //printf("GRID LOCATION OF FLAGPOLE TOP: %d %d",pole_grid_x,pole_grid_y);
         //Fill Array with flagpoledata
         if(MappingArray[X_Start] <= pole_grid_x && MappingArray[X_End] >= pole_grid_x){
             //pole x is in Erg Array range

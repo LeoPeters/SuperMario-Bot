@@ -1,13 +1,11 @@
 #include "SimplifierDummy.h"
 #include "Globals.h"
+#include <iostream>
 
 
-SimplifierDummy::SimplifierDummy() {
-}
-
-bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBITMAP image)
+GameState SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBITMAP image)
 {
-
+	GameState gameState;
 	int ergArray[GRIDRADIUS][GRIDRADIUS];
 	for (int y = 0; y < GRIDRADIUS; y++) {
 		for (int x = 0; x < GRIDRADIUS; x++) {
@@ -16,8 +14,8 @@ bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBIT
 		}
 	}
 	simply->clear();
-	int status;
-	env.environment_interface(PNG_NAME,ergArray,&status);
+	int status=3;
+	env->environment_interface(PNG_NAME,ergArray,&status);
 	for (int y = 0; y < GRIDRADIUS;y++) {
 		std::vector<int> vecX;
 		for (int x = 0; x < GRIDRADIUS; x++){
@@ -25,7 +23,29 @@ bool SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBIT
 		}
 		simply->push_back(vecX);
 	}
+	switch (status) {
+	case 0:
+		gameState = GameState::MarioNotFound;
+		std::cout << "Not Found: " << status << std::endl;
+		break;
+	case 1:
+		gameState = GameState::Win;
+		break;
+	case 2:
+		gameState = GameState::GameOver;
+		break;
+	case 3:
+		gameState = GameState::MarioAlive;
+		break;
+	default:
+		std::cout << "Default: " << status << std::endl;
+		gameState = GameState::MarioNotFound;
+	}
 
+	return gameState;
+}
 
-	return status!=TOT;
+void SimplifierDummy::init()
+{
+	env = new Environment();
 }

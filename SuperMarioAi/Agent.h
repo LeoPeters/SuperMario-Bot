@@ -3,8 +3,8 @@
 #include <cstdlib>
 #include "Globals.h"
 #include "IAgent.h"
-#include "State.h"
 #include "Policy.h"
+#include "MarioAction.h"
 
 class State;
 
@@ -16,14 +16,15 @@ public:
 
 	MarioAction calculateAction(int state, std::vector<MarioAction> possibleActions) override;
 	void gameOver() override;
+	void gameWin() override;
+	virtual std::array<State, NUMBER_OF_STATES> getStates() override;
 
 private:
 	int lastState;
+	int rewardRight;
 	Policy policy;
 	MarioAction lastAction;
 	std::array<State, NUMBER_OF_STATES> states;
 	MarioAction chooseAction(State state);
-	MarioAction getRandomAction();
-
 };
 

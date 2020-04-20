@@ -27,7 +27,7 @@
 //genauigkeitsformel. MATCH h�ngt intern noch von ABWEICHUNG ab
 //zb: es kan 180 raus ==> ismatch(180) = 256/2 < 180-32 = 128<148
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) / 2) < x-(TILESIZE*2) )
-#define MAX_FEHLER 8 //bei 4 kann mario small nicht gefunden werden?
+#define MAX_FEHLER 16 //bei 4 kann mario small nicht gefunden werden? //TODO wieder auf 8
 #define MAX_FEHLER_BLOECKE 25//34//wegen Pipe
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) - MAX_FEHLER_BLOECKE <= x ))
 #define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) - MAX_FEHLER_BLOECKE <= x ))
@@ -58,11 +58,13 @@
 #define SUPER_MARIO_PATH L"..\\Mesen\\Mesen.exe"
 
 //QLearning
-#define NUMBER_OF_STATES 3 * ((GRIDRADIUS / 2) + 1) * GRIDRADIUS * GRIDRADIUS
+#define NUMBER_OF_STATES 3 * ((GRIDRADIUS / 2) + 1) * GRIDRADIUS * GRIDRADIUS + 1
 #define ALPHA 0.4 //Learning rate
 #define GAMMA 0.9 //Discount factor
 #define EPSILON 0.1 //Propability of choosing a random action
-#define REWARDSTEP -0.05
+#define REWARDSTEP -0.01
+#define REWARDLOSE -20
+#define REWARDWIN 20
 
 //Features
 #define NUMBER_OF_FEATURES 4

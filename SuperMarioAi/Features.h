@@ -25,7 +25,7 @@ public:
     Features();
     ~Features();
     void Features::calculateStateAndActions(std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state) override;
-    void gameOver() override;
+    std::array<std::vector<int>, NUMBER_OF_STATES> getStates() override;
 
 private:
     std::vector<std::vector<int>> marioArray;
@@ -36,12 +36,13 @@ private:
     bool jumpBlocked;
     int onGroundCounter=0;
     
+    bool validPosition(int value, int lowBorder, int highBorder);
     int isUnderBlock();
     std::array<int, 2> closestEnemy();
     int distance(int x, int y);
     int distanceToObstacleRight();
     void setMarioPosition();
-    std::vector<int> getFeatureVector();
+    std::vector<int> getFeatureVector() override;
     std::vector<MarioAction> getPossibleActions();
     int Features::calculateStateNumber();
     void Features::calculateJumpBlocked();

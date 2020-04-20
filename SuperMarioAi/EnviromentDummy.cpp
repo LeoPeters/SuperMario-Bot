@@ -7,6 +7,11 @@ void EnvironmentDummy::calculateStateAndActions(std::vector<std::vector<int>>, s
 	*possibleActions = { MarioAction::highJump, MarioAction::moveRight, MarioAction::jump };
 }
 
-void EnvironmentDummy::gameOver()
+std::vector<int> EnvironmentDummy::getFeatureVector()
 {
+	return std::vector<int>();
+}
+
+std::array<std::vector<int>, NUMBER_OF_STATES> EnvironmentDummy::getStates() {
+	return std::array<std::vector<int>, NUMBER_OF_STATES>();
 }
