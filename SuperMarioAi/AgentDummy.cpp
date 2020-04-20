@@ -18,3 +18,8 @@ MarioAction AgentDummy::calculateAction(int state, std::vector<MarioAction> poss
 void AgentDummy::gameOver()
 {
 }
+
+void AgentDummy::gameWin()
+{
+}
+

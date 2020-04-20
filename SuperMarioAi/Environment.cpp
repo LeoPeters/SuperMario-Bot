@@ -49,7 +49,7 @@ int Environment::give_Input(PngImage& new_input,int arr[GRIDRADIUS][GRIDRADIUS],
             auto end = std::chrono::system_clock::now();
             std::chrono::duration<double> elapsed_seconds = end-start;
             std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-            std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
+            //std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
         }
         else{
             *status = NOT_FOUND;
@@ -62,6 +62,6 @@ int Environment::give_Input(PngImage& new_input,int arr[GRIDRADIUS][GRIDRADIUS],
     if(isdead){
         *status = TOT;
     }
-    std::cout<<"\nMario is dead == "<<isdead<<"\n";
+    //std::cout<<"\nMario is dead == "<<isdead<<"\n";
     return 0;
 }

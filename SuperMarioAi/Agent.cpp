@@ -22,14 +22,6 @@ MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> poss
 	lastAction = action;
 	lastState = stateIndex;
 
-	for (int i = 0; i < possibleActions.size(); i++) {
-		if ((int)possibleActions[i] == 0) std::cout << "moveLeft" << std::endl;
-		if ((int)possibleActions[i] == 1) std::cout << "moveRight" << std::endl;
-		if ((int)possibleActions[i] == 2) std::cout << "jump" << std::endl;
-		if ((int)possibleActions[i] == 3) std::cout << "highJump" << std::endl;
-		if ((int)possibleActions[i] == 4) std::cout << "shoot" << std::endl;
-	}
-
 	return action;
 }
 
@@ -37,6 +29,7 @@ void Agent::gameOver() {
 	states[lastState].setScore(lastAction, (states[lastState].getValue(lastAction) + REWARDLOSE));
 	lastState = 0;
 }
+
 
 
 void Agent::gameWin() {

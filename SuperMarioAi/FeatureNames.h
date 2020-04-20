@@ -4,5 +4,6 @@ enum class FeatureNames
 	closestEnemyX,
 	closestEnemyy,
 	underBlock,
-	distanceObstacleRight
+	distanceObstacleRight,
+	SIZE_FEATURE_NAMES 
 };

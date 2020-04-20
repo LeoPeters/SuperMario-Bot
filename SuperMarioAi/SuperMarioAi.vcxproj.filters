@@ -290,6 +290,9 @@
     <ClInclude Include="testing.h">
       <Filter>Source Files\Simplifier</Filter>
     </ClInclude>
+    <ClInclude Include="FeatureWidget.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainWindow.h">

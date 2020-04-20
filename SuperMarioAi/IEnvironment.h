@@ -7,5 +7,6 @@ class IEnvironment {
 public:
 	virtual void calculateStateAndActions(std::vector<std::vector<int>>, std::vector<MarioAction>* possibleActions, int* state) = 0;
 	virtual void gameOver()=0;
+	virtual std::vector<int> getFeatureVector() = 0;
 };
 #endif

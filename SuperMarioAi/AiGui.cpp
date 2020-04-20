@@ -24,19 +24,21 @@ void AiGui::end()
 void AiGui::update()
 {
 	if (observer->getGameView() != NULL) {
-		QPixmap pixmap = QtWin::fromHBITMAP(*observer->getGameView());
+		QPixmap pixmap = QtWin::fromHBITMAP(observer->getGameView());
 		mWindow->setGamePixmap(pixmap);
 		
 		
 	}
-	if ((observer->getSimpleView()->size()>0)) {
-		QImage simView = generateSimpleImage(*observer->getSimpleView());
+	if ((observer->getSimpleView().size()>0)) {
+		QImage simView = generateSimpleImage(observer->getSimpleView());
 		QPixmap pixmap = QPixmap::fromImage(simView);
 		mWindow->setSimplePixmap(pixmap);
 	}
-	mWindow->setState(*observer->getState());
-	mWindow->setAction(*observer->getAction());
-	mWindow->setPossibleAction(*observer->getpossibleAction());
+	mWindow->setState(observer->getState());
+	mWindow->setAction(observer->getAction());
+	mWindow->setPossibleAction(observer->getpossibleAction());
+	mWindow->setFeatureVector(observer->getFeatureVector());
+	mWindow->setGameState(observer->getGameState());
 	mWindow->updateView();
 }
 
@@ -70,6 +72,9 @@ QImage AiGui::generateSimpleImage(std::vector<std::vector<int>> simpleView)
 				break;
 			case ITEM:
 				image.setPixel(x, y, itemColor);
+				break;
+			case WINNINGCONDS:
+				image.setPixel(x, y, winningColor);
 				break;
 			default:
 				image.setPixel(x, y, blockColor);

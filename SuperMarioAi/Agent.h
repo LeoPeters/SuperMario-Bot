@@ -16,7 +16,7 @@ public:
 
 	MarioAction calculateAction(int state, std::vector<MarioAction> possibleActions) override;
 	void gameOver() override;
-	void gameWin();
+	void gameWin() override;
 
 private:
 	int lastState;

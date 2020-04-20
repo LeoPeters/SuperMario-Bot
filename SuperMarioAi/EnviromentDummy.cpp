@@ -10,3 +10,8 @@ void EnvironmentDummy::calculateStateAndActions(std::vector<std::vector<int>>, s
 void EnvironmentDummy::gameOver()
 {
 }
+
+std::vector<int> EnvironmentDummy::getFeatureVector()
+{
+	return std::vector<int>();
+}
