@@ -19,6 +19,7 @@ void AgentDummy::gameOver()
 {
 }
 
-void AgentDummy::win()
+void AgentDummy::gameWin()
 {
 }
+

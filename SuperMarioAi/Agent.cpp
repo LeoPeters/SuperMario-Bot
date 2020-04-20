@@ -30,9 +30,6 @@ void Agent::gameOver() {
 	lastState = 0;
 }
 
-void Agent::win()
-{
-}
 
 
 void Agent::gameWin() {

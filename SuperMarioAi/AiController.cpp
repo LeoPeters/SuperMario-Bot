@@ -31,7 +31,7 @@ void AiController::run() {
 					features->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
 					featureVector = features->getFeatureVector();
 					nextAction = agent->calculateAction(currentState, possibleActions);
-					//appControl->makeAction(nextAction);
+					appControl->makeAction(nextAction);
 					break;
 				case GameState::GameOver:
 					features->gameOver();
@@ -39,7 +39,7 @@ void AiController::run() {
 					appControl->restartGame();
 					break;
 				case GameState::Win:
-					agent->win();
+					agent->gameWin();
 					appControl->restartGame();
 					break;
 				default:
