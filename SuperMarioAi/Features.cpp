@@ -137,7 +137,7 @@ int Features::calculateStateNumber() {
             return i;
         }
     }
-    states[statesSize] = state;
+    states[statesSize++] = state;
     return statesSize;
 }
 
