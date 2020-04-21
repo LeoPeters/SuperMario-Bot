@@ -21,7 +21,7 @@ public:
 
 private:
 	int lastState;
-	int rewardRight;
+	double rewardRight;
 	int counterRight;
 	int counterLeft;
 	Policy policy;

@@ -57,18 +57,9 @@ std::vector<MarioAction> Features::getPossibleActions() {
 
     //TODO MarioAction::shoot        
     std::vector<MarioAction> possibleActions;
-    possibleActions.push_back(MarioAction::moveLeft);
-    possibleActions.push_back(MarioAction::moveRight);
-    /*
-    if (marioPositionX != 0 && marioArray[marioPositionY][marioPositionX - 1] != int(MarioObject::ground)) {
-        possibleActions.push_back(MarioAction::moveLeft);
-    }
 
-    //No boundaries needed. Mario can max be at X position (GRIDRADIUS/2 + 1)
-    if (marioArray[marioPositionY][marioPositionX + 1] != int(MarioObject::ground)) {
-        possibleActions.push_back(MarioAction::moveRight);
-    }
-    */
+    possibleActions.push_back(MarioAction::moveRight);
+    possibleActions.push_back(MarioAction::moveLeft);
 
     if (!jumpBlocked && validPosition(marioPositionY, 1, GRIDRADIUS - 2) && 
         marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) &&
@@ -89,6 +80,7 @@ int Features::isUnderBlock()
     }
     return 0;
 }
+
 std::array<int, 2> Features::closestEnemy() {
     std::array<int, 2> closest = { GRIDRADIUS, GRIDRADIUS };
     for (int y = 0; y < marioArray.size(); y++) {
@@ -102,18 +94,21 @@ std::array<int, 2> Features::closestEnemy() {
         //TODO Maybe this is bad. If the enemy is in the bottom right corner this will return (0,0) as if there was no enemy
         closest = { 0, 0 };
     }
+    else {
+        closest = { std::abs(marioPositionX - closest[0]) + std::abs(marioPositionY - closest[1]) };
+    }
     return closest;
 }
 
 int Features::distance(int x, int y) {
-    return std::abs((marioPositionX + marioPositionY) - (x + y));
+    return std::abs(marioPositionX - x) + std::abs(marioPositionY - y);
 }
 
 int Features::distanceToObstacleRight() {
     int distance = 0;
-    for (int x = marioPositionX; x < GRIDRADIUS; x++) {
+    for (int x = 0; x < GRIDRADIUS; x++) {
         if (marioArray[marioPositionY][x] == (int)MarioObject::ground) {
-            distance =  x - marioPositionX;
+            distance =  x - marioPositionX - 1;
         }
     }
     return distance;

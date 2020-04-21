@@ -22,9 +22,13 @@ std::array<State, NUMBER_OF_STATES> Agent::getStates() {
 MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions) {
 	states[stateIndex].setPossibleActions(possibleActions);
 	MarioAction action = chooseAction(states[stateIndex]);
-
-	double newScore = states[lastState].getValue(action) +  ALPHA * (REWARDSTEP + rewardRight + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(action));
-	states[lastState].setScore(lastAction, (states[lastState].getValue(lastAction) + newScore));
+	if (lastAction == MarioAction::moveRight) {
+		rewardRight = 0.2;
+	} else {
+		rewardRight = 0;
+	}
+	double newScore = states[lastState].getValue(lastAction) + ALPHA * (REWARDSTEP + rewardRight + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(lastAction));
+	states[lastState].setScore(lastAction, newScore);
 	lastAction = action;
 	lastState = stateIndex;
 
@@ -54,6 +58,7 @@ MarioAction Agent::chooseAction(State state) {
 	case Policy::greedy:
 		if (rnd <= EPSILON) {
 			a = state.getRandomAction();
+			//printf("Rand: %f", rnd);
 		} else {
 			a = state.getBestAction();
 		}
@@ -77,7 +82,7 @@ MarioAction Agent::chooseAction(State state) {
 	}
 	if (a == MarioAction::moveRight) counterRight++;
 	if (a == MarioAction::moveLeft) counterLeft++;
-	printf("Rand: %f", rnd);
-	std::cout << " Left: " << counterLeft << " Right: " << counterRight << std::endl;
+	
+	//std::cout << " Left: " << counterLeft << " Right: " << counterRight << std::endl;
 	return a;
 }
