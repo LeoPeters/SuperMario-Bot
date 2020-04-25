@@ -1,21 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/* 
- * File:   MarioStateFeatures.cpp
- * Author: MuhamadIqbal
- * 
- * Created on 12. April 2020, 00:18
- */
 
 #include <cstdlib>
 #include "Features.h"
 #include "MarioObject.h"
 #include "MarioAction.h"
 #include <iostream>
+
+
+void debugArray(std::vector<std::vector<int>> tempArray);
 
 Features::Features() :
     marioPositionX(-1),
@@ -40,7 +32,10 @@ void Features::calculateStateAndActions(std::vector<std::vector<int>> tempArray,
     calculateJumpBlocked();
     *possibleActions = getPossibleActions();
     *state = calculateStateNumber(); 
+
+    
 }
+
 
 void Features::setMarioPosition() {
     for (int y = 0; y < GRIDRADIUS;y++) {
@@ -48,6 +43,8 @@ void Features::setMarioPosition() {
             if (marioArray[y][x] == int(MarioObject::mario)) {
                 marioPositionX = x;
                 marioPositionY = y;
+
+                std::cout << std::endl << "XMario:" << x << " YMario:" << y << std::endl;
             }
         }
     }
@@ -71,7 +68,7 @@ std::vector<MarioAction> Features::getPossibleActions() {
     return possibleActions;
 }
 
-int Features::isUnderBlock()
+int Features::isUnderBlock() 
 {
     if ((marioPositionY >= 1 && marioArray[marioPositionY - 1][marioPositionX] == int(MarioObject::ground)) || 
         (marioPositionY >= 2 && marioArray[marioPositionY - 2][marioPositionX] == int(MarioObject::ground)) ||
@@ -96,7 +93,11 @@ std::array<int, 2> Features::closestEnemy() {
     }
     else {
         closest = { std::abs(marioPositionX - closest[0]) + std::abs(marioPositionY - closest[1]) };
+        
     }
+
+    //std::cout << std::endl << "X:" << closest[0] << " Y:" << closest[1] << std::endl;
+
     return closest;
 }
 
@@ -104,7 +105,7 @@ int Features::distance(int x, int y) {
     return std::abs(marioPositionX - x) + std::abs(marioPositionY - y);
 }
 
-int Features::distanceToObstacleRight() {
+int Features::distanceToObstacleRight() { 
     int distance = 0;
     for (int x = 0; x < GRIDRADIUS; x++) {
         if (marioArray[marioPositionY][x] == (int)MarioObject::ground) {
@@ -156,3 +157,96 @@ void Features::calculateJumpBlocked()
 bool Features::validPosition(int value, int lowBorder, int highBorder) {
     return (value >= lowBorder && value <= highBorder);
 }
+
+// NEW FEATURES
+
+
+int Features::isJump() {
+
+    if (marioArray[marioPositionY + 1][marioPositionX] != int(MarioObject::ground) &&
+        marioArray[marioPositionY + 1][marioPositionX] != int(MarioObject::item)) 
+    {
+        return 1;
+    }
+    return 0;
+}
+
+int Features::getNumberOfEnemy() {
+    
+    int numberOfEnemy = 0;
+
+    for (int y = 0; y < GRIDRADIUS; y++) {
+        for (int x = 0; x < GRIDRADIUS; x++) {
+            if (marioArray[y][x] == int(MarioObject::enemy)) {
+                numberOfEnemy++;
+            }
+        }
+    }
+
+    return numberOfEnemy;
+    
+}
+
+int Features::isItemNearby() {
+    
+    for (int y = 0; y < GRIDRADIUS; y++) {
+        for (int x = 0; x < GRIDRADIUS; x++) {
+            if (marioArray[y][x] == int(MarioObject::enemy)) {
+                return 1;
+            }
+        }
+    }
+
+    return 0;
+
+}
+
+int Features::distanceToHoleRight() {
+    
+    int distance = 0;
+
+    // feststellen, dass Mario auf dem Boden ist
+    if (marioPositionY == GRIDRADIUS - 3) {
+        
+        // nach Loch suchen
+        for (int x = 0; x < GRIDRADIUS; x++) {
+            if (marioArray[marioPositionY + 1][x] == int(MarioObject::empty) 
+                && marioArray[marioPositionY + 2][x] == int(MarioObject::empty)) {
+                
+                distance = x - marioPositionX - 1;
+            }
+        }
+        return distance;
+    
+    }
+
+}
+
+std::array<int, 2> Features::closestItems() {
+    
+    std::array<int, 2> closestItem = { 0, 0 };
+    
+    for (int y = 0; y < marioArray.size(); y++) {
+        for (int x = marioPositionX; x < marioArray.size(); x++) {
+            if (marioArray[y][x] == (int)MarioObject::item && distance(closestItem[0], closestItem[1]) >= distance(x, y)) {
+                closestItem = { x, y };
+            }
+        }
+    }
+        
+    return closestItem;
+}
+
+int Features::marioStatus() {
+    //TODO
+    return 0;
+}
+
+
+
+
+
+
+
+
+

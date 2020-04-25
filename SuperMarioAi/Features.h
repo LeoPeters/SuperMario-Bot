@@ -27,6 +27,7 @@ public:
     void Features::calculateStateAndActions(std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state) override;
     std::array<std::vector<int>, NUMBER_OF_STATES> getStates() override;
 
+
 private:
     std::vector<std::vector<int>> marioArray;
     std::array<std::vector<int>, NUMBER_OF_STATES> states;
@@ -46,6 +47,15 @@ private:
     std::vector<MarioAction> getPossibleActions();
     int Features::calculateStateNumber();
     void Features::calculateJumpBlocked();
+    // NEW Features
+    int Features::isJump(); 
+    int Features::getNumberOfEnemy(); 
+    int Features::marioStatus();
+    int Features::isItemNearby();
+    std::array<int, 2> closestItems(); 
+    int distanceToHoleRight();
+
+
 
 };
 
