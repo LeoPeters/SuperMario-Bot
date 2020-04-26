@@ -15,11 +15,27 @@ MarioAction State::getBestAction() {
 	for (auto i = 1; i < possibleActions.size(); i++) {
 		if (scores[(int)possibleActions[i]] > scores[(int)best]) best = possibleActions[i];
 	}
+	std::cout << "BestAction: " << (int)best << "   Score: " << scores[(int)best] << std::endl;
 	return best;
 }
 MarioAction State::getRandomAction() {
 	if (possibleActions.size() <= 1) {
 		return possibleActions[0];
+	}
+	MarioAction random = possibleActions[rand() % possibleActions.size()];
+
+	return random;
+}
+
+MarioAction State::getRandomActionWeighted() {
+	if (possibleActions.size() <= 1) {
+		return possibleActions[0];
+	}
+	double rnd = std::rand() / (double)RAND_MAX;
+	for (int i = 0; i < possibleActions.size(); i++) {
+		if (rnd) {
+
+		}
 	}
 	MarioAction random = possibleActions[rand() % (possibleActions.size() - 1)];
 

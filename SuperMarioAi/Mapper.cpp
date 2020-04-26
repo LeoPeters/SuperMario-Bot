@@ -99,7 +99,7 @@ bool Mapper::Map_Mario(){
         bools[i]=false;
         threads[i] = std::thread(&MarioFinder::search_for_Mario_threaded,
                     &finders[i],start_x,end_x,start_y,(end_y/MARIOFINDERTHREADS)*(i+1),&bools[i]);
-        start_y = end_y/MARIOFINDERTHREADS*(i+1)-tilesize_mario_big_y;
+        start_y = end_y/MARIOFINDERTHREADS*(i+1)- (tilesize_mario_big_y);
     }
     for(int i = 0; i<MARIOFINDERTHREADS;i++){
         threads[i].join();
@@ -116,18 +116,21 @@ bool Mapper::Map_Mario(){
     //such am Rand vom Input IMG, vlt ist er out of resized img
     start_x = 0;
     start_y = 0;
-    end_x = TILESIZE;
-    end_y = height - TILESIZE;
+    end_x = tilesize_mario_big_x;
+    end_y = height - tilesize_mario_big_y;
+
     for (int i = 0; i < MARIOFINDERTHREADS; i++) {
         bools[i] = false;
         if (start_y < 0)start_y = 0;
         threads[i] = std::thread(&MarioFinder::search_for_Mario_threaded_in_input_img,
-            &finders[i], start_x, end_x, start_y, (end_y / MARIOFINDERTHREADS) * (i + 1), &bools[i]);
-        start_y = end_y / MARIOFINDERTHREADS * (i + 1) - tilesize_mario_big_y;
+            &finders[i], 0, width-tilesize_mario_big_x, 0, height- tilesize_mario_big_y, &bools[i]);
+        //&finders[i], start_x, end_x, start_y, (end_y / MARIOFINDERTHREADS) * (i + 1), &bools[i]);
+        start_y = end_y / MARIOFINDERTHREADS * (i + 1) - (tilesize_mario_big_y);
     }
     for (int i = 0; i < MARIOFINDERTHREADS; i++) {
         threads[i].join();
     }
+
     for (int i = 0; i < MARIOFINDERTHREADS; i++) {
         if (bools[i]) {
             last_mario_pos_x = finders[i].return_x_pos();
@@ -148,7 +151,7 @@ bool Mapper::Map_Mario(){
         if (start_y < 0)start_y = 0;
         threads[i] = std::thread(&MarioFinder::search_for_Mario_threaded,
                     &finders[i],start_x,end_x,start_y,(end_y/MARIOFINDERTHREADS)*(i+1),&bools[i]);
-        start_y = end_y/MARIOFINDERTHREADS*(i+1)-tilesize_mario_big_y;
+        start_y = end_y/MARIOFINDERTHREADS*(i+1)-(tilesize_mario_big_y);
     }
     for(int i = 0; i<MARIOFINDERTHREADS;i++){
         threads[i].join();

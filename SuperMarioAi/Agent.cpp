@@ -4,7 +4,9 @@ Agent::Agent() :
 	lastState(0),
 	policy(Policy::greedy),
 	lastAction(MarioAction::moveLeft),
-	rewardRight(0)
+	rewardRight(0),
+	counterRight(0),
+	counterLeft(0)
 {
 
 }
@@ -20,9 +22,13 @@ std::array<State, NUMBER_OF_STATES> Agent::getStates() {
 MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions) {
 	states[stateIndex].setPossibleActions(possibleActions);
 	MarioAction action = chooseAction(states[stateIndex]);
-
-	double newScore = states[lastState].getValue(action) +  ALPHA * (REWARDSTEP + rewardRight + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(action));
-	states[lastState].setScore(lastAction, (states[lastState].getValue(lastAction) + newScore));
+	if (lastAction == MarioAction::moveRight) {
+		rewardRight = 0.2;
+	} else {
+		rewardRight = 0;
+	}
+	double newScore = states[lastState].getValue(lastAction) + ALPHA * (REWARDSTEP + rewardRight + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(lastAction));
+	states[lastState].setScore(lastAction, newScore);
 	lastAction = action;
 	lastState = stateIndex;
 
@@ -45,22 +51,38 @@ void Agent::gameWin() {
 
 
 MarioAction Agent::chooseAction(State state) {
-	double rnd = std::rand() / RAND_MAX;
+	double rnd = std::rand() / (double) RAND_MAX;
 	MarioAction a = MarioAction::moveRight;
 
 	switch (policy) {
 	case Policy::greedy:
 		if (rnd <= EPSILON) {
 			a = state.getRandomAction();
+			//printf("Rand: %f", rnd);
 		} else {
 			a = state.getBestAction();
 		}
 		break;
 	case Policy::soft:
-		
+		if (rnd <= 1 - EPSILON) {
+			a = state.getBestAction();
+		}
+		else {
+			a = state.getRandomAction();
+		}
 		break;
 	case Policy::softMax:
+		if (rnd <= 1 - EPSILON) {
+			a = state.getBestAction();
+		}
+		else {
+			a = state.getRandomActionWeighted(); //TODO get random action Weighted implementing
+		}
 		break;
 	}
+	if (a == MarioAction::moveRight) counterRight++;
+	if (a == MarioAction::moveLeft) counterLeft++;
+	
+	//std::cout << " Left: " << counterLeft << " Right: " << counterRight << std::endl;
 	return a;
 }

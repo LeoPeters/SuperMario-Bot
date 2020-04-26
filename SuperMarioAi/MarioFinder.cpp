@@ -1,6 +1,7 @@
 #include "MarioFinder.h"
 #include "TemplateMatcher.h"
 #include "Globals.h"
+#include <iostream>
 /*class MarioFinder{
     private:
         ImageDistributor distr;
@@ -34,15 +35,18 @@ bool MarioFinder::search_for_Mario(){
 
 bool MarioFinder::search_for_Mario_in_IMG(int x_start, int x_end, int y_start, int y_end, PngImage& img) {
     TemplateMatcher matcher(img);
+    ImageDistributor newdistr;
     bool am_i_done = false;
     int erg = 0;
     int highest = 0;
+    //BigMario
     while (true) {
-        PngImage& rBlock = distr.grab_next_mario_Small_img(&am_i_done);
+        PngImage& rBlock = newdistr.grab_next_mario_Small_img(&am_i_done);
         if (am_i_done) { break; }
-        for (int y = y_start; y < y_end - tilesize_mario_y; y++) {
-            for (int x = x_start; x < x_end - tilesize_mario_x; x++) {
+        for (int y = y_start; y < y_end; y++) {// - tilesize_mario_y
+            for (int x = x_start; x < x_end ; x++) { //- tilesize_mario_x
                 erg = matcher.match_tilesize_on_pixel(x, y, rBlock, tilesize_mario_x, tilesize_mario_y);
+
                 if (IS_A_MARIO_MATCH(erg)) {
                     x_pos = x;
                     y_pos = y;
@@ -52,13 +56,31 @@ bool MarioFinder::search_for_Mario_in_IMG(int x_start, int x_end, int y_start, i
             }
         }
     }
-    //BigMario
+    //std::cout << max << ",";
     am_i_done = false;
     while (true) {
-        PngImage& rBlock = distr.grab_next_mario_Shroom_img(&am_i_done);
+        PngImage& rBlock = newdistr.grab_next_mario_Shroom_img(&am_i_done);
         if (am_i_done) { break; }
-        for (int y = y_start; y < y_end - tilesize_mario_big_y; y++) {
-            for (int x = x_start; x < x_end - tilesize_mario_big_x; x++) {
+        for (int y = y_start; y < y_end; y++) {// - tilesize_mario_big_y
+            for (int x = x_start; x < x_end; x++) {// - tilesize_mario_big_x
+                erg = matcher.match_tilesize_on_pixel(x, y, rBlock, tilesize_mario_big_x, tilesize_mario_big_y);
+
+                if (IS_A_BIG_MARIO_MATCH(erg)) {
+                    x_pos = x;
+                    y_pos = y;
+                    is_big = true;
+                    return true;
+                }
+            }
+        }
+    }
+   // std::cout << max << ",";
+    am_i_done = false;
+    while (true) {
+        PngImage& rBlock = newdistr.grab_next_mario_Fire_img(&am_i_done);
+        if (am_i_done) { break; }
+        for (int y = y_start; y < y_end ; y++) {//- tilesize_mario_big_y
+            for (int x = x_start; x < x_end ; x++) {//- tilesize_mario_big_x
                 erg = matcher.match_tilesize_on_pixel(x, y, rBlock, tilesize_mario_big_x, tilesize_mario_big_y);
                 if (IS_A_BIG_MARIO_MATCH(erg)) {
                     x_pos = x;
@@ -69,22 +91,7 @@ bool MarioFinder::search_for_Mario_in_IMG(int x_start, int x_end, int y_start, i
             }
         }
     }
-    am_i_done = false;
-    while (true) {
-        PngImage& rBlock = distr.grab_next_mario_Fire_img(&am_i_done);
-        if (am_i_done) { break; }
-        for (int y = y_start; y < y_end - tilesize_mario_big_y; y++) {
-            for (int x = x_start; x < x_end - tilesize_mario_big_x; x++) {
-                erg = matcher.match_tilesize_on_pixel(x, y, rBlock, tilesize_mario_big_x, tilesize_mario_big_y);
-                if (IS_A_BIG_MARIO_MATCH(erg)) {
-                    x_pos = x;
-                    y_pos = y;
-                    is_big = true;
-                    return true;
-                }
-            }
-        }
-    }
+
     return false;
 }
 
