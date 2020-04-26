@@ -31,7 +31,8 @@ void AiController::run() {
 					features->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
 					featureVector = features->getFeatureVector();
 					nextAction = agent->calculateAction(currentState, possibleActions);
-					//appControl->makeAction(nextAction);
+					agentStateArray = agent->getStates();
+					appControl->makeAction(nextAction);
 					break;
 				case GameState::GameOver:
 					agent->gameOver();
@@ -44,10 +45,11 @@ void AiController::run() {
 				default:
 					break;
 				}
-			}
 				gui->update();
+			}
+
 		}
-		Sleep(300);
+		Sleep(200);
 	}
 }
 
@@ -113,6 +115,12 @@ std::vector<int> AiController::getFeatureVector()
 GameState AiController::getGameState()
 {
 	return gameState;
+}
+
+std::array<State, NUMBER_OF_STATES>AiController::getAgentStateList()
+{
+
+	return agentStateArray;
 }
 
 void AiController::startSuperMario()

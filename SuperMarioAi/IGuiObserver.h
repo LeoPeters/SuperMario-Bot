@@ -1,6 +1,8 @@
 #ifndef iguiobserver_h
 #define iguiobserver_h
 #include "MarioAction.h"
+#include "State.h"
+#include "Globals.h"
 #include "GameState.h"
 class IGuiObserver {
 public:	
@@ -14,5 +16,7 @@ public:
 	virtual std::vector<MarioAction> getpossibleAction() = 0;
 	virtual std::vector<int> getFeatureVector() =0;
 	virtual GameState getGameState() = 0;
+	virtual std::array<State, NUMBER_OF_STATES> getAgentStateList() = 0;
+
 };
 #endif

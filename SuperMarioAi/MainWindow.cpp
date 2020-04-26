@@ -3,8 +3,9 @@
 #include <iostream>
 #include "AiGui.h"
 #include "FeatureNames.h"
+#include "QValueTable.h"
+#include "State.h"
 #include "MainWindow.h"
-
 MainWindow::MainWindow(IGuiObserver* observer)
 	: QMainWindow(Q_NULLPTR),
 	observer(observer),
@@ -16,35 +17,37 @@ MainWindow::MainWindow(IGuiObserver* observer)
 	original = ui.highJumpLbl->palette();
 	ui.viewGame->setScene(gameScene);
 	ui.viewSimplify->setScene(simpleScene);
-	setUpFeatureGrid();
-	
+	setUpFeatureTable();
+	qValueTable =new QValueTable();
+	ui.QValueLayout->addWidget(qValueTable);
 }
 MainWindow::~MainWindow()
 {
 	observer->notifyEndApp();
 }
 
-void MainWindow::setUpFeatureGrid()
+void MainWindow::setUpFeatureTable()
 {
-	ui.gridLayout->setSpacing(0);
-	FeatureWidget* currentState=new FeatureWidget();
-	featureWidgets.push_back(currentState);
-	ui.gridLayout->addWidget(currentState);
-	for (int i = 0; i < (int)FeatureNames::SIZE_FEATURE_NAMES-1; i++) {
+	for (int i = 0; i < (int)FeatureNames::SIZE_FEATURE_NAMES; i++) {
 		FeatureWidget* wg = new FeatureWidget();
+		QListWidgetItem* listitem = new QListWidgetItem();
 		featureWidgets.push_back(wg);
-		ui.gridLayout->addWidget(wg);
-	}
-	featureWidgets[0]->setFeatureName("Under Block: ");
-	featureWidgets[1]->setFeatureName("Enemy X:");
-	featureWidgets[2]->setFeatureName("Enemy Y:");
-	featureWidgets[3]->setFeatureName("Obstacle:");
+		ui.listWidget->addItem(listitem);
+		listitem->setBackgroundColor(Qt::GlobalColor::lightGray);	
+		listitem->setSizeHint(wg->sizeHint());
+		ui.listWidget->setItemWidget(listitem,wg);
 
+	}
+		featureWidgets[0]->setFeatureName("Under Block: ");
+		featureWidgets[1]->setFeatureName("Enemy X:");
+		featureWidgets[2]->setFeatureName("Enemy Y:");
+		featureWidgets[3]->setFeatureName("Obstacle:");
 }
 void MainWindow::signalSetup() {
 	connect(ui.btn_start, SIGNAL(clicked()), this, SLOT(pressStartBtn()));
 	connect(ui.btn_pause, SIGNAL(clicked()), this, SLOT(pressPauseBtn()));
 	connect(ui.btn_exit, SIGNAL(clicked()), this, SLOT(pressExitBtn()));
+	connect(ui.btn_load, SIGNAL(clicked()), this, SLOT(loadWholeStateTable()));
 	connect(this, SIGNAL(updateView()), this, SLOT(updateGUi()));
 }
 
@@ -72,11 +75,11 @@ void MainWindow::updateGUi()
 {
 	updateSimpleViewGui();
 	updateGameViewGui();
-
 	setActionLabel();
 	ui.AgentState->setText(QString::number(state));
 	updateFeatureView();
 	updateGameStateGui();
+	updateStateTable();
 }
 void MainWindow::updateFeatureView() {
 	for (int i = 0; i < featureVector.size(); i++) {
@@ -169,8 +172,35 @@ void MainWindow::setState(int state) {
 	this->state = state;
 }
 
+void MainWindow::updateStateTable() {
+	agentStateArray = observer->getAgentStateList();
+	std::vector<double > rowValues;
+	for (int i = 0; i < (int)MarioAction::ACTION_MAX ; i++) {
+		rowValues.push_back(agentStateArray[state].getValue(MarioAction(i)));
+	}
+	for (int i = 0; i < featureVector.size(); i++) {
+		rowValues.push_back(featureVector.at(i));
+	}
+	this->qValueTable->updateTable(state,rowValues);
+}
 
-
+void MainWindow::loadWholeStateTable()
+{
+	agentStateArray = observer->getAgentStateList();
+	std::vector<std::vector<double>> qValueTable;
+	for (int i = 0; i < agentStateArray.size();i++) {
+		std::vector<double > qValueColumn;
+		for (int j = 0; j < (int)MarioAction::ACTION_MAX-1; j++) {
+			qValueColumn.push_back(agentStateArray[i].getValue(MarioAction(j)));
+		}
+		//for (int j = 0; j < ; j++) {
+		//	//qValueColumn.push_back());
+		//}
+		qValueTable.push_back(qValueColumn);
+	}
+	this->qValueTable->setQVlaues(qValueTable);
+	this->qValueTable->updateWholeTable();
+}
 
 
 void MainWindow::pressStartBtn()
@@ -212,4 +242,9 @@ void MainWindow::setSimplePixmap(QPixmap pixmap)
 void MainWindow::setGameState(GameState gameState)
 {
 	this->gameState = gameState;
+}
+
+void MainWindow::setAgentStateArray(std::array<State, NUMBER_OF_STATES> agentStateArray)
+{
+	this->agentStateArray = agentStateArray;
 }

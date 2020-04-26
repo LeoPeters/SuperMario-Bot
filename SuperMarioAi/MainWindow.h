@@ -1,6 +1,7 @@
 #ifndef mainwindow_h
 #define mainwindow_h
 #include <QMainWindow>
+#include "QValueTable.h"
 #include "IGuiObserver.h"
 #include "MarioAction.h"
 #include <QStandardItemModel>
@@ -23,19 +24,22 @@ public:
 	void setFeatureVector(std::vector<int> featureVector);
 	void setPossibleAction(std::vector<MarioAction> nextAction);
 	void setState(int);
+	void updateStateTable();
 	bool getIsPaused();
 	void setGamePixmap(QPixmap);
 	void setSimplePixmap(QPixmap);
 	void setGameState(GameState);
+	void setAgentStateArray(std::array<State, NUMBER_OF_STATES> agentStateArray);
 signals:
 	void updateView();
 
 private:
+	QValueTable* qValueTable;
 	void signalSetup();
 	void setActionLabelPalette(QPalette jump, QPalette left, QPalette right, QPalette highJump, QPalette shoot);
 	void setPossibleActionLabel();
 	void setActionLabel();
-	void setUpFeatureGrid();
+	void setUpFeatureTable();
 	Ui::MainWindow ui;
 	GameState gameState;
 	QPixmap gamePixmap;
@@ -54,12 +58,13 @@ private:
 	void updateSimpleViewGui();
 	void updateGameViewGui();
 	void updateFeatureView();
-
+	std::array<State, NUMBER_OF_STATES> agentStateArray;
 private slots:
 	void pressStartBtn();
 	void pressPauseBtn();
 	void pressExitBtn();
 	void updateGUi();
+	void loadWholeStateTable();
 
 	
 };
