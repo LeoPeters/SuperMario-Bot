@@ -61,7 +61,7 @@ void QValueTable::updateTable(int row, std::vector<double> rowValue)
 		QModelIndex index = model->index(row, j + 1, QModelIndex());
 		model->setData(index, rowValue.at(j));
 
-		std::cout << "Size: "<< rowValue.size() << std::endl;
+		//std::cout << "Size: "<< rowValue.size() << std::endl;
 
 	}
 

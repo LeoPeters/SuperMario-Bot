@@ -151,12 +151,10 @@ int Features::distance(int x, int y) {
 
 int Features::distanceToObstacleRight() {
     int distance = 0;
-    for (int x = 0; x < GRIDRADIUS; x++) {
+    for (int x = marioPositionX; x < GRIDRADIUS; x++) {
         if (marioArray[marioPositionY][x] == (int)MarioObject::ground) {
-            distance =  x - marioPositionX - 1;
-            if (distance == 9) {
-
-            }
+            distance = x - marioPositionX;
+            return distance;
         }
     }
     //std::cout << "Distance: " << distance << " MarioPositionX: " << marioPositionX << std::endl;
