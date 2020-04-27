@@ -30,6 +30,7 @@ public:
     void gameWin() override;
     std::vector<int> getFeatureVector(int i) override;
 
+
 private:
     std::vector<std::vector<int>> marioArray;
     std::array<std::vector<int>, NUMBER_OF_STATES> states;
@@ -51,9 +52,17 @@ private:
     void setMarioPosition();
     void calculateFeatureVector();
     std::vector<MarioAction> getPossibleActions();
-    int calculateStateNumber();
-    void calculateJumpBlocked();
+    int Features::calculateStateNumber();
+    void Features::calculateJumpBlocked();
+    // NEW Features
+    int Features::isJump(); 
+    int Features::getNumberOfEnemy(); 
+    int Features::marioStatus();
+    int Features::isItemNearby();
+    std::array<int, 2> closestItems(); 
+    int distanceToHoleRight();
     double getReward();
+    bool Features::movedRight();
     bool Features::movedRight();
 };
 
