@@ -204,16 +204,17 @@ int Features::isItemNearby() {
 int Features::distanceToHoleRight() {
     
     int distance = 0;
-
+  
     // feststellen, dass Mario auf dem Boden ist
     if (marioPositionY == GRIDRADIUS - 3) {
         
         // nach Loch suchen
-        for (int x = 0; x < GRIDRADIUS; x++) {
+        for (int x = marioPositionX; x < GRIDRADIUS; x++) {
             if (marioArray[marioPositionY + 1][x] == int(MarioObject::empty) 
                 && marioArray[marioPositionY + 2][x] == int(MarioObject::empty)) {
                 
-                distance = x - marioPositionX - 1;
+                distance = x - marioPositionX;
+                return distance
             }
         }
         return distance;
