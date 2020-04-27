@@ -39,6 +39,7 @@ void AiGui::update()
 	mWindow->setPossibleAction(observer->getpossibleAction());
 	mWindow->setFeatureVector(observer->getFeatureVector());
 	mWindow->setGameState(observer->getGameState());
+	mWindow->setAgentState(observer->getAgentState());
 	mWindow->updateView();
 }
 

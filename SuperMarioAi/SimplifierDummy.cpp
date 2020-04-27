@@ -26,7 +26,7 @@ GameState SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply,
 	switch (status) {
 	case 0:
 		gameState = GameState::MarioNotFound;
-		std::cout << "Not Found: " << status << std::endl;
+
 		break;
 	case 1:
 		gameState = GameState::Win;

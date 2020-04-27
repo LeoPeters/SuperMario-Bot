@@ -15,7 +15,7 @@ void EnvironmentDummy::gameOver() {
 
 }
 
-std::vector<int> EnvironmentDummy::getFeatureVector()
+std::vector<int> EnvironmentDummy::getFeatureVector(int index)
 {
 	return std::vector<int>();
 }

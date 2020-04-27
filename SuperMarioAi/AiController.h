@@ -28,8 +28,10 @@ public:
 	 std::vector<MarioAction> getpossibleAction() override;
 	 std::vector<int> getFeatureVector();
 	 GameState getGameState() override;
-	 std::array<State, NUMBER_OF_STATES> getAgentStateList() override;
+	State getAgentState() override;
+	State getAgentState(int i) override;
 private:
+	void startSuperMario();
 	std::vector<MarioAction> possibleActions;
 	double reward;
 	IScreenCapture* screenCapture;
@@ -44,15 +46,15 @@ private:
 	std::mutex mx;
 	std::condition_variable cv;
 	MarioAction nextAction;
+	int lastState;
 	int currentState;
 	std::vector<int> featureVector;
 	GameState gameState;
 
 	AiFactory factory=AiFactory();
 	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
-	void startSuperMario();
 	HBITMAP gameCapture=HBITMAP();
-	std::array<State, NUMBER_OF_STATES> agentStateArray;
+	State agentStateArray;
 };
 
 #endif

@@ -159,7 +159,7 @@ int Features::distanceToObstacleRight() {
             }
         }
     }
-    std::cout << "Distance: " << distance << " MarioPositionX: " << marioPositionX << std::endl;
+    //std::cout << "Distance: " << distance << " MarioPositionX: " << marioPositionX << std::endl;
     return distance;
 }
 
@@ -205,6 +205,6 @@ bool Features::validPosition(int value, int lowBorder, int highBorder) {
     return (value >= lowBorder && value <= highBorder);
 }
 
-std::vector<int> Features::getFeatureVector() {
-    return featureVector;
+std::vector<int> Features::getFeatureVector(int index) {
+    return states[index];
 }

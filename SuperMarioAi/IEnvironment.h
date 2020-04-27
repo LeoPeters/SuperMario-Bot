@@ -7,7 +7,7 @@
 class IEnvironment {
 public:
 	virtual void calculateStateAndActions(MarioAction lastAction, std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state, double* reward) = 0;
-	virtual std::vector<int> getFeatureVector() = 0;
+	virtual std::vector<int> getFeatureVector(int i) = 0;
 	virtual std::array<std::vector<int>, NUMBER_OF_STATES> getStates() = 0;
 	virtual void gameOver() = 0;
 	virtual void gameWin() = 0;
