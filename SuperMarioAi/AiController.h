@@ -29,10 +29,8 @@ public:
 	 std::vector<int> getFeatureVector();
 	 GameState getGameState() override;
 private:
-
 	std::vector<MarioAction> possibleActions;
-	void startSuperMario();
-	AiFactory factory=AiFactory();
+	double reward;
 	IScreenCapture* screenCapture;
 	IAppControl* appControl;
 	IEnvironment* features;
@@ -44,12 +42,15 @@ private:
 	bool isGuiRunning = true;
 	std::mutex mx;
 	std::condition_variable cv;
-	HBITMAP gameCapture=HBITMAP();
-	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
 	MarioAction nextAction;
 	int currentState;
 	std::vector<int> featureVector;
 	GameState gameState;
+
+	AiFactory factory=AiFactory();
+	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
+	void startSuperMario();
+	HBITMAP gameCapture=HBITMAP();
 };
 
 #endif

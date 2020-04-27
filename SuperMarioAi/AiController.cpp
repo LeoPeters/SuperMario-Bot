@@ -28,17 +28,24 @@ void AiController::run() {
 				gameState=simplifier->simplifyImage(simplifyVec, gameCapture);
 				switch (gameState) {
 				case GameState::MarioAlive:
-					features->calculateStateAndActions(*simplifyVec, &possibleActions, &currentState);
+					features->calculateStateAndActions(nextAction, *simplifyVec, &possibleActions, &currentState, &reward);
+					std::cout << "Reward: " << reward << std::endl;
 					featureVector = features->getFeatureVector();
-					nextAction = agent->calculateAction(currentState, possibleActions);
+					nextAction = agent->calculateAction(currentState, possibleActions, reward);
 					appControl->makeAction(nextAction);
 					break;
 				case GameState::GameOver:
-					agent->gameOver();
+					features->gameOver();
+					features->calculateStateAndActions(nextAction, *simplifyVec, &possibleActions, &currentState, &reward);
+					featureVector = features->getFeatureVector();
+					agent->calculateAction(currentState, possibleActions, reward);
 					appControl->restartGame();
 					break;
 				case GameState::Win:
-					agent->gameWin();
+					features->gameWin();
+					features->calculateStateAndActions(nextAction, *simplifyVec, &possibleActions, &currentState, &reward);
+					featureVector = features->getFeatureVector();
+					agent->calculateAction(currentState, possibleActions, reward);
 					appControl->restartGame();
 					break;
 				default:

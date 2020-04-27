@@ -6,9 +6,11 @@
 class EnvironmentDummy:public IEnvironment
 {
 public:
-	 void calculateStateAndActions(std::vector<std::vector<int>>, std::vector<MarioAction>* possibleActions, int* state) override;
+	 void calculateStateAndActions(MarioAction lastAction, std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state, double* reward) override;
 	 std::vector<int> getFeatureVector() override;
 	 std::array<std::vector<int>, NUMBER_OF_STATES> getStates() override;
+	 void gameOver() override;
+	 void gameWin() override;
 private:
 	
 };

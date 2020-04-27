@@ -19,36 +19,17 @@ std::array<State, NUMBER_OF_STATES> Agent::getStates() {
 	return states;
 }
 
-MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions) {
+MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions, double reward) {
 	states[stateIndex].setPossibleActions(possibleActions);
 	MarioAction action = chooseAction(states[stateIndex]);
-	if (lastAction == MarioAction::moveRight) {
-		rewardRight = 0.2;
-	} else {
-		rewardRight = 0;
-	}
-	double newScore = states[lastState].getValue(lastAction) + ALPHA * (REWARDSTEP + rewardRight + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(lastAction));
+
+	double newScore = states[lastState].getValue(lastAction) + ALPHA * (reward + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(lastAction));
 	states[lastState].setScore(lastAction, newScore);
 	lastAction = action;
 	lastState = stateIndex;
 
 	return action;
 }
-
-void Agent::gameOver() {
-	states[lastState].setScore(lastAction, (states[lastState].getValue(lastAction) + REWARDLOSE));
-	lastState = 0;
-}
-
-
-
-void Agent::gameWin() {
-	states[lastState].setScore(lastAction, (states[lastState].getValue(lastAction) + REWARDWIN));
-	lastState = 0;
-}
-
-
-
 
 MarioAction Agent::chooseAction(State state) {
 	double rnd = std::rand() / (double) RAND_MAX;

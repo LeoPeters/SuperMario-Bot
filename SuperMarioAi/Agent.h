@@ -13,10 +13,7 @@ class Agent : public IAgent
 public:
 	Agent();
 	~Agent();
-
-	MarioAction calculateAction(int state, std::vector<MarioAction> possibleActions) override;
-	void gameOver() override;
-	void gameWin() override;
+	MarioAction calculateAction(int state, std::vector<MarioAction> possibleActions, double reward) override;
 	virtual std::array<State, NUMBER_OF_STATES> getStates() override;
 
 private:

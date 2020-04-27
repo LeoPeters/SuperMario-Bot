@@ -12,18 +12,25 @@
  */
 
 #include <cstdlib>
+#include <iostream>
 #include "Features.h"
 #include "MarioObject.h"
 #include "MarioAction.h"
-#include <iostream>
+#include "FeatureNames.h"
 
 Features::Features() :
     marioPositionX(-1),
     marioPositionY(-1),
     statesSize(0),
-    jumpBlocked(false)
+    jumpBlocked(false),
+    gameWon(false),
+    gameLost(false),
+    onGroundCounter(0),
+    lastAction(MarioAction())
 {
-
+    for (int i = 0; i < (int)FeatureNames::SIZE_FEATURE_NAMES; i++) {
+        featureVector.push_back(0);
+    }
 }
 
 Features::~Features() {
@@ -34,12 +41,51 @@ std::array<std::vector<int>, NUMBER_OF_STATES> Features::getStates() {
     return states;
 }
 
-void Features::calculateStateAndActions(std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state) {
-    marioArray = tempArray;
-    setMarioPosition();
-    calculateJumpBlocked();
-    *possibleActions = getPossibleActions();
-    *state = calculateStateNumber(); 
+void Features::calculateStateAndActions(MarioAction lastAction, std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state, double* reward) {
+    if (gameWon) {
+        *reward = REWARDWIN;
+        *state = 0;
+        gameWon = false;
+        jumpBlocked = false;
+    }
+    else if (gameLost) {
+        *reward = REWARDLOSE;
+        *state = 0;
+        gameLost = false;
+        jumpBlocked = false;
+    } else {
+        this->lastAction = lastAction;
+        *reward = getReward();
+        marioArray = tempArray;
+        setMarioPosition();
+        calculateJumpBlocked();
+        *possibleActions = getPossibleActions();
+        calculateFeatureVector();
+        *state = calculateStateNumber();
+    }
+}
+
+void Features::gameWin() {
+    gameWon = true;
+}
+
+void Features::gameOver() {
+    gameLost = true;
+}
+
+double Features::getReward() {
+    double reward = REWARDSTEP;
+    if (movedRight()) {
+        reward = REWARDMOVERIGHT;
+    }
+    return reward;
+}
+
+bool Features::movedRight() {
+    if (lastAction == MarioAction::moveRight && (featureVector[(int) FeatureNames::distanceToObstacleRight] > 1 || featureVector[(int)FeatureNames::distanceToObstacleRight] == 0)) {
+        return true;
+    }
+    return false;
 }
 
 void Features::setMarioPosition() {
@@ -54,7 +100,6 @@ void Features::setMarioPosition() {
 }
 
 std::vector<MarioAction> Features::getPossibleActions() {
-
     //TODO MarioAction::shoot        
     std::vector<MarioAction> possibleActions;
 
@@ -114,20 +159,20 @@ int Features::distanceToObstacleRight() {
     return distance;
 }
 
-std::vector<int> Features::getFeatureVector() {
-    std::vector<int> state;
+void Features::calculateFeatureVector() {
+    std::vector<int> features;
     std::array<int, 2> closest = closestEnemy();
 
-    state.push_back(isUnderBlock());
-    state.push_back(closest[0]); //X
-    state.push_back(closest[1]); //Y
-    state.push_back(distanceToObstacleRight());
+    features.push_back(isUnderBlock());
+    features.push_back(closest[0]); //X
+    features.push_back(closest[1]); //Y
+    features.push_back(distanceToObstacleRight());
     
-    return state;
+    featureVector = features;
 }
 
 int Features::calculateStateNumber() {
-    std::vector<int> state = getFeatureVector();
+    std::vector<int> state = featureVector;
     for (int i = 1; i <= statesSize; i++) {
         if (states[i] == state) {
             statesSize++;
@@ -155,4 +200,8 @@ void Features::calculateJumpBlocked()
 
 bool Features::validPosition(int value, int lowBorder, int highBorder) {
     return (value >= lowBorder && value <= highBorder);
+}
+
+std::vector<int> Features::getFeatureVector() {
+    return featureVector;
 }

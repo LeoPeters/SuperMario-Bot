@@ -7,9 +7,7 @@
 
 class IAgent {
 public:
-	virtual MarioAction calculateAction(int state,std::vector<MarioAction> possibleActions) = 0;
-	virtual void gameOver() = 0;
-	virtual void gameWin() = 0;
+	virtual MarioAction calculateAction(int state,std::vector<MarioAction> possibleActions, double reward) = 0;
 	virtual std::array<State, NUMBER_OF_STATES> getStates() = 0;
 };
 #endif

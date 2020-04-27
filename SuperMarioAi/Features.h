@@ -24,17 +24,24 @@ class Features : public IEnvironment {
 public:
     Features();
     ~Features();
-    void Features::calculateStateAndActions(std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state) override;
+    void Features::calculateStateAndActions(MarioAction lastAction, std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state, double* reward) override;
     std::array<std::vector<int>, NUMBER_OF_STATES> getStates() override;
+    void gameOver() override;
+    void gameWin() override;
+    std::vector<int> getFeatureVector() override;
 
 private:
     std::vector<std::vector<int>> marioArray;
     std::array<std::vector<int>, NUMBER_OF_STATES> states;
+    std::vector<int> featureVector;
     int statesSize;
     int marioPositionX;
     int marioPositionY;
     bool jumpBlocked;
-    int onGroundCounter=0;
+    int onGroundCounter;
+    bool gameWon;
+    bool gameLost;
+    MarioAction lastAction;
     
     bool validPosition(int value, int lowBorder, int highBorder);
     int isUnderBlock();
@@ -42,11 +49,12 @@ private:
     int distance(int x, int y);
     int distanceToObstacleRight();
     void setMarioPosition();
-    std::vector<int> getFeatureVector() override;
+    void calculateFeatureVector();
     std::vector<MarioAction> getPossibleActions();
-    int Features::calculateStateNumber();
-    void Features::calculateJumpBlocked();
-
+    int calculateStateNumber();
+    void calculateJumpBlocked();
+    double getReward();
+    bool Features::movedRight();
 };
 
 #endif /* MARIOSTATEFEATURES_H */

@@ -12,7 +12,7 @@ public:
 	virtual HBITMAP getGameView() = 0;
 	virtual MarioAction getAction() = 0;
 	virtual std::vector<MarioAction> getpossibleAction() = 0;
-	virtual std::vector<int> getFeatureVector() =0;
+	virtual std::vector<int> getFeatureVector() = 0;
 	virtual GameState getGameState() = 0;
 };
 #endif
