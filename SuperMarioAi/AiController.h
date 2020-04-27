@@ -52,6 +52,7 @@ private:
 	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
 	void startSuperMario();
 	HBITMAP gameCapture=HBITMAP();
+	std::array<State, NUMBER_OF_STATES> agentStateArray;
 };
 
 #endif
