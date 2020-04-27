@@ -111,6 +111,7 @@
     <ClCompile Include="PngImage.cpp" />
     <ClCompile Include="ScreenCapture.cpp" />
     <ClCompile Include="ScreenCaptureDummy.cpp" />
+    <ClCompile Include="MemoryArray.cpp" />
     <ClCompile Include="Testing.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TemplateMatcher.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="Deathcondition.h" />
     <ClInclude Include="FeatureNames.h" />
     <ClInclude Include="FeatureWidget.h" />
+    <ClInclude Include="MemoryArray.h" />
     <ClInclude Include="QValueTable.h" />
     <ClInclude Include="testing.h" />
     <ClInclude Include="MarioObject.h" />

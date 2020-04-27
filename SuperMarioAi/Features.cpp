@@ -175,7 +175,7 @@ int Features::calculateStateNumber() {
     std::vector<int> state = featureVector;
     for (int i = 1; i <= statesSize; i++) {
         if (states[i] == state) {
-            statesSize++;
+             ///state size was 6054, cant be higher then max features vec size
             return i;
         }
     }
