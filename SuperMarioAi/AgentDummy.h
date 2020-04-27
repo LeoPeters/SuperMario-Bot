@@ -5,7 +5,7 @@ class AgentDummy:public IAgent
 {
 public:
 	 MarioAction calculateAction(int state, std::vector<MarioAction> possibleActions, double reward) override;
-	 std::array<State, NUMBER_OF_STATES> getStates() override;
+	 State getState(int index) override;
 private:
 	int cnt = 0;
 	int cnt2 = 0;

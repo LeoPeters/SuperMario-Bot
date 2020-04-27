@@ -154,8 +154,12 @@ int Features::distanceToObstacleRight() {
     for (int x = 0; x < GRIDRADIUS; x++) {
         if (marioArray[marioPositionY][x] == (int)MarioObject::ground) {
             distance =  x - marioPositionX - 1;
+            if (distance == 9) {
+
+            }
         }
     }
+    std::cout << "Distance: " << distance << " MarioPositionX: " << marioPositionX << std::endl;
     return distance;
 }
 
@@ -175,7 +179,6 @@ int Features::calculateStateNumber() {
     std::vector<int> state = featureVector;
     for (int i = 1; i <= statesSize; i++) {
         if (states[i] == state) {
-            statesSize++;
             return i;
         }
     }

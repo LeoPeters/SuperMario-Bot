@@ -15,8 +15,8 @@ Agent::~Agent() {
 
 }
 
-std::array<State, NUMBER_OF_STATES> Agent::getStates() {
-	return states;
+State Agent::getState(int index) {
+	return states[index];
 }
 
 MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions, double reward) {

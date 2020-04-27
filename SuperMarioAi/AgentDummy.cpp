@@ -15,8 +15,8 @@ MarioAction AgentDummy::calculateAction(int state, std::vector<MarioAction> poss
 	return MarioAction(cnt2);
 }
 
-std::array<State, NUMBER_OF_STATES> AgentDummy::getStates()
+State AgentDummy::getState(int index)
 {
-	return std::array<State, NUMBER_OF_STATES>();
+	return State();
 }
 

@@ -32,7 +32,7 @@ void AiController::run() {
 					std::cout << "Reward: " << reward << std::endl;
 					featureVector = features->getFeatureVector();
 					nextAction = agent->calculateAction(currentState, possibleActions, reward);
-					agentStateArray = agent->getStates();
+					agentStateArray = agent->getState(0);
 					appControl->makeAction(nextAction);
 					break;
 				case GameState::GameOver:

@@ -11,7 +11,7 @@ MarioController::MarioController() :
 
 void MarioController::makeAction(MarioAction nextAction)
 {
-	if (keyboardThread!=NULL) {
+	if (keyboardThread != NULL) {
 	keyboardThread->join();
 	}
 	switch (nextAction) {
@@ -130,7 +130,7 @@ void MarioController::jump()
 void MarioController::highJump()
 {
 	if (isStarted) {
-		keyboard->pressAndReleaseKey(NUM3, 600);
+		keyboard->pressAndReleaseKey(NUM3, 320);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;
