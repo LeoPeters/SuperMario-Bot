@@ -29,7 +29,7 @@ bool ImageResizer::resize(){
         return true;
     }
     else{
-        std::cout<<"NOTFOUND";
+        //std::cout<<"NOTFOUND";
         return false;
         //abort();
     }

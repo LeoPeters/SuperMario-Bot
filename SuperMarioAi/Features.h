@@ -28,7 +28,7 @@ public:
     std::array<std::vector<int>, NUMBER_OF_STATES> getStates() override;
     void gameOver() override;
     void gameWin() override;
-    std::vector<int> getFeatureVector() override;
+    std::vector<int> getFeatureVector(int i) override;
 
 private:
     std::vector<std::vector<int>> marioArray;

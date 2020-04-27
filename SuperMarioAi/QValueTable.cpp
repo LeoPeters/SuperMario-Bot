@@ -56,8 +56,13 @@ void QValueTable::updateWholeTable()
 
 void QValueTable::updateTable(int row, std::vector<double> rowValue)
 {
+
 	for (int j = 0; j < rowValue.size(); j++) {
 		QModelIndex index = model->index(row, j + 1, QModelIndex());
 		model->setData(index, rowValue.at(j));
+
+		std::cout << "Size: "<< rowValue.size() << std::endl;
+
 	}
+
 }

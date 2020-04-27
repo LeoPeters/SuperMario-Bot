@@ -29,23 +29,21 @@ void AiController::run() {
 				switch (gameState) {
 				case GameState::MarioAlive:
 					features->calculateStateAndActions(nextAction, *simplifyVec, &possibleActions, &currentState, &reward);
-					std::cout << "Reward: " << reward << std::endl;
-					featureVector = features->getFeatureVector();
+					//std::cout << "Reward: " << reward << std::endl;
 					nextAction = agent->calculateAction(currentState, possibleActions, reward);
-					agentStateArray = agent->getState(0);
+					agentStateArray = agent->getState(currentState);
 					appControl->makeAction(nextAction);
 					break;
 				case GameState::GameOver:
 					features->gameOver();
 					features->calculateStateAndActions(nextAction, *simplifyVec, &possibleActions, &currentState, &reward);
-					featureVector = features->getFeatureVector();
+
 					agent->calculateAction(currentState, possibleActions, reward);
 					appControl->restartGame();
 					break;
 				case GameState::Win:
 					features->gameWin();
 					features->calculateStateAndActions(nextAction, *simplifyVec, &possibleActions, &currentState, &reward);
-					featureVector = features->getFeatureVector();
 					agent->calculateAction(currentState, possibleActions, reward);
 					appControl->restartGame();
 					break;
@@ -53,6 +51,7 @@ void AiController::run() {
 					break;
 				}
 			}
+					featureVector = features->getFeatureVector(currentState);
 				gui->update();
 		}
 		Sleep(300);
@@ -123,9 +122,17 @@ GameState AiController::getGameState()
 	return gameState;
 }
 
-std::array<State, NUMBER_OF_STATES>AiController::getAgentStateList()
+State AiController::getAgentState()
 {
 	return agentStateArray;
+}
+
+State AiController::getAgentState(int i)
+{
+	if (agent != NULL) {
+		return agent->getState(i);
+	}
+	return State();
 }
 
 void AiController::startSuperMario()

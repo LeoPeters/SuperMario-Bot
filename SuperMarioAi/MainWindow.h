@@ -29,7 +29,7 @@ public:
 	void setGamePixmap(QPixmap);
 	void setSimplePixmap(QPixmap);
 	void setGameState(GameState);
-	void setAgentStateArray(std::array<State, NUMBER_OF_STATES> agentStateArray);
+	void setAgentState(State agentState);
 signals:
 	void updateView();
 
@@ -40,6 +40,10 @@ private:
 	void setPossibleActionLabel();
 	void setActionLabel();
 	void setUpFeatureTable();
+	void updateGameStateGui();
+	void updateSimpleViewGui();
+	void updateGameViewGui();
+	void updateFeatureView();
 	Ui::MainWindow ui;
 	GameState gameState;
 	QPixmap gamePixmap;
@@ -54,11 +58,7 @@ private:
 	std::vector<int> featureVector;
 	std::vector<FeatureWidget*> featureWidgets;
 	int state=0;
-	void updateGameStateGui();
-	void updateSimpleViewGui();
-	void updateGameViewGui();
-	void updateFeatureView();
-	std::array<State, NUMBER_OF_STATES> agentStateArray;
+	State agentState;
 private slots:
 	void pressStartBtn();
 	void pressPauseBtn();

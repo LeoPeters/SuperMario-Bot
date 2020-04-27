@@ -173,10 +173,10 @@ void MainWindow::setState(int state) {
 }
 
 void MainWindow::updateStateTable() {
-	agentStateArray = observer->getAgentStateList();
+
 	std::vector<double > rowValues;
 	for (int i = 0; i < (int)MarioAction::ACTION_MAX ; i++) {
-		rowValues.push_back(agentStateArray[state].getValue(MarioAction(i)));
+		rowValues.push_back(agentState.getValue(MarioAction(i)));
 	}
 	for (int i = 0; i < featureVector.size(); i++) {
 		rowValues.push_back(featureVector.at(i));
@@ -186,12 +186,11 @@ void MainWindow::updateStateTable() {
 
 void MainWindow::loadWholeStateTable()
 {
-	agentStateArray = observer->getAgentStateList();
 	std::vector<std::vector<double>> qValueTable;
-	for (int i = 0; i < agentStateArray.size();i++) {
+	for (int i = 0; i < NUMBER_OF_STATES;i++) {
 		std::vector<double > qValueColumn;
 		for (int j = 0; j < (int)MarioAction::ACTION_MAX-1; j++) {
-			qValueColumn.push_back(agentStateArray[i].getValue(MarioAction(j)));
+			qValueColumn.push_back(observer->getAgentState(i).getValue(MarioAction(j)));
 		}
 		//for (int j = 0; j < ; j++) {
 		//	//qValueColumn.push_back());
@@ -244,7 +243,7 @@ void MainWindow::setGameState(GameState gameState)
 	this->gameState = gameState;
 }
 
-void MainWindow::setAgentStateArray(std::array<State, NUMBER_OF_STATES> agentStateArray)
+void MainWindow::setAgentState(State agentState)
 {
-	this->agentStateArray = agentStateArray;
+	this->agentState = agentState;
 }
