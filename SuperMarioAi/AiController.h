@@ -28,6 +28,7 @@ public:
 	 std::vector<MarioAction> getpossibleAction() override;
 	 std::vector<int> getFeatureVector();
 	 GameState getGameState() override;
+	 std::array<State, NUMBER_OF_STATES> getAgentStateList() override;
 private:
 	std::vector<MarioAction> possibleActions;
 	double reward;

@@ -44,12 +44,12 @@
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <QtInstall>msvc2017_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
-    <QMakeCodeLines>QT+=winextras;$(QMakeCodeLines)</QMakeCodeLines>
+    <QMakeCodeLines>QT+=winextras;QT+=sql;$(QMakeCodeLines)</QMakeCodeLines>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtInstall>msvc2017_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
-    <QMakeCodeLines>QT+=winextras;$(QMakeCodeLines)</QMakeCodeLines>
+    <QMakeCodeLines>QT+=winextras;QT+=sql;$(QMakeCodeLines)</QMakeCodeLines>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
     <Import Project="$(QtMsBuild)\qt.props" />
@@ -99,6 +99,7 @@
     <ClCompile Include="ImageLibrary.cpp" />
     <ClCompile Include="ImageResizer.cpp" />
     <ClCompile Include="Features.cpp" />
+    <ClCompile Include="QValueTable.cpp" />
     <ClCompile Include="SimplifierDummy.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="Deathcondition.h" />
     <ClInclude Include="FeatureNames.h" />
     <ClInclude Include="FeatureWidget.h" />
+    <ClInclude Include="QValueTable.h" />
     <ClInclude Include="testing.h" />
     <ClInclude Include="MarioObject.h" />
     <ClInclude Include="IEnvironment.h" />
