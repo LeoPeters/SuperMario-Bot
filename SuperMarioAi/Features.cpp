@@ -284,6 +284,10 @@ int Features::marioStatus() {
     return 0;
 }
 
+std::vector<int> Features::getFeatureVector(int index) {
+    return states[index];
+}
+
 
 
 
