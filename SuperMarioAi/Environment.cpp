@@ -12,22 +12,36 @@
 #include <ctime>  
 
 
+
+
+
 int Environment::environment_interface(const char* filename, int arr[GRIDRADIUS][GRIDRADIUS], int* status){
     PngImage inp(filename);
+    //auto start = std::chrono::system_clock::now();
+    // Some computation here
     give_Input(inp,arr,status);
+  //  auto end = std::chrono::system_clock::now();
+    /*
+    std::chrono::duration<double> elapsed_seconds = end - start;
+    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+    std::cout << "finished computation at " << std::ctime(&end_time)
+        << "elapsed time: " << elapsed_seconds.count() << "s\n";*/
     return 0;
 }
+
+
 
 //constructor
 Environment::Environment(){
     image_library = ImageLibrary::getInstance(); 
+
 }
 
 Environment::~Environment()=default;
 
 int Environment::give_Input(PngImage& new_input,int arr[GRIDRADIUS][GRIDRADIUS], int* status){
     image_library->set_input_image(new_input);
-    auto start = std::chrono::system_clock::now();
     if(resize.resize()){
         if(mapper.Map_Mario()){
             mapper.Map_Enemys_Threaded();
@@ -37,31 +51,34 @@ int Environment::give_Input(PngImage& new_input,int arr[GRIDRADIUS][GRIDRADIUS],
                 *status = GEWONNEN;
             }
             mapper.return_erg_array(arr);
-            //printf("\n");
-            //for(int y = 0; y<GRIDRADIUS;y++){
-            //    for(int x= 0; x<GRIDRADIUS;x++){
-            //        printf("%d ",arr[x][y]);
-            //    }
-            //    printf("\n");
-            //}
-            //printf("\n");
-
-            auto end = std::chrono::system_clock::now();
-            std::chrono::duration<double> elapsed_seconds = end-start;
-            std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-            std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
+            mem_arr.push_in_memory_array(arr);
+            mem_arr.set_first_not_found(true);
+            return 0;
         }
         else{
-            *status = NOT_FOUND;
-            return -1;
+            if (mem_arr.return_first_not_found()) {
+                mem_arr.set_first_not_found(false);
+                if (mem_arr.retrieve_last_enemy_memory(arr) == false) {
+                    *status = NOT_FOUND;
+                    return -1;
+                }
+                //TODO maybe gib *status als not found, aber unsicher wie es geht bei luis
+                return 0;
+            }
+            else {
+                *status = NOT_FOUND;
+                mem_arr.set_first_not_found(false);
+                return -1;
+            }
         }
     }
-    //kein block wurde gefunden. Check if Deathscreen
-    Deathcondition deathcond;
-    bool isdead = deathcond.return_Is_Dead();
-    if(isdead){
-        *status = TOT;
+    else { //IF RESIZING == FALSE
+        Deathcondition deathcond;
+        bool isdead = deathcond.return_Is_Dead();
+        if (isdead) {
+            *status = TOT;
+        }
+        return 0;
     }
-    //std::cout<<"\nMario is dead == "<<isdead<<"\n";
     return 0;
 }

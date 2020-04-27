@@ -24,6 +24,8 @@
 #define NOT_FOUND 0
 #define GEWONNEN 1
 #define TOT 2
+//memory size
+#define MEMORYSIZE 5
 //genauigkeitsformel. MATCH h�ngt intern noch von ABWEICHUNG ab
 //zb: es kan 180 raus ==> ismatch(180) = 256/2 < 180-32 = 128<148
 //#define IS_A_MATCH(x) ( ((TILESIZE*TILESIZE) / 2) < x-(TILESIZE*2) )

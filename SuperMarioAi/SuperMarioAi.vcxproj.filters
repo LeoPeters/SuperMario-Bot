@@ -166,6 +166,9 @@
     <ClCompile Include="QValueTable.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="MemoryArray.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui">
@@ -298,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="QValueTable.h">
       <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryArray.h">
+      <Filter>Header Files\Simplifier</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
