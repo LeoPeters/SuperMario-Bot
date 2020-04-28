@@ -63,7 +63,6 @@ private:
     int distanceToHoleRight();
     double getReward();
     bool Features::movedRight();
-    bool Features::movedRight();
 };
 
 #endif /* MARIOSTATEFEATURES_H */
