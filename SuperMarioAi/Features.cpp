@@ -140,7 +140,7 @@ std::array<int, 2> Features::closestEnemy() {
         closest = { 0, 0 };
     }
     else {
-        closest = { std::abs(marioPositionX - closest[0]) + std::abs(marioPositionY - closest[1]) };
+        closest = { std::abs(marioPositionX - closest[0]), std::abs(marioPositionY - closest[1]) };
     }
     return closest;
 }
@@ -180,8 +180,8 @@ int Features::calculateStateNumber() {
             return i;
         }
     }
-    states[statesSize++] = state;
-    return statesSize;
+    states[statesSize] = state;
+    return statesSize++;
 }
 
 void Features::calculateJumpBlocked()
