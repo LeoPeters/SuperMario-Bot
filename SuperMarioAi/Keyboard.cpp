@@ -27,8 +27,21 @@ void Keyboard::pressAndReleaseKey(char key, int pressDuration) {
 	if (windowIsFound) {
 		if (pressDuration >= 50 && pressDuration <= 1800) {
 			PostMessage(window, WM_ACTIVATE, 0x1, 0);
-			PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key));
-			Sleep(pressDuration);
+			int i = 0;
+			while (i<pressDuration/30) {
+				PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key));
+				Sleep(15);
+				PostMessage(window, WM_CHAR, NULL, GetKeyDownScanCode(key));
+				Sleep(15);
+				i++;
+			}
+			//PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key));
+			//Sleep(pressDuration/3);
+			//PostMessage(window, WM_CHAR, NULL, GetKeyDownScanCode(key));
+			//Sleep(pressDuration / 3);
+			//PostMessage(window, WM_CHAR, NULL, GetKeyDownScanCode(key));
+			//Sleep(pressDuration / 3);
+
 			PostMessage(window, WM_KEYUP, NULL, GetKeyUpScanCode(key));
 		}
 		else {
@@ -39,11 +52,43 @@ void Keyboard::pressAndReleaseKey(char key, int pressDuration) {
 		cout << "Cant Press Button - Window doesn't exist!" << endl;
 	}
 }
+void Keyboard::pressAndReleaseKey(char key, char key2, int pressDuration, int pressDuration2) {
+	if (windowIsFound) {
+			PostMessage(window, WM_ACTIVATE, 0x1, 0);
+			int i = 0;
+			int temp=pressDuration / pressDuration2;
+			while (i < pressDuration / 30) {
+				PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key));
+
+				if (i*30>pressDuration/temp) {
+					PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key2));
+				}
+				Sleep(15);
+				i++;
+			}
+			//PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key));
+			//Sleep(pressDuration/3);
+			//PostMessage(window, WM_CHAR, NULL, GetKeyDownScanCode(key));
+			//Sleep(pressDuration / 3);
+			//PostMessage(window, WM_CHAR, NULL, GetKeyDownScanCode(key));
+			//Sleep(pressDuration / 3);
+
+			PostMessage(window, WM_KEYUP, NULL, GetKeyUpScanCode(key));
+		}
+
+	else {
+		cout << "Cant Press Button - Window doesn't exist!" << endl;
+	}
+}
 void Keyboard::pressKey(char key)
 {
 	if (windowIsFound) {
 		PostMessage(window, WM_ACTIVATE, 0x1, 0);
+		Sleep(25);
 		PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key));
+		Sleep(25);
+		PostMessage(window, WM_CHAR, NULL, GetKeyDownScanCode(key));
+
 	}
 	else {
 		cout << "Cant Press Button - Window doesn't exist!" << endl;
@@ -53,6 +98,7 @@ void Keyboard::releaseKey(char key)
 {
 	if (windowIsFound) {
 		PostMessage(window, WM_ACTIVATE, 0x1, 0);
+		Sleep(20);
 		PostMessage(window, WM_KEYUP, NULL, GetKeyUpScanCode(key));
 	}
 	else {

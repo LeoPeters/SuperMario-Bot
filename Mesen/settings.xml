@@ -434,7 +434,7 @@
     <ReduceSoundInBackground>true</ReduceSoundInBackground>
     <ReduceSoundInFastForward>false</ReduceSoundInFastForward>
     <VolumeReduction>62</VolumeReduction>
-    <MuteSoundInBackground>false</MuteSoundInBackground>
+    <MuteSoundInBackground>true</MuteSoundInBackground>
     <SwapDutyCycles>false</SwapDutyCycles>
     <SilenceTriangleHighFreq>false</SilenceTriangleHighFreq>
     <ReduceDmcPopping>false</ReduceDmcPopping>
@@ -1386,7 +1386,7 @@
   <RecentFiles>
     <RecentItem>
       <RomFile>
-        <Path>C:\Mesen\Super_mario_brothers.nes</Path>
+        <Path>C:\Users\Luisn\OneDrive\Desktop\SuperMario-Bot\Mesen\Super_mario_brothers.nes</Path>
         <InnerFile />
         <InnerFileIndex>0</InnerFileIndex>
       </RomFile>
@@ -1394,7 +1394,7 @@
     </RecentItem>
     <RecentItem>
       <RomFile>
-        <Path>C:\Users\Luisn\OneDrive\Desktop\SuperMario-Bot\Mesen\Super_mario_brothers.nes</Path>
+        <Path>C:\Mesen\Super_mario_brothers.nes</Path>
         <InnerFile />
         <InnerFileIndex>0</InnerFileIndex>
       </RomFile>
@@ -1441,7 +1441,7 @@
       <TextZoom>100</TextZoom>
       <UsingSourceView>false</UsingSourceView>
     </RightView>
-    <DebugConsoleId>Master</DebugConsoleId>
+    <DebugConsoleId>Slave</DebugConsoleId>
     <FontFamily>Consolas</FontFamily>
     <FontStyle>Regular</FontStyle>
     <FontSize>12</FontSize>
@@ -1875,8 +1875,8 @@
   </HistoryViewerInfo>
   <GameSpecificSettings />
   <WindowLocation>
-    <X>1024</X>
-    <Y>232</Y>
+    <X>1014</X>
+    <Y>179</Y>
   </WindowLocation>
   <WindowSize>
     <Width>340</Width>
