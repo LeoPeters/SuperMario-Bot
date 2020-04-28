@@ -177,8 +177,8 @@ int Features::calculateStateNumber() {
             return i;
         }
     }
-    states[statesSize++] = state;
-    return statesSize;
+    states[statesSize] = state;
+    return statesSize++;
 }
 
 void Features::calculateJumpBlocked()

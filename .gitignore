@@ -396,6 +396,7 @@ MigrationBackup/
 !MesenCore.dll
 Super_mario_brothers.rgd
 *.mst
+settings.xml
 
 #Pictures
 input.png

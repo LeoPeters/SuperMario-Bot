@@ -112,6 +112,7 @@ void MainWindow::setAction(MarioAction nextAction) {
 void MainWindow::setFeatureVector(std::vector<int> featureVector)
 {
 	this->featureVector = featureVector;
+
 }
 void MainWindow::setPossibleAction(std::vector<MarioAction> possibleActions) {
 	this->possibleActions = possibleActions;
