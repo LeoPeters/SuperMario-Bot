@@ -214,7 +214,7 @@ int Features::distanceToHoleRight() {
                 && marioArray[marioPositionY + 2][x] == int(MarioObject::empty)) {
                 
                 distance = x - marioPositionX;
-                return distance
+                return distance;
             }
         }
         return distance;
