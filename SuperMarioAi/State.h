@@ -20,6 +20,6 @@ public:
 	void State::setPossibleActions(std::vector<MarioAction> possibleActions);
 private:
 	std::vector<MarioAction> possibleActions;
-	std::array<double, (int)MarioAction::ACTION_MAX> scores;
+	std::array<double, MarioAction::size> scores;
 };
 

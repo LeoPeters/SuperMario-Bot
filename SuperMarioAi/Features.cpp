@@ -16,7 +16,7 @@
 #include "Features.h"
 #include "MarioObject.h"
 #include "MarioAction.h"
-#include "FeatureNames.h"
+#include "MarioFeature.h"
 
 Features::Features() :
     marioPositionX(-1),
@@ -28,7 +28,7 @@ Features::Features() :
     onGroundCounter(0),
     lastAction(MarioAction())
 {
-    for (int i = 0; i < (int)FeatureNames::SIZE_FEATURE_NAMES; i++) {
+    for (int i = 0; i < MarioFeature::size; i++) {
         featureVector.push_back(0);
     }
 }
@@ -82,9 +82,10 @@ double Features::getReward() {
 }
 
 bool Features::movedRight() {
-    if (lastAction == MarioAction::moveRight && (featureVector[(int) FeatureNames::distanceToObstacleRight] > 1 || featureVector[(int)FeatureNames::distanceToObstacleRight] == 0)) {
+    if (lastAction == MarioAction::moveRight && (featureVector[(int)MarioFeature::distanceToObstacleRight] > 1 || featureVector[(int)MarioFeature::distanceToObstacleRight] == 0)) {
         return true;
     }
+    
     return false;
 }
 

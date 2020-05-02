@@ -5,7 +5,7 @@
 #include "GameState.h"
 class ISimplifier {
 public:
-	virtual GameState simplifyImage(std::vector<std::vector<int>>*,HBITMAP image) = 0;
+	virtual GameState simplifyImage(std::vector<std::vector<int>>*) = 0;
 	virtual void init() = 0;
 };
 

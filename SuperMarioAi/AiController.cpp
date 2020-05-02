@@ -9,57 +9,63 @@ AiController::AiController(int argc, char** argv) :
 	simplifier(NULL),
 	features(NULL),
 	agent(NULL),
-	appControl(NULL),
-	currentState(0),
-	nextAction(MarioAction())
+	appControl(NULL)
+
 {
 	gui = new AiGui(argc, argv, this);
+	data = gui->getData();
 }
 
 void AiController::run() {
-
-
-
 	while (isGuiRunning) {
 		while (isGameStarted) {
-		gameCapture = screenCapture->captureScreen(PNG_LNAME);
-			
+			data->setGameView(screenCapture->captureScreen(PNG_LNAME));
+
+			auto start = std::chrono::high_resolution_clock::now();
 			if (!gui->getMainWindow()->getIsPaused()) {
-				gameState=simplifier->simplifyImage(simplifyVec, gameCapture);
-				switch (gameState) {
+				data->gameState = simplifier->simplifyImage(simplifyVec);
+				switch (data->gameState) {
 				case GameState::MarioAlive:
-					features->calculateStateAndActions(nextAction, *simplifyVec, &possibleActions, &currentState, &reward);
+					data->loopCounter++;
+					data->setSimpleView(*simplifyVec);
+					features->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
 					//std::cout << "Reward: " << reward << std::endl;
-					nextAction = agent->calculateAction(currentState, possibleActions, reward);
-					agentStateArray = agent->getState(currentState);
-					appControl->makeAction(nextAction);
+					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, reward);
+					data->agentState = agent->getState(data->agentStateNumber);
+					appControl->makeAction(data->nextAction);
 					break;
 				case GameState::GameOver:
+					data->marioDeathCounter++;
+					data->loopCounter++;
 					features->gameOver();
-					features->calculateStateAndActions(nextAction, *simplifyVec, &possibleActions, &currentState, &reward);
-
-					agent->calculateAction(currentState, possibleActions, reward);
+					features->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
+					agent->calculateAction(data->agentStateNumber, data->possibleActions, reward);
 					appControl->restartGame();
 					break;
 				case GameState::Win:
+					data->marioWinCounter++;
+					data->loopCounter++;
 					features->gameWin();
-					features->calculateStateAndActions(nextAction, *simplifyVec, &possibleActions, &currentState, &reward);
-					agent->calculateAction(currentState, possibleActions, reward);
+					features->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
+					agent->calculateAction(data->agentStateNumber, data->possibleActions, reward);
 					appControl->restartGame();
 					break;
 				default:
 					break;
 				}
 			}
-					featureVector = features->getFeatureVector(currentState);
-				gui->update();
+			data->featureValues = features->getFeatureVector(data->agentStateNumber);
+			auto stop = std::chrono::high_resolution_clock::now();
+			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+			auto fps = duration.count();
+			data->loopTime = (int)fps;
+			gui->update();
 		}
 		Sleep(300);
 	}
 }
 
 void AiController::runGui() {
-
 	gui->runGui();
 	isGuiRunning = false;
 	isGameStarted = false;
@@ -68,9 +74,7 @@ void AiController::runGui() {
 void AiController::notifyPausePressed()
 {
 	if (appControl != NULL) {
-
 		appControl->pauseGame();
-
 	}
 	else {
 		std::cout << "No Window exists Please Start Game" << std::endl;
@@ -84,55 +88,6 @@ void AiController::notifyStartPressed() {
 void AiController::notifyEndApp()
 {
 	gui->end();
-
-}
-
-int AiController::getState()
-{
-	return currentState;
-}
-
-std::vector<std::vector<int>> AiController::getSimpleView()
-{
-	return *simplifyVec;
-}
-
-HBITMAP AiController::getGameView()
-{
-	return gameCapture;
-}
-
-MarioAction AiController::getAction()
-{
-	return nextAction;
-}
-
-std::vector<MarioAction> AiController::getpossibleAction()
-{
-	return possibleActions;
-}
-
-std::vector<int> AiController::getFeatureVector()
-{
-	return featureVector;
-}
-
-GameState AiController::getGameState()
-{
-	return gameState;
-}
-
-State AiController::getAgentState()
-{
-	return agentStateArray;
-}
-
-State AiController::getAgentState(int i)
-{
-	if (agent != NULL) {
-		return agent->getState(i);
-	}
-	return State();
 }
 
 void AiController::startSuperMario()
@@ -147,7 +102,30 @@ void AiController::startSuperMario()
 		this->screenCapture->captureScreen(PNG_LNAME);
 		this->simplifier->init();
 		isGameStarted = true;
+		data->reset();
 	}
+}
+std::vector<double> AiController::getQValues(int stateNumber) {
+	std::vector<double> qValues;
+	if (agent != NULL) {
+		State state=agent->getState(stateNumber);
+		for (int i = 0; i < MarioAction::size; i++) {
+			qValues.push_back(state.getValue(i));
+		}
+	}
+	return qValues;
+}
+std::vector<int> AiController::getFeatureValues(int stateNumber) {
+	std::vector<int> featureValues;
+	if (features != NULL) {
+		featureValues=features->getFeatureVector(stateNumber);
+	}
+	return featureValues;
+}
+
+void AiController::loadMemory(std::string path)
+{
+	std::cout << path << std::endl;
 }
 
 AiController::~AiController()

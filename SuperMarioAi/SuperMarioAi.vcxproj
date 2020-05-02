@@ -87,6 +87,7 @@
     <ClCompile Include="AgentDummy.cpp" />
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="AiController.cpp" />
+    <ClCompile Include="AiData.cpp" />
     <ClCompile Include="AiFactory.cpp" />
     <ClCompile Include="AiGui.cpp" />
     <ClCompile Include="AppControlDummy.cpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TemplateMatcher.cpp" />
     <ClCompile Include="Wincondition.cpp" />
+    <ClCompile Include="MemoryFinder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui" />
@@ -125,8 +127,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="AiData.h" />
     <ClInclude Include="Deathcondition.h" />
-    <ClInclude Include="FeatureNames.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="MarioFeature.h" />
     <ClInclude Include="FeatureWidget.h" />
     <ClInclude Include="MemoryArray.h" />
     <ClInclude Include="QValueTable.h" />
@@ -167,6 +171,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="TemplateMatcher.h" />
     <ClInclude Include="Wincondition.h" />
+    <ClInclude Include="MemoryFinder.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

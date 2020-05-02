@@ -9,15 +9,9 @@ public:
 	virtual void notifyStartPressed() = 0;
 	virtual void notifyPausePressed() = 0;
 	virtual void notifyEndApp() = 0;
-	virtual int getState() = 0;
-	virtual std::vector <std::vector<int>> getSimpleView()=0;
-	virtual HBITMAP getGameView() = 0;
-	virtual MarioAction getAction() = 0;
-	virtual std::vector<MarioAction> getpossibleAction() = 0;
-	virtual std::vector<int> getFeatureVector() = 0;
-	virtual GameState getGameState() = 0;
-	virtual State getAgentState() = 0;
-	virtual State getAgentState(int i) = 0;
+	virtual std::vector<double> getQValues(int stateNumber)=0;
+	virtual std::vector<int> getFeatureValues(int stateNumber)=0;
+	virtual void loadMemory(std::string path)=0;
 
 };
 #endif

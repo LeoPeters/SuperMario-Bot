@@ -100,7 +100,7 @@ MarioController::~MarioController()
 void MarioController::moveLeft()
 {
 	if (isStarted) {
-		keyboard->pressAndReleaseKey(NUM4, 150);
+		keyboard->pressAndReleaseKey(NUM4, 100);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;
@@ -110,7 +110,7 @@ void MarioController::moveLeft()
 void MarioController::moveRight()
 {
 	if (isStarted) {
-		keyboard->pressAndReleaseKey(NUM6, 150);
+		keyboard->pressAndReleaseKey(NUM6, 100);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;
@@ -120,7 +120,7 @@ void MarioController::moveRight()
 void MarioController::jump()
 {
 	if (isStarted) {
-		keyboard->pressAndReleaseKey(NUM3, NUM6, 150, 50);
+		keyboard->pressAndReleaseKey(NUM3, NUM6, 100, 50);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;
@@ -142,7 +142,7 @@ void MarioController::highJump()
 void MarioController::shoot()
 {
 	if (isStarted) {
-		keyboard->pressAndReleaseKey(NUM1, 150);
+		keyboard->pressAndReleaseKey(NUM1, 50);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;

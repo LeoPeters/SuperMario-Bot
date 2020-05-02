@@ -10,5 +10,6 @@ public:
 	virtual void captureScreen(byte* image, int* lenght)=0;
 	virtual HBITMAP captureScreen(LPCTSTR fileName)=0;
 	virtual HBITMAP captureScreen()=0;
+	
 };
 #endif
