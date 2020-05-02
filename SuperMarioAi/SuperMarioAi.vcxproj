@@ -100,6 +100,7 @@
     <ClCompile Include="ImageResizer.cpp" />
     <ClCompile Include="Features.cpp" />
     <ClCompile Include="QValueTable.cpp" />
+    <ClCompile Include="Save.cpp" />
     <ClCompile Include="SimplifierDummy.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TemplateMatcher.cpp" />
     <ClCompile Include="Wincondition.cpp" />
+    <ClCompile Include="XMLWriter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui" />
@@ -130,6 +132,7 @@
     <ClInclude Include="FeatureWidget.h" />
     <ClInclude Include="MemoryArray.h" />
     <ClInclude Include="QValueTable.h" />
+    <ClInclude Include="Save.h" />
     <ClInclude Include="testing.h" />
     <ClInclude Include="MarioObject.h" />
     <ClInclude Include="IEnvironment.h" />
@@ -167,6 +170,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="TemplateMatcher.h" />
     <ClInclude Include="Wincondition.h" />
+    <ClInclude Include="XMLWriter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

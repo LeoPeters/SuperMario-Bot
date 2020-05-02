@@ -71,6 +71,12 @@
     <Filter Include="Header Files\Features">
       <UniqueIdentifier>{1eb4c394-d3be-4cc0-9f6f-b33ac4cec935}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Save">
+      <UniqueIdentifier>{b96212c2-74a5-49ad-a0ac-747d0dec2d86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Save">
+      <UniqueIdentifier>{12803744-56eb-47d2-a43f-8f7387f3ad9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -168,6 +174,12 @@
     </ClCompile>
     <ClCompile Include="MemoryArray.cpp">
       <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+    <ClCompile Include="Save.cpp">
+      <Filter>Source Files\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLWriter.cpp">
+      <Filter>Source Files\Save</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +316,12 @@
     </ClInclude>
     <ClInclude Include="MemoryArray.h">
       <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Save.h">
+      <Filter>Header Files\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLWriter.h">
+      <Filter>Header Files\Save</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

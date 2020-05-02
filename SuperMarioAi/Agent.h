@@ -14,7 +14,9 @@ public:
 	Agent();
 	~Agent();
 	MarioAction calculateAction(int state, std::vector<MarioAction> possibleActions, double reward) override;
-	virtual State getState(int index) override;
+	State getState(int index) override;
+	std::array<State, NUMBER_OF_STATES> getStates() override;
+	void setStates(std::array<State, NUMBER_OF_STATES> &states) override;
 
 private:
 	int lastState;

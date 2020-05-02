@@ -67,10 +67,13 @@
 #define EPSILON 0.1 //Propability of choosing a random action
 #define REWARDMOVERIGHT 0.08
 #define REWARDSTEP -0.1
-#define REWARDLOSE -20
+#define REWARDLOSE -10
 #define REWARDWIN 100
 #define INIT_STATE 0
 
 //Features
 #define NUMBER_OF_FEATURES 4
+#define MAX_NUMBER_ENEMIES 3
+
+#define SAVEFILE_PATH "saves/"
 #endif

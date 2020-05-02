@@ -18,6 +18,7 @@ MarioAction State::getBestAction() {
 	//std::cout << "BestAction: " << (int)best << "   Score: " << scores[(int)best] << std::endl;
 	return best;
 }
+
 MarioAction State::getRandomAction() {
 	MarioAction random = possibleActions[rand() % possibleActions.size()];
 
@@ -47,6 +48,7 @@ double State::getMaxReward() {
 double State::getValue(MarioAction action) {
 	return scores[(int)action];
 }
+
 void State::setScore(MarioAction action, double value) {
 	scores[(int)action] = value;
 }

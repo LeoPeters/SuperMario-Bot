@@ -54,16 +54,14 @@ private:
     std::vector<MarioAction> getPossibleActions();
     int Features::calculateStateNumber();
     void Features::calculateJumpBlocked();
-    // NEW Features
-    int Features::isJump(); 
-    int Features::getNumberOfEnemy(); 
-    int Features::marioStatus();
-    int Features::isItemNearby();
+    bool Features::isJumping(); 
+    int Features::getNumberOfEnemies(); 
+    bool Features::isItemAvailable();
     std::array<int, 2> closestItems(); 
     int distanceToHoleRight();
     double getReward();
     bool Features::movedRight();
 };
 
-#endif /* MARIOSTATEFEATURES_H */
+#endif MARIOSTATEFEATURES_H
 

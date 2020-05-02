@@ -1,3 +1,4 @@
+
 #include "Agent.h"
 #include <iostream>
 Agent::Agent() :
@@ -11,20 +12,34 @@ Agent::Agent() :
 
 }
 
-Agent::~Agent() {
+Agent::~Agent() 
+{
 
 }
 
-State Agent::getState(int index) {
+State Agent::getState(int index) 
+{
 	return states[index];
+}
+
+std::array<State, NUMBER_OF_STATES> Agent::getStates()
+{
+	return states;
+}
+
+void Agent::setStates(std::array<State, NUMBER_OF_STATES> &states)
+{
+	this->states = states;
 }
 
 MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions, double reward) {
 	states[stateIndex].setPossibleActions(possibleActions);
-	MarioAction action = chooseAction(states[stateIndex]);
 
-	double newScore = states[lastState].getValue(lastAction) + ALPHA * (reward + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(lastAction));
-	states[lastState].setScore(lastAction, newScore);
+	double newScore = states[lastState].getValue(lastAction) + ALPHA * (REWARDSTEP + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(lastAction));
+	//TODO reward zusätzlich summieren
+	states[lastState].setScore(lastAction, newScore + reward);
+
+	MarioAction action = chooseAction(states[stateIndex]);
 	lastAction = action;
 	lastState = stateIndex;
 
