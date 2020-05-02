@@ -1,7 +1,9 @@
 #include <iostream>
 #include "AiController.h"
 #include <thread>
-#define DEBUG TRUE
+#include "MemoryFinder.h"
+#include <string>
+#define DEBUG true
 FILE* fDummy;
 void CreateConsole();
 

@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-GameState SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply, HBITMAP image)
+GameState SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply)
 {
 	GameState gameState;
 	int ergArray[GRIDRADIUS][GRIDRADIUS];
@@ -25,7 +25,7 @@ GameState SimplifierDummy::simplifyImage(std::vector <std::vector<int>>* simply,
 	}
 	switch (status) {
 	case 0:
-		gameState = GameState::MarioNotFound;
+		gameState=GameState::MarioNotFound;
 
 		break;
 	case 1:

@@ -2,52 +2,33 @@
 #include "Globals.h"
 #include <iostream>
 #include "AiGui.h"
-#include "FeatureNames.h"
+#include "MarioFeature.h"
 #include "QValueTable.h"
 #include "State.h"
+#include "MemoryFinder.h"
 #include "MainWindow.h"
-MainWindow::MainWindow(IGuiObserver* observer)
+MainWindow::MainWindow(IGuiObserver* observer,AiData* data)
 	: QMainWindow(Q_NULLPTR),
 	observer(observer),
-	gameScene(new QGraphicsScene()),
-	simpleScene(new QGraphicsScene())
+	data(data)
 {
 	ui.setupUi(this);
 	signalSetup();
-	original = ui.highJumpLbl->palette();
-	ui.viewGame->setScene(gameScene);
-	ui.viewSimplify->setScene(simpleScene);
-	setUpFeatureTable();
-	qValueTable =new QValueTable();
-	ui.QValueLayout->addWidget(qValueTable);
+	updateMemoryList();
+	//setUpFeatureTable();
+
 }
 MainWindow::~MainWindow()
 {
 	observer->notifyEndApp();
 }
 
-void MainWindow::setUpFeatureTable()
-{
-	for (int i = 0; i < (int)FeatureNames::SIZE_FEATURE_NAMES; i++) {
-		FeatureWidget* wg = new FeatureWidget();
-		QListWidgetItem* listitem = new QListWidgetItem();
-		featureWidgets.push_back(wg);
-		ui.listWidget->addItem(listitem);
-		listitem->setBackgroundColor(Qt::GlobalColor::lightGray);	
-		listitem->setSizeHint(wg->sizeHint());
-		ui.listWidget->setItemWidget(listitem,wg);
 
-	}
-		featureWidgets[0]->setFeatureName("Under Block: ");
-		featureWidgets[1]->setFeatureName("Enemy X:");
-		featureWidgets[2]->setFeatureName("Enemy Y:");
-		featureWidgets[3]->setFeatureName("Obstacle:");
-}
 void MainWindow::signalSetup() {
 	connect(ui.btn_start, SIGNAL(clicked()), this, SLOT(pressStartBtn()));
 	connect(ui.btn_pause, SIGNAL(clicked()), this, SLOT(pressPauseBtn()));
 	connect(ui.btn_exit, SIGNAL(clicked()), this, SLOT(pressExitBtn()));
-	connect(ui.btn_load, SIGNAL(clicked()), this, SLOT(loadWholeStateTable()));
+	connect(ui.loadBtn, SIGNAL(clicked()), this, SLOT(loadMemory()));
 	connect(this, SIGNAL(updateView()), this, SLOT(updateGUi()));
 }
 
@@ -56,161 +37,59 @@ bool MainWindow::isActivated()
 	return ui.centralwidget->isVisible();
 }
 
-void MainWindow::updateSimpleViewGui() {
-	if (!simplePixmap.isNull()) {
-		QPixmap scale;
-		scale = (simplePixmap.scaled((ui.viewSimplify->width() * 0.995), (ui.viewSimplify->height() * 0.995)));
-		simpleScene->clear();
-		simpleScene->addPixmap(scale);
-	}
-}
-void MainWindow::updateGameViewGui() {
-	if (!gamePixmap.isNull()) {
-		gameScene->clear();
-		gameScene->addPixmap(gamePixmap);
-	}
-}
+
 
 void MainWindow::updateGUi()
 {
-	updateSimpleViewGui();
-	updateGameViewGui();
-	setActionLabel();
-	ui.AgentState->setText(QString::number(state));
-	updateFeatureView();
-	updateGameStateGui();
-	updateStateTable();
-}
-void MainWindow::updateFeatureView() {
-	for (int i = 0; i < featureVector.size(); i++) {
-		featureWidgets[i]->setFeatureValue(featureVector[i]);
+	if (!data->gameView.isNull()) {
+		ui.viewGame->scene()->clear();
+		ui.viewGame->scene()->addPixmap(data->gameView);
 	}
-}
-void MainWindow::updateGameStateGui() {
-	switch (gameState) {
-	case GameState::MarioAlive:
-		ui.GameState->setText("Mario Alive");
-		break;
-	case GameState::GameOver:
-		ui.GameState->setText("Game Over");
-		break;
-	case GameState::Win:
-		ui.GameState->setText("Win");
-		break;
-	case GameState::MarioNotFound:
-		ui.GameState->setText("Mario not Found");
-		break;
-	default:
-		break;
+	if (!data->simpleView.isNull()) {
+		ui.viewSimplify->scene()->clear();
+		ui.viewSimplify->scene()->addPixmap(data->simpleView.scaled((ui.viewSimplify->width() * 0.995), (ui.viewSimplify->height() * 0.995)));
 	}
+	ui.AgentState->setText(QString::number(data->agentStateNumber));
+	ui.GameState->setText(QString::fromStdString(data->gameState.toString()));
+
+	for (int i = 0; i < data->featureValues.size();i++) {
+		featureWidgetList.at(i)->setFeatureValue(data->featureValues.at(i));
+	}
+	updateTableView();
+	updateActionView();
+	ui.deathCounter->setText(QString::number(data->marioDeathCounter));
+	ui.winCounter->setText(QString::number(data->marioWinCounter));
+	ui.LoopTime->setText(QString::number(data->loopTime)+" ms");
+	ui.loopCount->setText(QString::number(data->loopCounter));
 }
 
 
-void MainWindow::setAction(MarioAction nextAction) {
-	action = nextAction;
-}
-void MainWindow::setFeatureVector(std::vector<int> featureVector)
+void MainWindow::updateMemoryList()
 {
-	this->featureVector = featureVector;
-
-}
-void MainWindow::setPossibleAction(std::vector<MarioAction> possibleActions) {
-	this->possibleActions = possibleActions;
-}
-
-void MainWindow::setActionLabelPalette( QPalette left,QPalette jump,QPalette highJump, QPalette shootl, QPalette right)
-{
-	ui.jumpLbl->setPalette(jump);
-	ui.shootLbl->setPalette(shootl);
-	ui.leftLbl->setPalette(left);
-	ui.rightLbl->setPalette(right);
-	ui.highJumpLbl->setPalette(highJump);
-}
-
-void MainWindow::setPossibleActionLabel() {
-	ui.highJumpLbl->hide();
-	ui.jumpLbl->hide();
-	ui.shootLbl->hide();
-	ui.leftLbl->hide();
-	ui.rightLbl->hide();
-	for (int i = 0; i < possibleActions.size(); i++) {
-		if (possibleActions[i] == MarioAction::highJump) ui.highJumpLbl->show() ;
-		if (possibleActions[i] == MarioAction::jump) ui.jumpLbl->show();
-		if (possibleActions[i] == MarioAction::moveLeft) ui.leftLbl->show();
-		if (possibleActions[i] == MarioAction::moveRight) ui.rightLbl->show();
-		if (possibleActions[i] == MarioAction::shoot) ui.shootLbl->show();
-	}
-}
-
-void MainWindow::setActionLabel()
-{
-	setPossibleActionLabel();
-	QPalette pal;
-	pal.setColor(QPalette::Window, QColor(Qt::blue));
-	switch (action) {
-	case MarioAction::highJump:
-
-		setActionLabelPalette(original, original, pal, original, original);
-		break;
-	case MarioAction::jump:
-		setActionLabelPalette(original, pal, original, original, original);
-		break;
-	case MarioAction::shoot:
-
-		setActionLabelPalette(original, original, original, pal, original);
-		break;
-	case MarioAction::moveLeft:
-		setActionLabelPalette(pal, original, original, original, original);
-		break;
-	case MarioAction::moveRight:
-		setActionLabelPalette(original, original, original, original, pal);
-		break;
-	}
-}
-
-
-void MainWindow::setState(int state) {
-	this->state = state;
-}
-
-void MainWindow::updateStateTable() {
-
-	std::vector<double > rowValues;
-	for (int i = 0; i < (int)MarioAction::ACTION_MAX ; i++) {
-		rowValues.push_back(agentState.getValue(MarioAction(i)));
-	}
-	for (int i = 0; i < featureVector.size(); i++) {
-		rowValues.push_back(featureVector.at(i));
-	}
-	this->qValueTable->updateTable(state,rowValues);
-}
-
-void MainWindow::loadWholeStateTable()
-{
-	std::vector<std::vector<double>> qValueTable;
-	for (int i = 0; i < NUMBER_OF_STATES;i++) {
-		std::vector<double > qValueColumn;
-		for (int j = 0; j < (int)MarioAction::ACTION_MAX-1; j++) {
-			qValueColumn.push_back(observer->getAgentState(i).getValue(MarioAction(j)));
+	MemoryFinder finder;
+	std::vector<std::string> memory= finder.getAllMemoryNames();
+	std::string memname;
+	for (int i = 0; i < memory.size(); i++) {
+		if (ui.LoadCmb->findText(QString::fromStdString(memory.at(i)))< 0) {
+			ui.LoadCmb->addItem(QString::fromStdString(memory.at(i)));
 		}
-		//for (int j = 0; j < ; j++) {
-		//	//qValueColumn.push_back());
-		//}
-		qValueTable.push_back(qValueColumn);
+			
 	}
-	this->qValueTable->setQVlaues(qValueTable);
-	this->qValueTable->updateWholeTable();
 }
-
 
 void MainWindow::pressStartBtn()
 {
+	
 	ui.btn_start->setText("Restart");
 	ui.btn_pause->setText("Pause");
+	isPaused = false;
 	observer->notifyStartPressed();
 }
 void MainWindow::pressPauseBtn()
 {
+	if (timer.elapsed() > 1000) {
+
+	timer.restart();
 	isPaused = !isPaused;
 	if (isPaused) {
 		ui.btn_pause->setText("Continue");
@@ -218,8 +97,9 @@ void MainWindow::pressPauseBtn()
 	else {
 		ui.btn_pause->setText("Pause");
 	}
-	Sleep(500);
+
 	observer->notifyPausePressed();
+	}
 }
 void MainWindow::pressExitBtn()
 {
@@ -229,22 +109,90 @@ bool MainWindow::getIsPaused() {
 	return isPaused;
 }
 
-void MainWindow::setGamePixmap(QPixmap pixmap)
+void MainWindow::setFeatureList(QListWidget* featureList, std::vector<FeatureWidget*> featureWidgetList)
 {
-	gamePixmap = pixmap;
+
+	ui.FeatureValueLayout->addWidget( featureList);
+	this->featureWidgetList = featureWidgetList;
 }
 
-void MainWindow::setSimplePixmap(QPixmap pixmap)
+void MainWindow::setActionLabelList(std::vector<QLabel*> actionLabelList)
 {
-	simplePixmap = pixmap;
+	for (int i = 0; i < actionLabelList.size();i++) {
+		ui.ActionLayout->addWidget(actionLabelList.at(i));
+	}
+	this->actionLabelList = actionLabelList;
 }
 
-void MainWindow::setGameState(GameState gameState)
+void MainWindow::setgameView(QGraphicsScene* gameView)
 {
-	this->gameState = gameState;
+	ui.viewGame->setScene(gameView);
 }
 
-void MainWindow::setAgentState(State agentState)
+void MainWindow::setSimpleView(QGraphicsScene* simpleView)
 {
-	this->agentState = agentState;
+	ui.viewSimplify->setScene(simpleView);
+}
+
+void MainWindow::setStateTableView(QTableView* stateTable, QStandardItemModel* modelStateTableView)
+{
+	ui.QValueLayout->addWidget(stateTable);
+	this->modelStateTableView = modelStateTableView;
+}
+
+void MainWindow::updateActionView() {
+	for (int i = 0; i < actionLabelList.size(); i++) {
+		actionLabelList.at(i)->hide();
+		QPalette pal;
+		pal.setColor(QPalette::Window, QColor(Qt::lightGray));
+		actionLabelList.at(i)->setPalette(pal);
+	}
+	for (int i = 0; i < data->possibleActions.size(); i++) {
+		int index = data->possibleActions.at(i);
+		actionLabelList.at(index)->show();
+		actionLabelList.at(index)->setText(QString::fromStdString(MarioAction::toString(index)+"\n")+QString::number(data->agentState.getValue(index),'g',2));
+	}
+	if (data->nextAction != NULL) {
+		QPalette pal;
+		pal.setColor(QPalette::Window, QColor(Qt::darkGray));
+		actionLabelList.at(data->nextAction)->setPalette(pal);
+	}
+}
+
+void MainWindow::updateTableView()
+{
+	std::vector<double> row;
+	for (int i = 0; i < MarioAction::size; i++) {
+		row.push_back(data->agentState.getValue(i));
+	}
+	for (int i = 0; i < data->featureValues.size(); i++) {
+		row.push_back(data->featureValues.at(i));
+	}
+	for (int i = 0; i < row.size(); i++) {
+		QModelIndex index = modelStateTableView->index(data->agentStateNumber, i);
+		modelStateTableView->setData(index, row.at(i));
+	}
+
+}
+void MainWindow::loadWholeTableView() {
+	std::vector<double> row;
+	std::vector<int> features;
+	for (int i = 0; i < NUMBER_OF_STATES; i++) {
+		row = observer->getQValues(i);
+		features = observer->getFeatureValues(i);
+		for (int j = 0; j < features.size(); j++) {
+			row.push_back(features.at(j));
+		}
+		for (int j = 0; j < row.size(); j++) {
+			QModelIndex index = modelStateTableView->index(i, j);
+			modelStateTableView->setData(index, row.at(j));
+		}
+	}
+}
+void MainWindow::loadMemory()
+{
+	MemoryFinder finder;
+	std::string selectedItem = ui.LoadCmb->currentText().toStdString();
+	observer->loadMemory(finder.getDirectoryPath() + selectedItem);
+	loadWholeTableView();
 }

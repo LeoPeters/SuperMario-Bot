@@ -53,9 +53,6 @@
     <Filter Include="Source Files\ControlUnit">
       <UniqueIdentifier>{7d0bc679-cad1-413b-875f-6e9287f53711}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Simplifier">
-      <UniqueIdentifier>{d75c13d5-97cb-4542-9d2b-55573889b81c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Simplifier">
       <UniqueIdentifier>{754f7e1a-e2a9-4b4d-9316-820684ee0a48}</UniqueIdentifier>
     </Filter>
@@ -71,11 +68,17 @@
     <Filter Include="Header Files\Features">
       <UniqueIdentifier>{1eb4c394-d3be-4cc0-9f6f-b33ac4cec935}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Save">
-      <UniqueIdentifier>{b96212c2-74a5-49ad-a0ac-747d0dec2d86}</UniqueIdentifier>
+    <Filter Include="Source Files\Structs/Enum/Defines">
+      <UniqueIdentifier>{1ddaa68b-1491-4956-81d1-0f049c00248b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Save">
-      <UniqueIdentifier>{12803744-56eb-47d2-a43f-8f7387f3ad9e}</UniqueIdentifier>
+    <Filter Include="Source Files\Simplifier">
+      <UniqueIdentifier>{d75c13d5-97cb-4542-9d2b-55573889b81c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Memory">
+      <UniqueIdentifier>{d38bdd7c-0d08-4289-bb76-ca2d8c284841}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Memory">
+      <UniqueIdentifier>{0a3060a3-e50e-4624-9066-6ed2b19934cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -175,11 +178,11 @@
     <ClCompile Include="MemoryArray.cpp">
       <Filter>Source Files\Simplifier</Filter>
     </ClCompile>
-    <ClCompile Include="Save.cpp">
-      <Filter>Source Files\Save</Filter>
+    <ClCompile Include="AiData.cpp">
+      <Filter>Source Files\Structs/Enum/Defines</Filter>
     </ClCompile>
-    <ClCompile Include="XMLWriter.cpp">
-      <Filter>Source Files\Save</Filter>
+    <ClCompile Include="MemoryFinder.cpp">
+      <Filter>Source Files\Memory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -299,9 +302,6 @@
     <ClInclude Include="Deathcondition.h">
       <Filter>Header Files\Simplifier</Filter>
     </ClInclude>
-    <ClInclude Include="FeatureNames.h">
-      <Filter>Header Files\Structs/Enum/Defines</Filter>
-    </ClInclude>
     <ClInclude Include="Wincondition.h">
       <Filter>Header Files\Simplifier</Filter>
     </ClInclude>
@@ -317,11 +317,17 @@
     <ClInclude Include="MemoryArray.h">
       <Filter>Header Files\Simplifier</Filter>
     </ClInclude>
-    <ClInclude Include="Save.h">
-      <Filter>Header Files\Save</Filter>
+    <ClInclude Include="MarioFeature.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
     </ClInclude>
-    <ClInclude Include="XMLWriter.h">
-      <Filter>Header Files\Save</Filter>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="AiData.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryFinder.h">
+      <Filter>Header Files\Memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

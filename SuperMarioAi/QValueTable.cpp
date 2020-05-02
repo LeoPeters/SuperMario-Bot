@@ -19,19 +19,19 @@ QValueTable::QValueTable()
 	FeatureHeaderList.append("Feature: Enemy X");
 	FeatureHeaderList.append("Feature: Enemy Y");
 	FeatureHeaderList.append("Feature: Obstacle Right");
-	headerList.append("State");
+	//headerList.append("State");
 	headerList.append(QValueHeaderList);
 	headerList.append(FeatureHeaderList);
 	model->setHorizontalHeaderLabels(headerList);
 	//setHorizontalHeaderLabels(headerList);
 	resizeColumnsToContents();
-	verticalHeader()->hide();
+	//verticalHeader()->hide();
 
-	for (int i = 0; i < model->rowCount(); i++) {
+	//for (int i = 0; i < model->rowCount(); i++) {
 
-		QModelIndex index = model->index(i, 0, QModelIndex());
-		model->setData(index, i);
-	}
+	//	QModelIndex index = model->index(i, 0, QModelIndex());
+	//	model->setData(index, i);
+	//}
 }
 
 void QValueTable::setQVlaues(std::vector<std::vector<double>> qValues)

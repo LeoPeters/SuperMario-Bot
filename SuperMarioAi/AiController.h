@@ -11,6 +11,7 @@
 #include "AiFactory.h"
 #include "GameState.h"
 #include "AiGui.h"
+#include "AiData.h"
 class AiController:public IGuiObserver
 {
 public:
@@ -21,15 +22,10 @@ public:
 	void notifyPausePressed() override;
 	void notifyStartPressed() override;
 	void notifyEndApp() override;
-	 int getState() override;
-	 std::vector <std::vector<int>> getSimpleView() override;
-	 HBITMAP getGameView() override;
-	 MarioAction getAction() override;
-	 std::vector<MarioAction> getpossibleAction() override;
-	 std::vector<int> getFeatureVector();
-	 GameState getGameState() override;
-	State getAgentState() override;
-	State getAgentState(int i) override;
+	std::vector<double> getQValues(int stateNumber) override;
+	std::vector<int> getFeatureValues(int stateNumber) override;
+	void loadMemory(std::string path) override;
+
 private:
 	void startSuperMario();
 	std::vector<MarioAction> possibleActions;
@@ -43,18 +39,11 @@ private:
 	bool isPause=false;
 	bool isGameStarted = false;
 	bool isGuiRunning = true;
-	std::mutex mx;
-	std::condition_variable cv;
-	MarioAction nextAction;
-	int lastState;
-	int currentState;
-	std::vector<int> featureVector;
-	GameState gameState;
-
 	AiFactory factory=AiFactory();
 	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
 	HBITMAP gameCapture=HBITMAP();
 	State agentStateArray;
+	AiData* data;
 };
 
 #endif

@@ -2,15 +2,25 @@
 #include "Globals.h"
 #include <iostream>
 #include "AiGui.h"
-AiGui::AiGui(int argc, char** argv, IGuiObserver* observer):
+AiGui::AiGui(int argc, char** argv, IGuiObserver* observer) :
 	observer(observer)
 {
 	app = new QApplication(argc, argv);
-
-	mWindow = new MainWindow(observer);
+	data = new AiData();
+	mWindow = new MainWindow(observer,data);
 	mWindow->show();
+	setUpTableView();
+	setUpFeatureTable();
+	setUpActionView();
+	gameView = new QGraphicsScene();
+	simpleView = new QGraphicsScene();
+	mWindow->setSimpleView(simpleView);
+	mWindow->setgameView(gameView);
+	
 }
-
+AiData* AiGui::getData() {
+	return data;
+}
 void AiGui::runGui()
 {
 	app->exec();
@@ -23,23 +33,7 @@ void AiGui::end()
 
 void AiGui::update()
 {
-	if (observer->getGameView() != NULL) {
-		QPixmap pixmap = QtWin::fromHBITMAP(observer->getGameView());
-		mWindow->setGamePixmap(pixmap);
-		
-		
-	}
-	if ((observer->getSimpleView().size()>0)) {
-		QImage simView = generateSimpleImage(observer->getSimpleView());
-		QPixmap pixmap = QPixmap::fromImage(simView);
-		mWindow->setSimplePixmap(pixmap);
-	}
-	mWindow->setState(observer->getState());
-	mWindow->setAction(observer->getAction());
-	mWindow->setPossibleAction(observer->getpossibleAction());
-	mWindow->setFeatureVector(observer->getFeatureVector());
-	mWindow->setGameState(observer->getGameState());
-	mWindow->setAgentState(observer->getAgentState());
+
 	mWindow->updateView();
 }
 
@@ -53,35 +47,51 @@ IGuiObserver* AiGui::getObserver()
 	return observer;
 }
 
-QImage AiGui::generateSimpleImage(std::vector<std::vector<int>> simpleView)
+void AiGui::setUpFeatureTable()
 {
-	QImage image(simpleView[0].size(), simpleView.size(), QImage::Format_RGB32);
-	for (int y = 0; y < simpleView.size(); y++) {
-		for (int x = 0; x < simpleView[y].size(); x++) {
-			switch (simpleView[y][x]) {
-			case SKY:
-				image.setPixel(x, y, skyColor);
-				break;
-			case MARIO:
-				image.setPixel(x, y, marioColor);
-				break;
-			case BLOCK:
-				image.setPixel(x, y, blockColor);
-				break;
-			case ENEMY:
-				image.setPixel(x, y, enemyColor);
-				break;
-			case ITEM:
-				image.setPixel(x, y, itemColor);
-				break;
-			case WINNINGCONDS:
-				image.setPixel(x, y, winningColor);
-				break;
-			default:
-				image.setPixel(x, y, blockColor);
-				break;
-			}
-		}
+	std::vector<FeatureWidget*> featureWidgetList;
+	listWidget = new QListWidget();
+	for (int i = 0; i < MarioFeature::size; i++) {
+		FeatureWidget* wg = new FeatureWidget();
+		QListWidgetItem* listitem = new QListWidgetItem();
+		listitem->setBackgroundColor(Qt::GlobalColor::lightGray);
+		listitem->setSizeHint(wg->sizeHint());
+		wg->setFeatureName(MarioFeature::toString(i) + ": ");
+		listWidget->addItem(listitem);
+		listWidget->setItemWidget(listitem, wg);
+		featureWidgetList.push_back(wg);
 	}
-	return image;
+	mWindow->setFeatureList(listWidget, featureWidgetList);
+}
+
+void AiGui::setUpActionView() {
+	std::vector<QLabel*> actionLabelList;
+	for (int i = 0; i < MarioAction::size; i++) {
+		QPalette pal;
+		pal.setColor(QPalette::Window, QColor(Qt::lightGray));
+		QLabel* newAction = new QLabel();
+		newAction->setText(QString::fromStdString(MarioAction::toString(i)));
+		newAction->setPalette(pal);
+		newAction->setAutoFillBackground(true);
+		newAction->setLayoutDirection(Qt::LeftToRight);
+		newAction->setAlignment(Qt::AlignCenter);
+		actionLabelList.push_back(newAction);
+	}
+	mWindow->setActionLabelList(actionLabelList);
+}
+void AiGui::setUpTableView()
+{
+	stateTableView = new QTableView();
+	QStringList headerList;
+	modelStateTableView = new QStandardItemModel(NUMBER_OF_STATES, MarioAction::size + MarioFeature::size);
+	for (int i = 0; i < MarioAction::size; i++) {
+		headerList.append("Q-Value: " + QString::fromStdString(MarioAction::toString(i)));
+	}
+	for (int i = 0; i < MarioFeature::size; i++) {
+		headerList.append("Feature: " + QString::fromStdString(MarioFeature::toString(i)));
+	}
+	modelStateTableView->setHorizontalHeaderLabels(headerList);
+	stateTableView->setModel(modelStateTableView);
+	stateTableView->resizeColumnsToContents();
+	mWindow->setStateTableView(stateTableView, modelStateTableView);
 }

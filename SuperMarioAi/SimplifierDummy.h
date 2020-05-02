@@ -5,7 +5,7 @@
 class SimplifierDummy:public ISimplifier
 {
 public:	
-	GameState simplifyImage(std::vector <std::vector<int>>* simpleView,HBITMAP image) override;
+	GameState simplifyImage(std::vector <std::vector<int>>* simpleView) override;
 	void init() override;
 private:
 	int calls;
