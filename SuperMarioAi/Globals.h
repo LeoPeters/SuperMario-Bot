@@ -7,7 +7,7 @@
 #define ENEMY 3
 #define ITEM 4
 #define WINNINGCONDS 5
-#define GRIDRADIUS 15 //5x5grid
+#define GRIDRADIUS 10 //5x5grid
 #define MAPPINGDATA 4 //positions from to where
 #define X_Start 0 //For Mappings Array 
 #define Y_Start 1
@@ -60,8 +60,12 @@
 #define PNG_LNAME L"pictures/Input/input.png"
 #define SUPER_MARIO_PATH L"..\\Mesen\\Mesen.exe"
 
+//Features
+#define NUMBER_OF_FEATURES 4
+#define MAX_NUMBER_ENEMIES 4
+
 //QLearning
-#define NUMBER_OF_STATES 3 * ((GRIDRADIUS / 2) + 1) * GRIDRADIUS * GRIDRADIUS + 1
+#define NUMBER_OF_STATES (GRIDRADIUS - 1) * (GRIDRADIUS - 1) * (GRIDRADIUS - 1)
 #define ALPHA 0.4 //Learning rate
 #define GAMMA 0.9 //Discount factor
 #define EPSILON 0.1 //Propability of choosing a random action
@@ -71,9 +75,7 @@
 #define REWARDWIN 100
 #define INIT_STATE 0
 
-//Features
-#define NUMBER_OF_FEATURES 4
-#define MAX_NUMBER_ENEMIES 3
+
 
 #define SAVEFILE_PATH "saves/"
 #endif

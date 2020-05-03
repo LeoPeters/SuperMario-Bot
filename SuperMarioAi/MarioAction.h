@@ -4,12 +4,12 @@
 class MarioAction {
 public:
 	enum ActionName {
-
-	moveLeft,
-	jump,
+	moveRight,
 	highJump,
+	jump,
+	moveLeft,
 	shoot,
-	moveRight
+	size
 	};
 	MarioAction() = default;
 	constexpr MarioAction(ActionName action) :action(action) {}
@@ -48,9 +48,6 @@ public:
 		MarioAction action(i);
 		return action.toString();
 	}
-
-	static const int size = ActionName::moveRight + 1;
-
 
 private:
 	ActionName action;

@@ -17,5 +17,5 @@
 
  std::string MemoryFinder::getDirectoryPath()
  {
-	 return directioryPath;
+	 return directoryPath;
  }

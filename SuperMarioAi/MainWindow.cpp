@@ -10,7 +10,8 @@
 MainWindow::MainWindow(IGuiObserver* observer,AiData* data)
 	: QMainWindow(Q_NULLPTR),
 	observer(observer),
-	data(data)
+	data(data),
+	lastAgentState(0)
 {
 	ui.setupUi(this);
 	signalSetup();
@@ -169,10 +170,11 @@ void MainWindow::updateTableView()
 		row.push_back(data->featureValues.at(i));
 	}
 	for (int i = 0; i < row.size(); i++) {
-		QModelIndex index = modelStateTableView->index(data->agentStateNumber, i);
+		QModelIndex index = modelStateTableView->index(lastAgentState, i);
 		modelStateTableView->setData(index, row.at(i));
-	}
 
+	}
+	lastAgentState = data->agentStateNumber;
 }
 void MainWindow::loadWholeTableView() {
 	std::vector<double> row;

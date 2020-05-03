@@ -20,3 +20,12 @@ State AgentDummy::getState(int index)
 	return State();
 }
 
+std::array<State, NUMBER_OF_STATES> AgentDummy::getStates()
+{
+	return new ;
+}
+
+void AgentDummy::setStates(std::array<State, NUMBER_OF_STATES> &states) 
+{
+
+}

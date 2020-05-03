@@ -22,9 +22,9 @@ State Agent::getState(int index)
 	return states[index];
 }
 
-std::array<State, NUMBER_OF_STATES> Agent::getStates()
+std::array<State, NUMBER_OF_STATES>* Agent::getStates()
 {
-	return states;
+	return &states;
 }
 
 void Agent::setStates(std::array<State, NUMBER_OF_STATES> &states)

@@ -4,11 +4,18 @@ class MarioFeature
 {
 public:
 	enum FeatureName {
-		isUnderBlock,
-		closestEnemyX,
-		closestEnemyy,
-		distanceToObstacleRight
+		//isUnderBlock, //2
+		closestEnemyX, //GRIDRADIUS-1 TODO(Wenn Enemy unter Mario, ist gleich zu kein Gegner da)
+		//closestEnemyY, //GRIDRADIUS-1
+		distanceToObstacle, //GRIDRADIUS-1
+		//numberOfEnemies, //siehe Define MAX_NUMBER_ENEMIES
+		distanceToHole, //GRIDRADIUS-1
+		//itemAvailable, //2
+		//closestItemX, //GRIDRADIUS-1
+		//closestItemY, //GRIDRADIUS-1
+		size
 	};
+
 	MarioFeature() = default;
 	constexpr MarioFeature(FeatureName feature) :feature(feature) {}
 	MarioFeature(int i) { feature = FeatureName(i); }
@@ -23,15 +30,31 @@ public:
 		case MarioFeature::closestEnemyX:
 			string = "Enemy-X";
 			break;
-		case MarioFeature::closestEnemyy:
+		/*case MarioFeature::closestEnemyY:
 			string = "Enemy-Y";
 			break;
 		case MarioFeature::isUnderBlock:
 			string = "Under Block";
-			break;
-		case MarioFeature::distanceToObstacleRight:
+			break;*/
+		case MarioFeature::distanceToObstacle:
 			string = "Obstacle Distance";
 			break;
+		/*case numberOfEnemies:
+			string = "Number of Enemies";
+			break;*/
+		
+		case distanceToHole:
+			string = "Distance to Hole";
+			break;
+		/*case itemAvailable:
+			string = "Item available";
+			break;
+		case closestItemX:
+			string = "Item-X";
+			break;
+		case closestItemY:
+			string = "Item-Y";
+			break;*/
 		default:
 			string = "NULL";
 			break;
@@ -42,8 +65,6 @@ public:
 		 MarioFeature feature(i);
 		 return feature.toString();
 	 }
-
-	 static const int size = FeatureName::distanceToObstacleRight + 1;
 private:
 	FeatureName feature;
 };

@@ -11,6 +11,15 @@ void EnvironmentDummy::gameWin() {
 
 }
 
+int EnvironmentDummy::getStatesSize()
+{
+	return 0;
+}
+
+void EnvironmentDummy::setStatesSize(int statesSize)
+{
+}
+
 void EnvironmentDummy::gameOver() {
 
 }
@@ -20,6 +29,6 @@ std::vector<int> EnvironmentDummy::getFeatureVector(int index)
 	return std::vector<int>();
 }
 
-std::array<std::vector<int>, NUMBER_OF_STATES> EnvironmentDummy::getStates() {
-	return std::array<std::vector<int>, NUMBER_OF_STATES>();
+std::array<std::vector<int>, NUMBER_OF_STATES>* EnvironmentDummy::getStates() {
+	return &std::array<std::vector<int>, NUMBER_OF_STATES>();
 }

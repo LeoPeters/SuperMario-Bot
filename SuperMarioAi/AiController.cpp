@@ -3,15 +3,19 @@
 #include "MarioWindow.h"
 #include "Globals.h"
 #include "AiController.h"
+#include "EnvironmentCalculation.h"
+#include "Agent.h"
 
 AiController::AiController(int argc, char** argv) :
 	screenCapture(NULL),
 	simplifier(NULL),
-	features(NULL),
+	environment(NULL),
 	agent(NULL),
-	appControl(NULL)
-
+	appControl(NULL),
+	numberOfCycles(0)
 {
+	agent = new Agent();
+	environment = new EnvironmentCalculation();
 	gui = new AiGui(argc, argv, this);
 	data = gui->getData();
 }
@@ -28,25 +32,27 @@ void AiController::run() {
 				case GameState::MarioAlive:
 					data->loopCounter++;
 					data->setSimpleView(*simplifyVec);
-					features->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
+					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
 					//std::cout << "Reward: " << reward << std::endl;
 					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, reward);
 					data->agentState = agent->getState(data->agentStateNumber);
 					appControl->makeAction(data->nextAction);
 					break;
 				case GameState::GameOver:
+					numberOfCycles++;
 					data->marioDeathCounter++;
 					data->loopCounter++;
-					features->gameOver();
-					features->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
+					environment->gameOver();
+					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
 					agent->calculateAction(data->agentStateNumber, data->possibleActions, reward);
 					appControl->restartGame();
 					break;
 				case GameState::Win:
+					numberOfCycles++;
 					data->marioWinCounter++;
 					data->loopCounter++;
-					features->gameWin();
-					features->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
+					environment->gameWin();
+					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
 					agent->calculateAction(data->agentStateNumber, data->possibleActions, reward);
 					appControl->restartGame();
 					break;
@@ -54,7 +60,7 @@ void AiController::run() {
 					break;
 				}
 			}
-			data->featureValues = features->getFeatureVector(data->agentStateNumber);
+			data->featureValues = environment->getFeatureVector(data->agentStateNumber);
 			auto stop = std::chrono::high_resolution_clock::now();
 			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 			auto fps = duration.count();
@@ -96,8 +102,6 @@ void AiController::startSuperMario()
 	if (factory.loadSuperMarioAi()) {
 		this->screenCapture = factory.getScreenCapture();
 		this->simplifier = factory.getImageScan();
-		this->features = factory.getEnvironment();
-		this->agent = factory.getAiAlgo();
 		this->appControl = factory.getAppControl();
 		this->screenCapture->captureScreen(PNG_LNAME);
 		this->simplifier->init();
@@ -117,19 +121,30 @@ std::vector<double> AiController::getQValues(int stateNumber) {
 }
 std::vector<int> AiController::getFeatureValues(int stateNumber) {
 	std::vector<int> featureValues;
-	if (features != NULL) {
-		featureValues=features->getFeatureVector(stateNumber);
+	if (environment != NULL) {
+		featureValues=environment->getFeatureVector(stateNumber);
 	}
 	return featureValues;
 }
 
 void AiController::loadMemory(std::string path)
 {
-	std::cout << path << std::endl;
+	int temp = 0;
+	save.loadValues(path, environment->getStates(), agent->getStates(), &numberOfCycles, &temp);
+	environment->setStatesSize(temp);
+}
+
+void AiController::saveMemory()
+{
+	save.saveValues(environment->getStates(), agent->getStates(), numberOfCycles, environment->getStatesSize());
 }
 
 AiController::~AiController()
 {
+	if (numberOfCycles > 0) {
+		save.saveValues(environment->getStates(), agent->getStates(), numberOfCycles, environment->getStatesSize());
+	}
+
 	if (appControl != NULL) {
 		appControl->endGame();
 	}

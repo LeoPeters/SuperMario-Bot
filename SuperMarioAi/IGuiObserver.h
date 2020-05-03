@@ -12,6 +12,6 @@ public:
 	virtual std::vector<double> getQValues(int stateNumber)=0;
 	virtual std::vector<int> getFeatureValues(int stateNumber)=0;
 	virtual void loadMemory(std::string path)=0;
-
+	virtual void saveMemory()=0;
 };
 #endif

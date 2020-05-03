@@ -39,6 +39,7 @@ private:
 	QStandardItemModel* modelStateTableView;
 	std::vector<QLabel*> actionLabelList;
 	std::vector<FeatureWidget*> featureWidgetList;
+	int lastAgentState;
 	
 private:
 	void signalSetup();

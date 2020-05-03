@@ -3,12 +3,12 @@
 #include "ScreenCapture.h"
 #include "SimplifierDummy.h"
 #include "EnvironmentDummy.h"
-#include "AgentDummy.h"
 #include "Agent.h"
 #include "AppControlDummy.h"
 #include "MarioController.h"
 #include "AiFactory.h"
-#include "Features.h"
+#include "EnvironmentCalculation.h"
+
 bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, bool environmentDummy, bool agentDummy, bool appControlDummy)
 {
 	if (appControlDummy) {
@@ -30,9 +30,9 @@ bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, 
 	if (environmentDummy) {
 		this->environment = new EnvironmentDummy();
 	}
-	else { this->environment = new Features(); };
+	else { this->environment = new EnvironmentCalculation(); };
 	if (agentDummy) {
-		this->agent = new AgentDummy();
+		
 	}
 	else { this->agent = new Agent(); }
 	return true;

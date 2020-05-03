@@ -12,6 +12,8 @@
 #include "GameState.h"
 #include "AiGui.h"
 #include "AiData.h"
+#include "Save.h"
+
 class AiController:public IGuiObserver
 {
 public:
@@ -25,6 +27,7 @@ public:
 	std::vector<double> getQValues(int stateNumber) override;
 	std::vector<int> getFeatureValues(int stateNumber) override;
 	void loadMemory(std::string path) override;
+	virtual void saveMemory() override;
 
 private:
 	void startSuperMario();
@@ -32,7 +35,7 @@ private:
 	double reward;
 	IScreenCapture* screenCapture;
 	IAppControl* appControl;
-	IEnvironment* features;
+	IEnvironment* environment;
 	ISimplifier* simplifier;
 	IAgent* agent;
 	AiGui* gui;
@@ -44,6 +47,8 @@ private:
 	HBITMAP gameCapture=HBITMAP();
 	State agentStateArray;
 	AiData* data;
+	Save save;
+	int numberOfCycles;
 };
 
 #endif

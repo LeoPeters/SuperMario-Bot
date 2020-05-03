@@ -151,17 +151,11 @@
     <ClCompile Include="SimplifierDummy.cpp">
       <Filter>Source Files\Dummy</Filter>
     </ClCompile>
-    <ClCompile Include="AgentDummy.cpp">
-      <Filter>Source Files\Dummy</Filter>
-    </ClCompile>
     <ClCompile Include="Agent.cpp">
       <Filter>Source Files\Agent</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>Source Files\Agent</Filter>
-    </ClCompile>
-    <ClCompile Include="Features.cpp">
-      <Filter>Source Files\Features</Filter>
     </ClCompile>
     <ClCompile Include="Deathcondition.cpp">
       <Filter>Source Files\Simplifier</Filter>
@@ -182,6 +176,21 @@
       <Filter>Source Files\Structs/Enum/Defines</Filter>
     </ClCompile>
     <ClCompile Include="MemoryFinder.cpp">
+      <Filter>Source Files\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Save.cpp">
+      <Filter>Source Files\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLWriter.cpp">
+      <Filter>Source Files\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="EnvironmentCalculation.cpp">
+      <Filter>Source Files\Features</Filter>
+    </ClCompile>
+    <ClCompile Include="Features.cpp">
+      <Filter>Source Files\Features</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLReader.cpp">
       <Filter>Source Files\Memory</Filter>
     </ClCompile>
   </ItemGroup>
@@ -269,9 +278,6 @@
     <ClInclude Include="ISimplifier.h">
       <Filter>Header Files\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="AgentDummy.h">
-      <Filter>Header Files\Dummy</Filter>
-    </ClInclude>
     <ClInclude Include="IAgent.h">
       <Filter>Header Files\Interface</Filter>
     </ClInclude>
@@ -289,9 +295,6 @@
     </ClInclude>
     <ClInclude Include="State.h">
       <Filter>Header Files\Agent</Filter>
-    </ClInclude>
-    <ClInclude Include="Features.h">
-      <Filter>Header Files\Features</Filter>
     </ClInclude>
     <ClInclude Include="MarioObject.h">
       <Filter>Header Files\Structs/Enum/Defines</Filter>
@@ -327,6 +330,21 @@
       <Filter>Header Files\Structs/Enum/Defines</Filter>
     </ClInclude>
     <ClInclude Include="MemoryFinder.h">
+      <Filter>Header Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLWriter.h">
+      <Filter>Header Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Save.h">
+      <Filter>Header Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="EnvironmentCalculation.h">
+      <Filter>Header Files\Features</Filter>
+    </ClInclude>
+    <ClInclude Include="Features.h">
+      <Filter>Header Files\Features</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLReader.h">
       <Filter>Header Files\Memory</Filter>
     </ClInclude>
   </ItemGroup>

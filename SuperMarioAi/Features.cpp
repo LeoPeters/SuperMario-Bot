@@ -1,93 +1,23 @@
-
-
-#include <cstdlib>
-#include <iostream>
 #include "Features.h"
+#include "Globals.h"
 #include "MarioObject.h"
 #include "MarioAction.h"
-#include "MarioFeature.h"
 
 Features::Features() :
     marioPositionX(-1),
     marioPositionY(-1),
-    statesSize(0),
-    jumpBlocked(false),
-    gameWon(false),
-    gameLost(false),
-    onGroundCounter(0),
-    lastAction(MarioAction())
-{
-    for (int i = 0; i < MarioFeature::size; i++) {
-        featureVector.push_back(0);
-    }
-}
-
-Features::~Features() 
+    jumpBlocked(false), 
+    onGroundCounter(0)
 {
 
 }
 
-std::array<std::vector<int>, NUMBER_OF_STATES> Features::getStates() 
+Features::~Features()
 {
-    return states;
+
 }
 
-void Features::calculateStateAndActions(MarioAction lastAction, std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state, double* reward) 
-{
-    if (gameWon) 
-    {
-        *reward = REWARDWIN;
-        *state = 0;
-        gameWon = false;
-        jumpBlocked = false;
-    }
-    else if (gameLost) 
-    {
-        *reward = REWARDLOSE;
-        *state = 0;
-        gameLost = false;
-        jumpBlocked = false;
-    } else {
-        this->lastAction = lastAction;
-        *reward = getReward();
-        marioArray = tempArray;
-        setMarioPosition();
-        calculateJumpBlocked();
-        *possibleActions = getPossibleActions();
-        calculateFeatureVector();
-        *state = calculateStateNumber();
-    }
-}
-
-void Features::gameWin() 
-{
-    gameWon = true;
-}
-
-void Features::gameOver() 
-{
-    gameLost = true;
-}
-
-double Features::getReward() 
-{
-    double reward = 0;
-    if (movedRight()) {
-        reward = REWARDMOVERIGHT;
-    }
-    return reward;
-}
-
-bool Features::movedRight() 
-{
-    if (lastAction == MarioAction::moveRight && (featureVector[(int) FeatureNames::distanceToObstacleRight] > 1 || featureVector[(int)FeatureNames::distanceToObstacleRight] == 0)) {
-        return true;
-    }
-    
-    return false;
-}
-
-void Features::setMarioPosition() 
+void Features::setMarioPosition()
 {
     for (int y = 0; y < GRIDRADIUS;y++) {
         for (int x = 0; x < GRIDRADIUS; x++) {
@@ -99,27 +29,9 @@ void Features::setMarioPosition()
     }
 }
 
-std::vector<MarioAction> Features::getPossibleActions()
+int Features::isUnderBlock()
 {
-    //TODO MarioAction::shoot        
-    std::vector<MarioAction> possibleActions;
-
-    possibleActions.push_back(MarioAction::moveRight);
-    possibleActions.push_back(MarioAction::moveLeft);
-
-    if (!jumpBlocked && validPosition(marioPositionY, 1, GRIDRADIUS - 2) && 
-        marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) &&
-        marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) {
-        
-        possibleActions.push_back(MarioAction::jump);
-        possibleActions.push_back(MarioAction::highJump);
-    }
-    return possibleActions;
-}
-
-int Features::isUnderBlock() 
-{
-    if ((marioPositionY >= 1 && marioArray[marioPositionY - 1][marioPositionX] == int(MarioObject::ground)) || 
+    if ((marioPositionY >= 1 && marioArray[marioPositionY - 1][marioPositionX] == int(MarioObject::ground)) ||
         (marioPositionY >= 2 && marioArray[marioPositionY - 2][marioPositionX] == int(MarioObject::ground)) ||
         (marioPositionY >= 3 && marioArray[marioPositionY - 3][marioPositionX] == int(MarioObject::ground))) {
         return 1;
@@ -127,7 +39,7 @@ int Features::isUnderBlock()
     return 0;
 }
 
-std::array<int, 2> Features::closestEnemy() 
+std::array<int, 2> Features::closestEnemy()
 {
     std::array<int, 2> closest = { GRIDRADIUS, GRIDRADIUS };
     for (int y = 0; y < marioArray.size(); y++) {
@@ -148,13 +60,13 @@ std::array<int, 2> Features::closestEnemy()
     return closest;
 }
 
-int Features::distance(int x, int y) 
+int Features::distance(int x, int y)
 {
     return std::abs(marioPositionX - x) + std::abs(marioPositionY - y);
 }
 
-int Features::distanceToObstacleRight() 
-{ 
+int Features::distanceToObstacle()
+{
     int distance = 0;
     for (int x = marioPositionX; x < GRIDRADIUS; x++) {
         if (marioArray[marioPositionY][x] == (int)MarioObject::ground) {
@@ -166,63 +78,17 @@ int Features::distanceToObstacleRight()
     return distance;
 }
 
-void Features::calculateFeatureVector() 
-{
-    std::vector<int> features;
-    std::array<int, 2> closest = closestEnemy();
-
-    features.push_back(isUnderBlock());
-    features.push_back(closest[0]); //X
-    features.push_back(closest[1]); //Y
-    features.push_back(distanceToObstacleRight());
-    
-    featureVector = features;
-}
-
-int Features::calculateStateNumber() 
-{
-    std::vector<int> state = featureVector;
-    for (int i = 1; i <= statesSize; i++) {
-        if (states[i] == state) {
-            return i;
-        }
-    }
-    states[statesSize] = state;
-    return statesSize++;
-}
-
-void Features::calculateJumpBlocked()
+/*
+bool Features::isJumping()
 {
     if (validPosition(marioPositionY, 0, GRIDRADIUS - 2) &&
-        marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground)){
-        onGroundCounter++;
-    } else {
-        onGroundCounter = 0;
-    }
-    if (onGroundCounter >= 0) {
-        jumpBlocked = false;
-    } else {
-        jumpBlocked = true;
-    }
-}
-
-bool Features::validPosition(int value, int lowBorder, int highBorder) 
-{
-    return (value >= lowBorder && value <= highBorder);
-}
-
-// NEW FEATURES
-
-
-bool Features::isJumping() 
-{
-    if (validPosition(marioPositionY, 0, GRIDRADIUS - 2) && 
         marioArray[marioPositionY + 1][marioPositionX] != int(MarioObject::ground))
     {
         return true;
     }
     return false;
 }
+*/
 
 int Features::getNumberOfEnemies() {
     int numberOfEnemies = 0;
@@ -240,7 +106,7 @@ int Features::getNumberOfEnemies() {
     return numberOfEnemies;
 }
 
-bool Features::isItemAvailable() 
+bool Features::isItemAvailable()
 {
     for (int y = 0; y < GRIDRADIUS; y++) {
         for (int x = 0; x < GRIDRADIUS; x++) {
@@ -252,7 +118,7 @@ bool Features::isItemAvailable()
     return false;
 }
 
-int Features::distanceToHoleRight() 
+int Features::distanceToHole()
 {
     for (int x = marioPositionX; x < GRIDRADIUS; x++)
     {
@@ -260,11 +126,11 @@ int Features::distanceToHoleRight()
         {
             for (int y = marioPositionY + 1; y < GRIDRADIUS; y++)
             {
-                if (marioArray[x][y] == (int)MarioObject::ground) 
+                if (marioArray[x][y] == (int)MarioObject::ground)
                 {
                     break;
-                } 
-                if (y == GRIDRADIUS - 1) 
+                }
+                if (y == GRIDRADIUS - 1)
                 {
                     return x - marioPositionX;
                 }
@@ -274,7 +140,7 @@ int Features::distanceToHoleRight()
     return 0;
 }
 
-std::array<int, 2> Features::closestItems() {
+std::array<int, 2> Features::closestItem() {
     std::array<int, 2> closestItem = { 0, 0 };
     for (int y = 0; y < marioArray.size(); y++) {
         for (int x = marioPositionX; x < marioArray.size(); x++) {
@@ -286,15 +152,52 @@ std::array<int, 2> Features::closestItems() {
     return closestItem;
 }
 
-std::vector<int> Features::getFeatureVector(int index) {
-    return states[index];
+void Features::calculateJumpBlocked()
+{
+    if (validPosition(marioPositionY, 0, GRIDRADIUS - 2) &&
+        marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground)) {
+        onGroundCounter++;
+    }
+    else {
+        onGroundCounter = 0;
+    }
+    if (onGroundCounter >= 2) {
+        jumpBlocked = false;
+    }
+    else {
+        jumpBlocked = true;
+    }
 }
 
+std::vector<MarioAction> Features::getPossibleActions()
+{
+    //TODO MarioAction::shoot        
+    std::vector<MarioAction> possibleActions;
 
+    possibleActions.push_back(MarioAction::moveRight);
+    possibleActions.push_back(MarioAction::moveLeft);
 
+    if (!jumpBlocked && validPosition(marioPositionY, 1, GRIDRADIUS - 2) &&
+        marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) &&
+        marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) {
 
+        possibleActions.push_back(MarioAction::jump);
+        possibleActions.push_back(MarioAction::highJump);
+    }
+    return possibleActions;
+}
 
+void Features::setJumpBlocked(bool jumpBlocked)
+{
+    this->jumpBlocked = jumpBlocked;
+}
 
+bool Features::validPosition(int value, int lowBorder, int highBorder)
+{
+    return (value >= lowBorder && value <= highBorder);
+}
 
-
-
+void Features::setMarioArray(std::vector<std::vector<int>>& marioArray)
+{
+    this->marioArray = marioArray;
+}

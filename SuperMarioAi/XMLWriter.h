@@ -18,7 +18,9 @@ public:
     void writeStartElementTag(const std::string);
     void writeEndElementTag();
     void writeAttribute(const std::string);
-    void writeString(const std::string);
+    void writeAttribute(int outAttribute);
+    void writeValue(const std::string);
+    void writeValue(int outInt);
 private:
     std::ofstream outFile;
     int current_indent;

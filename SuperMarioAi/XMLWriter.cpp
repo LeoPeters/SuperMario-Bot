@@ -33,10 +33,7 @@ bool XMLWriter::exists(const std::string fileName) {
 //=============================================================================
 bool XMLWriter::open(const std::string strFile) {
 
-    if (exists(strFile)) {
-        std::cout << "Error: File alread exists.\n";
-        return false;
-    }
+    //TODO If file exists?
 
     outFile.open(strFile);
     if (outFile.is_open()) {
@@ -46,7 +43,6 @@ bool XMLWriter::open(const std::string strFile) {
         current_indent = 0;
         return true;
     }
-
     return false;
 }
 
@@ -164,6 +160,10 @@ void XMLWriter::writeAttribute(const std::string outAttribute) {
         outFile << " " << outAttribute;
 }
 
+void XMLWriter::writeAttribute(int outAttribute) {
+    outFile << " " << outAttribute;
+}
+
 //=============================================================================
 //== Function Name  :   XmlWriter::writeString
 //==
@@ -175,6 +175,10 @@ void XMLWriter::writeAttribute(const std::string outAttribute) {
 //== Description
 //== --------------------------------------------------------------------------
 //=============================================================================
-void XMLWriter::writeString(const std::string outString) {
+void XMLWriter::writeValue(const std::string outString) {
         outFile << ">" << outString;
+}
+
+void XMLWriter::writeValue(int outInt) {
+    outFile << ">" << outInt;
 }
