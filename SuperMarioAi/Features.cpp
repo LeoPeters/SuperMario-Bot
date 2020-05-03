@@ -54,7 +54,7 @@ std::array<int, 2> Features::closestEnemy()
         closest = { 0, 0 };
     }
     else {
-        closest = { std::abs(marioPositionX - closest[0]) + std::abs(marioPositionY - closest[1]) };
+        closest = { std::abs(marioPositionX - closest[0]), std::abs(marioPositionY - closest[1]) };
     }
     //std::cout << std::endl << "X:" << closest[0] << " Y:" << closest[1] << std::endl;
     return closest;
@@ -120,13 +120,13 @@ bool Features::isItemAvailable()
 
 int Features::distanceToHole()
 {
-    for (int x = marioPositionX; x < GRIDRADIUS; x++)
+    for (int x = marioPositionX+1; x < GRIDRADIUS; x++)
     {
-        if (marioArray[x][marioPositionY] != (int)MarioObject::ground)
+        if (marioArray[marioPositionY][x] != (int)MarioObject::ground)
         {
             for (int y = marioPositionY + 1; y < GRIDRADIUS; y++)
             {
-                if (marioArray[x][y] == (int)MarioObject::ground)
+                if (marioArray[y][x] == (int)MarioObject::ground)
                 {
                     break;
                 }

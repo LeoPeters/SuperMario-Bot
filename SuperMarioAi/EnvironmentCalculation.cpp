@@ -101,6 +101,8 @@ void EnvironmentCalculation::calculateFeatureVector()
     std::array<int, 2> closestEnemy = features.closestEnemy();
     std::array<int, 2> closestItem = features.closestItem();
 
+    int temp = features.distanceToHole();
+    std::cout << temp << std::endl;
     for (int i = 0; i < MarioFeature::size; i++) 
     {
         switch (i)
@@ -122,7 +124,8 @@ void EnvironmentCalculation::calculateFeatureVector()
             break;*/
         
         case (int)MarioFeature::distanceToHole:
-            featureVector.push_back(features.distanceToHole());
+            
+            featureVector.push_back(temp);
             break;
         /*case (int)MarioFeature::itemAvailable:
                 featureVector.push_back(features.isItemAvailable());
