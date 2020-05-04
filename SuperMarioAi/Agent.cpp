@@ -42,7 +42,6 @@ MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> poss
 	MarioAction action = chooseAction(states[stateIndex]);
 	lastAction = action;
 	lastState = stateIndex;
-
 	return action;
 }
 

@@ -28,11 +28,11 @@ void Keyboard::pressAndReleaseKey(char key, int pressDuration) {
 		if (pressDuration >= 50 && pressDuration <= 1800) {
 			PostMessage(window, WM_ACTIVATE, 0x1, 0);
 			int i = 0;
-			while (i<pressDuration/30) {
+			while (i<pressDuration/10) {
 				PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key));
-				Sleep(15);
+				Sleep(5);
 				PostMessage(window, WM_CHAR, NULL, GetKeyDownScanCode(key));
-				Sleep(15);
+				Sleep(5);
 				i++;
 			}
 			//PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key));
@@ -42,7 +42,10 @@ void Keyboard::pressAndReleaseKey(char key, int pressDuration) {
 			//PostMessage(window, WM_CHAR, NULL, GetKeyDownScanCode(key));
 			//Sleep(pressDuration / 3);
 
-			PostMessage(window, WM_KEYUP, NULL, GetKeyUpScanCode(key));
+			for (int i = 0; i < 3; i++) {
+
+				PostMessage(window, WM_KEYUP, NULL, GetKeyUpScanCode(key));
+			}
 		}
 		else {
 			cout << "The Press Duration must be between 100 and 500" << endl;
@@ -52,18 +55,17 @@ void Keyboard::pressAndReleaseKey(char key, int pressDuration) {
 		cout << "Cant Press Button - Window doesn't exist!" << endl;
 	}
 }
-void Keyboard::pressAndReleaseKey(char key, char key2, int pressDuration, int pressDuration2) {
+void Keyboard::pressAndReleaseKey(char key, char key2, int pressDuration) {
 	if (windowIsFound) {
 			PostMessage(window, WM_ACTIVATE, 0x1, 0);
 			int i = 0;
-			int temp=pressDuration / pressDuration2;
-			while (i < pressDuration / 30) {
+			int iMax = pressDuration / 20;
+			while (i < iMax) {
 				PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key));
-
-				if (i*30>pressDuration/temp) {
+				Sleep(20);
+				if (i > iMax * 0.5) {
 					PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key2));
 				}
-				Sleep(15);
 				i++;
 			}
 			//PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key));
@@ -72,8 +74,12 @@ void Keyboard::pressAndReleaseKey(char key, char key2, int pressDuration, int pr
 			//Sleep(pressDuration / 3);
 			//PostMessage(window, WM_CHAR, NULL, GetKeyDownScanCode(key));
 			//Sleep(pressDuration / 3);
+			for (int i = 0; i < 3; i++) {
 
 			PostMessage(window, WM_KEYUP, NULL, GetKeyUpScanCode(key));
+			PostMessage(window, WM_KEYUP, NULL, GetKeyUpScanCode(key2));
+			Sleep(15);
+			}
 		}
 
 	else {

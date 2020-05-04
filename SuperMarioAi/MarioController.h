@@ -26,6 +26,7 @@ private:
 	void moveRight();
 	void jump();
 	void highJump();
+	void highJumpRight();
 	void shoot();
 	bool isPaused=true;
 	bool isStarted = false;

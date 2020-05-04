@@ -5,7 +5,7 @@ class Keyboard
 public:
 	Keyboard(HWND window);
 	void pressAndReleaseKey(char key, int pressDuration);
-	void pressAndReleaseKey(char key, char key2, int pressDuration, int pressDuration2);
+	void pressAndReleaseKey(char key, char key2, int pressDuration);
 	void pressKey(char key);
 	void releaseKey(char key);
 

@@ -7,7 +7,7 @@
 #define ENEMY 3
 #define ITEM 4
 #define WINNINGCONDS 5
-#define GRIDRADIUS 13 //5x5grid
+#define GRIDRADIUS 15 //5x5grid
 #define MAPPINGDATA 4 //positions from to where
 #define X_Start 0 //For Mappings Array 
 #define Y_Start 1
@@ -65,7 +65,7 @@
 #define MAX_NUMBER_ENEMIES 4
 
 //QLearning
-#define NUMBER_OF_STATES (GRIDRADIUS - 1) * (GRIDRADIUS - 1) * (GRIDRADIUS - 1)
+#define NUMBER_OF_STATES (GRIDRADIUS - 1) * (GRIDRADIUS - 1) * (GRIDRADIUS - 1)+(GRIDRADIUS - 1)
 #define ALPHA 0.4 //Learning rate
 #define GAMMA 0.9 //Discount factor
 #define EPSILON 0.1 //Propability of choosing a random action

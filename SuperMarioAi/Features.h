@@ -19,7 +19,7 @@ public:
     std::array<int, 2> closestItem();
     int distanceToHole();
     void setMarioArray(std::vector<std::vector<int>> &marioArray);
-    void calculateJumpBlocked();
+    void calculateJumpBlocked(MarioAction);
     std::vector<MarioAction> getPossibleActions();
     void setJumpBlocked(bool jumpBlocked);
 
