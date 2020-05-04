@@ -63,8 +63,6 @@ void MainWindow::updateGUi()
 	ui.LoopTime->setText(QString::number(data->loopTime)+" ms");
 	ui.loopCount->setText(QString::number(data->loopCounter));
 	ui.reward->setText(QString::number(data->reward));
-
-
 }
 
 

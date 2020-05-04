@@ -1,5 +1,3 @@
-
-
 #include <cstdlib>
 #include <iostream>
 #include "EnvironmentCalculation.h"
@@ -79,14 +77,14 @@ void EnvironmentCalculation::gameOver()
 
 double EnvironmentCalculation::getReward() 
 {
-    double reward = 0;
+    double reward = REWARDSTEP;
     if (movedRight()) {
         reward = REWARDMOVERIGHT;
     }
-    if (lastAction == MarioAction::moveRight && features.closestEnemy().at(0) == 1 && features.closestEnemy().at(0) == 0) {
-        reward += -1;
-        std::cout << "afsd" << std::endl;
-    }
+    /*
+    if (lastAction == MarioAction::moveRight && featureVector[(int)MarioFeature::closestEnemyX] == 1 && featureVector[(int)MarioFeature::closestEnemyY] == 0) {
+        reward = -1;
+    }*/
     return reward;
 }
 

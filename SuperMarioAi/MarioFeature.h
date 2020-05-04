@@ -8,7 +8,7 @@ public:
 		closestEnemyX, //GRIDRADIUS-1 TODO(Wenn Enemy unter Mario, ist gleich zu kein Gegner da)
 		closestEnemyY, //GRIDRADIUS-1
 		distanceToObstacle, //GRIDRADIUS-1
-		//numberOfEnemies, //siehe Define MAX_NUMBER_ENEMIES
+		numberOfEnemies, //siehe Define MAX_NUMBER_ENEMIES + 1
 		distanceToHole, //GRIDRADIUS-1
 		//itemAvailable, //2
 		//closestItemX, //GRIDRADIUS-1
@@ -39,9 +39,9 @@ public:
 		case MarioFeature::distanceToObstacle:
 			string = "Obstacle Distance";
 			break;
-		/*case numberOfEnemies:
+		case numberOfEnemies:
 			string = "Number of Enemies";
-			break;*/
+			break;
 		
 		case distanceToHole:
 			string = "Distance to Hole";
