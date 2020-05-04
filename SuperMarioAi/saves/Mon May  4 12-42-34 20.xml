@@ -1,0 +1,1040 @@
+<!--XML Document-->
+<?xml version='1.0' encoding='us-ascii'>
+<AnzahlDurchlaeufe>2488</AnzahlDurchlaeufe>
+<AnzahlStates>116</AnzahlStates>
+<FeatureNames>Enemy-X,ObstacleDistance,DistancetoHole</FeatureNames>
+<State>
+	<stateNumber>1</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0949212300684,0.0659248288584,0.0502965181836,0.0143697577153,</Scores>
+</State>
+<State>
+	<stateNumber>2</stateNumber>
+	<Features>
+		<Enemy-X>6</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0554949232833,-0.0501248334345,-0.0527299308895,-0.0163656065558,</Scores>
+</State>
+<State>
+	<stateNumber>3</stateNumber>
+	<Features>
+		<Enemy-X>5</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0431094405814,-0.0725004795499,-0.061677901647,-0.0727200879838,</Scores>
+</State>
+<State>
+	<stateNumber>4</stateNumber>
+	<Features>
+		<Enemy-X>4</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0226455072455,-0.0969265387104,-0.0934517386111,-0.0941379088812,</Scores>
+</State>
+<State>
+	<stateNumber>5</stateNumber>
+	<Features>
+		<Enemy-X>3</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0198430219744,-0.0901873842303,-0.0998720537683,-0.099898854409,</Scores>
+</State>
+<State>
+	<stateNumber>6</stateNumber>
+	<Features>
+		<Enemy-X>1</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-4.00407701194,-10.3310750266,-11.8591428129,-10.6550461201,</Scores>
+</State>
+<State>
+	<stateNumber>7</stateNumber>
+	<Features>
+		<Enemy-X>2</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.233399459859,-0.0995349202884,-0.353277869305,-14.0258600982,</Scores>
+</State>
+<State>
+	<stateNumber>8</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>3</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0171675061589,-0.016317333405,-0.013724633271,-0.0474742713062,</Scores>
+</State>
+<State>
+	<stateNumber>9</stateNumber>
+	<Features>
+		<Enemy-X>6</Enemy-X>
+		<ObstacleDistance>2</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-3.98432063442,-0.0999994967785,-4.0738715299,-0.108267669777,</Scores>
+</State>
+<State>
+	<stateNumber>10</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>6</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0951486086629,-0.0337107953166,-0.0558807982392,0.0514540670167,</Scores>
+</State>
+<State>
+	<stateNumber>11</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>5</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0643886528687,-0.0216851462377,-0.0340411792177,-0.00194787424717,</Scores>
+</State>
+<State>
+	<stateNumber>12</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>4</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0364794636842,0.0176986030906,0.0166734477718,-0.0181058841753,</Scores>
+</State>
+<State>
+	<stateNumber>13</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>2</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-9.93957124779,-0.0827248987876,-0.0982282209241,-0.140069494454,</Scores>
+</State>
+<State>
+	<stateNumber>14</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>1</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.0195803468088,-0.0999999999712,-0.115478670264,-10.0226856498,</Scores>
+</State>
+<State>
+	<stateNumber>15</stateNumber>
+	<Features>
+		<Enemy-X>6</Enemy-X>
+		<ObstacleDistance>1</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.0999999376459,-0.1,-0.1,-10.0380679959,</Scores>
+</State>
+<State>
+	<stateNumber>16</stateNumber>
+	<Features>
+		<Enemy-X>2</Enemy-X>
+		<ObstacleDistance>6</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-9.99294503187,-0.738324231851,-1.6931652984,-0.35194312336,</Scores>
+</State>
+<State>
+	<stateNumber>17</stateNumber>
+	<Features>
+		<Enemy-X>5</Enemy-X>
+		<ObstacleDistance>1</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.1,-0.1,-0.1,-0.1,</Scores>
+</State>
+<State>
+	<stateNumber>18</stateNumber>
+	<Features>
+		<Enemy-X>4</Enemy-X>
+		<ObstacleDistance>1</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.0900328944696,-0.1,-0.100000006962,-0.1,</Scores>
+</State>
+<State>
+	<stateNumber>19</stateNumber>
+	<Features>
+		<Enemy-X>3</Enemy-X>
+		<ObstacleDistance>1</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.1,-0.102597053936,-0.1,-0.140931971025,</Scores>
+</State>
+<State>
+	<stateNumber>20</stateNumber>
+	<Features>
+		<Enemy-X>7</Enemy-X>
+		<ObstacleDistance>1</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.0997406765549,-0.0996466370947,-0.0999999937765,-0.0999999993441,</Scores>
+</State>
+<State>
+	<stateNumber>21</stateNumber>
+	<Features>
+		<Enemy-X>8</Enemy-X>
+		<ObstacleDistance>1</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.0639226767232,-0.1,-0.1,-4.1,</Scores>
+</State>
+<State>
+	<stateNumber>22</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>6</DistancetoHole>
+	</Features>
+	<Scores>0.0581157354946,-0.00763508639308,-0.0327931007616,0.0518310806718,</Scores>
+</State>
+<State>
+	<stateNumber>23</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>5</DistancetoHole>
+	</Features>
+	<Scores>0.0368665862436,-0.0153561062475,-0.050370249475,-0.0013177407487,</Scores>
+</State>
+<State>
+	<stateNumber>24</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>4</DistancetoHole>
+	</Features>
+	<Scores>0.0170084053417,-0.0754333245604,0,-0.0124127470659,</Scores>
+</State>
+<State>
+	<stateNumber>25</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>3</DistancetoHole>
+	</Features>
+	<Scores>-10.0300599881,-0.0748416040621,-0.0551426535631,-0.0748118719367,</Scores>
+</State>
+<State>
+	<stateNumber>26</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>2</DistancetoHole>
+	</Features>
+	<Scores>0.0196624793541,0.0127252875892,-0.0996512702045,-10.0387008365,</Scores>
+</State>
+<State>
+	<stateNumber>27</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>1</DistancetoHole>
+	</Features>
+	<Scores>-3.98458146635,-0.0962044283204,-0.0913213182151,0.00848589422039,</Scores>
+</State>
+<State>
+	<stateNumber>28</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>2</ObstacleDistance>
+		<DistancetoHole>1</DistancetoHole>
+	</Features>
+	<Scores>-10.0259982994,0,0,-10.0538189261,</Scores>
+</State>
+<State>
+	<stateNumber>29</stateNumber>
+	<Features>
+		<Enemy-X>1</Enemy-X>
+		<ObstacleDistance>2</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.104565788059,-10.2825080459,-15.7196210197,-10.0698371462,</Scores>
+</State>
+<State>
+	<stateNumber>30</stateNumber>
+	<Features>
+		<Enemy-X>1</Enemy-X>
+		<ObstacleDistance>6</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-10.008416417,-10.084,-10.7256341441,-0.0412549045239,</Scores>
+</State>
+<State>
+	<stateNumber>31</stateNumber>
+	<Features>
+		<Enemy-X>4</Enemy-X>
+		<ObstacleDistance>2</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0796287800409,-3.99961944833,-0.165818914269,-0.644198913477,</Scores>
+</State>
+<State>
+	<stateNumber>32</stateNumber>
+	<Features>
+		<Enemy-X>2</Enemy-X>
+		<ObstacleDistance>5</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-10.2947486198,-10.2811328314,-10.0693378935,-0.739043494234,</Scores>
+</State>
+<State>
+	<stateNumber>33</stateNumber>
+	<Features>
+		<Enemy-X>1</Enemy-X>
+		<ObstacleDistance>4</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-12.3918643481,-15.9424754504,-10.1652369941,-10.721206867,</Scores>
+</State>
+<State>
+	<stateNumber>34</stateNumber>
+	<Features>
+		<Enemy-X>7</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0799136943495,-0.0264536089653,-0.0229145491878,-0.0174380041819,</Scores>
+</State>
+<State>
+	<stateNumber>35</stateNumber>
+	<Features>
+		<Enemy-X>7</Enemy-X>
+		<ObstacleDistance>2</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.621932264926,-0.0999980444919,-0.0967668897329,-0.0999989435032,</Scores>
+</State>
+<State>
+	<stateNumber>36</stateNumber>
+	<Features>
+		<Enemy-X>6</Enemy-X>
+		<ObstacleDistance>7</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0745385529685,0,-0.0226707711439,-0.0579017113812,</Scores>
+</State>
+<State>
+	<stateNumber>37</stateNumber>
+	<Features>
+		<Enemy-X>4</Enemy-X>
+		<ObstacleDistance>6</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0216550619569,0,0,-0.061922392967,</Scores>
+</State>
+<State>
+	<stateNumber>38</stateNumber>
+	<Features>
+		<Enemy-X>3</Enemy-X>
+		<ObstacleDistance>5</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0171743167405,0,-0.0178284166429,-0.0866873007953,</Scores>
+</State>
+<State>
+	<stateNumber>39</stateNumber>
+	<Features>
+		<Enemy-X>2</Enemy-X>
+		<ObstacleDistance>4</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-11.6783701322,-10.0633487476,-10.1848667677,-0.201583437673,</Scores>
+</State>
+<State>
+	<stateNumber>40</stateNumber>
+	<Features>
+		<Enemy-X>1</Enemy-X>
+		<ObstacleDistance>3</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-11.8530979501,-12.6546761022,-14.3363645812,-14.1305157822,</Scores>
+</State>
+<State>
+	<stateNumber>41</stateNumber>
+	<Features>
+		<Enemy-X>4</Enemy-X>
+		<ObstacleDistance>4</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0542445635233,0,0,-0.0591809448038,</Scores>
+</State>
+<State>
+	<stateNumber>42</stateNumber>
+	<Features>
+		<Enemy-X>3</Enemy-X>
+		<ObstacleDistance>6</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0168131190117,-0.0463977022057,-0.06,-0.0924948587526,</Scores>
+</State>
+<State>
+	<stateNumber>43</stateNumber>
+	<Features>
+		<Enemy-X>7</Enemy-X>
+		<ObstacleDistance>3</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0297978833033,-0.0457952364014,-0.0566343881419,-0.0657748791095,</Scores>
+</State>
+<State>
+	<stateNumber>44</stateNumber>
+	<Features>
+		<Enemy-X>6</Enemy-X>
+		<ObstacleDistance>3</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-1.56313391752,-0.0976613882556,-0.0959182904888,-0.0558523752044,</Scores>
+</State>
+<State>
+	<stateNumber>45</stateNumber>
+	<Features>
+		<Enemy-X>2</Enemy-X>
+		<ObstacleDistance>7</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-10.024992443,-0.0162333251473,-0.0863942825327,-0.0991173128744,</Scores>
+</State>
+<State>
+	<stateNumber>46</stateNumber>
+	<Features>
+		<Enemy-X>5</Enemy-X>
+		<ObstacleDistance>2</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-3.97154441582,-0.699446273872,-0.0999999991294,-0.0967022322281,</Scores>
+</State>
+<State>
+	<stateNumber>47</stateNumber>
+	<Features>
+		<Enemy-X>3</Enemy-X>
+		<ObstacleDistance>4</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0169205708882,-0.0463008059762,-0.06,-0.0978213310626,</Scores>
+</State>
+<State>
+	<stateNumber>48</stateNumber>
+	<Features>
+		<Enemy-X>2</Enemy-X>
+		<ObstacleDistance>3</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-11.5777398406,-0.0999997344736,-4.0940242561,-10.1324739384,</Scores>
+</State>
+<State>
+	<stateNumber>49</stateNumber>
+	<Features>
+		<Enemy-X>7</Enemy-X>
+		<ObstacleDistance>4</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0234088077508,0.0162422862962,-0.0572170859041,-0.0742458775679,</Scores>
+</State>
+<State>
+	<stateNumber>50</stateNumber>
+	<Features>
+		<Enemy-X>8</Enemy-X>
+		<ObstacleDistance>4</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0565571256054,0.00293879540912,0.0107926615284,0.0173922066557,</Scores>
+</State>
+<State>
+	<stateNumber>51</stateNumber>
+	<Features>
+		<Enemy-X>5</Enemy-X>
+		<ObstacleDistance>6</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.047084435648,0,0,-0.0584553399514,</Scores>
+</State>
+<State>
+	<stateNumber>52</stateNumber>
+	<Features>
+		<Enemy-X>3</Enemy-X>
+		<ObstacleDistance>7</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0335269951908,-0.0844062544117,-0.0828084823314,-0.0529167765198,</Scores>
+</State>
+<State>
+	<stateNumber>53</stateNumber>
+	<Features>
+		<Enemy-X>8</Enemy-X>
+		<ObstacleDistance>2</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0213762565038,-0.0956853232624,-0.090993976857,-0.0200032044512,</Scores>
+</State>
+<State>
+	<stateNumber>54</stateNumber>
+	<Features>
+		<Enemy-X>4</Enemy-X>
+		<ObstacleDistance>5</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0250799583771,0,-0.0743582188783,-0.0848938208461,</Scores>
+</State>
+<State>
+	<stateNumber>55</stateNumber>
+	<Features>
+		<Enemy-X>1</Enemy-X>
+		<ObstacleDistance>5</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-10.0044004238,-10.3017039674,-10.3057460338,-10.6349061046,</Scores>
+</State>
+<State>
+	<stateNumber>56</stateNumber>
+	<Features>
+		<Enemy-X>1</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>1</DistancetoHole>
+	</Features>
+	<Scores>0.0637867635715,0,0,0.0142670739394,</Scores>
+</State>
+<State>
+	<stateNumber>57</stateNumber>
+	<Features>
+		<Enemy-X>5</Enemy-X>
+		<ObstacleDistance>3</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0869723636246,-0.0888924017495,-0.0278015936399,0.0115540526836,</Scores>
+</State>
+<State>
+	<stateNumber>58</stateNumber>
+	<Features>
+		<Enemy-X>3</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>2</DistancetoHole>
+	</Features>
+	<Scores>0.0377653164675,0,0,-0.084,</Scores>
+</State>
+<State>
+	<stateNumber>59</stateNumber>
+	<Features>
+		<Enemy-X>2</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>1</DistancetoHole>
+	</Features>
+	<Scores>0.0291529889058,0,0,-0.0182986338042,</Scores>
+</State>
+<State>
+	<stateNumber>60</stateNumber>
+	<Features>
+		<Enemy-X>3</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>1</DistancetoHole>
+	</Features>
+	<Scores>0.0367511253039,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>61</stateNumber>
+	<Features>
+		<Enemy-X>8</Enemy-X>
+		<ObstacleDistance>3</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0426141679846,-0.0086677699604,-0.0569773788216,-0.0704136356191,</Scores>
+</State>
+<State>
+	<stateNumber>62</stateNumber>
+	<Features>
+		<Enemy-X>4</Enemy-X>
+		<ObstacleDistance>7</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0515410127099,0,0,-0.06,</Scores>
+</State>
+<State>
+	<stateNumber>63</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>7</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.185551940232,0.05082843628,0.00206142555231,0.0452068367365,</Scores>
+</State>
+<State>
+	<stateNumber>64</stateNumber>
+	<Features>
+		<Enemy-X>9</Enemy-X>
+		<ObstacleDistance>3</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0685371653351,-0.0215547178468,-0.0602492580457,-0.0268133896081,</Scores>
+</State>
+<State>
+	<stateNumber>65</stateNumber>
+	<Features>
+		<Enemy-X>5</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>1</DistancetoHole>
+	</Features>
+	<Scores>0.0876434261444,0,0,-0.056527860175,</Scores>
+</State>
+<State>
+	<stateNumber>66</stateNumber>
+	<Features>
+		<Enemy-X>4</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>1</DistancetoHole>
+	</Features>
+	<Scores>0.0364302268283,0,0,-0.0468144104199,</Scores>
+</State>
+<State>
+	<stateNumber>67</stateNumber>
+	<Features>
+		<Enemy-X>10</Enemy-X>
+		<ObstacleDistance>4</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0993955046818,-0.000522906188931,-0.05406,-0.0258717726932,</Scores>
+</State>
+<State>
+	<stateNumber>68</stateNumber>
+	<Features>
+		<Enemy-X>11</Enemy-X>
+		<ObstacleDistance>4</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0892046499944,-0.0206839222056,-0.0640725882675,-0.0192998921996,</Scores>
+</State>
+<State>
+	<stateNumber>69</stateNumber>
+	<Features>
+		<Enemy-X>10</Enemy-X>
+		<ObstacleDistance>3</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0294504681075,-0.0390211295386,-0.0787052290894,-0.0347969470854,</Scores>
+</State>
+<State>
+	<stateNumber>70</stateNumber>
+	<Features>
+		<Enemy-X>5</Enemy-X>
+		<ObstacleDistance>7</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0574808439356,0,-0.0484351776903,0,</Scores>
+</State>
+<State>
+	<stateNumber>71</stateNumber>
+	<Features>
+		<Enemy-X>1</Enemy-X>
+		<ObstacleDistance>7</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.147558044749,0.0128954362613,0,-0.033293936757,</Scores>
+</State>
+<State>
+	<stateNumber>72</stateNumber>
+	<Features>
+		<Enemy-X>8</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0774586467112,0,0,-0.0334516680351,</Scores>
+</State>
+<State>
+	<stateNumber>73</stateNumber>
+	<Features>
+		<Enemy-X>9</Enemy-X>
+		<ObstacleDistance>4</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0611132413569,-0.0522035751867,-0.0325020634016,-0.0424446501065,</Scores>
+</State>
+<State>
+	<stateNumber>74</stateNumber>
+	<Features>
+		<Enemy-X>9</Enemy-X>
+		<ObstacleDistance>2</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.177591679785,-0.0987869221421,-0.0978667880528,-0.0976418918026,</Scores>
+</State>
+<State>
+	<stateNumber>75</stateNumber>
+	<Features>
+		<Enemy-X>6</Enemy-X>
+		<ObstacleDistance>4</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0499369635692,0.0232526388203,0.000396823365077,0.0103761162803,</Scores>
+</State>
+<State>
+	<stateNumber>76</stateNumber>
+	<Features>
+		<Enemy-X>9</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.128621539917,0,0,-0.0110031725798,</Scores>
+</State>
+<State>
+	<stateNumber>77</stateNumber>
+	<Features>
+		<Enemy-X>12</Enemy-X>
+		<ObstacleDistance>5</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.131757200035,0,0.0171411887246,0.0323843639133,</Scores>
+</State>
+<State>
+	<stateNumber>78</stateNumber>
+	<Features>
+		<Enemy-X>2</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>2</DistancetoHole>
+	</Features>
+	<Scores>0.0536426583056,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>79</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>8</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.164043503946,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>80</stateNumber>
+	<Features>
+		<Enemy-X>6</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>1</DistancetoHole>
+	</Features>
+	<Scores>0.0715349028042,0,0,-0.0331399458691,</Scores>
+</State>
+<State>
+	<stateNumber>81</stateNumber>
+	<Features>
+		<Enemy-X>2</Enemy-X>
+		<ObstacleDistance>2</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0348923698683,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>82</stateNumber>
+	<Features>
+		<Enemy-X>10</Enemy-X>
+		<ObstacleDistance>5</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.152068467142,-0.00163902148961,0.0276740212642,-0.00522372865471,</Scores>
+</State>
+<State>
+	<stateNumber>83</stateNumber>
+	<Features>
+		<Enemy-X>11</Enemy-X>
+		<ObstacleDistance>6</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.128383411895,0,0,-0.06,</Scores>
+</State>
+<State>
+	<stateNumber>84</stateNumber>
+	<Features>
+		<Enemy-X>10</Enemy-X>
+		<ObstacleDistance>6</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.119944536393,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>85</stateNumber>
+	<Features>
+		<Enemy-X>9</Enemy-X>
+		<ObstacleDistance>5</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.117851361188,0.0113023469983,0,-0.00237402800125,</Scores>
+</State>
+<State>
+	<stateNumber>86</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>1</ObstacleDistance>
+		<DistancetoHole>4</DistancetoHole>
+	</Features>
+	<Scores>-0.06,0,0,-0.040777336202,</Scores>
+</State>
+<State>
+	<stateNumber>87</stateNumber>
+	<Features>
+		<Enemy-X>10</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0436482663906,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>88</stateNumber>
+	<Features>
+		<Enemy-X>7</Enemy-X>
+		<ObstacleDistance>5</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.122349372686,0,0.0138366366795,0,</Scores>
+</State>
+<State>
+	<stateNumber>89</stateNumber>
+	<Features>
+		<Enemy-X>8</Enemy-X>
+		<ObstacleDistance>5</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.142476255045,0,0.00782028259867,0.0280105100484,</Scores>
+</State>
+<State>
+	<stateNumber>90</stateNumber>
+	<Features>
+		<Enemy-X>11</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.11860375197,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>91</stateNumber>
+	<Features>
+		<Enemy-X>12</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.122409480158,0,-0.0372867380766,0,</Scores>
+</State>
+<State>
+	<stateNumber>92</stateNumber>
+	<Features>
+		<Enemy-X>9</Enemy-X>
+		<ObstacleDistance>6</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.140462364471,0,0,0.0226016797174,</Scores>
+</State>
+<State>
+	<stateNumber>93</stateNumber>
+	<Features>
+		<Enemy-X>6</Enemy-X>
+		<ObstacleDistance>8</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0754947189274,-0.06,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>94</stateNumber>
+	<Features>
+		<Enemy-X>11</Enemy-X>
+		<ObstacleDistance>5</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.129498329216,0,0,0.0143839769707,</Scores>
+</State>
+<State>
+	<stateNumber>95</stateNumber>
+	<Features>
+		<Enemy-X>5</Enemy-X>
+		<ObstacleDistance>8</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0494923450968,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>96</stateNumber>
+	<Features>
+		<Enemy-X>3</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>3</DistancetoHole>
+	</Features>
+	<Scores>0.0240194428024,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>97</stateNumber>
+	<Features>
+		<Enemy-X>2</Enemy-X>
+		<ObstacleDistance>1</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.084,0,-0.06,-0.0740999542533,</Scores>
+</State>
+<State>
+	<stateNumber>98</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>9</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.014,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>99</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>10</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.014,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>100</stateNumber>
+	<Features>
+		<Enemy-X>9</Enemy-X>
+		<ObstacleDistance>9</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0615151779825,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>101</stateNumber>
+	<Features>
+		<Enemy-X>8</Enemy-X>
+		<ObstacleDistance>8</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.07095170024,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>102</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>3</ObstacleDistance>
+		<DistancetoHole>6</DistancetoHole>
+	</Features>
+	<Scores>0.129852756302,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>103</stateNumber>
+	<Features>
+		<Enemy-X>12</Enemy-X>
+		<ObstacleDistance>7</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0998120239755,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>104</stateNumber>
+	<Features>
+		<Enemy-X>7</Enemy-X>
+		<ObstacleDistance>8</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0585382791461,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>105</stateNumber>
+	<Features>
+		<Enemy-X>4</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>2</DistancetoHole>
+	</Features>
+	<Scores>0.0248194883579,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>106</stateNumber>
+	<Features>
+		<Enemy-X>8</Enemy-X>
+		<ObstacleDistance>6</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0841214463983,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>107</stateNumber>
+	<Features>
+		<Enemy-X>7</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>1</DistancetoHole>
+	</Features>
+	<Scores>0.0522964732625,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>108</stateNumber>
+	<Features>
+		<Enemy-X>1</Enemy-X>
+		<ObstacleDistance>1</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-0.084,0,0,-0.06,</Scores>
+</State>
+<State>
+	<stateNumber>109</stateNumber>
+	<Features>
+		<Enemy-X>0</Enemy-X>
+		<ObstacleDistance>2</ObstacleDistance>
+		<DistancetoHole>5</DistancetoHole>
+	</Features>
+	<Scores>0.01,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>110</stateNumber>
+	<Features>
+		<Enemy-X>3</Enemy-X>
+		<ObstacleDistance>8</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.014,0,0,-0.084,</Scores>
+</State>
+<State>
+	<stateNumber>111</stateNumber>
+	<Features>
+		<Enemy-X>2</Enemy-X>
+		<ObstacleDistance>8</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0238936812748,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>112</stateNumber>
+	<Features>
+		<Enemy-X>9</Enemy-X>
+		<ObstacleDistance>7</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0246444303567,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>113</stateNumber>
+	<Features>
+		<Enemy-X>3</Enemy-X>
+		<ObstacleDistance>9</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>0.0386081166931,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>114</stateNumber>
+	<Features>
+		<Enemy-X>1</Enemy-X>
+		<ObstacleDistance>8</ObstacleDistance>
+		<DistancetoHole>0</DistancetoHole>
+	</Features>
+	<Scores>-10.0006981383,0,0,0,</Scores>
+</State>
+<State>
+	<stateNumber>115</stateNumber>
+	<Features>
+		<Enemy-X>4</Enemy-X>
+		<ObstacleDistance>0</ObstacleDistance>
+		<DistancetoHole>3</DistancetoHole>
+	</Features>
+	<Scores>0.01994,0,0,-0.06,</Scores>
+</State>

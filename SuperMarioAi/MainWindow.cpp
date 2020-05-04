@@ -174,6 +174,7 @@ void MainWindow::updateTableView()
 		modelStateTableView->setData(index, row.at(i));
 
 	}
+	//TODO Das reicht nicht, die oberen For-Schleifen müssen auch verändert werden, sonst werden falsche Werte angezeigt!
 	lastAgentState = data->agentStateNumber;
 }
 void MainWindow::loadWholeTableView() {

@@ -36,7 +36,7 @@ void AiController::run() {
 					//std::cout << "Reward: " << reward << std::endl;
 					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, reward);
 					data->agentState = agent->getState(data->agentStateNumber);
-					//appControl->makeAction(data->nextAction);
+					appControl->makeAction(data->nextAction);
 					break;
 				case GameState::GameOver:
 					numberOfCycles++;
