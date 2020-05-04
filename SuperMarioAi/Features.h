@@ -12,6 +12,7 @@ public:
     int isUnderBlock();
     std::array<int, 2> closestEnemy();
     int distanceToObstacle();
+	bool isJumping(MarioAction lastAction);
     void setMarioPosition();
     //bool isJumping(); 
     int getNumberOfEnemies();
@@ -22,6 +23,7 @@ public:
     void calculateJumpBlocked(MarioAction);
     std::vector<MarioAction> getPossibleActions();
     void setJumpBlocked(bool jumpBlocked);
+    int obstacleHeight();
 
 private:
     bool jumpBlocked;

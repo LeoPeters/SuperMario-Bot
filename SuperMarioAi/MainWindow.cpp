@@ -178,12 +178,12 @@ void MainWindow::updateTableView()
 	for (int i = 0; i < data->lastFeatureValues.size(); i++) {
 		row.push_back(data->lastFeatureValues.at(i));
 	}
+	if(lastAgentState< Max_TABLE_SIZE){
 	for (int i = 0; i < row.size(); i++) {
-		if(lastAgentState<6000){
 		QModelIndex index = modelStateTableView->index(lastAgentState, i);
 		modelStateTableView->setData(index, row.at(i));
-		}
 
+	}
 	}
 
 	lastAgentState = data->agentStateNumber;

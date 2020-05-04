@@ -130,12 +130,19 @@ void EnvironmentCalculation::calculateFeatureVector()
             
             featureVector.push_back(temp);
             break;
+        case (int)MarioFeature::isJumping:
+            featureVector.push_back(features.isJumping(lastAction));
+            break;
+        case (int)MarioFeature::obstacleHeight:
+            featureVector.push_back(features.obstacleHeight());
+            break;
         /*case (int)MarioFeature::itemAvailable:
                 featureVector.push_back(features.isItemAvailable());
                 break;
         case (int)MarioFeature::closestItemX:
             featureVector.push_back(closestItem[0]);
             break;
+
         case (int)MarioFeature::closestItemY:
             featureVector.push_back(closestItem[1]);
             break;*/

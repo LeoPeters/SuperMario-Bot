@@ -13,6 +13,8 @@ public:
 		//itemAvailable, //2
 		//closestItemX, //GRIDRADIUS-1
 		//closestItemY, //GRIDRADIUS-1
+		isJumping,
+		obstacleHeight,
 		size
 	};
 
@@ -45,6 +47,12 @@ public:
 		
 		case distanceToHole:
 			string = "Distance to Hole";
+			break;
+		case isJumping:
+			string = "Is Jumping";
+			break;
+		case obstacleHeight:
+			string = "Obstacle Height";
 			break;
 		/*case itemAvailable:
 			string = "Item available";

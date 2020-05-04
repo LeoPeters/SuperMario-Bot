@@ -83,7 +83,13 @@ void AiGui::setUpTableView()
 {
 	stateTableView = new QTableView();
 	QStringList headerList;
-	modelStateTableView = new QStandardItemModel(NUMBER_OF_STATES, MarioAction::size + MarioFeature::size);
+	if (NUMBER_OF_STATES< Max_TABLE_SIZE) {
+
+		modelStateTableView = new QStandardItemModel(NUMBER_OF_STATES, MarioAction::size + MarioFeature::size);
+	}
+	else {
+		modelStateTableView = new QStandardItemModel(Max_TABLE_SIZE, MarioAction::size + MarioFeature::size);
+	}
 	for (int i = 0; i < MarioAction::size; i++) {
 		headerList.append("Q-Value: " + QString::fromStdString(MarioAction::toString(i)));
 	}

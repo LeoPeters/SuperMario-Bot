@@ -78,17 +78,17 @@ int Features::distanceToObstacle()
     return distance;
 }
 
-/*
-bool Features::isJumping()
+
+bool Features::isJumping(MarioAction lastAction)
 {
     if (validPosition(marioPositionY, 0, GRIDRADIUS - 2) &&
-        marioArray[marioPositionY + 1][marioPositionX] != int(MarioObject::ground))
+        lastAction==MarioAction::jump || marioArray[marioPositionY + 1][marioPositionX] != int(MarioObject::ground))
     {
         return true;
     }
     return false;
 }
-*/
+
 
 int Features::getNumberOfEnemies() {
     int numberOfEnemies = 0;
@@ -180,20 +180,33 @@ std::vector<MarioAction> Features::getPossibleActions()
 
     possibleActions.push_back(MarioAction::moveRight);
     possibleActions.push_back(MarioAction::moveLeft);
+    possibleActions.push_back(MarioAction::jump);
 
-    if (!jumpBlocked && validPosition(marioPositionY, 1, GRIDRADIUS - 2) &&
-        marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) &&
-        marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) {
+    //if (!jumpBlocked && validPosition(marioPositionY, 1, GRIDRADIUS - 2) &&
+    //    marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) &&
+    //    marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) {
 
-        possibleActions.push_back(MarioAction::jump);
-        possibleActions.push_back(MarioAction::highJump);
-    }
+    //    possibleActions.push_back(MarioAction::jump);
+    //    possibleActions.push_back(MarioAction::highJump);
+    //}
     return possibleActions;
 }
 
 void Features::setJumpBlocked(bool jumpBlocked)
 {
     this->jumpBlocked = jumpBlocked;
+}
+
+int Features::obstacleHeight()
+{
+    int obstacleX = marioPositionX + distanceToObstacle();
+    int obstacleHeight= marioPositionY;
+    while (obstacleHeight > 0 && marioArray[obstacleHeight][obstacleX]== (int)MarioObject::ground) {
+        obstacleHeight--;
+    }
+    obstacleHeight -= marioPositionY;
+    obstacleHeight *= -1;
+    return obstacleHeight;
 }
 
 bool Features::validPosition(int value, int lowBorder, int highBorder)

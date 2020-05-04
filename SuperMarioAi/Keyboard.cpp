@@ -90,11 +90,7 @@ void Keyboard::pressKey(char key)
 {
 	if (windowIsFound) {
 		PostMessage(window, WM_ACTIVATE, 0x1, 0);
-		Sleep(25);
 		PostMessage(window, WM_KEYDOWN, NULL, GetKeyDownScanCode(key));
-		Sleep(25);
-		PostMessage(window, WM_CHAR, NULL, GetKeyDownScanCode(key));
-
 	}
 	else {
 		cout << "Cant Press Button - Window doesn't exist!" << endl;
@@ -104,7 +100,7 @@ void Keyboard::releaseKey(char key)
 {
 	if (windowIsFound) {
 		PostMessage(window, WM_ACTIVATE, 0x1, 0);
-		Sleep(20);
+
 		PostMessage(window, WM_KEYUP, NULL, GetKeyUpScanCode(key));
 	}
 	else {
