@@ -40,15 +40,18 @@ private:
 public:
 	std::vector<std::string> actionList;
 	std::vector<int> featureValues;
+	std::vector<int> lastFeatureValues;
 	std::vector<MarioAction> possibleActions;
 	QPixmap simpleView;
 	QPixmap gameView;
 	GameState gameState;
 	State agentState;
+	State lastAgentState;
 	MarioAction nextAction;
 	int agentStateNumber;
 	int loopTime=0;
 	int loopCounter = 0;
 	int marioDeathCounter = 0;
 	int marioWinCounter = 0;
+	double reward = 0;
 };

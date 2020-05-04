@@ -152,8 +152,11 @@ std::array<int, 2> Features::closestItem() {
     return closestItem;
 }
 
-void Features::calculateJumpBlocked()
+void Features::calculateJumpBlocked(MarioAction lastAction)
 {
+    if (lastAction == MarioAction::jump || lastAction == MarioAction::highJump) {
+        onGroundCounter = 0;
+    }
     if (validPosition(marioPositionY, 0, GRIDRADIUS - 2) &&
         marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground)) {
         onGroundCounter++;
@@ -161,7 +164,8 @@ void Features::calculateJumpBlocked()
     else {
         onGroundCounter = 0;
     }
-    if (onGroundCounter >= 2) {
+   
+    if (onGroundCounter >= 1) {
         jumpBlocked = false;
     }
     else {

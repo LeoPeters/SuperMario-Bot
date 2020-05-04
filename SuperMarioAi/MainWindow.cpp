@@ -62,6 +62,9 @@ void MainWindow::updateGUi()
 	ui.winCounter->setText(QString::number(data->marioWinCounter));
 	ui.LoopTime->setText(QString::number(data->loopTime)+" ms");
 	ui.loopCount->setText(QString::number(data->loopCounter));
+	ui.reward->setText(QString::number(data->reward));
+
+
 }
 
 
@@ -153,28 +156,36 @@ void MainWindow::updateActionView() {
 		actionLabelList.at(index)->show();
 		actionLabelList.at(index)->setText(QString::fromStdString(MarioAction::toString(index)+"\n")+QString::number(data->agentState.getValue(index),'g',2));
 	}
-	if (data->nextAction != NULL) {
+	//if (data->nextAction != NULL) {
 		QPalette pal;
 		pal.setColor(QPalette::Window, QColor(Qt::darkGray));
 		actionLabelList.at(data->nextAction)->setPalette(pal);
-	}
+
+	//	
+	//}
+	//else {
+	//}
 }
 
 void MainWindow::updateTableView()
 {
+	
+
 	std::vector<double> row;
 	for (int i = 0; i < MarioAction::size; i++) {
-		row.push_back(data->agentState.getValue(i));
+		row.push_back(data->lastAgentState.getValue(i));
 	}
-	for (int i = 0; i < data->featureValues.size(); i++) {
-		row.push_back(data->featureValues.at(i));
+	for (int i = 0; i < data->lastFeatureValues.size(); i++) {
+		row.push_back(data->lastFeatureValues.at(i));
 	}
 	for (int i = 0; i < row.size(); i++) {
+		if(lastAgentState<6000){
 		QModelIndex index = modelStateTableView->index(lastAgentState, i);
 		modelStateTableView->setData(index, row.at(i));
+		}
 
 	}
-	//TODO Das reicht nicht, die oberen For-Schleifen müssen auch verändert werden, sonst werden falsche Werte angezeigt!
+
 	lastAgentState = data->agentStateNumber;
 }
 void MainWindow::loadWholeTableView() {

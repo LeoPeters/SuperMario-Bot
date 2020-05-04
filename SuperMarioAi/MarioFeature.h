@@ -6,7 +6,7 @@ public:
 	enum FeatureName {
 		//isUnderBlock, //2
 		closestEnemyX, //GRIDRADIUS-1 TODO(Wenn Enemy unter Mario, ist gleich zu kein Gegner da)
-		//closestEnemyY, //GRIDRADIUS-1
+		closestEnemyY, //GRIDRADIUS-1
 		distanceToObstacle, //GRIDRADIUS-1
 		//numberOfEnemies, //siehe Define MAX_NUMBER_ENEMIES
 		distanceToHole, //GRIDRADIUS-1
@@ -30,12 +30,12 @@ public:
 		case MarioFeature::closestEnemyX:
 			string = "Enemy-X";
 			break;
-		/*case MarioFeature::closestEnemyY:
+		case MarioFeature::closestEnemyY:
 			string = "Enemy-Y";
 			break;
-		case MarioFeature::isUnderBlock:
-			string = "Under Block";
-			break;*/
+		//case MarioFeature::isUnderBlock:
+		//	string = "Under Block";
+		//	break;
 		case MarioFeature::distanceToObstacle:
 			string = "Obstacle Distance";
 			break;

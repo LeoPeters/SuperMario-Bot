@@ -29,7 +29,9 @@ void MarioController::makeAction(MarioAction nextAction)
 		break;
 	case MarioAction::highJump:
 		//highJump();
-		keyboardThread = new std::thread(&MarioController::highJump, this);
+		
+		//keyboardThread = new std::thread(&MarioController::highJump, this);
+		keyboardThread = new std::thread(&MarioController::highJumpRight, this);
 		break;
 	case MarioAction::shoot:
 		//shoot();
@@ -53,9 +55,9 @@ HWND MarioController::startGame()
 	}
 	keyboard = new Keyboard(window);
 	this->window = window;
-	keyboard->pressAndReleaseKey(NUMPLUS, 100);
-	keyboard->pressAndReleaseKey(NUMMUL, 100);
-	keyboard->pressAndReleaseKey(NUMMIN, 100);
+	keyboard->pressAndReleaseKey(NUMPLUS, 120);
+	keyboard->pressAndReleaseKey(NUMMUL, 120);
+	keyboard->pressAndReleaseKey(NUMMIN, 120);
 	Sleep(1000);
 	isStarted = true;
 	return window;
@@ -64,7 +66,7 @@ HWND MarioController::startGame()
 void MarioController::pauseGame()
 {
 	if (isStarted) {
-			keyboard->pressAndReleaseKey(NUMMUL, 100);
+			keyboard->pressAndReleaseKey(NUMMUL, 120);
 			std::cout << "PressPause" << std::endl;
 	}
 	else {
@@ -75,7 +77,7 @@ void MarioController::pauseGame()
 void MarioController::unpauseGame()
 {
 	if (isStarted) {
-			keyboard->pressAndReleaseKey(NUMMUL, 100);
+			keyboard->pressAndReleaseKey(NUMMUL, 120);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;
@@ -85,7 +87,7 @@ void MarioController::unpauseGame()
 void MarioController::restartGame()
 {
 	if (isStarted) {
-		keyboard->pressAndReleaseKey(NUMMIN, 100);
+		keyboard->pressAndReleaseKey(NUMMIN, 120);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;
@@ -100,7 +102,7 @@ MarioController::~MarioController()
 void MarioController::moveLeft()
 {
 	if (isStarted) {
-		keyboard->pressAndReleaseKey(NUM4, 100);
+		keyboard->pressAndReleaseKey(NUM4, 120);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;
@@ -110,7 +112,7 @@ void MarioController::moveLeft()
 void MarioController::moveRight()
 {
 	if (isStarted) {
-		keyboard->pressAndReleaseKey(NUM6, 100);
+		keyboard->pressAndReleaseKey(NUM6, 120);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;
@@ -120,7 +122,9 @@ void MarioController::moveRight()
 void MarioController::jump()
 {
 	if (isStarted) {
-		keyboard->pressAndReleaseKey(NUM3, NUM6, 100, 50);
+
+		keyboard->pressAndReleaseKey(NUM3, 120);
+		keyboard->pressAndReleaseKey(NUM6, 60);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;
@@ -129,20 +133,27 @@ void MarioController::jump()
 
 void MarioController::highJump()
 {
+	
 	if (isStarted) {
-
-		keyboard->pressAndReleaseKey(NUM3,NUM6,500,250);
-
+		keyboard->pressAndReleaseKey(NUM3,520);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;
 	}
 }
 
+void MarioController::highJumpRight()
+{
+	std::thread jump = std::thread(&MarioController::highJump, this);
+	Sleep(380);
+	keyboard->pressAndReleaseKey(NUM6, 120);
+	jump.join();
+}
+
 void MarioController::shoot()
 {
 	if (isStarted) {
-		keyboard->pressAndReleaseKey(NUM1, 50);
+		keyboard->pressAndReleaseKey(NUM1, 60);
 	}
 	else {
 		std::cout << "Game isn't started" << std::endl;

@@ -21,45 +21,57 @@ AiController::AiController(int argc, char** argv) :
 }
 
 void AiController::run() {
+
 	while (isGuiRunning) {
 		while (isGameStarted) {
 			data->setGameView(screenCapture->captureScreen(PNG_LNAME));
 
 			auto start = std::chrono::high_resolution_clock::now();
 			if (!gui->getMainWindow()->getIsPaused()) {
+				data->lastAgentState = data->agentState;
+				data->lastFeatureValues = data->featureValues;
 				data->gameState = simplifier->simplifyImage(simplifyVec);
 				switch (data->gameState) {
 				case GameState::MarioAlive:
 					data->loopCounter++;
 					data->setSimpleView(*simplifyVec);
-					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
-					//std::cout << "Reward: " << reward << std::endl;
-					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, reward);
+					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &data->reward);
+					//std::cout << "Reward: " << data->reward << std::endl;
+				
+					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
 					data->agentState = agent->getState(data->agentStateNumber);
 					appControl->makeAction(data->nextAction);
 					break;
 				case GameState::GameOver:
 					numberOfCycles++;
+					if (numberOfCycles % 500 == 0) {
+						saveMemory();
+					}
 					data->marioDeathCounter++;
 					data->loopCounter++;
 					environment->gameOver();
-					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
-					agent->calculateAction(data->agentStateNumber, data->possibleActions, reward);
+					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &data->reward);
+					agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
 					appControl->restartGame();
 					break;
 				case GameState::Win:
 					numberOfCycles++;
+					if (numberOfCycles % 500 == 0) {
+						numberOfCycles = 0;
+						saveMemory();
+					}
 					data->marioWinCounter++;
 					data->loopCounter++;
 					environment->gameWin();
-					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &reward);
-					agent->calculateAction(data->agentStateNumber, data->possibleActions, reward);
+					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &data->reward);
+					agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
 					appControl->restartGame();
 					break;
 				default:
 					break;
 				}
 			}
+			
 			data->featureValues = environment->getFeatureVector(data->agentStateNumber);
 			auto stop = std::chrono::high_resolution_clock::now();
 			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);

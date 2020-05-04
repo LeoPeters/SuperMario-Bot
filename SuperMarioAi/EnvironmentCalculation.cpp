@@ -60,7 +60,7 @@ void EnvironmentCalculation::calculateStateAndActions(MarioAction lastAction, st
         *reward = getReward();
         features.setMarioArray(tempArray);
         features.setMarioPosition();
-        features.calculateJumpBlocked();
+        features.calculateJumpBlocked(lastAction);
         *possibleActions = features.getPossibleActions();
         calculateFeatureVector();
         *state = calculateStateNumber();
@@ -82,6 +82,10 @@ double EnvironmentCalculation::getReward()
     double reward = 0;
     if (movedRight()) {
         reward = REWARDMOVERIGHT;
+    }
+    if (lastAction == MarioAction::moveRight && features.closestEnemy().at(0) == 1 && features.closestEnemy().at(0) == 0) {
+        reward += -1;
+        std::cout << "afsd" << std::endl;
     }
     return reward;
 }
@@ -108,12 +112,12 @@ void EnvironmentCalculation::calculateFeatureVector()
         case (int)MarioFeature::closestEnemyX:
             featureVector.push_back(closestEnemy[0]); //X
             break;
-        /*case (int)MarioFeature::closestEnemyY:
+        case (int)MarioFeature::closestEnemyY:
             featureVector.push_back(closestEnemy[1]); //Y
             break;
-        case (int)MarioFeature::isUnderBlock:
-            featureVector.push_back(features.isUnderBlock());
-            break;*/
+        //case (int)MarioFeature::isUnderBlock:
+        //    featureVector.push_back(features.isUnderBlock());
+        //    break;
         case (int)MarioFeature::distanceToObstacle:
             featureVector.push_back(features.distanceToObstacle());
         break;

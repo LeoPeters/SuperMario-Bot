@@ -7,7 +7,7 @@
 #define ENEMY 3
 #define ITEM 4
 #define WINNINGCONDS 5
-#define GRIDRADIUS 13 //5x5grid
+#define GRIDRADIUS 15 //5x5grid
 #define MAPPINGDATA 4 //positions from to where
 #define X_Start 0 //For Mappings Array 
 #define Y_Start 1
