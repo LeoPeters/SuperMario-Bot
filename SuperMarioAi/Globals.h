@@ -69,10 +69,10 @@
 #define ALPHA 0.6 //Learning rate
 #define GAMMA 0.99 //Discount factor
 #define EPSILON 0.1 //Propability of choosing a random action
-#define REWARDMOVERIGHT 0.07
+#define REWARDOBSTACLE 5
 #define REWARDSTEP -0.1
-#define REWARDLOSE -10
-#define REWARDWIN 100
+#define REWARDLOSE -30
+#define REWARDWIN 150
 #define INIT_STATE 0
 
 

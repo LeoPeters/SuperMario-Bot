@@ -32,5 +32,6 @@ private:
 
     bool validPosition(int value, int lowBorder, int highBorder);
     int distance(int x, int y);
+    bool conqueredObstacle();
 
 };

@@ -79,7 +79,7 @@ double EnvironmentCalculation::getReward()
 {
     double reward = REWARDSTEP;
     if (movedRight()) {
-        reward = REWARDMOVERIGHT;
+        reward = REWARDOBSTACLE;
     }
     /*
     if (lastAction == MarioAction::moveRight && featureVector[(int)MarioFeature::closestEnemyX] == 1 && featureVector[(int)MarioFeature::closestEnemyY] == 0) {
@@ -88,13 +88,13 @@ double EnvironmentCalculation::getReward()
     return reward;
 }
 
-bool EnvironmentCalculation::movedRight() 
-{
-    if (lastAction == MarioAction::moveRight && (featureVector[(int) MarioFeature::distanceToObstacle] > 1 || featureVector[(int)MarioFeature::distanceToObstacle] == 0)) {
-        return true;
-    }
-    return false;
-}
+//bool EnvironmentCalculation::movedRight() 
+//{
+//    if (lastAction == MarioAction::moveRight && (featureVector[(int) MarioFeature::distanceToObstacle] > 1 || featureVector[(int)MarioFeature::distanceToObstacle] == 0)) {
+//        return true;
+//    }
+//    return false;
+//}
 
 
 void EnvironmentCalculation::calculateFeatureVector() 

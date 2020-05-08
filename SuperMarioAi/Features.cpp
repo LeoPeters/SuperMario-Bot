@@ -29,6 +29,10 @@ void Features::setMarioPosition()
     }
 }
 
+bool Features::conqueredObstacle() {
+
+}
+
 int Features::isUnderBlock()
 {
     if ((marioPositionY >= 1 && marioArray[marioPositionY - 1][marioPositionX] == int(MarioObject::ground)) ||
