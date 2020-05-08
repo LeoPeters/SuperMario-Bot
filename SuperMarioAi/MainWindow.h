@@ -1,7 +1,6 @@
 #ifndef mainwindow_h
 #define mainwindow_h
 #include <QMainWindow>
-#include "QValueTable.h"
 #include "IGuiObserver.h"
 #include "MarioAction.h"
 #include <QStandardItemModel>

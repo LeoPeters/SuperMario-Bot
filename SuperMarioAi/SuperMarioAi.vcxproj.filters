@@ -166,9 +166,6 @@
     <ClCompile Include="Testing.cpp">
       <Filter>Source Files\Simplifier</Filter>
     </ClCompile>
-    <ClCompile Include="QValueTable.cpp">
-      <Filter>Source Files\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="MemoryArray.cpp">
       <Filter>Source Files\Simplifier</Filter>
     </ClCompile>
@@ -192,6 +189,12 @@
     </ClCompile>
     <ClCompile Include="XMLReader.cpp">
       <Filter>Source Files\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentDummy.cpp">
+      <Filter>Source Files\Dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="rewardCalculator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -314,9 +317,6 @@
     <ClInclude Include="FeatureWidget.h">
       <Filter>Header Files\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="QValueTable.h">
-      <Filter>Header Files\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="MemoryArray.h">
       <Filter>Header Files\Simplifier</Filter>
     </ClInclude>
@@ -346,6 +346,15 @@
     </ClInclude>
     <ClInclude Include="XMLReader.h">
       <Filter>Header Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentDummy.h">
+      <Filter>Header Files\Dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rewardCalculator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -34,6 +34,7 @@ private:
 	void releaseAll();
 	void pressKey();
 	std::array<bool, MAX_KEYBOARD_INPUTS> keyBool;
+	std::array<bool, MAX_KEYBOARD_INPUTS> lastkeyBool;
 	std::array<char, MAX_KEYBOARD_INPUTS> keyValue = {NUM0,NUM1,NUM2 ,NUM3 ,NUM4 ,NUM5 ,NUM6 ,NUM7 ,NUM8 ,NUM9 };
 	bool isPaused=true;
 	bool isStarted = false;

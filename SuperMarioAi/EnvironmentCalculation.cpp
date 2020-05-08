@@ -7,6 +7,7 @@
 #include "MarioAction.h"
 #include "MarioFeature.h"
 #include "Features.h"
+#include "rewardCalculator.h"
 
 EnvironmentCalculation::EnvironmentCalculation() :
     statesSize(1),
@@ -57,7 +58,7 @@ void EnvironmentCalculation::calculateStateAndActions(MarioAction lastAction, st
         features.setJumpBlocked(false);
     } else {
         this->lastAction = lastAction;
-        *reward = getReward();
+        *reward = getReward(tempArray);
         features.setMarioArray(tempArray);
         features.setMarioPosition();
         features.calculateJumpBlocked(lastAction);
@@ -77,16 +78,23 @@ void EnvironmentCalculation::gameOver()
     gameLost = true;
 }
 
-double EnvironmentCalculation::getReward() 
+double EnvironmentCalculation::getReward(std::vector<std::vector<int>> tempArray)
 {
+    RewardCalculator calc;
+    calc.calculateReward(tempArray);
     double reward = 0;
-    if (movedRight()) {
-        reward = REWARDMOVERIGHT;
+    if (lastAction == MarioAction::moveRight && (featureVector[(int)MarioFeature::distanceToObstacle] == 1)) {
+        reward = -1.5;
     }
-    if (lastAction == MarioAction::moveRight && features.closestEnemy().at(0) == 1 && features.closestEnemy().at(0) == 0) {
-        reward += -1;
-        std::cout << "afsd" << std::endl;
+
+    if (!features.canMoveLeft()) {
+        reward -= 2;
     }
+
+//    if (features.distanceToObstacle() > 1 && lastAction == MarioAction::moveRight ) {
+//        reward += 0.8;
+//    }
+
     return reward;
 }
 

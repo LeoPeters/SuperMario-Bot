@@ -5,6 +5,7 @@
 #include "AiController.h"
 #include "EnvironmentCalculation.h"
 #include "Agent.h"
+#include "AgentDummy.h"
 
 AiController::AiController(int argc, char** argv) :
 	screenCapture(NULL),
@@ -21,16 +22,17 @@ AiController::AiController(int argc, char** argv) :
 }
 
 void AiController::run() {
-
+	 
 	while (isGuiRunning) {
 		while (isGameStarted) {
 			data->setGameView(screenCapture->captureScreen(PNG_LNAME));
 
-			auto start = std::chrono::high_resolution_clock::now();
 			if (!gui->getMainWindow()->getIsPaused()) {
+			auto start = std::chrono::high_resolution_clock::now();
 				data->lastAgentState = data->agentState;
 				data->lastFeatureValues = data->featureValues;
 				data->gameState = simplifier->simplifyImage(simplifyVec);
+				auto stop = std::chrono::high_resolution_clock::now();
 				switch (data->gameState) {
 				case GameState::MarioAlive:
 					data->loopCounter++;
@@ -40,7 +42,7 @@ void AiController::run() {
 				
 					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
 					data->agentState = agent->getState(data->agentStateNumber);
-					appControl->makeAction(data->nextAction);
+					//appControl->makeAction(data->nextAction);
 					break;
 				case GameState::GameOver:
 					numberOfCycles++;
@@ -68,15 +70,16 @@ void AiController::run() {
 					appControl->restartGame();
 					break;
 				default:
+
 					break;
 				}
-			}
-			
-			data->featureValues = environment->getFeatureVector(data->agentStateNumber);
-			auto stop = std::chrono::high_resolution_clock::now();
 			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 			auto fps = duration.count();
 			data->loopTime = (int)fps;
+			}
+			
+			data->featureValues = environment->getFeatureVector(data->agentStateNumber);
+			
 			gui->update();
 		}
 		Sleep(300);

@@ -5,7 +5,7 @@ class MarioAction {
 public:
 	enum ActionName {
 	moveRight,
-	highJump,
+	jumpRight,
 	jump,
 	moveLeft,
 	shoot,
@@ -29,8 +29,8 @@ public:
 		case MarioAction::jump:
 			string = "Jump";
 			break;
-		case MarioAction::highJump:
-			string = "High Jump";
+		case MarioAction::jumpRight:
+			string = "Jump Right";
 			break;
 		case MarioAction::moveLeft:
 			string = "Left";

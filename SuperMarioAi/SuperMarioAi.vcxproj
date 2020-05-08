@@ -85,6 +85,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="AgentDummy.cpp" />
     <ClCompile Include="AiController.cpp" />
     <ClCompile Include="AiData.cpp" />
     <ClCompile Include="AiFactory.cpp" />
@@ -100,7 +101,7 @@
     <ClCompile Include="ImageLibrary.cpp" />
     <ClCompile Include="ImageResizer.cpp" />
     <ClCompile Include="EnvironmentCalculation.cpp" />
-    <ClCompile Include="QValueTable.cpp" />
+    <ClCompile Include="rewardCalculator.cpp" />
     <ClCompile Include="Save.cpp" />
     <ClCompile Include="SimplifierDummy.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="AgentDummy.h" />
     <ClInclude Include="AiData.h" />
     <ClInclude Include="Deathcondition.h" />
     <ClInclude Include="Features.h" />
@@ -137,7 +139,8 @@
     <ClInclude Include="MarioFeature.h" />
     <ClInclude Include="FeatureWidget.h" />
     <ClInclude Include="MemoryArray.h" />
-    <ClInclude Include="QValueTable.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="rewardCalculator.h" />
     <ClInclude Include="Save.h" />
     <ClInclude Include="testing.h" />
     <ClInclude Include="MarioObject.h" />

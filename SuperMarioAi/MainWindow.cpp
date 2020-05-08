@@ -3,7 +3,6 @@
 #include <iostream>
 #include "AiGui.h"
 #include "MarioFeature.h"
-#include "QValueTable.h"
 #include "State.h"
 #include "MemoryFinder.h"
 #include "MainWindow.h"
@@ -115,7 +114,6 @@ bool MainWindow::getIsPaused() {
 
 void MainWindow::setFeatureList(QListWidget* featureList, std::vector<FeatureWidget*> featureWidgetList)
 {
-
 	ui.FeatureValueLayout->addWidget( featureList);
 	this->featureWidgetList = featureWidgetList;
 }
@@ -156,15 +154,11 @@ void MainWindow::updateActionView() {
 		actionLabelList.at(index)->show();
 		actionLabelList.at(index)->setText(QString::fromStdString(MarioAction::toString(index)+"\n")+QString::number(data->agentState.getValue(index),'g',2));
 	}
-	//if (data->nextAction != NULL) {
 		QPalette pal;
 		pal.setColor(QPalette::Window, QColor(Qt::darkGray));
 		actionLabelList.at(data->nextAction)->setPalette(pal);
 
-	//	
-	//}
-	//else {
-	//}
+
 }
 
 void MainWindow::updateTableView()

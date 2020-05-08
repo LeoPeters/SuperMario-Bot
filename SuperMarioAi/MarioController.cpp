@@ -1,6 +1,5 @@
 #include "MarioController.h"
 #include "KeyboardDefines.h"
-
 #include "MarioWindow.h"
 #include <iostream>
 MarioController::MarioController() :
@@ -12,7 +11,6 @@ MarioController::MarioController() :
 void MarioController::makeAction(MarioAction nextAction)
 {
 	isPressing = false;
-
 	if (keyboardThread != NULL) {
 		keyboardThread->join();
 	}
@@ -36,9 +34,10 @@ void MarioController::makeAction(MarioAction nextAction)
 		//keyboardThread = new std::thread(&MarioController::jump, this);
 
 		break;
-	case MarioAction::highJump:
+	case MarioAction::jumpRight:
 		//highJump();
 		keyBool[3] = true;
+		keyBool[6] = true;
 		//keyboardThread = new std::thread(&MarioController::highJump, this);
 		//keyboardThread = new std::thread(&MarioController::highJumpRight, this);
 
@@ -171,23 +170,27 @@ void MarioController::shoot()
 }
 void MarioController::releaseAll() {
 	for (int i = 0; i < keyBool.size(); i++) {
-		if (!keyBool[i]) {
+		if (!keyBool[i]&&lastkeyBool[i]) {
 			keyboard->releaseKey(keyValue[i]);
+
 		}
 	}
 }
 
 void MarioController::pressKey()
 {
-	int k = 5;
+	for (int i = 0; i < 4; i++) {
+		releaseAll();
+	
+	}
 	while (isPressing) {
-			releaseAll();
+		Sleep(15);
 		for (int i = 0; i < keyBool.size(); i++) {
 			if (keyBool[i]) {
 				keyboard->pressKey(keyValue[i]);
 			}
 		}
-		Sleep(5);
+		
 	}
-	
+	lastkeyBool = keyBool;
 }

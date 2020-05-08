@@ -13,6 +13,7 @@ public:
     std::array<int, 2> closestEnemy();
     int distanceToObstacle();
 	bool isJumping(MarioAction lastAction);
+	bool canMoveLeft();
     void setMarioPosition();
     //bool isJumping(); 
     int getNumberOfEnemies();
@@ -24,7 +25,6 @@ public:
     std::vector<MarioAction> getPossibleActions();
     void setJumpBlocked(bool jumpBlocked);
     int obstacleHeight();
-
 private:
     bool jumpBlocked;
     int onGroundCounter;

@@ -40,10 +40,10 @@ private:
     bool gameWon;
     bool gameLost;
     MarioAction lastAction;
-    
+  
     void calculateFeatureVector();
     int calculateStateNumber();
-    double getReward();
+    double getReward(std::vector<std::vector<int>> tempArray);
     bool movedRight();
     bool validPosition(int value, int lowBorder, int highBorder);
 };
