@@ -5,6 +5,7 @@ public:
 	int right = 0;
 	int left = 0;
 	bool marioHasArrived = false;
-	bool isVisible = false;
+	bool rewardPaid = false;
+	int arrivedCounter = 0;
 };
 

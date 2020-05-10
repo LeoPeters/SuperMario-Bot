@@ -7,7 +7,6 @@
 #include "MarioAction.h"
 #include "MarioFeature.h"
 #include "Features.h"
-#include "rewardCalculator.h"
 
 EnvironmentCalculation::EnvironmentCalculation() :
     statesSize(1),
@@ -80,20 +79,20 @@ void EnvironmentCalculation::gameOver()
 
 double EnvironmentCalculation::getReward(std::vector<std::vector<int>> tempArray)
 {
-    RewardCalculator calc;
-    calc.calculateReward(tempArray);
-    double reward = 0;
-    if (lastAction == MarioAction::moveRight && (featureVector[(int)MarioFeature::distanceToObstacle] == 1)) {
-        reward = -1.5;
-    }
+    
+  
+    double reward = calc.calculateReward(tempArray,lastAction);
+    //if (lastAction == MarioAction::moveRight && (featureVector[(int)MarioFeature::distanceToObstacle] == 1)) {
+    //    reward = -1.5;
+    //}
 
     if (!features.canMoveLeft()) {
         reward -= 2;
     }
 
-//    if (features.distanceToObstacle() > 1 && lastAction == MarioAction::moveRight ) {
-//        reward += 0.8;
-//    }
+    //if (features.distanceToObstacle() > 1 && lastAction == MarioAction::moveRight ) {
+    //    reward += 0.8;
+    //}
 
     return reward;
 }

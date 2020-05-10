@@ -19,6 +19,7 @@
 #include "Globals.h"
 #include "IEnvironment.h"
 #include "Features.h"
+#include "rewardCalculator.h"
 
 
 class EnvironmentCalculation : public IEnvironment {
@@ -40,7 +41,7 @@ private:
     bool gameWon;
     bool gameLost;
     MarioAction lastAction;
-  
+    RewardCalculator calc;
     void calculateFeatureVector();
     int calculateStateNumber();
     double getReward(std::vector<std::vector<int>> tempArray);

@@ -6,15 +6,17 @@
 class RewardCalculator
 {
 public :
-    double calculateReward(std::vector<std::vector<int>> tempArra);
+    double calculateReward(std::vector<std::vector<int>> tempArra,MarioAction lastAction);
 private:
     int marioPosX;
     int marioPosY;
-    std::array<Obstacle,3> obstacleArray;
+    std::vector<Obstacle> obstacleList;
     MarioAction lastAction;
     std::vector<std::vector<int>> simpleArray;
-    void calculateObstacle();
+    std::vector<Obstacle> calculateObstacle();
     void calculateMarioPosition();
+    void updateObstacleList(std::vector<Obstacle> obstacleList);
+    double calculateObstacleReward();
 
 };
 
