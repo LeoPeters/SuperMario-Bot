@@ -6,7 +6,7 @@
 #include <chrono>
 #include "ScreenCapture.h"
 
-using namespace std;
+//using namespace std;
 
 ScreenCapture::ScreenCapture(HWND window) {
 	init(window);
@@ -39,7 +39,7 @@ void ScreenCapture::captureScreen(byte* captureByte, int* ImageSize) {
 		}
 	}
 	else {
-		cout << "Cant Capture Image - No window exist" << endl;
+		std::cout << "Cant Capture Image - No window exist" << std::endl;
 	}
 }
 HBITMAP ScreenCapture::captureScreen() {
@@ -61,7 +61,7 @@ HBITMAP ScreenCapture::captureScreen(LPCTSTR fileName) {
 
 	}
 	else {
-		cout << "Can't Capture Image - window  doesn't exist" << endl;
+		std::cout << "Can't Capture Image - window  doesn't exist" << std::endl;
 	}
 	return image;
 }

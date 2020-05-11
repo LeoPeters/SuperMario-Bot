@@ -196,6 +196,9 @@
     <ClCompile Include="rewardCalculator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataExtractor.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui">
@@ -355,6 +358,9 @@
     </ClInclude>
     <ClInclude Include="rewardCalculator.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataExtractor.h">
+      <Filter>Header Files\Simplifier</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
