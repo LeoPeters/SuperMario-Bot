@@ -15,14 +15,27 @@ AiController::AiController(int argc, char** argv) :
 	appControl(NULL),
 	numberOfCycles(0)
 {
+	std::vector<MarioFeature> activeFeatures;
+	activeFeatures.push_back(MarioFeature::closestEnemyX);
+	activeFeatures.push_back(MarioFeature::closestEnemyY);
+	activeFeatures.push_back(MarioFeature::distanceToHole);
+	activeFeatures.push_back(MarioFeature::isEnemyLeft);
+	activeFeatures.push_back(MarioFeature::isRightFromObstacle);
+	activeFeatures.push_back(MarioFeature::numberOfEnemies);
+	activeFeatures.push_back(MarioFeature::obstacleHeight);
+	activeFeatures.push_back(MarioFeature:: isHoleLeft);
+
+
 	agent = new Agent();
 	environment = new EnvironmentCalculation();
-	gui = new AiGui(argc, argv, this);
+	gui = new AiGui(argc, argv, this, activeFeatures);
 	data = gui->getData();
+	environment->setActiveFeatures(activeFeatures);
 }
 
 void AiController::run() {
-	 
+	
+	
 	while (isGuiRunning) {
 		while (isGameStarted) {
 			data->setGameView(screenCapture->captureScreen(PNG_LNAME));

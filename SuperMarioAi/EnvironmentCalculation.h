@@ -20,7 +20,7 @@
 #include "IEnvironment.h"
 #include "Features.h"
 #include "rewardCalculator.h"
-
+#include "MarioFeature.h"
 
 class EnvironmentCalculation : public IEnvironment {
 public:
@@ -33,6 +33,7 @@ public:
     std::vector<int> getFeatureVector(int i) override;
     int getStatesSize() override;
     void setStatesSize(int statesSize) override;
+    void setActiveFeatures(std::vector<MarioFeature> activeFeatures)override;
 private:
     Features features;
     std::array<std::vector<int>, NUMBER_OF_STATES> states;
@@ -47,6 +48,7 @@ private:
     double getReward(std::vector<std::vector<int>> tempArray);
     bool movedRight();
     bool validPosition(int value, int lowBorder, int highBorder);
+    std::vector<MarioFeature> activeFeatures;
 };
 
 #endif MARIOSTATEFEATURES_H

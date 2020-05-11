@@ -6,10 +6,28 @@ double RewardCalculator::calculateReward(std::vector<std::vector<int>> tempArra,
 {
 	double reward=0;
 	if (tempArra.size()>0) {
+		for (int y = marioPosY; y < GRIDRADIUS - 1; y++) {
+			if ((lastAction == MarioAction::jump || lastAction == MarioAction::jumpRight) && simpleArray.at(y).at(marioPosX)== (int)MarioObject::empty) {
+				reward = 1;
+			}
+			else {
+				reward = 0;
+			}
+		}
 		simpleArray = tempArra;
 		calculateMarioPosition();
 		updateObstacleList(calculateObstacle());
-		reward = calculateObstacleReward();
+		reward += calculateObstacleReward();
+		double reward2 = 0;
+		for (int y = marioPosY; y < GRIDRADIUS - 1; y++) {
+			if (lastAction!=MarioAction::moveLeft&& y < GRIDRADIUS - 1 && marioPosX > 0 && simpleArray.at(y + 1).at(marioPosX - 1) == (int)MarioObject::empty) {
+				reward2 = 5;
+			}
+			else {
+				reward2 = 0;
+			}
+		}
+		reward += reward2;
 	}
 	return reward;
 }
@@ -92,12 +110,21 @@ void RewardCalculator::updateObstacleList(std::vector<Obstacle> obstacleList)
 
 double RewardCalculator::calculateObstacleReward()
 {
+	double reward = 0;
 	for (int i = 0; i < this->obstacleList.size(); i++) {
 		if (this->obstacleList.at(i).marioHasArrived && !this->obstacleList.at(i).rewardPaid) {
 			this->obstacleList.at(i).rewardPaid = true;
-			return REWARD_OBSTACLE_ARRIVED;
+			this->obstacleList.at(i).punished = false;
+			reward+= REWARD_OBSTACLE_ARRIVED;
+		}
+		if (this->obstacleList.at(i).marioHasArrived && !this->obstacleList.at(i).punished && this->obstacleList.at(i).left>marioPosX) {
+			this->obstacleList.at(i).rewardPaid = false;
+			this->obstacleList.at(i).marioHasArrived = false;
+			this->obstacleList.at(i).punished = true;
+			reward -= REWARD_OBSTACLE_ARRIVED*1.25;
+
 		}
 	}
 
-	return 0.0;
+	return reward;
 }

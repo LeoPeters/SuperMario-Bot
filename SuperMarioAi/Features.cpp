@@ -181,21 +181,14 @@ std::array<int, 2> Features::closestItem() {
 
 void Features::calculateJumpBlocked(MarioAction lastAction)
 {
-    if (marioPositionY > GRIDRADIUS - 2) {
-        return ;
-    }
+
     if (lastAction == MarioAction::jump || lastAction == MarioAction::jumpRight) {
-        onGroundCounter = 0;
-    }
-    if (validPosition(marioPositionY, 0, GRIDRADIUS - 2) &&
-        marioArray[(marioPositionY + 1)][marioPositionX] == int(MarioObject::ground)) {
         onGroundCounter++;
-    }
-    else {
+    }else {
         onGroundCounter = 0;
     }
    
-    if (onGroundCounter >= 1) {
+    if (onGroundCounter < 8) {
         jumpBlocked = false;
     }
     else {
@@ -203,6 +196,35 @@ void Features::calculateJumpBlocked(MarioAction lastAction)
     }
 }
 
+int Features::getEnemyIsLeft() {
+    for (int y = 0; y < GRIDRADIUS; y++) {
+        if (marioPositionX>0&&marioArray[y][marioPositionX - 1] == (int)MarioObject::enemy) {
+            return 1;
+        }
+        if (marioPositionX > 1 && marioArray[y][marioPositionX - 2] == (int)MarioObject::enemy) {
+        }
+    }
+    return 0;
+}
+int Features::getHoleIsLeft() {
+    if (marioPositionX > 0 && marioPositionY < GRIDRADIUS-1) {
+        if (marioArray[(marioPositionY+1)][(marioPositionX )]==(int)MarioObject::ground && marioArray[(marioPositionY + 1)][(marioPositionX-1)] == (int)MarioObject::empty) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int Features::getRightFromObstacle(){
+
+        for (int x = 0; x < marioPositionX; x++) {
+            if (marioArray[marioPositionY][x] == (int)MarioObject::ground) {
+                return 1;
+            }
+    }
+    return 0;
+
+}
 std::vector<MarioAction> Features::getPossibleActions()
 {
     //TODO MarioAction::shoot        
@@ -210,9 +232,12 @@ std::vector<MarioAction> Features::getPossibleActions()
 
     possibleActions.push_back(MarioAction::moveRight);
     possibleActions.push_back(MarioAction::moveLeft);
+    if (!jumpBlocked) {
+
     possibleActions.push_back(MarioAction::jump);
     possibleActions.push_back(MarioAction::jumpRight);
 
+    }
         //    marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) &&
         //    marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) 
     //if (!jumpBlocked && validPosition(marioPositionY, 1, GRIDRADIUS - 2) &&

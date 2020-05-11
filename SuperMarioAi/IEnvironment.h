@@ -3,6 +3,7 @@
 #include <vector>
 #include <array>
 #include "MarioAction.h"
+#include "MarioFeature.h"
 
 class IEnvironment {
 public:
@@ -13,5 +14,6 @@ public:
 	virtual void gameWin() = 0;
 	virtual int getStatesSize() = 0;
 	virtual void setStatesSize(int statesSize) = 0;
+	virtual void setActiveFeatures(std::vector<MarioFeature> activeFeatures) = 0;
 };
 #endif
