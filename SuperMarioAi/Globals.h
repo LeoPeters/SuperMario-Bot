@@ -77,7 +77,7 @@
 #define INIT_STATE 0
 
 #define MAX_KEYBOARD_INPUTS 10
-#define Max_TABLE_SIZE 3100
+#define Max_TABLE_SIZE 60000
 
 #define SAVEFILE_PATH "saves/"
 #endif

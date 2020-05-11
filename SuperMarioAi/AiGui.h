@@ -4,11 +4,12 @@
 #include "MarioAction.h"
 #include "AiData.h"
 #include "MainWindow.h"
+#include "MarioFeature.h"
 
 class AiGui
 {
 public:
-	AiGui(int argc, char** argv, IGuiObserver*);
+	AiGui(int argc, char** argv, IGuiObserver*, std::vector<MarioFeature> activeMarioFeature);
 	AiData* getData();
 	void runGui();
 	void end();
@@ -26,6 +27,7 @@ private:
 	QStandardItemModel* modelStateTableView;
 	QLabel* agentStateView;
 	QLabel* gameStateView;
+	std::vector<MarioFeature> activeMarioFeatures;
 private:
 	AiData* data;
 private:

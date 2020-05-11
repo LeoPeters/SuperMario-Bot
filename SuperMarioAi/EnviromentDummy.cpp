@@ -20,6 +20,10 @@ void EnvironmentDummy::setStatesSize(int statesSize)
 {
 }
 
+void EnvironmentDummy::setActiveFeatures(std::vector<MarioFeature> activeFeatures)
+{
+}
+
 void EnvironmentDummy::gameOver() {
 
 }

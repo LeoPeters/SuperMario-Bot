@@ -4,16 +4,16 @@ class MarioFeature
 {
 public:
 	enum FeatureName {
-		//isUnderBlock, //2
+		isUnderBlock, //2
 		closestEnemyX, //GRIDRADIUS-1 TODO(Wenn Enemy unter Mario, ist gleich zu kein Gegner da)
 		closestEnemyY, //GRIDRADIUS-1
 		distanceToObstacle, //GRIDRADIUS-1
-		//numberOfEnemies, //siehe Define MAX_NUMBER_ENEMIES
+		numberOfEnemies, //siehe Define MAX_NUMBER_ENEMIES
 		distanceToHole, //GRIDRADIUS-1
-		//itemAvailable, //2
-		//closestItemX, //GRIDRADIUS-1
-		//closestItemY, //GRIDRADIUS-1
-		//isJumping,
+		itemAvailable, //2
+		closestItemX, //GRIDRADIUS-1
+		closestItemY, //GRIDRADIUS-1
+		isJumping,
 		obstacleHeight,
 		isRightFromObstacle,
 		isEnemyLeft,
@@ -38,22 +38,22 @@ public:
 		case MarioFeature::closestEnemyY:
 			string = "Enemy-Y";
 			break;
-		//case MarioFeature::isUnderBlock:
-		//	string = "Under Block";
-		//	break;
+		case MarioFeature::isUnderBlock:
+			string = "Under Block";
+			break;
 		case MarioFeature::distanceToObstacle:
 			string = "Obstacle Distance";
 			break;
-		/*case numberOfEnemies:
+		case numberOfEnemies:
 			string = "Number of Enemies";
-			break;*/
+			break;
 		
 		case distanceToHole:
 			string = "Distance to Hole";
 			break;
-		//case isJumping:
-		//	string = "Is Jumping";
-		//	break;
+		case isJumping:
+			string = "Is Jumping";
+			break;
 		case obstacleHeight:
 			string = "Obstacle Height";
 			break;
@@ -66,7 +66,7 @@ public:
 		case isRightFromObstacle:
 			string = "Right from Obstacle";
 			break;
-		/*case itemAvailable:
+		case itemAvailable:
 			string = "Item available";
 			break;
 		case closestItemX:
@@ -74,7 +74,7 @@ public:
 			break;
 		case closestItemY:
 			string = "Item-Y";
-			break;*/
+			break;
 		default:
 			string = "NULL";
 			break;

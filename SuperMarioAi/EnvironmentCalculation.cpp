@@ -40,6 +40,11 @@ void EnvironmentCalculation::setStatesSize(int statesSize)
     this->statesSize = statesSize;
 }
 
+void EnvironmentCalculation::setActiveFeatures(std::vector<MarioFeature> activeFeatures)
+{
+    this->activeFeatures = activeFeatures;
+}
+
 void EnvironmentCalculation::calculateStateAndActions(MarioAction lastAction, std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state, double* reward) 
 {
     if (gameWon) 
@@ -113,55 +118,52 @@ void EnvironmentCalculation::calculateFeatureVector()
     std::array<int, 2> closestItem = features.closestItem();
 
     int temp = features.distanceToHole();
-    for (int i = 0; i < MarioFeature::size; i++) 
+    for (int i = 0; i < activeFeatures.size(); i++) 
     {
-        switch (i)
+        switch (activeFeatures.at(i))
         {
-        case (int)MarioFeature::closestEnemyX:
+        case MarioFeature::closestEnemyX:
             featureVector.push_back(closestEnemy[0]); //X
             break;
-        case (int)MarioFeature::closestEnemyY:
+        case MarioFeature::closestEnemyY:
             featureVector.push_back(closestEnemy[1]); //Y
             break;
-        //case (int)MarioFeature::isUnderBlock:
-        //    featureVector.push_back(features.isUnderBlock());
-        //    break;
-        case (int)MarioFeature::distanceToObstacle:
+        case MarioFeature::isUnderBlock:
+            featureVector.push_back(features.isUnderBlock());
+            break;
+        case MarioFeature::distanceToObstacle:
             featureVector.push_back(features.distanceToObstacle());
         break;
-        /*case (int)MarioFeature::numberOfEnemies:
+        case MarioFeature::numberOfEnemies:
             featureVector.push_back(features.getNumberOfEnemies());
-            break;*/
-        
-        case (int)MarioFeature::distanceToHole:
-            
+            break;
+        case MarioFeature::distanceToHole:   
             featureVector.push_back(temp);
             break;
-        //case (int)MarioFeature::isJumping:
-        //    featureVector.push_back(features.isJumping(lastAction));
-        //    break;
-        case (int)MarioFeature::obstacleHeight:
+        case MarioFeature::isJumping:
+            featureVector.push_back(features.isJumping(lastAction));
+            break;
+        case MarioFeature::obstacleHeight:
             featureVector.push_back(features.obstacleHeight());
             break;
-        case (int)MarioFeature::isEnemyLeft:
+        case MarioFeature::isEnemyLeft:
             featureVector.push_back(features.getEnemyIsLeft());
             break;
-        case (int)MarioFeature::isHoleLeft:
+        case MarioFeature::isHoleLeft:
             featureVector.push_back(features.getHoleIsLeft());
             break;
-        case (int)MarioFeature::isRightFromObstacle:
+        case MarioFeature::isRightFromObstacle:
             featureVector.push_back(features.getRightFromObstacle());
             break;
-        /*case (int)MarioFeature::itemAvailable:
+        case MarioFeature::itemAvailable:
                 featureVector.push_back(features.isItemAvailable());
                 break;
-        case (int)MarioFeature::closestItemX:
+        case MarioFeature::closestItemX:
             featureVector.push_back(closestItem[0]);
             break;
-
-        case (int)MarioFeature::closestItemY:
+        case MarioFeature::closestItemY:
             featureVector.push_back(closestItem[1]);
-            break;*/
+            break;
         default:
             break;
         }

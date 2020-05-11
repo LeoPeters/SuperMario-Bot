@@ -2,7 +2,7 @@
 #define environmentdummy_h
 
 #include "IEnvironment.h"
-
+#include "MarioFeature.h"
 class EnvironmentDummy:public IEnvironment
 {
 public:
@@ -13,6 +13,7 @@ public:
 	 void gameWin() override;
 	 int getStatesSize() override;
 	 void setStatesSize(int statesSize) override;
+	 void setActiveFeatures(std::vector<MarioFeature> activeFeatures) override;
 private:
 	
 };
