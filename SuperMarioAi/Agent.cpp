@@ -39,7 +39,7 @@ MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> poss
 	std::cout << "Size: " << lambdaTrace.size() << std::endl;
 	int i = 0;
 	for (auto it = lambdaTrace.crbegin(); it != lambdaTrace.crend(); ++it) {
-		std::cout << std::endl << "State: " << it->stateNumber << " Action: " << it->action << std::endl;
+		//std::cout << std::endl << "State: " << it->stateNumber << " Action: " << it->action << std::endl;
 		double newScore = states[it->stateNumber].getValue(it->action) + ALPHA * (REWARDSTEP + reward + GAMMA * states[stateIndex].getMaxReward() - states[lambdaTrace.front().stateNumber].getValue(lambdaTrace.front().action));
 		states[it->stateNumber].setScore(it->action, newScore * pow(LAMBDAFACTOR, ++i));
 	}
@@ -48,15 +48,18 @@ MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> poss
 
 	if (stateIndex == 0) {
 		lambdaTrace.clear();
-	}
-	else {
-		if (lambdaTrace.size() == MAXQUEUESIZE) {
-			lambdaTrace.pop_back();
-		}
-		for (auto it = lambdaTrace.begin(); it != lambdaTrace.end(); ++it) {
-			if (it->stateNumber == stateIndex && it->action == action) {
+	} else
+	{
+		for (auto it = lambdaTrace.begin(); it != lambdaTrace.end(); ++it) 
+		{
+			if (it->stateNumber == stateIndex && it->action == action) 
+			{
 				return action;
 			}
+		}
+		if (lambdaTrace.size() == MAXQUEUESIZE) 
+		{
+			lambdaTrace.pop_back();
 		}
 		lambdaTrace.push_front(lambdaState{ stateIndex, action });
 	}

@@ -80,7 +80,7 @@ void Save::saveValues(std::array<std::vector<int>, NUMBER_OF_STATES>* features, 
             strStream << scores->at(i).getValue(MarioAction(j));
             scoreValues += strStream.str() + ",";
             }
-            scoreValues.erase(scoreValues.size() - 2, scoreValues.size() - 1);
+            scoreValues.erase(scoreValues.size() - 3, scoreValues.size() - 1);
             xml.writeValue(scoreValues);
             xml.writeEndElementTag();
             xml.writeCloseTag();
