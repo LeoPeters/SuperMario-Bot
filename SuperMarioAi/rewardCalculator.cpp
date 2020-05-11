@@ -116,14 +116,13 @@ double RewardCalculator::calculateObstacleReward()
 			this->obstacleList.at(i).rewardPaid = true;
 			this->obstacleList.at(i).punished = false;
 			reward+= REWARD_OBSTACLE_ARRIVED;
-			std::cout << "Reward Arrived" << std::endl;
 		}
 		if (this->obstacleList.at(i).marioHasArrived && !this->obstacleList.at(i).punished && this->obstacleList.at(i).left>marioPosX) {
 			this->obstacleList.at(i).rewardPaid = false;
 			this->obstacleList.at(i).marioHasArrived = false;
 			this->obstacleList.at(i).punished = true;
 			reward -= REWARD_OBSTACLE_ARRIVED*1.25;
-			std::cout << "Reward Punished" << std::endl;
+
 		}
 	}
 
