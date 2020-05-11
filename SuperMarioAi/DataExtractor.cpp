@@ -1,7 +1,7 @@
 #include "DataExtractor.h"
 #define MAX_TRAIN_DATA (1350000/3)
 #define STARTZAHL 0
-#define STARTINDEX_TRAINDATA_STRING ((1350000/3)*STARTZAHL)
+#define STARTINDEX_TRAINDATA_STRING (MAX_TRAIN_DATA*STARTZAHL)
 #define ERRORNUM -2
 #define filepath "aiTrainingData/pytorchdata.xml"
 
@@ -15,7 +15,7 @@ DataExtractor::DataExtractor(): xml(), filecount(0)
 
 int DataExtractor::filecopy() {
     //COPY
-    if (MAX_TRAIN_DATA - 1 <= filecount) {
+    if (MAX_TRAIN_DATA <= filecount) {
         return ERRORNUM;
     }
     std::string path = "aiTrainingData/pictures/";
