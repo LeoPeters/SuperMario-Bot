@@ -67,7 +67,7 @@
 //QLearning
 #define NUMBER_OF_STATES (GRIDRADIUS - 1) * (GRIDRADIUS - 1) * (GRIDRADIUS - 1)+(GRIDRADIUS - 1)*2*(GRIDRADIUS - 1)
 #define ALPHA 0.4 //Learning rate
-#define GAMMA 0.9 //Discount factor
+#define GAMMA 1 //Discount factor
 #define EPSILON 0.1 //Propability of choosing a random action
 #define REWARDMOVERIGHT 0.08
 #define REWARDSTEP -0.1
@@ -75,6 +75,8 @@
 #define REWARDWIN 300
 #define REWARD_OBSTACLE_ARRIVED 5
 #define INIT_STATE 0
+#define MAXQUEUESIZE 5
+#define LAMBDAFACTOR 1
 
 #define MAX_KEYBOARD_INPUTS 10
 #define Max_TABLE_SIZE 3100

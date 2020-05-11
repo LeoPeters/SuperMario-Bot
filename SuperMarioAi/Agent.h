@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include <cstdlib>
+#include <deque>
 #include "Globals.h"
 #include "IAgent.h"
 #include "Policy.h"
@@ -19,12 +20,15 @@ public:
 	void setStates(std::array<State, NUMBER_OF_STATES> &states) override;
 
 private:
+	struct lambdaState {
+		int stateNumber;
+		MarioAction action;
+	};
+
 	int lastState;
 	double rewardRight;
-	int counterRight;
-	int counterLeft;
 	Policy policy;
-	MarioAction lastAction;
+	std::deque<lambdaState> lambdaTrace;
 	std::array<State, NUMBER_OF_STATES> states;
 	MarioAction chooseAction(State state);
 };

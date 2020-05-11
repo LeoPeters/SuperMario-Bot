@@ -1,6 +1,7 @@
 #include "State.h"
 
-State::State() {
+State::State()
+{
 	for (auto i = 0; i < scores.size(); i++) {
 		scores[i] = 0;
 	}

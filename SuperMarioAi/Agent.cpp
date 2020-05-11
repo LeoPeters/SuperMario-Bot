@@ -1,15 +1,16 @@
 
 #include "Agent.h"
 #include <iostream>
+#include <cmath> 
+#include <ctgmath>
+#include <deque>
+
 Agent::Agent() :
 	lastState(0),
 	policy(Policy::greedy),
-	lastAction(MarioAction::moveLeft),
-	rewardRight(0),
-	counterRight(0),
-	counterLeft(0)
+	rewardRight(0)
 {
-
+	
 }
 
 Agent::~Agent() 
@@ -25,7 +26,7 @@ State Agent::getState(int index)
 std::array<State, NUMBER_OF_STATES>* Agent::getStates()
 {
 	return &states;
-}
+} 
 
 void Agent::setStates(std::array<State, NUMBER_OF_STATES> &states)
 {
@@ -35,13 +36,30 @@ void Agent::setStates(std::array<State, NUMBER_OF_STATES> &states)
 MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions, double reward) {
 	states[stateIndex].setPossibleActions(possibleActions);
 
-	double newScore = states[lastState].getValue(lastAction) + ALPHA * (REWARDSTEP + reward + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(lastAction));
-	//TODO reward zusätzlich summieren
-	states[lastState].setScore(lastAction, newScore );
+	std::cout << "Size: " << lambdaTrace.size() << std::endl;
+	int i = 0;
+	for (auto it = lambdaTrace.crbegin(); it != lambdaTrace.crend(); ++it) {
+		std::cout << std::endl << "State: " << it->stateNumber << " Action: " << it->action << std::endl;
+		double newScore = states[it->stateNumber].getValue(it->action) + ALPHA * (REWARDSTEP + reward + GAMMA * states[stateIndex].getMaxReward() - states[lambdaTrace.front().stateNumber].getValue(lambdaTrace.front().action));
+		states[it->stateNumber].setScore(it->action, newScore * pow(LAMBDAFACTOR, ++i));
+	}
 
 	MarioAction action = chooseAction(states[stateIndex]);
-	lastAction = action;
-	lastState = stateIndex;
+
+	if (stateIndex == 0) {
+		lambdaTrace.clear();
+	}
+	else {
+		if (lambdaTrace.size() == MAXQUEUESIZE) {
+			lambdaTrace.pop_back();
+		}
+		for (auto it = lambdaTrace.begin(); it != lambdaTrace.end(); ++it) {
+			if (it->stateNumber == stateIndex && it->action == action) {
+				return action;
+			}
+		}
+		lambdaTrace.push_front(lambdaState{ stateIndex, action });
+	}
 	return action;
 }
 
@@ -75,8 +93,9 @@ MarioAction Agent::chooseAction(State state) {
 		}
 		break;
 	}
-	if (a == MarioAction::moveRight) counterRight++;
-	if (a == MarioAction::moveLeft) counterLeft++;
+	if (state.getBestAction() != a) {
+		lambdaTrace.clear();
+	}
 	
 	//std::cout << " Left: " << counterLeft << " Right: " << counterRight << std::endl;
 	return a;
