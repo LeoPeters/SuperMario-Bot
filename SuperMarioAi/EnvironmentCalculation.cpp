@@ -90,7 +90,7 @@ double EnvironmentCalculation::getReward(std::vector<std::vector<int>> tempArray
         reward -= 2;
     }
 
-    //if (features.distanceToObstacle() > 1 && lastAction == MarioAction::moveRight ) {
+    //if (features.obstacleHeight() == 0 && lastAction == MarioAction::moveRight ) {
     //    reward += 0.8;
     //}
 
@@ -137,11 +137,20 @@ void EnvironmentCalculation::calculateFeatureVector()
             
             featureVector.push_back(temp);
             break;
-        case (int)MarioFeature::isJumping:
-            featureVector.push_back(features.isJumping(lastAction));
-            break;
+        //case (int)MarioFeature::isJumping:
+        //    featureVector.push_back(features.isJumping(lastAction));
+        //    break;
         case (int)MarioFeature::obstacleHeight:
             featureVector.push_back(features.obstacleHeight());
+            break;
+        case (int)MarioFeature::isEnemyLeft:
+            featureVector.push_back(features.getEnemyIsLeft());
+            break;
+        case (int)MarioFeature::isHoleLeft:
+            featureVector.push_back(features.getHoleIsLeft());
+            break;
+        case (int)MarioFeature::isRightFromObstacle:
+            featureVector.push_back(features.getRightFromObstacle());
             break;
         /*case (int)MarioFeature::itemAvailable:
                 featureVector.push_back(features.isItemAvailable());

@@ -22,6 +22,9 @@ public:
     int distanceToHole();
     void setMarioArray(std::vector<std::vector<int>> &marioArray);
     void calculateJumpBlocked(MarioAction);
+    int getEnemyIsLeft();
+    int getHoleIsLeft();
+    int getRightFromObstacle();
     std::vector<MarioAction> getPossibleActions();
     void setJumpBlocked(bool jumpBlocked);
     int obstacleHeight();

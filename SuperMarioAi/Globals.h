@@ -71,9 +71,9 @@
 #define EPSILON 0.1 //Propability of choosing a random action
 #define REWARDMOVERIGHT 0.08
 #define REWARDSTEP -0.1
-#define REWARDLOSE -30
-#define REWARDWIN 300
-#define REWARD_OBSTACLE_ARRIVED 5
+#define REWARDLOSE -100
+#define REWARDWIN 1000
+#define REWARD_OBSTACLE_ARRIVED 10
 #define INIT_STATE 0
 
 #define MAX_KEYBOARD_INPUTS 10

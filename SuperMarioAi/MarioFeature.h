@@ -13,8 +13,11 @@ public:
 		//itemAvailable, //2
 		//closestItemX, //GRIDRADIUS-1
 		//closestItemY, //GRIDRADIUS-1
-		isJumping,
+		//isJumping,
 		obstacleHeight,
+		isRightFromObstacle,
+		isEnemyLeft,
+		isHoleLeft,
 		size
 	};
 
@@ -48,11 +51,20 @@ public:
 		case distanceToHole:
 			string = "Distance to Hole";
 			break;
-		case isJumping:
-			string = "Is Jumping";
-			break;
+		//case isJumping:
+		//	string = "Is Jumping";
+		//	break;
 		case obstacleHeight:
 			string = "Obstacle Height";
+			break;
+		case isHoleLeft:
+			string = "Hole is Left";
+			break;
+		case isEnemyLeft:
+			string = "Enemy is Left";
+			break;
+		case isRightFromObstacle:
+			string = "Right from Obstacle";
 			break;
 		/*case itemAvailable:
 			string = "Item available";

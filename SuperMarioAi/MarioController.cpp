@@ -14,6 +14,7 @@ void MarioController::makeAction(MarioAction nextAction)
 	if (keyboardThread != NULL) {
 		keyboardThread->join();
 	}
+	lastkeyBool = keyBool;
 	for (int i = 0; i < keyBool.size(); i++) {
 		keyBool[i] = false;
 	}
@@ -50,6 +51,7 @@ void MarioController::makeAction(MarioAction nextAction)
 	}
 	isPressing = true;
 	keyboardThread = new std::thread(&MarioController::pressKey, this);
+	
 }
 
 void MarioController::endGame()
@@ -172,19 +174,17 @@ void MarioController::releaseAll() {
 	for (int i = 0; i < keyBool.size(); i++) {
 		if (!keyBool[i]&&lastkeyBool[i]) {
 			keyboard->releaseKey(keyValue[i]);
-
+			
 		}
 	}
 }
 
 void MarioController::pressKey()
 {
-	for (int i = 0; i < 4; i++) {
-		releaseAll();
-	
-	}
+
 	while (isPressing) {
-		Sleep(15);
+		releaseAll();
+		Sleep(4);
 		for (int i = 0; i < keyBool.size(); i++) {
 			if (keyBool[i]) {
 				keyboard->pressKey(keyValue[i]);
@@ -192,5 +192,5 @@ void MarioController::pressKey()
 		}
 		
 	}
-	lastkeyBool = keyBool;
+	
 }
