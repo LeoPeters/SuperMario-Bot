@@ -5,16 +5,18 @@
 #include <string>
 #include "GameState.h"
 #include <QPixMap>
+#include "MarioFeature.h"
 #include "State.h"
 class AiData
 {
 private:
 	QPixmap generateSimpleView(std::vector<std::vector<int>> simpleView);
 
+
 //setter
 public:
-	void setSimpleView(std::vector<std::vector<int>> simpleView);
-	void setGameView(HBITMAP gameView);
+	QPixmap getSimpleView();
+	QPixmap getGameView();
 
 	void reset();
 
@@ -42,8 +44,9 @@ public:
 	std::vector<int> featureValues;
 	std::vector<int> lastFeatureValues;
 	std::vector<MarioAction> possibleActions;
-	QPixmap simpleView;
-	QPixmap gameView;
+	std::vector<MarioFeature> activeFeatures;
+	std::vector<std::vector<int>> simpleView;
+	HBITMAP gameView;
 	GameState gameState;
 	State agentState;
 	State lastAgentState;

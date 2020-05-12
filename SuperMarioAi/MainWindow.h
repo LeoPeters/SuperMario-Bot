@@ -26,6 +26,7 @@ public:
 	void setStateTableView(QTableView* stateTable, QStandardItemModel* modelStateTableView);
 	void updateActionView();
 	void updateTableView();
+	void setUp();
 signals:
 	void updateView();
 
@@ -39,11 +40,15 @@ private:
 	std::vector<QLabel*> actionLabelList;
 	std::vector<FeatureWidget*> featureWidgetList;
 	int lastAgentState;
-	
+	QTableView* stateTableView;
+	QListWidget* listWidget;
 private:
 	void signalSetup();
 	void updateMemoryList();
 	void loadWholeTableView();
+	void setUpFeatureTable();
+	void setUpActionView();
+	void setUpTableView();
 
 private slots:
 	void pressStartBtn();
@@ -51,6 +56,8 @@ private slots:
 	void pressExitBtn();
 	void updateGUi();
 	void loadMemory();
+
+	
 
 	
 };
