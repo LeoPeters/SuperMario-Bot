@@ -41,8 +41,8 @@ void Save::saveValues(std::array<std::vector<int>, NUMBER_OF_STATES>* features, 
         xml.writeStartElementTag("AnzahlStates");
         xml.writeValue(statesSize);
         xml.writeEndElementTag();
+        xml.writeStartElementTag("Features");
 
-        xml.writeStartElementTag("FeatureNames");
         for (int i = 0; i < MarioFeature::size; i++)
         {
             featureName += MarioFeature::toString(i) + ",";
@@ -80,7 +80,7 @@ void Save::saveValues(std::array<std::vector<int>, NUMBER_OF_STATES>* features, 
             strStream << scores->at(i).getValue(MarioAction(j));
             scoreValues += strStream.str() + ",";
             }
-            scoreValues.erase(scoreValues.size() - 3, scoreValues.size() - 1);
+            scoreValues.erase(scoreValues.size() - 3, scoreValues.size() - 1); //Delete the last comma
             xml.writeValue(scoreValues);
             xml.writeEndElementTag();
             xml.writeCloseTag();
