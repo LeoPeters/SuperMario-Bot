@@ -40,16 +40,14 @@ QPixmap AiData::generateSimpleView(std::vector<std::vector<int>> simpleView)
 	return pixmap;
 }
 
-void AiData::setSimpleView(std::vector<std::vector<int>> simpleView)
+QPixmap AiData::getSimpleView()
 {
-	this->simpleView = generateSimpleView(simpleView);
+	return generateSimpleView(simpleView);
 }
 
-void AiData::setGameView(HBITMAP gameView)
+QPixmap AiData::getGameView()
 {
-	if (gameView != NULL) {
-		this->gameView = QtWin::fromHBITMAP(gameView);
-	}
+	return QtWin::fromHBITMAP(gameView);
 }
 
 void AiData::reset() {

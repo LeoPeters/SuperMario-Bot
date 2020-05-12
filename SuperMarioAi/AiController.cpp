@@ -15,31 +15,28 @@ AiController::AiController(int argc, char** argv) :
 	appControl(NULL),
 	numberOfCycles(0)
 {
-	std::vector<MarioFeature> activeFeatures;
-	activeFeatures.push_back(MarioFeature::closestEnemyX);
-	activeFeatures.push_back(MarioFeature::closestEnemyY);
-	activeFeatures.push_back(MarioFeature::distanceToHole);
-	activeFeatures.push_back(MarioFeature::isEnemyLeft);
-	activeFeatures.push_back(MarioFeature::isRightFromObstacle);
-	activeFeatures.push_back(MarioFeature::numberOfEnemies);
-	activeFeatures.push_back(MarioFeature::obstacleHeight);
-	activeFeatures.push_back(MarioFeature:: isHoleLeft);
 
+	
 
+	data = new AiData();
+	//data->activeFeatures.push_back(MarioFeature::closestEnemyX);
+	//data->activeFeatures.push_back(MarioFeature::closestEnemyY);
+	//data->activeFeatures.push_back(MarioFeature::distanceToHole);
+	//data->activeFeatures.push_back(MarioFeature::isEnemyLeft);
+	//data->activeFeatures.push_back(MarioFeature::isRightFromObstacle);
+	data->activeFeatures.push_back(MarioFeature::numberOfEnemies);
+	data->activeFeatures.push_back(MarioFeature::obstacleHeight);
+	data->activeFeatures.push_back(MarioFeature::isHoleLeft);
 	agent = new Agent();
 	environment = new EnvironmentCalculation();
-	gui = new AiGui(argc, argv, this, activeFeatures);
-	data = gui->getData();
-	environment->setActiveFeatures(activeFeatures);
+	gui = new AiGui(argc, argv, this,data);
+	environment->setActiveFeatures(data->activeFeatures);
 }
 
 void AiController::run() {
-	
-	
 	while (isGuiRunning) {
 		while (isGameStarted) {
-			data->setGameView(screenCapture->captureScreen(PNG_LNAME));
-
+			data->gameView=screenCapture->captureScreen(PNG_LNAME);
 			if (!gui->getMainWindow()->getIsPaused()) {
 			auto start = std::chrono::high_resolution_clock::now();
 				data->lastAgentState = data->agentState;
@@ -49,13 +46,12 @@ void AiController::run() {
 				switch (data->gameState) {
 				case GameState::MarioAlive:
 					data->loopCounter++;
-					data->setSimpleView(*simplifyVec);
+					data->simpleView=*simplifyVec;
 					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &data->reward);
 					//std::cout << "Reward: " << data->reward << std::endl;
-				
 					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
-					data->agentState = agent->getState(data->agentStateNumber);
-					appControl->makeAction(data->nextAction);
+					
+					//appControl->makeAction(data->nextAction);
 					break;
 				case GameState::GameOver:
 					numberOfCycles++;
@@ -67,6 +63,8 @@ void AiController::run() {
 					environment->gameOver();
 					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &data->reward);
 					agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
+					data->agentState = agent->getState(data->agentStateNumber);
+					
 					appControl->restartGame();
 					break;
 				case GameState::Win:
@@ -90,9 +88,10 @@ void AiController::run() {
 			auto fps = duration.count();
 			data->loopTime = (int)fps;
 			}
+
 			
+			data->agentState = agent->getState(data->agentStateNumber);
 			data->featureValues = environment->getFeatureVector(data->agentStateNumber);
-			
 			gui->update();
 		}
 		Sleep(300);
@@ -158,6 +157,7 @@ std::vector<int> AiController::getFeatureValues(int stateNumber) {
 void AiController::loadMemory(std::string path)
 {
 	int temp = 0;
+	data->activeFeatures.clear();
 	save.loadValues(path, environment->getStates(), agent->getStates(), &numberOfCycles, &temp);
 	environment->setStatesSize(temp);
 }

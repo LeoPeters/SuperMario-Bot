@@ -9,8 +9,9 @@
 class AiGui
 {
 public:
-	AiGui(int argc, char** argv, IGuiObserver*, std::vector<MarioFeature> activeMarioFeature);
-	AiData* getData();
+	AiGui(int argc, char** argv, IGuiObserver*, AiData* data);
+	void setData(AiData* newData);
+
 	void runGui();
 	void end();
 	void update();
@@ -20,20 +21,13 @@ private:
 	MainWindow* mWindow;
 	QApplication* app;
 	IGuiObserver* observer;
-	QListWidget* listWidget;
 	QGraphicsScene* gameView;
 	QGraphicsScene* simpleView;
-	QTableView* stateTableView ;
-	QStandardItemModel* modelStateTableView;
 	QLabel* agentStateView;
 	QLabel* gameStateView;
-	std::vector<MarioFeature> activeMarioFeatures;
 private:
 	AiData* data;
-private:
-	void setUpFeatureTable();
-	void setUpActionView();
-	void setUpTableView();
+
 
 };
 #endif
