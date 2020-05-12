@@ -37,7 +37,6 @@ void AiController::run() {
 	while (isGuiRunning) {
 		while (isGameStarted) {
 			data->gameView=screenCapture->captureScreen(PNG_LNAME);
-
 			if (!gui->getMainWindow()->getIsPaused()) {
 			auto start = std::chrono::high_resolution_clock::now();
 				data->lastAgentState = data->agentState;
@@ -50,9 +49,8 @@ void AiController::run() {
 					data->simpleView=*simplifyVec;
 					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &data->reward);
 					//std::cout << "Reward: " << data->reward << std::endl;
-				
 					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
-					data->agentState = agent->getState(data->agentStateNumber);
+					
 					//appControl->makeAction(data->nextAction);
 					break;
 				case GameState::GameOver:
@@ -65,6 +63,8 @@ void AiController::run() {
 					environment->gameOver();
 					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &data->reward);
 					agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
+					data->agentState = agent->getState(data->agentStateNumber);
+					
 					appControl->restartGame();
 					break;
 				case GameState::Win:
@@ -88,9 +88,10 @@ void AiController::run() {
 			auto fps = duration.count();
 			data->loopTime = (int)fps;
 			}
+
 			
+			data->agentState = agent->getState(data->agentStateNumber);
 			data->featureValues = environment->getFeatureVector(data->agentStateNumber);
-			
 			gui->update();
 		}
 		Sleep(300);

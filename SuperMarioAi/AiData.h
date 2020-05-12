@@ -51,7 +51,7 @@ public:
 	State agentState;
 	State lastAgentState;
 	MarioAction nextAction;
-	int agentStateNumber;
+	int agentStateNumber=0;
 	int loopTime=0;
 	int loopCounter = 0;
 	int marioDeathCounter = 0;
