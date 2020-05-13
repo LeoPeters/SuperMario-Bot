@@ -57,12 +57,12 @@ void EnvironmentCalculation::calculateStateAndActions(MarioAction lastAction, st
         features.setJumpBlocked(false);
     } else {
         this->lastAction = lastAction;
-        *reward = getReward(tempArray);
         features.setMarioArray(tempArray);
         features.setMarioPosition();
         features.calculateJumpBlocked(lastAction);
-        *possibleActions = features.getPossibleActions();
         calculateFeatureVector();
+        *possibleActions = features.getPossibleActions();
+        *reward = getReward(tempArray);
         *state = calculateStateNumber();
     }
 }

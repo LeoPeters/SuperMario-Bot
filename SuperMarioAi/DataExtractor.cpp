@@ -16,6 +16,7 @@ DataExtractor::DataExtractor(): xml(), filecount(0)
 int DataExtractor::filecopy() {
     //COPY
     if (MAX_TRAIN_DATA <= filecount) {
+        exit(1);
         return ERRORNUM;
     }
     std::string path = "aiTrainingData/pictures/";
@@ -37,6 +38,7 @@ bool DataExtractor::write_array_to_data_file(int ergarray[GRIDRADIUS][GRIDRADIUS
     xml.writeStartElementTag("path");
     std::string filename;
     filename += std::to_string(num + STARTINDEX_TRAINDATA_STRING);
+    filename += "png";
     xml.writeValue(filename);
     xml.writeEndElementTag();
     xml.writeStartElementTag("values");
