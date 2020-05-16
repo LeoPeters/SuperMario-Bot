@@ -16,7 +16,7 @@ DataExtractor::DataExtractor(): xml(), filecount(0)
 int DataExtractor::filecopy() {
     //COPY
     if (MAX_TRAIN_DATA <= filecount) {
-        exit(1);
+        //exit(1);
         return ERRORNUM;
     }
     std::string path = "aiTrainingData/pictures/";

@@ -65,7 +65,7 @@
 #define MAX_NUMBER_ENEMIES 4
 
 //QLearning
-#define NUMBER_OF_STATES (GRIDRADIUS - 1) * (GRIDRADIUS - 1) * (GRIDRADIUS - 1)+(GRIDRADIUS - 1)*2*(GRIDRADIUS - 1)
+#define NUMBER_OF_STATES (GRIDRADIUS - 1) * (GRIDRADIUS - 1) * (GRIDRADIUS - 1)+(GRIDRADIUS - 1)*2*(GRIDRADIUS - 1) * 2//*2 wegen is  under hole
 #define ALPHA 0.4 //Learning rate
 #define GAMMA 0.9 //Discount factor
 #define EPSILON 0.1 //Propability of choosing a random action
