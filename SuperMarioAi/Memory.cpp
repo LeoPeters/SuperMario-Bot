@@ -7,52 +7,67 @@
 #include <string>
 #include <array>
 #include <vector>
-#include "Save.h"
+#include "Memory.h"
 #include "Globals.h"
 #include "MemoryFinder.h"
 #include "MarioFeature.h"
 
-Save::Save() 
+Memory::Memory()
 {
 
 }
 
-Save::~Save()
+Memory::~Memory()
 {
 
 }
 
 //TODO Statistiken übergeben (Tode, Wins, Anzahl Durchläufe etc.)
-void Save::saveValues(std::array<std::vector<int>, NUMBER_OF_STATES>* features, std::array<State, NUMBER_OF_STATES>* scores, int numberOfCycles, int statesSize)
+void Memory::saveValues(SaveLoad *saveLoad)
 {
     std::string featureName;
     std::string scoreValues;
     std::ostringstream strStream;
     XMLWriter xml;
     std::string path = "saves/";
-    std::string fileName = path + getTimeDate() + ".xml";
-    std::replace(fileName.begin(), fileName.end(), ':', '-');
+    std::string fileName = path + "Hallo" + "_v";
+    int i = 1;
+    //xml.exists(fileName + std::to_string(i) + ".xml"
+    while (xml.exists("Hallo_v11.xml")) {
+        i++;
+        if (i > 10) {
+            break;
+        }
+    }
+
+    fileName.append(std::to_string(i) + ".xml");
 
     if (xml.open(fileName)) {
 
-        xml.writeStartElementTag("AnzahlDurchlaeufe");
-        xml.writeValue(numberOfCycles);
+        xml.writeStartElementTag("NumberOfCycles");
+        xml.writeValue(saveLoad->numberOfCycles);
         xml.writeEndElementTag();
-        xml.writeStartElementTag("AnzahlStates");
-        xml.writeValue(statesSize);
+        xml.writeStartElementTag("NumberOfStates");
+        xml.writeValue(saveLoad->statesSize);
         xml.writeEndElementTag();
-        xml.writeStartElementTag("Features");
+        xml.writeStartElementTag("NumberOfWins");
+        xml.writeValue(saveLoad->numberOfWins);
+        xml.writeEndElementTag();
+        xml.writeStartElementTag("NumberOfDeaths");
+        xml.writeValue(saveLoad->numberOfDeaths);
+        xml.writeEndElementTag();
 
-        for (int i = 0; i < MarioFeature::size; i++)
+        xml.writeStartElementTag("ActiveFeatures");
+
+        for (int i = 0; i < saveLoad->activeFeatures.size(); i++)
         {
-            featureName += MarioFeature::toString(i) + ",";
+            featureName.append(std::to_string(saveLoad->activeFeatures[i]) + ",");
         }
-        featureName.erase(std::remove_if(featureName.begin(), featureName.end(), ::isspace), featureName.end());
         featureName.erase(featureName.size() - 1, featureName.size());
         xml.writeValue(featureName);
         xml.writeEndElementTag();
 
-        for (int i = 1; i < statesSize; i++)
+        for (int i = 1; i < saveLoad->statesSize; i++)
         {
             xml.writeOpenTag("State");
 
@@ -60,16 +75,19 @@ void Save::saveValues(std::array<std::vector<int>, NUMBER_OF_STATES>* features, 
             xml.writeValue(i);
             xml.writeEndElementTag();
 
+            //Write Features
             xml.writeOpenTag("Features");
-            for (int j = 0; j < features->at(i).size(); j++)
+            for (int j = 0; j < saveLoad->featureValues.at(i).size(); j++)
             {
                 featureName = MarioFeature::toString(j);
                 featureName.erase(std::remove_if(featureName.begin(), featureName.end(), ::isspace), featureName.end());
                 xml.writeStartElementTag(featureName);
-                xml.writeValue(features->at(i)[j]);
+                xml.writeValue(saveLoad->featureValues.at(i)[j]);
                 xml.writeEndElementTag();
             }
             xml.writeCloseTag();
+
+            //Write Scores
             xml.writeStartElementTag("Scores");
             scoreValues = "";
             for (int j = 0; j < MarioAction::size; j++)
@@ -77,7 +95,7 @@ void Save::saveValues(std::array<std::vector<int>, NUMBER_OF_STATES>* features, 
             strStream.str(std::string());
             //strStream << std::fixed;
             strStream << std::setprecision(12);
-            strStream << scores->at(i).getValue(MarioAction(j));
+            strStream << saveLoad->scores.at(i).getValue(MarioAction(j));
             scoreValues += strStream.str() + ",";
             }
             scoreValues.erase(scoreValues.size() - 3, scoreValues.size() - 1); //Delete the last comma
@@ -85,29 +103,6 @@ void Save::saveValues(std::array<std::vector<int>, NUMBER_OF_STATES>* features, 
             xml.writeEndElementTag();
             xml.writeCloseTag();
         }
-
-        /*
-        xml.writeOpenTag("testTag");
-        xml.writeStartElementTag("testEle1");
-        xml.writeValue("This is my first tag string!");
-        xml.writeEndElementTag();
-
-        xml.writeOpenTag("testTag2");
-        xml.writeStartElementTag("testEle2");
-        xml.writeAttribute("testAtt=\"TestAttribute\"");
-        xml.writeValue("I sometimes amaze myself.");
-        xml.writeEndElementTag();
-
-        xml.writeOpenTag("testTag3");
-        xml.writeStartElementTag("testEle3");
-        xml.writeAttribute("testAtt2=\"TestAttrib2\"");
-        xml.writeValue("Though i'm sure someone can make something even better");
-        xml.writeEndElementTag();
-
-        xml.writeCloseTag();
-        xml.writeCloseTag();
-        xml.writeCloseTag();
-        */
 
         xml.close();
         std::cout << "Success!\n";
@@ -117,39 +112,55 @@ void Save::saveValues(std::array<std::vector<int>, NUMBER_OF_STATES>* features, 
     }
 }
 
-void Save::loadValues(std::string path, std::array<std::vector<int>, NUMBER_OF_STATES>* featureValues, std::array<State, NUMBER_OF_STATES>* scores, int* numberOfCycles, int* statesSize)
+void Memory::loadValues(std::string path, SaveLoad *saveLoad)
 {
     std::string temp;
     std::string item;
+    int numberOfActiveFeatures = 0;
     reader.openFile(path);
+
     temp = reader.readNextElement();
-    *numberOfCycles = std::stoi(temp);
+    std::cout << temp << std::endl;
+    saveLoad->numberOfCycles = std::stoi(temp);
     temp = reader.readNextElement();
-    *statesSize = std::stoi(temp);
+    std::cout << temp << std::endl;
+    saveLoad->statesSize = std::stoi(temp);
+    temp = reader.readNextElement();
+    std::cout << temp << std::endl;
+    saveLoad->numberOfWins = std::stoi(temp);
+    temp = reader.readNextElement();
+    std::cout << temp << std::endl;
+    saveLoad->numberOfDeaths = std::stoi(temp);
     
     //TODO FeatureNames std::vector<std::string>
     temp = reader.readNextElement();
+    std::stringstream ss(temp);
 
-    for (int i = 1; i < *statesSize; i++) {
+    while (std::getline(ss, item, ',')) {
+        MarioFeature f = MarioFeature(std::stoi(item));
+        std::cout << f << std::endl;
+        saveLoad->activeFeatures.push_back(MarioFeature(std::stoi(item)));
+        numberOfActiveFeatures++;
+    }
+
+    for (int i = 1; i < saveLoad->statesSize; i++) {
         temp = reader.readNextElement(); //TODO Statenumber ist bekannt (i)!
-        for (int j = 0; j < MarioFeature::size; j++)
+        for (int j = 0; j < numberOfActiveFeatures; j++)
         {
             temp = reader.readNextElement();
-            featureValues->at(i).push_back(std::stoi(temp));
+            saveLoad->featureValues.at(i).push_back(std::stoi(temp));
         }
         temp = reader.readNextElement();
         std::stringstream ss(temp);
         int k = 0;
         while (std::getline(ss, item, ','))
         {
-            scores->at(i).setScore(MarioAction(k++), ::atof(item.c_str()));
+            saveLoad->scores.at(i).setScore(MarioAction(k++), ::atof(item.c_str()));
         }
     }
 }
 
-
-
-std::string Save::getTimeDate() 
+std::string Memory::getTimeDate()
 {
     time_t now = time(0);
     std::string time = ctime(&now);

@@ -16,15 +16,13 @@ AiController::AiController(int argc, char** argv) :
 	numberOfCycles(0)
 {
 
-	
-
 	data = new AiData();
 	//data->activeFeatures.push_back(MarioFeature::closestEnemyX);
 	//data->activeFeatures.push_back(MarioFeature::closestEnemyY);
 	//data->activeFeatures.push_back(MarioFeature::distanceToHole);
 	//data->activeFeatures.push_back(MarioFeature::isEnemyLeft);
 	//data->activeFeatures.push_back(MarioFeature::isRightFromObstacle);
-	data->activeFeatures.push_back(MarioFeature::numberOfEnemies);
+	//data->activeFeatures.push_back(MarioFeature::numberOfEnemies);
 	data->activeFeatures.push_back(MarioFeature::obstacleHeight);
 	data->activeFeatures.push_back(MarioFeature::isHoleLeft);
 	agent = new Agent();
@@ -156,21 +154,41 @@ std::vector<int> AiController::getFeatureValues(int stateNumber) {
 
 void AiController::loadMemory(std::string path)
 {
-	int temp = 0;
+	SaveLoad *saveLoad = new SaveLoad();
 	data->activeFeatures.clear();
-	save.loadValues(path, environment->getStates(), agent->getStates(), &numberOfCycles, &temp);
-	environment->setStatesSize(temp);
+
+	memory.loadValues(path, saveLoad);
+
+	numberOfCycles = saveLoad->numberOfCycles;
+	environment->setStatesSize(saveLoad->statesSize);
+	data->marioWinCounter = saveLoad->numberOfWins;
+	data->marioDeathCounter = saveLoad->numberOfDeaths;
+	data->activeFeatures = saveLoad->activeFeatures;
+	*environment->getStates() = saveLoad->featureValues;
+	*agent->getStates() = saveLoad->scores;
+	environment->setActiveFeatures(saveLoad->activeFeatures);
+	delete saveLoad;
 }
 
 void AiController::saveMemory()
 {
-	save.saveValues(environment->getStates(), agent->getStates(), numberOfCycles, environment->getStatesSize());
+	SaveLoad *saveLoad = new SaveLoad();
+	saveLoad->numberOfCycles = numberOfCycles;
+	saveLoad->statesSize = environment->getStatesSize();
+	saveLoad->numberOfWins = data->marioWinCounter;
+	saveLoad->numberOfDeaths = data->marioDeathCounter;
+	saveLoad->activeFeatures = data->activeFeatures;
+	saveLoad->featureValues = *environment->getStates();
+	saveLoad->scores = *agent->getStates();
+
+	memory.saveValues(saveLoad);
+	delete saveLoad;
 }
 
 AiController::~AiController()
 {
 	if (numberOfCycles > 0) {
-		save.saveValues(environment->getStates(), agent->getStates(), numberOfCycles, environment->getStatesSize());
+		saveMemory();
 	}
 
 	if (appControl != NULL) {

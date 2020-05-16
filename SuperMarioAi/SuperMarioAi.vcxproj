@@ -104,7 +104,7 @@
     <ClCompile Include="ImageResizer.cpp" />
     <ClCompile Include="EnvironmentCalculation.cpp" />
     <ClCompile Include="rewardCalculator.cpp" />
-    <ClCompile Include="Save.cpp" />
+    <ClCompile Include="Memory.cpp" />
     <ClCompile Include="SimplifierDummy.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
@@ -144,7 +144,7 @@
     <ClInclude Include="MemoryArray.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="rewardCalculator.h" />
-    <ClInclude Include="Save.h" />
+    <ClInclude Include="Memory.h" />
     <ClInclude Include="testing.h" />
     <ClInclude Include="MarioObject.h" />
     <ClInclude Include="IEnvironment.h" />

@@ -4,9 +4,7 @@ Agent::Agent() :
 	lastState(0),
 	policy(Policy::greedy),
 	lastAction(MarioAction::moveLeft),
-	rewardRight(0),
-	counterRight(0),
-	counterLeft(0)
+	rewardRight(0)
 {
 
 }

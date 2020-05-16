@@ -12,7 +12,7 @@
 #include "GameState.h"
 #include "AiGui.h"
 #include "AiData.h"
-#include "Save.h"
+#include "Memory.h"
 
 class AiController:public IGuiObserver
 {
@@ -30,7 +30,6 @@ public:
 	virtual void saveMemory() override;
 
 private:
-	void startSuperMario();
 	std::vector<MarioAction> possibleActions;
 	double reward;
 	IScreenCapture* screenCapture;
@@ -42,13 +41,15 @@ private:
 	bool isPause=false;
 	bool isGameStarted = false;
 	bool isGuiRunning = true;
+	State agentStateArray;
+	AiData* data;
+	Memory memory;
+	int numberOfCycles;
+
+	void startSuperMario();
 	AiFactory factory=AiFactory();
 	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
 	HBITMAP gameCapture=HBITMAP();
-	State agentStateArray;
-	AiData* data;
-	Save save;
-	int numberOfCycles;
 };
 
 #endif

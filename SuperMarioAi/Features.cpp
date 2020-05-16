@@ -198,7 +198,7 @@ void Features::calculateJumpBlocked(MarioAction lastAction)
 
 int Features::getEnemyIsLeft() {
     for (int y = 0; y < GRIDRADIUS; y++) {
-        if (marioPositionX>0&&marioArray[y][marioPositionX - 1] == (int)MarioObject::enemy) {
+        if (marioPositionX > 0 && marioArray[y][marioPositionX - 1] == (int)MarioObject::enemy) {
             return 1;
         }
         if (marioPositionX > 1 && marioArray[y][marioPositionX - 2] == (int)MarioObject::enemy) {
@@ -238,8 +238,8 @@ std::vector<MarioAction> Features::getPossibleActions()
     possibleActions.push_back(MarioAction::jumpRight);
 
     }
-        //    marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) &&
-        //    marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) 
+    //    marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) &&
+    //    marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) 
     //if (!jumpBlocked && validPosition(marioPositionY, 1, GRIDRADIUS - 2) &&
     //    marioArray[marioPositionY + 1][marioPositionX] == int(MarioObject::ground) &&
     //    marioArray[marioPositionY - 1][marioPositionX] != int(MarioObject::ground)) {

@@ -15,6 +15,7 @@ XMLReader::~XMLReader()
 
 }
 
+
 void XMLReader::openFile(const std::string fileName)
 {
 	std::string temp;

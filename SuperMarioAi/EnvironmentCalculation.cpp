@@ -169,6 +169,11 @@ void EnvironmentCalculation::calculateFeatureVector()
         }
     }
     this->featureVector = featureVector;
+
+    for (int i = 0; i < featureVector.size(); i++) {
+        std::cout << featureVector[i] << ", ";
+    }
+    std::cout << std::endl;
 }
 
 

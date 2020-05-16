@@ -4,6 +4,7 @@
 #include "SimplifierDummy.h"
 #include "EnvironmentDummy.h"
 #include "Agent.h"
+#include "AgentLambda.h"
 #include "AppControlDummy.h"
 #include "MarioController.h"
 #include "AiFactory.h"
@@ -34,7 +35,7 @@ bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, 
 	if (agentDummy) {
 		
 	}
-	else { this->agent = new Agent(); }
+	else { this->agent = new AgentLambda(); }
 	return true;
 
 }
