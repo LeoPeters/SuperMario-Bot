@@ -1,5 +1,5 @@
 #include "DataExtractor.h"
-#define MAX_TRAIN_DATA (1350000/3)
+#define MAX_TRAIN_DATA 5000//(1350000/3)
 #define STARTZAHL 0
 #define STARTINDEX_TRAINDATA_STRING (MAX_TRAIN_DATA*STARTZAHL)
 #define ERRORNUM -2
@@ -38,7 +38,7 @@ bool DataExtractor::write_array_to_data_file(int ergarray[GRIDRADIUS][GRIDRADIUS
     xml.writeStartElementTag("path");
     std::string filename;
     filename += std::to_string(num + STARTINDEX_TRAINDATA_STRING);
-    filename += "png";
+    filename += ".png";
     xml.writeValue(filename);
     xml.writeEndElementTag();
     xml.writeStartElementTag("values");
