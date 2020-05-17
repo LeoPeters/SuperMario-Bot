@@ -5,12 +5,15 @@
 #include "Mapper.h"
 #include "Globals.h"
 #include "MemoryArray.h"
+#include "DataExtractor.h"
 class Environment{
 private:
     ImageLibrary* image_library; // = ImageLibrary::getInstance()
     ImageResizer resize;
     Mapper mapper;
     MemoryArray mem_arr;
+    DataExtractor traindata;
+    bool trainingflag;
 
 public:
     Environment();

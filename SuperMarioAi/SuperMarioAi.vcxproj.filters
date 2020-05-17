@@ -199,6 +199,9 @@
     <ClCompile Include="Memory.cpp">
       <Filter>Source Files\Memory</Filter>
     </ClCompile>
+    <ClCompile Include="DataExtractor.cpp">
+      <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui">
@@ -361,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="Memory.h">
       <Filter>Header Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="DataExtractor.h">
+      <Filter>Header Files\Simplifier</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

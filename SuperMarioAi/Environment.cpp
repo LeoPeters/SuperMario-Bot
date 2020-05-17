@@ -12,9 +12,6 @@
 #include <ctime>  
 
 
-
-
-
 int Environment::environment_interface(const char* filename, int arr[GRIDRADIUS][GRIDRADIUS], int* status){
     PngImage inp(filename);
     //auto start = std::chrono::system_clock::now();
@@ -33,9 +30,8 @@ int Environment::environment_interface(const char* filename, int arr[GRIDRADIUS]
 
 
 //constructor
-Environment::Environment(){
+Environment::Environment(): traindata(), trainingflag(true){
     image_library = ImageLibrary::getInstance(); 
-
 }
 
 Environment::~Environment()=default;
@@ -53,6 +49,13 @@ int Environment::give_Input(PngImage& new_input,int arr[GRIDRADIUS][GRIDRADIUS],
             mapper.return_erg_array(arr);
             mem_arr.push_in_memory_array(arr);
             mem_arr.set_first_not_found(true);
+
+            if (trainingflag) {
+                if (!traindata.write_array_to_data_file(arr)) {
+                    trainingflag = false;
+                }
+            }
+
             return 0;
         }
         else{

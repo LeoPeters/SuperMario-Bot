@@ -1,5 +1,7 @@
 #include "ImageResizer.h"
 #include <iostream>
+
+
    /*     ImageDistributor distr;
         int resizing_data[MAPPINGDATA];
         int find_block(); //setzt den block in resizing data für find mapping data
@@ -38,6 +40,8 @@ bool ImageResizer::resize(){
 ImageResizer::ImageResizer(){
     
 }
+
+
 
 ImageResizer::~ImageResizer()=default;
 
@@ -154,4 +158,5 @@ void ImageResizer::resize_png_file(int x_start, int y_start, int x_end, int y_en
     //free(new_row_pointers);
     png_destroy_write_struct(&png, &info);
     fclose(fp);
+
 }

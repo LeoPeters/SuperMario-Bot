@@ -21,16 +21,58 @@ bool MemoryArray::retrieve_last_enemy_memory(int arr[GRIDRADIUS][GRIDRADIUS])
     for (int i = 0; i < mem_count; i++) {
         bool mario_found = false;
         bool enemy_found = false;
+        int marioposX = 0;
+        int marioposY = 0;
         for (int x = 0; x < GRIDRADIUS; x++) {
             for (int y = 0; y < GRIDRADIUS; y++) {
                 if (memory_array[i][x][y] == MARIO) {
                     mario_found = true;
-                }
-                if (memory_array[i][x][y] == ENEMY) {
-                    enemy_found = true;
+                    marioposX = x;
+                    marioposY = y;
                 }
             }
         }
+
+        for (int distance = 1; distance <= 2; distance++) {
+            //check right
+            if (marioposX + distance < GRIDRADIUS)
+                if (memory_array[i][marioposX + distance][marioposY] == ENEMY)
+                    enemy_found = true;
+            //left
+            if (marioposX - distance >= 0)
+                if (memory_array[i][marioposX - distance][marioposY] == ENEMY)
+                    enemy_found = true;
+            //above
+            if (marioposY + distance < GRIDRADIUS)
+                if (memory_array[i][marioposX][marioposY + distance] == ENEMY)
+                    enemy_found = true;
+            //under
+            if (marioposY - distance >= 0)
+                if (memory_array[i][marioposX][marioposY - distance] == ENEMY)
+                    enemy_found = true;
+            //above right
+            if (marioposX + distance < GRIDRADIUS)
+                if (marioposY + distance < GRIDRADIUS)
+                    if (memory_array[i][marioposX + distance][marioposY + distance] == ENEMY)
+                        enemy_found = true;
+            //above left
+            if (marioposX - distance >= 0)
+                if (marioposY + distance < GRIDRADIUS)
+                    if (memory_array[i][marioposX - distance][marioposY + distance] == ENEMY)
+                        enemy_found = true;
+            //under right
+            if (marioposY - distance >= 0)
+                if (marioposX + distance < GRIDRADIUS)
+                    if (memory_array[i][marioposX + distance][marioposY - distance] == ENEMY)
+                        enemy_found = true;
+            //under left
+            if (marioposY - distance >= 0)
+                if (marioposX - distance >= 0)
+                    if (memory_array[i][marioposX + distance][marioposY - distance] == ENEMY)
+                        enemy_found = true;
+        }
+        
+      
         if (mario_found && enemy_found) {
             //cpy in arr
             for (int x = 0; x < GRIDRADIUS; x++) {
