@@ -17,6 +17,16 @@ Features::~Features()
 
 }
 
+int Features::isAboveHole()
+{
+    for (int i = GRIDRADIUS-1; i > marioPositionY; i--) {
+        if (marioArray[i][marioPositionX] != int(MarioObject::empty)) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void Features::setMarioPosition()
 {
     for (int y = 0; y < GRIDRADIUS;y++) {

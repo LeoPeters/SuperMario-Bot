@@ -164,6 +164,9 @@ void EnvironmentCalculation::calculateFeatureVector()
         case MarioFeature::closestItemY:
             featureVector.push_back(closestItem[1]);
             break;
+        case MarioFeature::isAboveHole:
+            featureVector.push_back(features.isAboveHole());
+            break;
         default:
             break;
         }

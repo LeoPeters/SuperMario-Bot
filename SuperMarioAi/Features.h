@@ -8,7 +8,7 @@ class Features
 public:
     Features();
     ~Features();
-
+    int isAboveHole();
     int isUnderBlock();
     std::array<int, 2> closestEnemy();
     int distanceToObstacle();

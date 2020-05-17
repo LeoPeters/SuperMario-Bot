@@ -18,6 +18,7 @@ public:
 		isRightFromObstacle,
 		isEnemyLeft,
 		isHoleLeft,
+		isAboveHole,//new //2
 		size
 	};
 
@@ -65,6 +66,9 @@ public:
 			break;
 		case isRightFromObstacle:
 			string = "Right from Obstacle";
+			break;
+		case isAboveHole:
+			string = "Above Hole";
 			break;
 		case itemAvailable:
 			string = "Item available";
