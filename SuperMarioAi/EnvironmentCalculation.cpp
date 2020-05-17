@@ -117,7 +117,6 @@ void EnvironmentCalculation::calculateFeatureVector()
     std::array<int, 2> closestEnemy = features.closestEnemy();
     std::array<int, 2> closestItem = features.closestItem();
 
-    int temp = features.distanceToHole();
     for (int i = 0; i < activeFeatures.size(); i++) 
     {
         switch (activeFeatures.at(i))
@@ -133,12 +132,12 @@ void EnvironmentCalculation::calculateFeatureVector()
             break;
         case MarioFeature::distanceToObstacle:
             featureVector.push_back(features.distanceToObstacle());
-        break;
+            break;
         case MarioFeature::numberOfEnemies:
             featureVector.push_back(features.getNumberOfEnemies());
             break;
         case MarioFeature::distanceToHole:   
-            featureVector.push_back(temp);
+            featureVector.push_back(features.distanceToHole());
             break;
         case MarioFeature::isJumping:
             featureVector.push_back(features.isJumping(lastAction));
@@ -156,8 +155,8 @@ void EnvironmentCalculation::calculateFeatureVector()
             featureVector.push_back(features.getRightFromObstacle());
             break;
         case MarioFeature::itemAvailable:
-                featureVector.push_back(features.isItemAvailable());
-                break;
+            featureVector.push_back(features.isItemAvailable());
+            break;
         case MarioFeature::closestItemX:
             featureVector.push_back(closestItem[0]);
             break;
@@ -173,10 +172,10 @@ void EnvironmentCalculation::calculateFeatureVector()
     }
     this->featureVector = featureVector;
 
-    for (int i = 0; i < featureVector.size(); i++) {
-        std::cout << featureVector[i] << ", ";
-    }
-    std::cout << std::endl;
+    //for (int i = 0; i < featureVector.size(); i++) {
+    //    std::cout << featureVector[i] << ", ";
+    //}
+    //std::cout << std::endl;
 }
 
 

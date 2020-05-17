@@ -25,7 +25,7 @@ public:
 	void loadValues(std::string path, SaveLoad *load);
 
 private:
-	void writeState();
+	std::string Memory::writeFileName(SaveLoad* saveLoad);
 	std::string getTimeDate();
 
 	XMLWriter writer;

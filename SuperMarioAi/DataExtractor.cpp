@@ -1,14 +1,18 @@
+#include <filesystem>
 #include "DataExtractor.h"
+
 #define MAX_TRAIN_DATA (1350000/3)
 #define STARTZAHL 0
 #define STARTINDEX_TRAINDATA_STRING (MAX_TRAIN_DATA*STARTZAHL)
 #define ERRORNUM -2
 #define filepath "aiTrainingData/pytorchdata.xml"
 
-DataExtractor::DataExtractor(): xml(), filecount(0)
+DataExtractor::DataExtractor(): 
+    xml(), 
+    filecount(0)
 {
     if (!xml.open(filepath)){
-        abort();
+        std::cout << "Did not find Training File" << std::endl;
     }
 }
 

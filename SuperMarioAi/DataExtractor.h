@@ -1,10 +1,10 @@
 #ifndef dataextractor_h
 #define dataextractor_h
+
+#include <string>
 #include "XMLReader.h"
 #include "XMLWriter.h"
 #include "Globals.h"
-#include <filesystem>
-#include <string>
 
 class DataExtractor {
 private:

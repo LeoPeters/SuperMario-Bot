@@ -80,7 +80,7 @@ int Features::distance(int x, int y)
 
 int Features::distanceToObstacle()
 {
-        int distance = 0;
+    int distance = 0;
     if (marioArray.size() > 0) {
         for (int x = marioPositionX; x < GRIDRADIUS; x++) {
             if (marioArray[marioPositionY][x] == (int)MarioObject::ground) {

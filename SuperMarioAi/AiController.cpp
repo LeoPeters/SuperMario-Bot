@@ -17,14 +17,14 @@ AiController::AiController(int argc, char** argv) :
 {
 
 	data = new AiData();
-	//data->activeFeatures.push_back(MarioFeature::closestEnemyX);
-	//data->activeFeatures.push_back(MarioFeature::closestEnemyY);
-	//data->activeFeatures.push_back(MarioFeature::distanceToHole);
+	data->activeFeatures.push_back(MarioFeature::closestEnemyX);
+	data->activeFeatures.push_back(MarioFeature::closestEnemyY);
+	data->activeFeatures.push_back(MarioFeature::distanceToHole);
 	//data->activeFeatures.push_back(MarioFeature::isEnemyLeft);
 	//data->activeFeatures.push_back(MarioFeature::isRightFromObstacle);
-	//data->activeFeatures.push_back(MarioFeature::numberOfEnemies);
+	data->activeFeatures.push_back(MarioFeature::numberOfEnemies);
 	data->activeFeatures.push_back(MarioFeature::obstacleHeight);
-	data->activeFeatures.push_back(MarioFeature::isHoleLeft);
+	data->activeFeatures.push_back(MarioFeature::distanceToObstacle);
 	agent = new Agent();
 	environment = new EnvironmentCalculation();
 	gui = new AiGui(argc, argv, this,data);
@@ -49,7 +49,7 @@ void AiController::run() {
 					//std::cout << "Reward: " << data->reward << std::endl;
 					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
 					
-					//appControl->makeAction(data->nextAction);
+					appControl->makeAction(data->nextAction);
 					break;
 				case GameState::GameOver:
 					numberOfCycles++;

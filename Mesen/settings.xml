@@ -1386,6 +1386,14 @@
   <RecentFiles>
     <RecentItem>
       <RomFile>
+        <Path>G:\Programmierzeug\Git\Super Mario Bot\Mesen\Super_mario_brothers.nes</Path>
+        <InnerFile />
+        <InnerFileIndex>0</InnerFileIndex>
+      </RomFile>
+      <PatchFile xsi:nil="true" />
+    </RecentItem>
+    <RecentItem>
+      <RomFile>
         <Path>C:\Users\michi\source\repos\SuperMario-Bot\Mesen\Super_mario_brothers.nes</Path>
         <InnerFile />
         <InnerFileIndex>0</InnerFileIndex>
@@ -1403,14 +1411,6 @@
     <RecentItem>
       <RomFile>
         <Path>C:\Users\Luisn\OneDrive\Desktop\SuperMario-Bot\Mesen\Super_mario_brothers.nes</Path>
-        <InnerFile />
-        <InnerFileIndex>0</InnerFileIndex>
-      </RomFile>
-      <PatchFile xsi:nil="true" />
-    </RecentItem>
-    <RecentItem>
-      <RomFile>
-        <Path>G:\Programmierzeug\Git\Super Mario Bot\Mesen\Super_mario_brothers.nes</Path>
         <InnerFile />
         <InnerFileIndex>0</InnerFileIndex>
       </RomFile>
@@ -1891,8 +1891,8 @@
   </HistoryViewerInfo>
   <GameSpecificSettings />
   <WindowLocation>
-    <X>2666</X>
-    <Y>111</Y>
+    <X>719</X>
+    <Y>195</Y>
   </WindowLocation>
   <WindowSize>
     <Width>340</Width>

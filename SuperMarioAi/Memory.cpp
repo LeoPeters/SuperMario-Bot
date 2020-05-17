@@ -22,6 +22,22 @@ Memory::~Memory()
 
 }
 
+std::string Memory::writeFileName(SaveLoad* saveLoad)
+{
+    std::string fileName = "";
+
+    fileName.append("S" + std::to_string(saveLoad->statesSize) + " ");
+    fileName.append("C" + std::to_string(saveLoad->numberOfCycles) + " ");
+    fileName.append("W" + std::to_string(saveLoad->numberOfWins) + " ");
+    fileName.append("D" + std::to_string(saveLoad->numberOfDeaths) + " F");
+    for (int i = 0; i < saveLoad->activeFeatures.size(); i++) {
+        fileName.append(std::to_string(saveLoad->activeFeatures[i]) + ",");
+    }
+    fileName.erase(fileName.size() - 1, fileName.size()); //Delete last comma
+    fileName.append("_v");
+    return fileName;
+}
+
 //TODO Statistiken übergeben (Tode, Wins, Anzahl Durchläufe etc.)
 void Memory::saveValues(SaveLoad *saveLoad)
 {
@@ -30,10 +46,9 @@ void Memory::saveValues(SaveLoad *saveLoad)
     std::ostringstream strStream;
     XMLWriter xml;
     std::string path = "saves/";
-    std::string fileName = path + "Hallo" + "_v";
+    std::string fileName = path.append(writeFileName(saveLoad));
     int i = 1;
-    //xml.exists(fileName + std::to_string(i) + ".xml"
-    while (xml.exists("Hallo_v11.xml")) {
+    while (xml.exists(fileName + std::to_string(i) + ".xml")) {
         i++;
         if (i > 10) {
             break;

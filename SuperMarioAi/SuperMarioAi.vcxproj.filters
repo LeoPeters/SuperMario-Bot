@@ -190,9 +190,6 @@
     <ClCompile Include="AgentDummy.cpp">
       <Filter>Source Files\Dummy</Filter>
     </ClCompile>
-    <ClCompile Include="rewardCalculator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AgentLambda.cpp">
       <Filter>Source Files\Agent</Filter>
     </ClCompile>
@@ -201,6 +198,9 @@
     </ClCompile>
     <ClCompile Include="DataExtractor.cpp">
       <Filter>Source Files\Simplifier</Filter>
+    </ClCompile>
+    <ClCompile Include="rewardCalculator.cpp">
+      <Filter>Source Files\Features</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -353,12 +353,6 @@
     <ClInclude Include="AgentDummy.h">
       <Filter>Header Files\Dummy</Filter>
     </ClInclude>
-    <ClInclude Include="Obstacle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rewardCalculator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AgentLambda.h">
       <Filter>Header Files\Agent</Filter>
     </ClInclude>
@@ -367,6 +361,12 @@
     </ClInclude>
     <ClInclude Include="DataExtractor.h">
       <Filter>Header Files\Simplifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>Header Files\Structs/Enum/Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="rewardCalculator.h">
+      <Filter>Header Files\Features</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

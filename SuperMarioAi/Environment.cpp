@@ -30,7 +30,7 @@ int Environment::environment_interface(const char* filename, int arr[GRIDRADIUS]
 
 
 //constructor
-Environment::Environment(): traindata(), trainingflag(true){
+Environment::Environment(): traindata(), trainingflag(false){
     image_library = ImageLibrary::getInstance(); 
 }
 
