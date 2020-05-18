@@ -84,8 +84,6 @@ void EnvironmentCalculation::gameOver()
 
 double EnvironmentCalculation::getReward(std::vector<std::vector<int>> tempArray)
 {
-    
-  
     double reward = calc.calculateReward(tempArray,lastAction);
     //if (lastAction == MarioAction::moveRight && (featureVector[(int)MarioFeature::distanceToObstacle] == 1)) {
     //    reward = -1.5;
@@ -117,7 +115,6 @@ void EnvironmentCalculation::calculateFeatureVector()
     std::array<int, 2> closestEnemy = features.closestEnemy();
     std::array<int, 2> closestItem = features.closestItem();
 
-    int temp = features.distanceToHole();
     for (int i = 0; i < activeFeatures.size(); i++) 
     {
         switch (activeFeatures.at(i))
@@ -138,7 +135,7 @@ void EnvironmentCalculation::calculateFeatureVector()
             featureVector.push_back(features.getNumberOfEnemies());
             break;
         case MarioFeature::distanceToHole:   
-            featureVector.push_back(temp);
+            featureVector.push_back(features.distanceToHole());
             break;
         case MarioFeature::isJumping:
             featureVector.push_back(features.isJumping(lastAction));
@@ -170,10 +167,10 @@ void EnvironmentCalculation::calculateFeatureVector()
     }
     this->featureVector = featureVector;
 
-    for (int i = 0; i < featureVector.size(); i++) {
-        std::cout << featureVector[i] << ", ";
-    }
-    std::cout << std::endl;
+    //for (int i = 0; i < featureVector.size(); i++) {
+    //    std::cout << featureVector[i] << ", ";
+    //}
+    //std::cout << std::endl;
 }
 
 

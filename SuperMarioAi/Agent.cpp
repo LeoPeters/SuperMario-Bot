@@ -32,7 +32,7 @@ void Agent::setStates(std::array<State, NUMBER_OF_STATES>& states)
 MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions, double reward) {
 	states[stateIndex].setPossibleActions(possibleActions);
 
-	double newScore = states[lastState].getValue(lastAction) + ALPHA * (REWARDSTEP + reward + GAMMA * states[stateIndex].getMaxReward() - states[lastState].getValue(lastAction));
+	double newScore = states[lastState].getValue(lastAction) + ALPHA * (REWARDSTEP + reward + GAMMA * states[stateIndex].getBestScore() - states[lastState].getValue(lastAction));
 	//TODO reward zusätzlich summieren
 	states[lastState].setScore(lastAction, newScore);
 

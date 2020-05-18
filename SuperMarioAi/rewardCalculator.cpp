@@ -2,19 +2,19 @@
 #include "MarioObject.h"
 #include "Globals.h"
 #include <iostream>
-double RewardCalculator::calculateReward(std::vector<std::vector<int>> tempArra, MarioAction lastAction)
+double RewardCalculator::calculateReward(std::vector<std::vector<int>> tempArray, MarioAction lastAction)
 {
 	double reward=0;
-	if (tempArra.size()>0) {
+	if (tempArray.size()>0) {
 		for (int y = marioPosY; y < GRIDRADIUS - 1; y++) {
-			if ((lastAction == MarioAction::jump || lastAction == MarioAction::jumpRight) && simpleArray.at(y).at(marioPosX)== (int)MarioObject::empty) {
+			if ((lastAction == MarioAction::jump || lastAction == MarioAction::jumpRight) && simpleArray.at(y).at(marioPosX) == (int)MarioObject::empty) {
 				reward = 1;
 			}
 			else {
 				reward = 0;
 			}
 		}
-		simpleArray = tempArra;
+		simpleArray = tempArray;
 		calculateMarioPosition();
 		updateObstacleList(calculateObstacle());
 		reward += calculateObstacleReward();

@@ -1,8 +1,8 @@
 #include "XMLWriter.h"
 
 bool XMLWriter::exists(const std::string fileName) {
-    std::cout << fileName << " " << outFile.good() << std::endl;
-    return outFile.good();
+    std::ifstream f(fileName.c_str());
+    return f.good();
 }
 
 bool XMLWriter::open(const std::string strFile) {

@@ -34,8 +34,7 @@ bool AiFactory::loadSuperMarioAi(bool screenCaptureDummy, bool simplifierDummy, 
 	else { this->environment = new EnvironmentCalculation(); };
 	if (agentDummy) {
 		
-	}
-	else { this->agent = new AgentLambda(); }
+	} else { this->agent = new AgentLambda(); }
 	return true;
 
 }

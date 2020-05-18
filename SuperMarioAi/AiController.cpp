@@ -4,7 +4,7 @@
 #include "Globals.h"
 #include "AiController.h"
 #include "EnvironmentCalculation.h"
-#include "Agent.h"
+#include "AgentLambda.h"
 #include "AgentDummy.h"
 
 AiController::AiController(int argc, char** argv) :
@@ -17,15 +17,37 @@ AiController::AiController(int argc, char** argv) :
 {
 
 	data = new AiData();
-	//data->activeFeatures.push_back(MarioFeature::closestEnemyX);
-	//data->activeFeatures.push_back(MarioFeature::closestEnemyY);
-	//data->activeFeatures.push_back(MarioFeature::distanceToHole);
-	//data->activeFeatures.push_back(MarioFeature::isEnemyLeft);
-	//data->activeFeatures.push_back(MarioFeature::isRightFromObstacle);
-	//data->activeFeatures.push_back(MarioFeature::numberOfEnemies);
+	/*
+	isUnderBlock, //2
+		closestEnemyX, //GRIDRADIUS-1 TODO(Wenn Enemy unter Mario, ist gleich zu kein Gegner da)
+		closestEnemyY, //GRIDRADIUS-1
+		distanceToObstacle, //GRIDRADIUS-1
+		numberOfEnemies, //siehe Define MAX_NUMBER_ENEMIES
+		distanceToHole, //GRIDRADIUS-1
+		itemAvailable, //2
+		closestItemX, //GRIDRADIUS-1
+		closestItemY, //GRIDRADIUS-1
+		isJumping,
+		obstacleHeight,
+		isRightFromObstacle,
+		isEnemyLeft,
+		isHoleLeft,
+		*/
+	data->activeFeatures.push_back(MarioFeature::closestEnemyX);
+	data->activeFeatures.push_back(MarioFeature::closestEnemyY);
+	data->activeFeatures.push_back(MarioFeature::distanceToObstacle);
+	data->activeFeatures.push_back(MarioFeature::numberOfEnemies);
+	data->activeFeatures.push_back(MarioFeature::distanceToHole);
+	//data->activeFeatures.push_back(MarioFeature::itemAvailable);
+	//data->activeFeatures.push_back(MarioFeature::closestItemX);
+	//data->activeFeatures.push_back(MarioFeature::closestItemY);
+	//data->activeFeatures.push_back(MarioFeature::isJumping);
 	data->activeFeatures.push_back(MarioFeature::obstacleHeight);
+	//data->activeFeatures.push_back(MarioFeature::isRightFromObstacle);
+	data->activeFeatures.push_back(MarioFeature::isEnemyLeft);
 	data->activeFeatures.push_back(MarioFeature::isHoleLeft);
-	agent = new Agent();
+
+	agent = new AgentLambda();
 	environment = new EnvironmentCalculation();
 	gui = new AiGui(argc, argv, this,data);
 	environment->setActiveFeatures(data->activeFeatures);
@@ -49,7 +71,7 @@ void AiController::run() {
 					//std::cout << "Reward: " << data->reward << std::endl;
 					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
 					
-					//appControl->makeAction(data->nextAction);
+					appControl->makeAction(data->nextAction);
 					break;
 				case GameState::GameOver:
 					numberOfCycles++;

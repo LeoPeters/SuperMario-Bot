@@ -38,7 +38,7 @@ MarioAction State::getRandomActionWeighted() {
 	return random;
 }
 
-double State::getMaxReward() {
+double State::getBestScore() {
 	double max = scores[0];
 	for (auto i = 1; i < scores.size(); i++) {
 		if (scores[i] > max) max = scores[i];

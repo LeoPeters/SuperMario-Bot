@@ -16,7 +16,7 @@ public:
 	MarioAction State::getRandomActionWeighted();
 	double getValue(MarioAction action);
 	void setScore(MarioAction action, double value);
-	double getMaxReward();
+	double getBestScore();
 	void State::setPossibleActions(std::vector<MarioAction> possibleActions);
 
 private:
