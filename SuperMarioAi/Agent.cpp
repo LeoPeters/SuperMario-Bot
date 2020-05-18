@@ -29,6 +29,11 @@ void Agent::setStates(std::array<State, NUMBER_OF_STATES>& states)
 	this->states = states;
 }
 
+std::vector<int> Agent::getLambdaQueue()
+{
+	return std::vector<int>();
+}
+
 MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions, double reward) {
 	states[stateIndex].setPossibleActions(possibleActions);
 

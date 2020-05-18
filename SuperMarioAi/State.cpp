@@ -39,11 +39,12 @@ MarioAction State::getRandomActionWeighted() {
 }
 
 double State::getBestScore() {
-	double max = scores[0];
-	for (auto i = 1; i < scores.size(); i++) {
-		if (scores[i] > max) max = scores[i];
+	double best = scores[possibleActions[0]];
+	for (auto i = 1; i < possibleActions.size(); i++) {
+		if (scores[possibleActions[i]] > best) best = scores[possibleActions[i]];
 	}
-	return max;
+	//std::cout << "BestScore: " << best << std::endl;
+	return best;
 }
 
 double State::getValue(MarioAction action) {

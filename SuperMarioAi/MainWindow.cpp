@@ -161,19 +161,37 @@ void MainWindow::updateActionView() {
 void MainWindow::updateTableView()
 {
 	std::vector<double> row;
-	for (int i = 0; i < MarioAction::size; i++) {
-		row.push_back(data->lastAgentState.getValue(i));
-	}
-	for (int i = 0; i < data->lastFeatureValues.size(); i++) {
-		row.push_back(data->lastFeatureValues.at(i));
-	}
-	
-	if (lastAgentState < Max_TABLE_SIZE / (MarioAction::size + data->activeFeatures.size())) {
-		for (int i = 0; i < row.size(); i++) {
-			QModelIndex index = modelStateTableView->index(lastAgentState, i);
-			modelStateTableView->setData(index, row.at(i));
+	std::vector<int> features;
+	for (int i = 0; i < data->stateNumberQueue.size(); i++) {
+		row = observer->getQValues(data->stateNumberQueue[i]);
+		features = observer->getFeatureValues(data->stateNumberQueue[i]);
+		for (int j = 0; j < features.size(); j++) {
+			row.push_back(features.at(j));
+		}
+		if (data->stateNumberQueue[i] < MAX_TABLE_SIZE / (MarioAction::size + data->activeFeatures.size()))
+		{
+			for (int j = 0; j < row.size(); j++) {
+				QModelIndex index = modelStateTableView->index(data->stateNumberQueue[i], j);
+				modelStateTableView->setData(index, row.at(j));
+			}
 		}
 	}
+
+
+	//std::vector<double> row;
+	//for (int i = 0; i < MarioAction::size; i++) {
+	//	row.push_back(data->lastAgentState.getValue(i));
+	//}
+	//for (int i = 0; i < data->lastFeatureValues.size(); i++) {
+	//	row.push_back(data->lastFeatureValues.at(i));
+	//}
+	//
+	//if (lastAgentState < Max_TABLE_SIZE / (MarioAction::size + data->activeFeatures.size())) {
+	//	for (int i = 0; i < row.size(); i++) {
+	//		QModelIndex index = modelStateTableView->index(lastAgentState, i);
+	//		modelStateTableView->setData(index, row.at(i));
+	//	}
+	//}
 }
 void MainWindow::setUp()
 {
@@ -189,6 +207,7 @@ void MainWindow::loadWholeTableView() {
 		for (int j = 0; j < features.size(); j++) {
 			row.push_back(features.at(j));
 		}
+
 		for (int j = 0; j < row.size(); j++) {
 			QModelIndex index = modelStateTableView->index(i, j);
 			modelStateTableView->setData(index, row.at(j));
@@ -243,11 +262,11 @@ void MainWindow::setUpActionView() {
 void MainWindow::setUpTableView()
 {
 	QStringList headerList;
-	if (NUMBER_OF_STATES < Max_TABLE_SIZE / (MarioAction::size + data->activeFeatures.size())) {
+	if (NUMBER_OF_STATES < MAX_TABLE_SIZE / (MarioAction::size + data->activeFeatures.size())) {
 		modelStateTableView = new QStandardItemModel(NUMBER_OF_STATES, MarioAction::size + data->activeFeatures.size());
 	}
 	else {
-		modelStateTableView = new QStandardItemModel(Max_TABLE_SIZE / (MarioAction::size + data->activeFeatures.size()), MarioAction::size + data->activeFeatures.size());
+		modelStateTableView = new QStandardItemModel(MAX_TABLE_SIZE / (MarioAction::size + data->activeFeatures.size()), MarioAction::size + data->activeFeatures.size());
 	}
 	for (int i = 0; i < MarioAction::size; i++) {
 		headerList.append("Q-Value: " + QString::fromStdString(MarioAction::toString(i)));

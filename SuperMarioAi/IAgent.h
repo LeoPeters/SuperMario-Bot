@@ -11,5 +11,6 @@ public:
 	virtual State getState(int index) = 0;
 	virtual std::array<State, NUMBER_OF_STATES>* getStates() = 0;
 	virtual void setStates(std::array<State, NUMBER_OF_STATES> &states) = 0;
+	virtual std::vector<int> getLambdaQueue() = 0;
 };
 #endif

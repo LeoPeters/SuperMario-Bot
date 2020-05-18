@@ -1,5 +1,4 @@
 #include "AgentLambda.h"
-
 #include "Agent.h"
 #include <iostream>
 #include <cmath> 
@@ -34,42 +33,52 @@ void AgentLambda::setStates(std::array<State, NUMBER_OF_STATES>& states)
 	this->states = states;
 }
 
+std::vector<int> AgentLambda::getLambdaQueue()
+{
+	std::vector<int> lambdaQueue;
+	for (auto it = lambdaTrace.crbegin(); it != lambdaTrace.crend(); ++it)
+	{
+		lambdaQueue.push_back(it->stateNumber);
+	}
+	return lambdaQueue;
+}
+
 MarioAction AgentLambda::calculateAction(int stateIndex, std::vector<MarioAction> possibleActions, double reward) {
 	int tempIndex = stateIndex;
 	states[stateIndex].setPossibleActions(possibleActions);
-	 
+
 	if (stateIndex == 0) {
 		tempIndex = lambdaTrace.front().stateNumber;
 		lambdaTrace.pop_front();
 	}
 	int i = 0;
+	std::cout << "Loop" << std::endl;
 	for (auto it = lambdaTrace.crbegin(); it != lambdaTrace.crend(); ++it) {
-		//std::cout << std::endl << "State: " << it->stateNumber << " Action: " << it->action << std::endl;
-		double newScore = states[it->stateNumber].getValue(it->action) + ALPHA * (REWARDSTEP + reward + GAMMA * states[tempIndex].getBestScore() - states[lambdaTrace.front().stateNumber].getValue(lambdaTrace.front().action));
+		//std::cout << std::endl << "S: " << it->stateNumber << " A: " << it->action << "   ";
+		double newScore = states[it->stateNumber].getValue(it->action) + ALPHA * (REWARDSTEP + (GAMMA * states[tempIndex].getBestScore()) - states[lambdaTrace.front().stateNumber].getValue(lambdaTrace.front().action));
+		std::cout << "State: " << it->stateNumber << "Action: " << it->action << " " << newScore << " = " << states[it->stateNumber].getValue(it->action) << " + " << ALPHA << " * (" << REWARDSTEP << " + (" << GAMMA << " * " << states[tempIndex].getBestScore() << ") - " << states[lambdaTrace.front().stateNumber].getValue(lambdaTrace.front().action) << ")" << std::endl;
+		//TODO REWARD!!!!!!!!!!!!!!!!!!!
+
 		states[it->stateNumber].setScore(it->action, newScore * pow(LAMBDAFACTOR, ++i));
+
+		//if (reward > 4 || reward < -4) {
+		//	std::cout << "State: " << it->stateNumber << " Reward: " << (reward + REWARDSTEP) * pow(LAMBDAFACTOR, ++i) << std::endl;
+		//}
 	}
+	//std::cout << std::endl;
 
 	MarioAction action = chooseAction(states[stateIndex]);
-
 	if (stateIndex == 0) {
 		lambdaTrace.clear();
-	}
-	else 
+	} else 
 	{
-		if (lambdaTrace.size() > 0 && lambdaTrace.front().stateNumber == stateIndex && lambdaTrace.front().action == action)
-		{
-			return action;
-		}
 		if (lambdaTrace.size() == MAXQUEUESIZE)
 		{
 			lambdaTrace.pop_back();
 		}
-		lambdaTrace.push_front(lambdaState{ stateIndex, action });
+		lambdaTrace.push_front(LambdaEntry{ stateIndex, action });
 	}
-	for (int i = 0; i < MarioAction::size; i++) {
-		std::cout << states[0].getValue(i) << ",";
-	}
-	std::cout << std::endl;
+
 	return action;
 }
 
@@ -107,7 +116,5 @@ MarioAction AgentLambda::chooseAction(State state) {
 	if (state.getBestAction() != a) {
 		lambdaTrace.clear();
 	}
-
-	//std::cout << " Left: " << counterLeft << " Right: " << counterRight << std::endl;
 	return a;
 }

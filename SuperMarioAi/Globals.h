@@ -65,8 +65,8 @@
 #define MAX_NUMBER_ENEMIES 4
 
 //QLearning
-#define NUMBER_OF_STATES (GRIDRADIUS - 1) * (GRIDRADIUS - 1) * (GRIDRADIUS - 1)+(GRIDRADIUS - 1)*2*(GRIDRADIUS - 1)
-#define ALPHA 0.4 //Learning rate
+#define NUMBER_OF_STATES (GRIDRADIUS - 1) * (GRIDRADIUS - 1) * (GRIDRADIUS - 1)+(GRIDRADIUS - 1)* 2 *(GRIDRADIUS - 1)
+#define ALPHA 0.35 //Learning rate
 #define GAMMA 1 //Discount factor
 #define EPSILON 0.1 //Propability of choosing a random action
 #define REWARDMOVERIGHT 0.08
@@ -79,7 +79,7 @@
 #define LAMBDAFACTOR 1
 
 #define MAX_KEYBOARD_INPUTS 10
-#define Max_TABLE_SIZE 60000
+#define MAX_TABLE_SIZE 60000
 
 #define SAVEFILE_PATH "saves/"
 #endif

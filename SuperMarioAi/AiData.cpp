@@ -55,6 +55,4 @@ void AiData::reset() {
 	featureValues.clear();
 	possibleActions.clear();
 	agentStateNumber = 0;
-	marioDeathCounter = 0;
-	marioWinCounter = 0;
 }

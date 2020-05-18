@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include <vector>
 #include <cstdlib>
 #include "Globals.h"
 #include "IAgent.h"
@@ -17,6 +18,7 @@ public:
 	State getState(int index) override;
 	std::array<State, NUMBER_OF_STATES>* getStates() override;
 	void setStates(std::array<State, NUMBER_OF_STATES>& states) override;
+	std::vector<int> getLambdaQueue() override;
 
 private:
 	int lastState;

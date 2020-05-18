@@ -68,9 +68,9 @@ void AiController::run() {
 					data->loopCounter++;
 					data->simpleView=*simplifyVec;
 					environment->calculateStateAndActions(data->nextAction, *simplifyVec, &data->possibleActions, &data->agentStateNumber, &data->reward);
+
 					//std::cout << "Reward: " << data->reward << std::endl;
 					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
-					
 					appControl->makeAction(data->nextAction);
 					break;
 				case GameState::GameOver:
@@ -108,8 +108,8 @@ void AiController::run() {
 			auto fps = duration.count();
 			data->loopTime = (int)fps;
 			}
-
 			
+			data->stateNumberQueue = agent->getLambdaQueue();
 			data->agentState = agent->getState(data->agentStateNumber);
 			data->featureValues = environment->getFeatureVector(data->agentStateNumber);
 			gui->update();
@@ -178,7 +178,6 @@ void AiController::loadMemory(std::string path)
 {
 	SaveLoad *saveLoad = new SaveLoad();
 	data->activeFeatures.clear();
-
 	memory.loadValues(path, saveLoad);
 
 	numberOfCycles = saveLoad->numberOfCycles;

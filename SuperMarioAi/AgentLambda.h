@@ -12,24 +12,25 @@ class State;
 class AgentLambda : public IAgent
 {
 public:
+	struct LambdaEntry {
+		int stateNumber;
+		MarioAction action;
+	};
 	AgentLambda();
 	~AgentLambda();
 	MarioAction calculateAction(int state, std::vector<MarioAction> possibleActions, double reward) override;
 	State getState(int index) override;
 	std::array<State, NUMBER_OF_STATES>* getStates() override;
 	void setStates(std::array<State, NUMBER_OF_STATES>& states) override;
+	std::vector<int> getLambdaQueue() override;
 
 private:
-	struct lambdaState {
-		int stateNumber;
-		MarioAction action;
-	};
-
 	int lastState;
 	double rewardRight;
 	Policy policy;
-	std::deque<lambdaState> lambdaTrace;
+	std::deque<LambdaEntry> lambdaTrace;
 	std::array<State, NUMBER_OF_STATES> states;
+
 	MarioAction chooseAction(State state);
 };
 

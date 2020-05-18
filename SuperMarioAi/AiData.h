@@ -1,10 +1,10 @@
 #pragma once
 #include <vector>
-#include "Globals.h"
 #include <Windows.h>
 #include <string>
-#include "GameState.h"
 #include <QPixMap>
+#include "Globals.h"
+#include "GameState.h"
 #include "MarioFeature.h"
 #include "State.h"
 class AiData
@@ -51,8 +51,9 @@ public:
 	State agentState;
 	State lastAgentState;
 	MarioAction nextAction;
-	int agentStateNumber=0;
-	int loopTime=0;
+	std::vector<int> stateNumberQueue;
+	int agentStateNumber = 0;
+	int loopTime = 0;
 	int loopCounter = 0;
 	int marioDeathCounter = 0;
 	int marioWinCounter = 0;

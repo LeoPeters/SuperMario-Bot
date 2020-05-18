@@ -136,16 +136,16 @@ void Memory::loadValues(std::string path, SaveLoad *saveLoad)
     reader.openFile(path);
 
     temp = reader.readNextElement();
-    std::cout << temp << std::endl;
+    //std::cout << temp << std::endl;
     saveLoad->numberOfCycles = std::stoi(temp);
     temp = reader.readNextElement();
-    std::cout << temp << std::endl;
+    //std::cout << temp << std::endl;
     saveLoad->statesSize = std::stoi(temp);
     temp = reader.readNextElement();
-    std::cout << temp << std::endl;
+    //std::cout << temp << std::endl;
     saveLoad->numberOfWins = std::stoi(temp);
     temp = reader.readNextElement();
-    std::cout << temp << std::endl;
+    //std::cout << temp << std::endl;
     saveLoad->numberOfDeaths = std::stoi(temp);
     
     //TODO FeatureNames std::vector<std::string>
@@ -154,7 +154,7 @@ void Memory::loadValues(std::string path, SaveLoad *saveLoad)
 
     while (std::getline(ss, item, ',')) {
         MarioFeature f = MarioFeature(std::stoi(item));
-        std::cout << f << std::endl;
+        //std::cout << f << std::endl;
         saveLoad->activeFeatures.push_back(MarioFeature(std::stoi(item)));
         numberOfActiveFeatures++;
     }
