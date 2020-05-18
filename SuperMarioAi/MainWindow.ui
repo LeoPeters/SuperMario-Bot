@@ -3529,9 +3529,9 @@
    <widget class="QFrame" name="memoryFrame">
     <property name="geometry">
      <rect>
-      <x>820</x>
+      <x>720</x>
       <y>10</y>
-      <width>181</width>
+      <width>281</width>
       <height>71</height>
      </rect>
     </property>
@@ -3569,7 +3569,7 @@
       <rect>
        <x>0</x>
        <y>30</y>
-       <width>181</width>
+       <width>281</width>
        <height>31</height>
       </rect>
      </property>

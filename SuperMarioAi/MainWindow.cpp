@@ -168,7 +168,7 @@ void MainWindow::updateTableView()
 		row.push_back(data->lastFeatureValues.at(i));
 	}
 	
-	if (lastAgentState < Max_TABLE_SIZE) {
+	if (lastAgentState < Max_TABLE_SIZE / (MarioAction::size + data->activeFeatures.size())) {
 		for (int i = 0; i < row.size(); i++) {
 			QModelIndex index = modelStateTableView->index(lastAgentState, i);
 			modelStateTableView->setData(index, row.at(i));
