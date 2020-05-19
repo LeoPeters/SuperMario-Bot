@@ -114,6 +114,7 @@ void EnvironmentCalculation::calculateFeatureVector()
     std::vector<int> featureVector;
     std::array<int, 2> closestEnemy = features.closestEnemy();
     std::array<int, 2> closestItem = features.closestItem();
+    int obstacleDistance = features.distanceToObstacle();
 
     for (int i = 0; i < activeFeatures.size(); i++) 
     {
@@ -129,7 +130,7 @@ void EnvironmentCalculation::calculateFeatureVector()
             featureVector.push_back(features.isUnderBlock());
             break;
         case MarioFeature::distanceToObstacle:
-            featureVector.push_back(features.distanceToObstacle());
+            featureVector.push_back(obstacleDistance);
         break;
         case MarioFeature::numberOfEnemies:
             featureVector.push_back(features.getNumberOfEnemies());
@@ -160,6 +161,9 @@ void EnvironmentCalculation::calculateFeatureVector()
             break;
         case MarioFeature::closestItemY:
             featureVector.push_back(closestItem[1]);
+            break;
+        case MarioFeature::speed:
+            featureVector.push_back(features.getSpeed(lastAction, obstacleDistance));
             break;
         default:
             break;

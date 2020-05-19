@@ -28,7 +28,9 @@ public:
     std::vector<MarioAction> getPossibleActions();
     void setJumpBlocked(bool jumpBlocked);
     int obstacleHeight();
+    int Features::getSpeed(MarioAction lastAction, int obstacleDistance);
 private:
+    int speedCounter;
     bool jumpBlocked;
     int onGroundCounter;
     std::vector<std::vector<int>> marioArray;

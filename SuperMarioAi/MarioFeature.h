@@ -18,6 +18,7 @@ public:
 		isRightFromObstacle,
 		isEnemyLeft,
 		isHoleLeft,
+		speed,
 		size
 	};
 
@@ -74,6 +75,9 @@ public:
 			break;
 		case closestItemY:
 			string = "Item-Y";
+			break;
+		case speed:
+			string = "Speed";
 			break;
 		default:
 			string = "NULL";

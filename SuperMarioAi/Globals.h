@@ -63,17 +63,18 @@
 //Features
 #define NUMBER_OF_FEATURES 4
 #define MAX_NUMBER_ENEMIES 4
+#define MAX_SPEED 3
 
 //QLearning
-#define NUMBER_OF_STATES (GRIDRADIUS - 1) * (GRIDRADIUS - 1) * (GRIDRADIUS - 1)+(GRIDRADIUS - 1)* 2 *(GRIDRADIUS - 1)
+#define NUMBER_OF_STATES (GRIDRADIUS - 1) * (GRIDRADIUS - 1) * (GRIDRADIUS - 1) * (GRIDRADIUS - 1)* 2 *(GRIDRADIUS - 1)
 #define ALPHA 0.35 //Learning rate
 #define GAMMA 1 //Discount factor
 #define EPSILON 0.1 //Propability of choosing a random action
 #define REWARDMOVERIGHT 0.08
-#define REWARDSTEP -0.1
+#define REWARDSTEP -0.05
 #define REWARDLOSE -100
-#define REWARDWIN 1000
-#define REWARD_OBSTACLE_ARRIVED 10
+#define REWARDWIN 500
+#define REWARD_OBSTACLE_ARRIVED 8
 #define INIT_STATE 0
 #define MAXQUEUESIZE 5
 #define LAMBDAFACTOR 1

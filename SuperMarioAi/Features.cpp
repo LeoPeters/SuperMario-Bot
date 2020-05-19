@@ -267,6 +267,51 @@ int Features::obstacleHeight()
     return obstacleHeight;
 }
 
+int Features::getSpeed(MarioAction lastAction, int obstacleDistance)
+{
+    switch (lastAction)
+    {
+    case MarioAction::jumpRight:
+    case MarioAction::moveRight:
+        if (speedCounter < 0 || obstacleDistance == 1)
+        {
+            speedCounter = -1;
+        }
+        speedCounter++;
+        break;
+    case MarioAction::moveLeft:
+        if (speedCounter > 0 || marioPositionX == 0 || (validPosition(marioPositionX - 1, 1, GRIDRADIUS) && marioArray[marioPositionY][marioPositionX - 1] == (int)MarioObject::ground)) {
+            speedCounter = 1;
+        }
+        speedCounter--;
+        break;
+    case MarioAction::jump:
+        if (speedCounter > 0)
+        {
+            speedCounter--;
+        }
+        else if (speedCounter < 0)
+        {
+            speedCounter++;
+        }
+        break;
+    default:
+        break;
+}
+
+
+
+    if (speedCounter > MAX_SPEED)
+    {
+        return MAX_SPEED;
+    }
+    else if (speedCounter < -MAX_SPEED)
+    {
+        return -MAX_SPEED;
+    }
+    return speedCounter;
+}
+
 bool Features::validPosition(int value, int lowBorder, int highBorder)
 {
     if(marioArray.size()<1){
