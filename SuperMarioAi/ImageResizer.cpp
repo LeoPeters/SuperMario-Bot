@@ -1,25 +1,9 @@
 #include "ImageResizer.h"
 #include <iostream>
 
+ImageResizer::ImageResizer() {
 
-   /*     ImageDistributor distr;
-        int resizing_data[MAPPINGDATA];
-        int find_block(); //setzt den block in resizing data für find mapping data
-        int find_mapping_data(); //findet aufgrund von resizing data die außenstellen von block aus
-        int resize_input_image(int *mapping);
-
-    public:
-        ImageResizer();
-        bool resize();*/
-
-/*//unten links bis oben rechts
-    for(int y = height-1; y >= 0; y--){
-        png_bytep row = resized.row_pointers[y];
-        for(int x = 0; x < width ;x++){
-            png_bytep px = &(row[(x) * 4]);
-            
-        }
-    }*/
+}
 
 bool ImageResizer::resize(){
     if(find_block()){
@@ -37,9 +21,70 @@ bool ImageResizer::resize(){
     }
 }
 
-ImageResizer::ImageResizer(){
-    
+void ImageResizer::resizer(PngImage input, const char* outputname, int x_start, int y_start, int x_end, int y_end)
+{
+    int new_width = x_end - x_start + 1;
+    int new_height = y_end - y_start + 1;
+
+    //IO Operations
+    FILE* fp = fopen(outputname, "wb");
+    if (!fp) abort();
+
+    png_structp png = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    if (!png) abort();
+    png_infop info = png_create_info_struct(png);
+    if (!info) abort();
+    if (setjmp(png_jmpbuf(png))) abort();
+    png_init_io(png, fp);
+
+    // Output is 8bit depth, RGBA format.
+    png_set_IHDR(
+        png,
+        info,
+        new_width, new_height,
+        8,
+        PNG_COLOR_TYPE_RGBA,
+        PNG_INTERLACE_NONE,
+        PNG_COMPRESSION_TYPE_DEFAULT,
+        PNG_FILTER_TYPE_DEFAULT
+    );
+    png_write_info(png, info);
+
+    // Init new row pointers
+    png_bytep* new_row_pointers = (png_bytep*)malloc(sizeof(png_bytep) * new_height);
+    for (int y = 0; y < new_height; y++) {
+        new_row_pointers[y] = (png_byte*)malloc(png_get_rowbytes(png, info));
+    }
+    if (!new_row_pointers) abort();
+
+    //resizing, copy Pixels in Scope
+    for (int y = y_start; y <= y_end; y++) {
+        png_bytep row = input.row_pointers[y];
+        png_bytep new_row = new_row_pointers[y - y_start];
+        for (int x = x_start; x <= x_end; x++) {
+            png_bytep px = &(row[x * 4]);
+            png_bytep new_px = &(new_row[(x - x_start) * 4]);
+            // Do something awesome for each pixel here...
+            new_px[0] = px[0];
+            new_px[1] = px[1];
+            new_px[2] = px[2];
+            new_px[3] = px[3];
+        }
+    }
+    //Write
+    png_write_image(png, new_row_pointers);
+    png_write_end(png, NULL);
+    //Clean
+    for (int y = 0; y < new_height; y++) {
+        free(new_row_pointers[y]);
+    }
+    free(new_row_pointers);
+
+    //free(new_row_pointers);
+    png_destroy_write_struct(&png, &info);
+    fclose(fp);
 }
+
 
 
 
@@ -97,66 +142,5 @@ bool ImageResizer::resize_input_image(){
 }
 
 void ImageResizer::resize_png_file(int x_start, int y_start, int x_end, int y_end) {
-    PngImage input = distr.grab_input_img();
-    int new_width = x_end-x_start +1;
-    int new_height = y_end-y_start +1;
-
-    //IO Operations
-    FILE *fp = fopen("pictures/Resized/resized.png", "wb");
-    if(!fp) abort();
-
-    png_structp png = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-    if (!png) abort();
-    png_infop info = png_create_info_struct(png);
-    if (!info) abort();
-    if (setjmp(png_jmpbuf(png))) abort();
-    png_init_io(png, fp);
-
-    // Output is 8bit depth, RGBA format.
-    png_set_IHDR(
-        png,
-        info,
-        new_width, new_height,
-        8,
-        PNG_COLOR_TYPE_RGBA,
-        PNG_INTERLACE_NONE,
-        PNG_COMPRESSION_TYPE_DEFAULT,
-        PNG_FILTER_TYPE_DEFAULT
-    );
-    png_write_info(png, info);
-
-    // Init new row pointers
-    png_bytep *new_row_pointers = (png_bytep*)malloc(sizeof(png_bytep) * new_height);
-    for(int y = 0; y < new_height; y++) {
-        new_row_pointers[y] = (png_byte*)malloc(png_get_rowbytes(png,info));
-    }
-    if (!new_row_pointers) abort();
-
-    //resizing, copy Pixels in Scope
-    for(int y = y_start; y <= y_end; y++) {
-        png_bytep row = input.row_pointers[y];
-        png_bytep new_row = new_row_pointers[y - y_start];
-        for(int x = x_start; x <= x_end; x++) {
-            png_bytep px = &(row[x * 4]);
-            png_bytep new_px = &(new_row[(x - x_start) * 4]);
-            // Do something awesome for each pixel here...
-            new_px[0] = px[0];
-            new_px[1] = px[1];
-            new_px[2] = px[2];
-            new_px[3] = px[3];
-            } 
-        }
-    //Write
-    png_write_image(png, new_row_pointers);
-    png_write_end(png, NULL);
-    //Clean
-    for(int y = 0; y < new_height; y++) {
-        free(new_row_pointers[y]); 
-    }
-    free(new_row_pointers);
-
-    //free(new_row_pointers);
-    png_destroy_write_struct(&png, &info);
-    fclose(fp);
-
+    resizer(distr.grab_input_img(), "pictures/Resized/resized.png", x_start, y_start, x_end, y_end);
 }

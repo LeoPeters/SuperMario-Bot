@@ -18,6 +18,7 @@ class ImageResizer{
     public:
         ImageResizer();
         bool resize();
+        void resizer(PngImage input, const char* outputname, int x_start, int y_start, int x_end, int y_end);
         ~ImageResizer();
         
 

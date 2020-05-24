@@ -10,7 +10,7 @@
 #include <iostream>
 #include <chrono>
 #include <ctime>  
-
+#include "DataExtractorPerTile.h"
 
 int Environment::environment_interface(const char* filename, int arr[GRIDRADIUS][GRIDRADIUS], int* status){
     PngImage inp(filename);
@@ -30,7 +30,7 @@ int Environment::environment_interface(const char* filename, int arr[GRIDRADIUS]
 
 
 //constructor
-Environment::Environment(): traindata(), trainingflag(true){
+Environment::Environment(): traindata(), trainingflag(true), traindata_on_tiles(){
     image_library = ImageLibrary::getInstance(); 
 }
 
@@ -49,10 +49,10 @@ int Environment::give_Input(PngImage& new_input,int arr[GRIDRADIUS][GRIDRADIUS],
             mapper.return_erg_array(arr);
             mem_arr.push_in_memory_array(arr);
             mem_arr.set_first_not_found(true);
-
+            //trainingflag = false;
             if (trainingflag) {
-                if (!traindata.write_array_to_data_file(arr)) {
-                    trainingflag = false;
+                if (traindata_on_tiles.createTrainDataFromArray(arr)) {
+                    exit(0);
                 }
             }
 

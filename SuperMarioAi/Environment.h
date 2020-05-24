@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include "MemoryArray.h"
 #include "DataExtractor.h"
+#include "DataExtractorPerTile.h"
 class Environment{
 private:
     ImageLibrary* image_library; // = ImageLibrary::getInstance()
@@ -13,6 +14,7 @@ private:
     Mapper mapper;
     MemoryArray mem_arr;
     DataExtractor traindata;
+    DataExtractorPerTile traindata_on_tiles;
     bool trainingflag;
 
 public:

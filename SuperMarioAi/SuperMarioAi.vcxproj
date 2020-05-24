@@ -77,6 +77,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <PreprocessorDefinitions>_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -92,6 +93,7 @@
     <ClCompile Include="AiFactory.cpp" />
     <ClCompile Include="AiGui.cpp" />
     <ClCompile Include="AppControlDummy.cpp" />
+    <ClCompile Include="DataExtractorPerTile.cpp" />
     <ClCompile Include="Deathcondition.cpp" />
     <ClCompile Include="EnviromentDummy.cpp" />
     <ClCompile Include="Environment.cpp" />
@@ -136,6 +138,7 @@
     <ClInclude Include="AgentDummy.h" />
     <ClInclude Include="AiData.h" />
     <ClInclude Include="DataExtractor.h" />
+    <ClInclude Include="DataExtractorPerTile.h" />
     <ClInclude Include="Deathcondition.h" />
     <ClInclude Include="Features.h" />
     <ClInclude Include="GameState.h" />

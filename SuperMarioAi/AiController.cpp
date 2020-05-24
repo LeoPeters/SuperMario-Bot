@@ -42,7 +42,7 @@ void AiController::run() {
 				
 					data->nextAction = agent->calculateAction(data->agentStateNumber, data->possibleActions, data->reward);
 					data->agentState = agent->getState(data->agentStateNumber);
-					appControl->makeAction(data->nextAction);
+					//appControl->makeAction(data->nextAction);
 					break;
 				case GameState::GameOver:
 					numberOfCycles++;
