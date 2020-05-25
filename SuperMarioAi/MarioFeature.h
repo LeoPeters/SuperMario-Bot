@@ -18,7 +18,9 @@ public:
 		isRightFromObstacle,
 		isEnemyLeft,
 		isHoleLeft,
+		aboveHole,
 		speed,
+		flag,
 		size
 	};
 
@@ -78,6 +80,12 @@ public:
 			break;
 		case speed:
 			string = "Speed";
+			break;
+		case aboveHole:
+			string = "Above Hole";
+			break;
+		case flag:
+			string = "Flag";
 			break;
 		default:
 			string = "NULL";

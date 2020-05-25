@@ -63,6 +63,14 @@ std::array<int, 2> Features::closestEnemy()
     return closest;
 }
 
+int Features::Flag() {
+    for (int i = 0; i < GRIDRADIUS;i++) {
+        if (marioArray[GRIDRADIUS/2][i]==(int)MarioObject::flag) {
+            return 1;
+        }
+    }
+    return 0;
+}
 int Features::distance(int x, int y)
 {
     return std::abs(marioPositionX - x) + std::abs(marioPositionY - y);
@@ -312,6 +320,14 @@ int Features::getSpeed(MarioAction lastAction, int obstacleDistance)
     return speedCounter;
 }
 
+bool Features::isAboveHole() {
+    for (int i = marioPositionY; i < GRIDRADIUS - 1; i++) {
+        if (marioArray[i][marioPositionX]==(int)MarioObject::ground) {
+            return false;
+        }
+    }
+    return true;
+}
 bool Features::validPosition(int value, int lowBorder, int highBorder)
 {
     if(marioArray.size()<1){

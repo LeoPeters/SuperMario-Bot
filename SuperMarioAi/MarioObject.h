@@ -5,5 +5,6 @@ enum class MarioObject {
 	mario, 
 	ground, 
 	enemy, 
-	item 
+	item,
+	flag
 };

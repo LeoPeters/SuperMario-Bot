@@ -46,7 +46,9 @@ AiController::AiController(int argc, char** argv) :
 	//data->activeFeatures.push_back(MarioFeature::isRightFromObstacle);
 	data->activeFeatures.push_back(MarioFeature::isEnemyLeft);
 	data->activeFeatures.push_back(MarioFeature::isHoleLeft);
+	data->activeFeatures.push_back(MarioFeature::aboveHole);
 	data->activeFeatures.push_back(MarioFeature::speed);
+	data->activeFeatures.push_back(MarioFeature::flag);
 
 	agent = new AgentLambda();
 	environment = new EnvironmentCalculation();

@@ -29,6 +29,8 @@ public:
     void setJumpBlocked(bool jumpBlocked);
     int obstacleHeight();
     int Features::getSpeed(MarioAction lastAction, int obstacleDistance);
+    bool isAboveHole();
+    int Flag();
 private:
     int speedCounter;
     bool jumpBlocked;
@@ -37,7 +39,10 @@ private:
     int marioPositionX;
     int marioPositionY;
 
-    bool validPosition(int value, int lowBorder, int highBorder);
-    int distance(int x, int y);
+	
+
+	bool validPosition(int value, int lowBorder, int highBorder);
+	
+	int distance(int x, int y);
 
 };

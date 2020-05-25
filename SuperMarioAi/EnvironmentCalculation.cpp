@@ -165,6 +165,12 @@ void EnvironmentCalculation::calculateFeatureVector()
         case MarioFeature::speed:
             featureVector.push_back(features.getSpeed(lastAction, obstacleDistance));
             break;
+        case MarioFeature::aboveHole:
+            featureVector.push_back(features.isAboveHole());
+            break;
+        case MarioFeature::flag:
+            featureVector.push_back(features.Flag());
+            break;
         default:
             break;
         }
