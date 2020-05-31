@@ -1,3 +1,5 @@
+#include <torch/script.h> // One-stop header.
+
 #include <iostream>
 #include "AiController.h"
 #include <thread>
@@ -9,6 +11,20 @@ void CreateConsole();
 
 int main(int argc, char* argv[])
 {
+
+    torch::jit::script::Module module;
+    try
+    {
+        // Deserialize the ScriptModule from a file using torch::jit::load().
+        module = torch::jit::load("../models/traced_cnn_model.pt");
+    }
+    catch (const c10::Error& e)
+    {
+        std::cerr << "error loading the model\n";
+        return -1;
+    }
+    std::cout << "ok\n";
+
     if (DEBUG) {
         CreateConsole();
     }
