@@ -11,12 +11,15 @@ void CreateConsole();
 
 int main(int argc, char* argv[])
 {
+    if (DEBUG) {
+        CreateConsole();
+    }
 
     torch::jit::script::Module module;
     try
     {
         // Deserialize the ScriptModule from a file using torch::jit::load().
-        module = torch::jit::load("../models/traced_cnn_model.pt");
+        module = torch::jit::load("./pytorch-models/traced_cnn_model.pt");
     }
     catch (const c10::Error& e)
     {
@@ -25,9 +28,7 @@ int main(int argc, char* argv[])
     }
     std::cout << "ok\n";
 
-    if (DEBUG) {
-        CreateConsole();
-    }
+    
     AiController controller(argc, argv);
     std::thread controllerThread(&AiController::run, &controller);
     controller.runGui();
