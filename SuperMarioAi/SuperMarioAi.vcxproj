@@ -70,7 +70,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Path\libtorch\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>torch_cpu.lib;torch.lib;caffe2_detectron_ops.lib;c10.lib;caffe2_module_test_dynamic.lib;asmjit.lib;clog.lib;cpuinfo.lib;fbgemm.lib;libprotobufd.lib;libprotobuf-lited.lib;libprotocd.lib;mkldnn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>torch_cpu.lib;torch.lib;caffe2_detectron_ops_gpu.lib;c10.lib;caffe2_module_test_dynamic.lib;asmjit.lib;clog.lib;cpuinfo.lib;fbgemm.lib;libprotobufd.lib;libprotobuf-lited.lib;libprotocd.lib;mkldnn.lib;torch_cuda.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>
       </ImportLibrary>
     </Link>
@@ -114,6 +114,7 @@
     <ClCompile Include="ImageLibrary.cpp" />
     <ClCompile Include="ImageResizer.cpp" />
     <ClCompile Include="EnvironmentCalculation.cpp" />
+    <ClCompile Include="MainWindow_DeepQ.cpp" />
     <ClCompile Include="rewardCalculator.cpp" />
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="SimplifierDummy.cpp" />
@@ -138,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui" />
+    <QtUic Include="MainWindow_DeepQ.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainWindow.h" />
@@ -150,6 +152,7 @@
     <ClInclude Include="Deathcondition.h" />
     <ClInclude Include="Features.h" />
     <ClInclude Include="GameState.h" />
+    <QtMoc Include="MainWindow_DeepQ.h" />
     <ClInclude Include="MarioFeature.h" />
     <ClInclude Include="FeatureWidget.h" />
     <ClInclude Include="MemoryArray.h" />

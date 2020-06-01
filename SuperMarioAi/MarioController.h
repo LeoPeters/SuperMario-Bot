@@ -25,12 +25,6 @@ private:
 	bool isPressing;
 	HWND window;
 	Keyboard* keyboard;
-	void moveLeft();
-	void moveRight();
-	void jump();
-	void highJump();
-	void highJumpRight();
-	void shoot();
 	void releaseAll();
 	void pressKey();
 	std::array<bool, MAX_KEYBOARD_INPUTS> keyBool;

@@ -238,8 +238,8 @@ std::vector<MarioAction> Features::getPossibleActions()
     //TODO MarioAction::shoot        
     std::vector<MarioAction> possibleActions;
 
-    possibleActions.push_back(MarioAction::moveRight);
-    possibleActions.push_back(MarioAction::moveLeft);
+    possibleActions.push_back(MarioAction::right);
+    possibleActions.push_back(MarioAction::left);
     if (!jumpBlocked) {
 
     possibleActions.push_back(MarioAction::jump);
@@ -280,14 +280,14 @@ int Features::getSpeed(MarioAction lastAction, int obstacleDistance)
     switch (lastAction)
     {
     case MarioAction::jumpRight:
-    case MarioAction::moveRight:
+    case MarioAction::right:
         if (speedCounter < 0 || obstacleDistance == 1)
         {
             speedCounter = -1;
         }
         speedCounter++;
         break;
-    case MarioAction::moveLeft:
+    case MarioAction::left:
         if (speedCounter > 0 || marioPositionX == 0 || (validPosition(marioPositionX - 1, 1, GRIDRADIUS) && marioArray[marioPositionY][marioPositionX - 1] == (int)MarioObject::ground)) {
             speedCounter = 1;
         }

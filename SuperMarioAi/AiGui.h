@@ -4,6 +4,7 @@
 #include "MarioAction.h"
 #include "AiData.h"
 #include "MainWindow.h"
+#include "MainWindow_DeepQ.h"
 #include "MarioFeature.h"
 
 class AiGui
@@ -15,10 +16,10 @@ public:
 	void runGui();
 	void end();
 	void update();
-	MainWindow* getMainWindow();
+	MainWindowDeepQ* getMainWindow();
 	IGuiObserver* getObserver();
 private:
-	MainWindow* mWindow;
+	MainWindowDeepQ* mWindow;
 	QApplication* app;
 	IGuiObserver* observer;
 	QGraphicsScene* gameView;

@@ -83,7 +83,7 @@ MarioAction AgentLambda::calculateAction(int stateIndex, std::vector<MarioAction
 
 MarioAction AgentLambda::chooseAction(State state) {
 	double rnd = std::rand() / (double)RAND_MAX;
-	MarioAction a = MarioAction::moveRight;
+	MarioAction a = MarioAction::right;
 
 	switch (policy) {
 	case Policy::greedy:

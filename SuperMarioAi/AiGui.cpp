@@ -7,7 +7,7 @@ AiGui::AiGui(int argc, char** argv, IGuiObserver* observer,AiData* data) :
 	data(data)
 {
 	app = new QApplication(argc, argv);
-	mWindow = new MainWindow(observer,data);
+	mWindow = new MainWindowDeepQ(observer,data);
 	mWindow->show();
 	
 	gameView = new QGraphicsScene();
@@ -33,7 +33,7 @@ void AiGui::update()
 	mWindow->updateView();
 }
 
-MainWindow* AiGui::getMainWindow()
+MainWindowDeepQ* AiGui::getMainWindow()
 {
 	return mWindow;
 }

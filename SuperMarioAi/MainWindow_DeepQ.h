@@ -33,9 +33,7 @@ private:
 	Ui::MainWindowDeepQ ui;
 	IGuiObserver* observer;
 	bool isPaused = false;
-	QStandardItemModel* modelStateTableView;
 	std::vector<QLabel*> actionLabelList;
-	std::vector<FeatureWidget*> featureWidgetList;
 	int lastAgentState;
 	QTableView* stateTableView;
 	QListWidget* listWidget;
