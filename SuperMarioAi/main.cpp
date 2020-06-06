@@ -1,10 +1,12 @@
 #include <torch/script.h> // One-stop header.
-
+#include "TorchCNN.h"
 #include <iostream>
 #include "AiController.h"
 #include <thread>
 #include "MemoryFinder.h"
 #include <string>
+#include <chrono>
+
 #define DEBUG true
 FILE* fDummy;
 void CreateConsole();
@@ -15,20 +17,24 @@ int main(int argc, char* argv[])
         CreateConsole();
     }
 
-    torch::jit::script::Module module;
-    try
-    {
-        // Deserialize the ScriptModule from a file using torch::jit::load().
-        module = torch::jit::load("./pytorch-models/traced_cnn_model.pt");
-    }
-    catch (const c10::Error& e)
-    {
-        std::cerr << "error loading the model\n";
-        return -1;
-    }
-    std::cout << "ok\n";
 
+    ImageLibrary* libptr = ImageLibrary::getInstance();
+    PngImage resized("pictures/Resized/resized.png");
+    libptr->set_resized_image(resized);
+
+    TorchCNN cnn;
+    for (int y = 0; y < 15; y++) {
+        for (int x = 0; x < 15; x++) {
+            std::cout<<cnn.returnErgFromGridcoords(x, y)<<" ";
+
+        }
+        std::cout << std::endl;
+    }
     
+
+    while (true)
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    /*
     AiController controller(argc, argv);
     std::thread controllerThread(&AiController::run, &controller);
     controller.runGui();
@@ -37,7 +43,8 @@ int main(int argc, char* argv[])
         fclose(fDummy);
         FreeConsole();
     }
-
+    */
+    
     return 0;
 }
 void CreateConsole()

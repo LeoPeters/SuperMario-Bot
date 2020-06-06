@@ -131,6 +131,7 @@
     <ClCompile Include="Testing.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TemplateMatcher.cpp" />
+    <ClCompile Include="TorchCNN.cpp" />
     <ClCompile Include="Wincondition.cpp" />
     <ClCompile Include="MemoryFinder.cpp" />
     <ClCompile Include="XMLReader.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="ScreenCaptureDummy.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="TemplateMatcher.h" />
+    <ClInclude Include="TorchCNN.h" />
     <ClInclude Include="Wincondition.h" />
     <ClInclude Include="MemoryFinder.h" />
     <ClInclude Include="XMLReader.h" />
