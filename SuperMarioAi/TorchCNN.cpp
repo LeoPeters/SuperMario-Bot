@@ -23,15 +23,15 @@ int TorchCNN::returnErgFromGridcoords(int gridx, int gridy)
     PngImage& resized = distr.grab_resized_img();
     int y_pos = 0;
     int x_pos = 0;
-    //float array[16][16][3];
-    float array[3][16][16];
+    float array[16][16][3];
+    //float array[3][16][16];
     //TESTING
     int xpos = gridx * 16;
     int ypos = gridy * 16;
    // PngImage resized("pictures/Resized/pic0.png");
             //std::cout << "cnn start\n";
         
-            /*for (int y = 0; y < 16; y++) {
+            for (int y = 0; y < 16; y++) {
                 png_bytep img_row = resized.row_pointers[ypos + y];
                 for (int x = 0; x < 16; x++) {
                     png_bytep impx = &(img_row[(xpos + x) * 4]);
@@ -41,8 +41,8 @@ int TorchCNN::returnErgFromGridcoords(int gridx, int gridy)
                    // std::cout << (int)impx[0] << " " << (int)impx[1] << " " << (int)impx[2] << " ";
                 }
                // std::cout << std::endl;
-            }*/
-
+            }
+    /*
     for (int i = 0; i < 3; i++) {
         for (int y = 0; y < 16; y++) {
             png_bytep img_row = resized.row_pointers[ypos + y];
@@ -55,17 +55,17 @@ int TorchCNN::returnErgFromGridcoords(int gridx, int gridy)
             // std::cout << std::endl;
         }
 
-    }
+    }*/
             //std::cout << array[0][0];
 
             //torch::scalar_to_tensor(array);
             //
             //auto options = torch::TensorOptions().dtype(torch::kInt32);
-            //torch::Tensor tensor = torch::from_blob(array, { 16, 16, 3 } );//, options);
-    torch::Tensor tensor = torch::from_blob(array, { 3, 16, 16 });
-            //tensor = tensor / 255;
-            //tensor = at::transpose(tensor, 0, 1);
-            //tensor = at::transpose(tensor, 0, 2);
+            //torch::Tensor tensor = torch::from_blob(array, { 3, 16, 16 } );//, options);
+    torch::Tensor tensor = torch::from_blob(array, { 16, 16, 3 });
+            tensor = tensor / 255;
+            tensor = at::transpose(tensor, 0, 1);
+            tensor = at::transpose(tensor, 0, 2);
     tensor = tensor.unsqueeze(0);
            //std::cout.precision(6);
             //torch::print(tensor,100000); //WORKING 100& CORRECTLY!!!!
