@@ -17,16 +17,16 @@
 
 int Environment::environment_interface(const char* filename, int arr[GRIDRADIUS][GRIDRADIUS], int* status){
     PngImage inp(filename);
-    //auto start = std::chrono::system_clock::now();
+    auto start = std::chrono::system_clock::now();
     // Some computation here
     give_Input(inp,arr,status);
-  //  auto end = std::chrono::system_clock::now();
-    /*
+    auto end = std::chrono::system_clock::now();
+
     std::chrono::duration<double> elapsed_seconds = end - start;
     std::time_t end_time = std::chrono::system_clock::to_time_t(end);
 
     std::cout << "finished computation at " << std::ctime(&end_time)
-        << "elapsed time: " << elapsed_seconds.count() << "s\n";*/
+        << "elapsed time: " << elapsed_seconds.count() << "s\n";
     return 0;
 }
 
