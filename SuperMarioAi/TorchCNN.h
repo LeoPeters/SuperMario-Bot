@@ -1,4 +1,6 @@
 #pragma once
+#ifndef TORCHCNN_H
+#define TORCHCNN_H
 #include <torch/script.h> // One-stop header.
 #include "ImageDistributor.h"
 #include "MarioFinder.h"
@@ -13,3 +15,4 @@ public:
 	int returnErgFromGridcoords(int gridx, int gridy);
 	~TorchCNN() = default;
 };
+#endif

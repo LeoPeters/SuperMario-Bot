@@ -10,8 +10,8 @@
 #include <iostream>
 #include <chrono>
 #include <ctime>  
-
-
+#include "TorchCNN.h"
+TorchCNN* cnnptr;
 
 
 
@@ -30,27 +30,52 @@ int Environment::environment_interface(const char* filename, int arr[GRIDRADIUS]
     return 0;
 }
 
+bool Environment::threadedSearch(int arr[GRIDRADIUS][GRIDRADIUS])
+{
+
+    std::thread threads[FINDERTHREADS];
+    for (int i = 0; i < FINDERTHREADS; i++) {
+        threads[i] = std::thread(&Environment::threadrun, this, arr, i);
+    }
+    for (int i = 0; i < FINDERTHREADS; i++) {
+        threads[i].join();
+    }
+
+    for (int x = 0; x < GRIDRADIUS; x++) {
+        for (int y = 0; y < GRIDRADIUS; y++) {
+            if (arr[x][y] == MARIO) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void Environment::threadrun(int arr[GRIDRADIUS][GRIDRADIUS], int row)
+{
+
+    for (int x = 0; x < GRIDRADIUS; x++) {
+        arr[x][row] = cnnptr->returnErgFromGridcoords(x, row);
+    }
+
+}
 
 
 //constructor
 Environment::Environment(){
     image_library = ImageLibrary::getInstance(); 
-
+    cnnptr = new TorchCNN();
 }
 
-Environment::~Environment()=default;
+Environment::~Environment() {
+    delete cnnptr;
+}
 
 int Environment::give_Input(PngImage& new_input,int arr[GRIDRADIUS][GRIDRADIUS], int* status){
+
     image_library->set_input_image(new_input);
     if(resize.resize()){
-        if(mapper.Map_Mario()){
-            mapper.Map_Enemys_Threaded();
-            mapper.Map_Blocks_Threaded();
-            mapper.Map_Items_Threaded();
-            if(mapper.Map_Winning_Conditions_Threaded()){
-                *status = GEWONNEN;
-            }
-            mapper.return_erg_array(arr);
+        if (threadedSearch(arr)) {
             mem_arr.push_in_memory_array(arr);
             mem_arr.set_first_not_found(true);
             return 0;

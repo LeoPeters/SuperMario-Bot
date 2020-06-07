@@ -1,5 +1,5 @@
 #include <torch/script.h> // One-stop header.
-#include "TorchCNN.h"
+//#include "TorchCNN.h"
 #include <iostream>
 #include "AiController.h"
 #include <thread>
@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
         CreateConsole();
     }
 
-
+    /*
     ImageLibrary* libptr = ImageLibrary::getInstance();
     PngImage resized("pictures/Resized/resized.png");
     libptr->set_resized_image(resized);
@@ -30,11 +30,8 @@ int main(int argc, char* argv[])
         }
         std::cout << std::endl;
     }
-    
+    */
 
-    while (true)
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    /*
     AiController controller(argc, argv);
     std::thread controllerThread(&AiController::run, &controller);
     controller.runGui();
@@ -43,7 +40,7 @@ int main(int argc, char* argv[])
         fclose(fDummy);
         FreeConsole();
     }
-    */
+    
     
     return 0;
 }
