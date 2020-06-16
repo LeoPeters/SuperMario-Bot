@@ -75,7 +75,19 @@ int Environment::give_Input(PngImage& new_input,int arr[GRIDRADIUS][GRIDRADIUS],
 
     image_library->set_input_image(new_input);
     if(resize.resize()){
-        if (threadedSearch(arr)) {
+        /*if (threadedSearch(arr)) { //CNN
+            mem_arr.push_in_memory_array(arr);
+            mem_arr.set_first_not_found(true);
+            return 0;
+        }*/
+        if (mapper.Map_Mario()) {
+            mapper.Map_Enemys_Threaded();
+            mapper.Map_Blocks_Threaded();
+            mapper.Map_Items_Threaded();
+            if (mapper.Map_Winning_Conditions_Threaded()) {
+                *status = GEWONNEN;
+            }
+            mapper.return_erg_array(arr);
             mem_arr.push_in_memory_array(arr);
             mem_arr.set_first_not_found(true);
             return 0;

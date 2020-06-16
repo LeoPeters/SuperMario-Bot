@@ -112,10 +112,11 @@ void DQNAgent::learn()
 	iter_cntr++;
 	if (epsilon > eps_min) {
 		epsilon = epsilon - eps_dec;
+		//epsilon = eps_min + (epsilon - (double)eps_min) * exp(-1. * iter_cntr / eps_dec);
 	}
 	
 	if (iter_cntr % replace_target == 0) {
-		loadstatedict(Q_eval->model, Q_next->model);
+		loadstatedict(Q_eval->model, Q_next->model);	
 	}
 
 }
