@@ -36,10 +36,10 @@ void DQNAgent::store_transition(std::vector<unsigned char> state, int64_t action
 	bool terminals[1] = { terminal };
 	int64_t actions[1] = { action };
 
-	torch::Tensor reward_tensor = torch::from_blob(rewards, { 1 });
-	torch::Tensor terminals_tensor = torch::from_blob(terminals, { 1 });
-	terminals_tensor = terminals_tensor.to(torch::kFloat32);
-	torch::Tensor actions_tensor = torch::from_blob(actions, { 1 });
+	torch::Tensor reward_tensor = torch::from_blob(rewards, { 1 })/*.clone()*/;
+	torch::Tensor terminals_tensor = torch::from_blob(terminals, { 1 }, torch::kFloat32)/*.clone()*/;
+	//terminals_tensor = terminals_tensor.to(torch::kFloat32).clone();
+	torch::Tensor actions_tensor = torch::from_blob(actions, { 1 })/*.clone()*/;
 
 	storage.push(get_tensor_observation(state), get_tensor_observation(state_), 
 		actions_tensor, terminals_tensor, reward_tensor);
@@ -88,11 +88,11 @@ void DQNAgent::learn()
 	torch::Tensor rewards_tensor;
 	torch::Tensor dones_tensor;
 
-	states_tensor = torch::cat(states, 0);
-	new_states_tensor = torch::cat(new_states, 0);
-	actions_tensor = torch::cat(actions, 0);
-	rewards_tensor = torch::cat(rewards, 0);
-	dones_tensor = torch::cat(dones, 0);
+	states_tensor = torch::cat(states);
+	new_states_tensor = torch::cat(new_states);
+	actions_tensor = torch::cat(actions);
+	rewards_tensor = torch::cat(rewards);
+	dones_tensor = torch::cat(dones);
 
 	auto q_values = Q_eval->model.forward(states_tensor);
 	auto next_q_values = Q_eval->model.forward(new_states_tensor);
@@ -145,12 +145,12 @@ void DQNAgent::loadstatedict(torch::nn::Module& model,
 torch::Tensor DQNAgent::get_tensor_observation(std::vector<unsigned char> state)
 {
 	std::vector<int64_t > state_int;
-	state_int.reserve(state.size());
+	//state_int.reserve(state.size());
 
 	for (int i = 0; i < state.size(); i++) {
 		state_int.push_back(int64_t(state[i]));
 	}
 
-	torch::Tensor state_tensor = torch::from_blob(state_int.data(), { 1, input_dim, input_height, input_width });
+	torch::Tensor state_tensor = torch::from_blob(state_int.data(), { 1, input_dim, input_height, input_width }).clone();
 	return state_tensor;
 }
