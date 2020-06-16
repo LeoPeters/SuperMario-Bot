@@ -97,9 +97,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="AgentDQN.cpp" />
     <ClCompile Include="AgentDummy.cpp" />
     <ClCompile Include="AgentLambda.cpp" />
     <ClCompile Include="AiController.cpp" />
+    <ClCompile Include="AiControllerDQN.cpp" />
     <ClCompile Include="AiData.cpp" />
     <ClCompile Include="AiFactory.cpp" />
     <ClCompile Include="AiGui.cpp" />
@@ -148,8 +150,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="AgentDQN.h" />
     <ClInclude Include="AgentDummy.h" />
     <ClInclude Include="AgentLambda.h" />
+    <ClInclude Include="AiControllerDQN.h" />
     <ClInclude Include="AiData.h" />
     <ClInclude Include="DeepQNetwork.h" />
     <ClInclude Include="Deathcondition.h" />

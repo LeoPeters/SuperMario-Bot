@@ -214,6 +214,12 @@
     <ClCompile Include="ExperienceReplay.cpp">
       <Filter>Source Files\DQN</Filter>
     </ClCompile>
+    <ClCompile Include="AgentDQN.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AiControllerDQN.cpp">
+      <Filter>Source Files\ControlUnit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui">
@@ -388,6 +394,12 @@
     </ClInclude>
     <ClInclude Include="ExperienceReplay.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentDQN.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AiControllerDQN.h">
+      <Filter>Header Files\ControlUnit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
