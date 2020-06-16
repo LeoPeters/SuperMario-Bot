@@ -36,10 +36,10 @@ void DQNAgent::store_transition(std::vector<unsigned char> state, int64_t action
 	bool terminals[1] = { terminal };
 	int64_t actions[1] = { action };
 
-	torch::Tensor reward_tensor = torch::from_blob(rewards, { 1 })/*.clone()*/;
-	torch::Tensor terminals_tensor = torch::from_blob(terminals, { 1 }, torch::kFloat32)/*.clone()*/;
+	torch::Tensor reward_tensor = torch::from_blob(rewards, { 1 }).clone();
+	torch::Tensor terminals_tensor = torch::from_blob(terminals, { 1 }, torch::kFloat32).clone();
 	//terminals_tensor = terminals_tensor.to(torch::kFloat32).clone();
-	torch::Tensor actions_tensor = torch::from_blob(actions, { 1 })/*.clone()*/;
+	torch::Tensor actions_tensor = torch::from_blob(actions, { 1 }).clone();
 
 	storage.push(get_tensor_observation(state), get_tensor_observation(state_), 
 		actions_tensor, terminals_tensor, reward_tensor);
@@ -115,8 +115,7 @@ void DQNAgent::learn()
 	}
 	
 	if (iter_cntr % replace_target == 0) {
-		//loadstatedict(Q_eval->model, Q_next->model);
-		Q_next->model = Q_eval->model;
+		loadstatedict(Q_eval->model, Q_next->model);
 	}
 
 }
@@ -140,17 +139,15 @@ void DQNAgent::loadstatedict(torch::nn::Module& model,
 			}
 		}
 	}
+	torch::autograd::GradMode::set_enabled(true);
 }
 
 torch::Tensor DQNAgent::get_tensor_observation(std::vector<unsigned char> state)
 {
 	std::vector<int64_t > state_int;
-	//state_int.reserve(state.size());
-
 	for (int i = 0; i < state.size(); i++) {
 		state_int.push_back(int64_t(state[i]));
 	}
-
 	torch::Tensor state_tensor = torch::from_blob(state_int.data(), { 1, input_dim, input_height, input_width }).clone();
 	return state_tensor;
 }
