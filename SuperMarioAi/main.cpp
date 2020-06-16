@@ -6,10 +6,22 @@
 #include "MemoryFinder.h"
 #include <string>
 #include <chrono>
-
+#include "DeepQNetwork.h"
+#include "DQNAgent.h"
+#include <time.h> 
+#include <algorithm>
+#include <random>
+#include <vector>
 #define DEBUG true
 FILE* fDummy;
 void CreateConsole();
+
+
+static std::vector<unsigned char> getEnvDataDummy() {
+    std::vector<unsigned char> v(4 * 15 * 15);
+    std::generate(v.begin(), v.end(), std::rand);
+    return v;
+}
 
 int main(int argc, char* argv[])
 {
@@ -17,20 +29,41 @@ int main(int argc, char* argv[])
         CreateConsole();
     }
 
-    /*
-    ImageLibrary* libptr = ImageLibrary::getInstance();
-    PngImage resized("pictures/Resized/resized.png");
-    libptr->set_resized_image(resized);
+    DQNAgent agent( /*gamma*/0.999, /*epsilon*/0.1, /*learnrate*/0.001, 
+                    /*eps_min*/0.001, /*eps_dec*/0.0001, /*mem_size*/10000, 
+                    /*batch_size*/16, /*update_target*/10, /*actions*/12, 
+                    /*input_shape: DIM, HEIGHT, WIDTH*/4, 15, 15 );
 
-    TorchCNN cnn;
-    for (int y = 0; y < 15; y++) {
-        for (int x = 0; x < 15; x++) {
-            std::cout<<cnn.returnErgFromGridcoords(x, y)<<" ";
+    auto start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < 80; i++) {
+    srand(time(NULL));
+    int random = rand();
 
-        }
-        std::cout << std::endl;
-    } 
-    */
+    //ABLAUF:
+    //GET INPUT 4 15 15 => v
+    auto state = getEnvDataDummy();
+    //act
+    int action = agent.choose_action(state);
+    //std::cout <<"action: "<< action << std::endl;
+    //GET NEW ENV AFTER ACTION
+    //DO ( ACTION ) 
+    auto nextstate = getEnvDataDummy();
+    // REWARD = GET REWARD()
+    float reward = (float)random / (RAND_MAX); /*DUMMY*/
+    // AM I DONE = GET DONE?()
+    bool done = false; /*DUMMY*/
+    //jetzt: store transition
+    agent.store_transition(/*state*/state, /*action*/action, /*reward*/reward, /*newstate*/nextstate, /*done*/done);
+    agent.learn(); //hier wird er nicht lernen, da memory size < batchsize ( 1 < 2)
+    }
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+    std::cout << duration.count() << "ms for inputting 80* 4*15*15 pictures and learning after the 8th" << std::endl;
+
+
+    char x;
+    std::cin >> x;
+    return 0;
 
     AiController controller(argc, argv);
     std::thread controllerThread(&AiController::run, &controller);

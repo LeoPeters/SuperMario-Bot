@@ -4,7 +4,7 @@ TorchCNN::TorchCNN() : distr(), module(), mariofinder() {
     try
     {
         // Deserialize the ScriptModule from a file using torch::jit::load().
-        module = torch::jit::load("./pytorch-models/traced_cnn_model__.pt");
+        module = torch::jit::load("./pytorch-models/traced_cnn_model_fast.pt");
     }
     catch (const c10::Error& e)
     {
@@ -18,7 +18,7 @@ TorchCNN::TorchCNN() : distr(), module(), mariofinder() {
 int TorchCNN::returnErgFromGridcoords(int gridx, int gridy)
 {
     //get rgb values into an array
-    torch::Tensor sizestensor = torch::randn({ 16, 16, 3 });
+   // torch::Tensor sizestensor = torch::randn({ 16, 16, 3 });
     //std::cout<< sizestensor.sizes() << std::endl;
     PngImage& resized = distr.grab_resized_img();
     int y_pos = 0;
@@ -44,12 +44,13 @@ int TorchCNN::returnErgFromGridcoords(int gridx, int gridy)
     tensor = at::transpose(tensor, 0, 2);
     tensor = tensor.unsqueeze(0);
 
+    //tensor shape == {1, 3, 16, 16}
+
     std::vector<torch::jit::IValue> inputs;
     inputs.emplace_back(tensor);
 
     auto erg = module.forward(inputs);
-
-    auto pred = at::argmax(erg.toTensor(), 1, true).item().toInt();
+    auto pred = at::argmax(erg.toTensor(), 0, true).item().toInt();
 
     switch (pred) {
     case 0: return BLOCK;

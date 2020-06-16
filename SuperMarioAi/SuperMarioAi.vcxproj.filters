@@ -80,6 +80,9 @@
     <Filter Include="Header Files\Memory">
       <UniqueIdentifier>{0a3060a3-e50e-4624-9066-6ed2b19934cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DQN">
+      <UniqueIdentifier>{ce1246d7-3838-4dc6-9937-e07899048477}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -201,6 +204,15 @@
     </ClCompile>
     <ClCompile Include="TorchCNN.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DeepQNetwork.cpp">
+      <Filter>Source Files\DQN</Filter>
+    </ClCompile>
+    <ClCompile Include="DQNAgent.cpp">
+      <Filter>Source Files\DQN</Filter>
+    </ClCompile>
+    <ClCompile Include="ExperienceReplay.cpp">
+      <Filter>Source Files\DQN</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -366,6 +378,15 @@
       <Filter>Header Files\Features</Filter>
     </ClInclude>
     <ClInclude Include="TorchCNN.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeepQNetwork.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DQNAgent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExperienceReplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
