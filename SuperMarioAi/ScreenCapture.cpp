@@ -12,7 +12,7 @@ ScreenCapture::ScreenCapture(HWND window) {
 	init(window);
 }
 
-void ScreenCapture::captureScreen(byte* captureByte, int* ImageSize) {
+void ScreenCapture::captureScreen(std::byte* captureByte, int* ImageSize) {
 	if (windowIsFound) {
 		while (1) {
 			using namespace Gdiplus;
@@ -27,7 +27,7 @@ void ScreenCapture::captureScreen(byte* captureByte, int* ImageSize) {
 			GetHGlobalFromStream(stream, &hg);
 			*ImageSize = GlobalSize(hg);
 			LPVOID pimage = GlobalLock(hg);
-			captureByte = (byte*)malloc(*ImageSize);
+			captureByte = (std::byte*)malloc(*ImageSize);
 			memcpy(captureByte, pimage, *ImageSize);
 			GlobalUnlock(hg);
 			stream->Release();

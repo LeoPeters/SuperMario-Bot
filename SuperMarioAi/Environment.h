@@ -5,6 +5,7 @@
 #include "Mapper.h"
 #include "Globals.h"
 #include "MemoryArray.h"
+
 class Environment{
 private:
     ImageLibrary* image_library; // = ImageLibrary::getInstance()
@@ -17,6 +18,8 @@ public:
     int give_Input(PngImage& new_input, int arr[GRIDRADIUS][GRIDRADIUS], int* status);
     int environment_interface(const char* filename, int arr[GRIDRADIUS][GRIDRADIUS], int* status);
     ~Environment();
+    bool threadedSearch(int arr[GRIDRADIUS][GRIDRADIUS]);
+    void threadrun(int arr[GRIDRADIUS][GRIDRADIUS], int row);
 
 };  
 #endif 

@@ -1,6 +1,6 @@
 #include "ScreenCaptureDummy.h"
 
-void ScreenCaptureDummy::captureScreen(byte* image, int* lenght)
+void ScreenCaptureDummy::captureScreen(std::byte* image, int* lenght)
 {
 }
 
