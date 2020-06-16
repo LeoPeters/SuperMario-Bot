@@ -90,7 +90,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Path\libtorch_release\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>torch_cpu.lib;torch.lib;caffe2_detectron_ops.lib;c10.lib;caffe2_module_test_dynamic.lib;asmjit.lib;clog.lib;cpuinfo.lib;fbgemm.lib;libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;mkldnn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>torch_cpu.lib;torch.lib;caffe2_detectron_ops_gpu.lib;c10.lib;caffe2_module_test_dynamic.lib;asmjit.lib;clog.lib;cpuinfo.lib;fbgemm.lib;libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;mkldnn.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>
       </ImportLibrary>
     </Link>

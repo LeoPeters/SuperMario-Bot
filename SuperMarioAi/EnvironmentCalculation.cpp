@@ -53,6 +53,7 @@ void EnvironmentCalculation::calculateStateAndActions(MarioAction lastAction, st
         *state = 0;
         gameWon = false;
         features.setJumpBlocked(false);
+        calc.setProgess(0);
     }
     else if (gameLost) 
     {
@@ -60,6 +61,7 @@ void EnvironmentCalculation::calculateStateAndActions(MarioAction lastAction, st
         *state = 0;
         gameLost = false;
         features.setJumpBlocked(false);
+        calc.setProgess(0);
     } else {
         this->lastAction = lastAction;
         features.setMarioArray(tempArray);
@@ -89,9 +91,9 @@ double EnvironmentCalculation::getReward(std::vector<std::vector<int>> tempArray
     //    reward = -1.5;
     //}
 
-    if (!features.canMoveLeft()) {
-        reward -= 2;
-    }
+    //if (!features.canMoveLeft()) {
+    //    reward -= 2;
+    //}
 
     //if (features.obstacleHeight() == 0 && lastAction == MarioAction::moveRight ) {
     //    reward += 0.8;

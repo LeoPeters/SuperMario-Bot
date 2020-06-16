@@ -196,7 +196,7 @@ void Features::calculateJumpBlocked(MarioAction lastAction)
         onGroundCounter = 0;
     }
    
-    if (onGroundCounter < 8) {
+    if (onGroundCounter < 7) {
         jumpBlocked = false;
     }
     else {

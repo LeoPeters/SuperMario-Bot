@@ -6,30 +6,33 @@ double RewardCalculator::calculateReward(std::vector<std::vector<int>> tempArray
 {
 	double reward=0;
 	if (tempArray.size()>0) {
-		for (int y = marioPosY; y < GRIDRADIUS - 1; y++) {
-			if ((lastAction == MarioAction::jump || lastAction == MarioAction::jumpRight) && simpleArray.at(y).at(marioPosX) == (int)MarioObject::empty) {
-				reward = 1;
-			}
-			else {
-				reward = 0;
-			}
-		}
-		simpleArray = tempArray;
+		//for (int y = marioPosY; y < GRIDRADIUS - 1; y++) {
+		//	if ((lastAction == MarioAction::jump || lastAction == MarioAction::jumpRight) && gameArray.at(y).at(marioPosX) == (int)MarioObject::empty) {
+		//		reward = 1;
+		//	}
+		//	else {
+		//		reward = 0;
+		//	}
+		//}
+		gameArray = tempArray;
 		calculateMarioPosition();
 		updateObstacleList(calculateObstacle());
 		reward += calculateObstacleReward();
-		double reward2 = 0;
-		for (int y = marioPosY; y < GRIDRADIUS - 1; y++) {
-			if (lastAction!=MarioAction::left&& y < GRIDRADIUS - 1 && marioPosX > 0 && simpleArray.at(y + 1).at(marioPosX - 1) == (int)MarioObject::empty) {
-				reward2 = 5;
-			}
-			else {
-				reward2 = 0;
-			}
+		int progressTmp = progress;
+		calculateProgress();
+		if (progressTmp < progress) {
+			reward += REWARDSTEP;
 		}
-		reward += reward2;
 	}
 	return reward;
+}
+void RewardCalculator::setProgess(int i)
+{
+	progress = i;
+}
+int RewardCalculator::getProgress()
+{
+	return progress;
 }
 std::vector<Obstacle> RewardCalculator::calculateObstacle()
 {
@@ -37,8 +40,8 @@ std::vector<Obstacle> RewardCalculator::calculateObstacle()
 	const int yStart = 12;
 	bool isObstacleNew=true;
 	int obstacleCount = 0;
-	for(int x = 0; x < simpleArray.size(); x++) {
-			if (simpleArray.at(yStart).at(x) ==(int) MarioObject::ground ) {
+	for(int x = 0; x < gameArray.size(); x++) {
+			if (gameArray.at(yStart).at(x) ==(int) MarioObject::ground ) {
 				if (isObstacleNew) {
 					obstacleList.push_back(Obstacle());
 					obstacleList[obstacleCount].left = x;
@@ -55,15 +58,13 @@ std::vector<Obstacle> RewardCalculator::calculateObstacle()
 				isObstacleNew = true;
 			}
 	}
-
-
 	return obstacleList;
 }
 
 void RewardCalculator::calculateMarioPosition() {
-	for (int y = 0; y < simpleArray.size(); y++) {
-		for (int x = 0; x < simpleArray.size(); x++)
-			if (simpleArray.at(y).at(x) == (int)MarioObject::mario) {
+	for (int y = 0; y < gameArray.size(); y++) {
+		for (int x = 0; x < gameArray.size(); x++)
+			if (gameArray.at(y).at(x) == (int)MarioObject::mario) {
 				marioPosY = y;
 				marioPosX = x;
 			}
@@ -127,4 +128,39 @@ double RewardCalculator::calculateObstacleReward()
 	}
 
 	return reward;
+}
+
+void RewardCalculator::calculateProgress()
+{	
+	if (lastGameArray.size()>0) {
+	bool allEqual = true;
+	for (int y = 0; y < gameArray.size(); y++) {
+		for (int x = 0; x < gameArray.at(y).size()-1; x++) {
+			if (isStaticObject(gameArray.at(y).at(x)) ) {
+				if (gameArray.at(y).at(x) == lastGameArray.at(y).at(x)) {
+					allEqual &= true;
+				}
+				else {
+					allEqual = false;
+				}
+			}
+		
+		}
+	}
+	if (!allEqual) {
+		progress++;
+
+	}
+	
+	}
+	lastGameArray = gameArray;
+}
+bool RewardCalculator::isStaticObject(int objectIndex) {
+	switch (objectIndex) {
+	case (int)MarioObject::ground:
+		return true;
+	case (int)MarioObject::flag:
+		return true;
+	}
+	return false;
 }
