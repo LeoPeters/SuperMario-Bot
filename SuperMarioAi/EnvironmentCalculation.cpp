@@ -102,7 +102,7 @@ double EnvironmentCalculation::getReward(std::vector<std::vector<int>> tempArray
 
 bool EnvironmentCalculation::movedRight() 
 {
-    if (lastAction == MarioAction::moveRight && (featureVector[(int) MarioFeature::distanceToObstacle] > 1 || featureVector[(int)MarioFeature::distanceToObstacle] == 0)) {
+    if (lastAction == MarioAction::right && (featureVector[(int) MarioFeature::distanceToObstacle] > 1 || featureVector[(int)MarioFeature::distanceToObstacle] == 0)) {
         return true;
     }
     return false;

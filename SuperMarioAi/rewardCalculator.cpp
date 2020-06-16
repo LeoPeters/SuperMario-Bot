@@ -20,7 +20,7 @@ double RewardCalculator::calculateReward(std::vector<std::vector<int>> tempArray
 		reward += calculateObstacleReward();
 		double reward2 = 0;
 		for (int y = marioPosY; y < GRIDRADIUS - 1; y++) {
-			if (lastAction!=MarioAction::moveLeft&& y < GRIDRADIUS - 1 && marioPosX > 0 && simpleArray.at(y + 1).at(marioPosX - 1) == (int)MarioObject::empty) {
+			if (lastAction!=MarioAction::left&& y < GRIDRADIUS - 1 && marioPosX > 0 && simpleArray.at(y + 1).at(marioPosX - 1) == (int)MarioObject::empty) {
 				reward2 = 5;
 			}
 			else {

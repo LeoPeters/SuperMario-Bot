@@ -3,7 +3,7 @@
 Agent::Agent() :
 	lastState(0),
 	policy(Policy::greedy),
-	lastAction(MarioAction::moveLeft),
+	lastAction(MarioAction::left),
 	rewardRight(0)
 {
 
@@ -49,7 +49,7 @@ MarioAction Agent::calculateAction(int stateIndex, std::vector<MarioAction> poss
 
 MarioAction Agent::chooseAction(State state) {
 	double rnd = std::rand() / (double)RAND_MAX;
-	MarioAction a = MarioAction::moveRight;
+	MarioAction a = MarioAction::right;
 
 	switch (policy) {
 	case Policy::greedy:

@@ -4,7 +4,7 @@
 void EnvironmentDummy::calculateStateAndActions(MarioAction nextAction, std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state, double* reward)
 {
 	*state = rand() % (NUMBER_OF_STATES - 1);
-	*possibleActions = { MarioAction::jumpRight, MarioAction::moveRight, MarioAction::jump };
+	*possibleActions = { MarioAction::jumpRight, MarioAction::right, MarioAction::jump };
 }
 
 void EnvironmentDummy::gameWin() {
