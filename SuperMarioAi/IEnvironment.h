@@ -4,7 +4,7 @@
 #include <array>
 #include "MarioAction.h"
 #include "MarioFeature.h"
-
+#include "Globals.h"
 class IEnvironment {
 public:
 	virtual void calculateStateAndActions(MarioAction lastAction, std::vector<std::vector<int>> tempArray, std::vector<MarioAction>* possibleActions, int* state, double* reward) = 0;

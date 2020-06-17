@@ -71,7 +71,7 @@
 #define GAMMA 1 //Discount factor
 #define EPSILON 0.1 //Propability of choosing a random action
 #define REWARDMOVERIGHT 0.08
-#define REWARDSTEP -0.05
+#define REWARDSTEP 0.3
 #define REWARDLOSE -100
 #define REWARDWIN 500
 #define REWARD_OBSTACLE_ARRIVED 8
@@ -81,6 +81,6 @@
 
 #define MAX_KEYBOARD_INPUTS 10
 #define MAX_TABLE_SIZE 60000
-
+#define INPUT_DIM 4
 #define SAVEFILE_PATH "saves/"
 #endif

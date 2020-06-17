@@ -83,6 +83,12 @@
     <Filter Include="Source Files\DQN">
       <UniqueIdentifier>{ce1246d7-3838-4dc6-9937-e07899048477}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Environment">
+      <UniqueIdentifier>{2638bbfe-36e4-496f-bc9f-c9694af856e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Environment">
+      <UniqueIdentifier>{d3e6d28f-fd8f-4893-97b5-0fd0f21fbbcc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -214,15 +220,27 @@
     <ClCompile Include="ExperienceReplay.cpp">
       <Filter>Source Files\DQN</Filter>
     </ClCompile>
-    <ClCompile Include="AgentDQN.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AiControllerDQN.cpp">
       <Filter>Source Files\ControlUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWindow_DeepQ.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentDQN.cpp">
+      <Filter>Source Files\Agent</Filter>
+    </ClCompile>
+    <ClCompile Include="AiGuiDQN.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="EnvironmentDQN.cpp">
+      <Filter>Source Files\Environment</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="MainWindow_DeepQ.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -395,15 +413,24 @@
     <ClInclude Include="ExperienceReplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AgentDQN.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AiControllerDQN.h">
       <Filter>Header Files\ControlUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentDQN.h">
+      <Filter>Header Files\Agent</Filter>
+    </ClInclude>
+    <ClInclude Include="AiGuiDQN.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="EnvironmentDQN.h">
+      <Filter>Header Files\Environment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainWindow.h">
+      <Filter>Header Files\GUI</Filter>
+    </QtMoc>
+    <QtMoc Include="MainWindow_DeepQ.h">
       <Filter>Header Files\GUI</Filter>
     </QtMoc>
   </ItemGroup>

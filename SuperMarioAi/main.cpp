@@ -2,6 +2,7 @@
 //#include "TorchCNN.h"
 #include <iostream>
 #include "AiController.h"
+#include "AiControllerDQN.h"
 #include <thread>
 #include "MemoryFinder.h"
 #include <string>
@@ -24,14 +25,24 @@ int main(int argc, char* argv[])
         CreateConsole();
     }
     bool DQNskipexample = true;
+    bool isDQN = true;
     if (!DQNskipexample) {
         DQNexample();
     }
-   
-    AiController controller(argc, argv);
-    std::thread controllerThread(&AiController::run, &controller);
-    controller.runGui();
-    controllerThread.join();
+    if (!isDQN) {
+        AiController controller(argc, argv);
+        std::thread controllerThread(&AiController::run, &controller);
+        controller.runGui();
+        controllerThread.join();
+    }
+    else {
+        AiControllerDQN controller(argc, argv);
+        std::thread controllerThread(&AiControllerDQN::run, &controller);
+        controller.runGui();
+        controllerThread.join();
+    }
+    
+    
     if (DEBUG) {
         fclose(fDummy);
         FreeConsole();

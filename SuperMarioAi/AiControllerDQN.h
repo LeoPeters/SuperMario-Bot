@@ -9,9 +9,10 @@
 #include "IGuiObserver.h"
 #include "AiFactory.h"
 #include "GameState.h"
-#include "AiGui.h"
+#include "AiGuiDQN.h"
 #include "AiData.h"
 #include "Memory.h"
+#include "EnvironmentDQN.h"
 
 class AiControllerDQN:public IGuiObserver
 {
@@ -29,12 +30,14 @@ public:
 	virtual void saveMemory() override;
 
 private:
+
 	double reward;
 	IScreenCapture* screenCapture;
 	IAppControl* appControl;
 	ISimplifier* simplifier;
+	EnvironmentDQN env;
 	AgentDQN agent;
-	AiGui* gui;
+	AiGuiDQN* gui;
 	bool isPause = false;
 	bool isGameStarted = false;
 	bool isGuiRunning = true;
@@ -46,5 +49,6 @@ private:
 	AiFactory factory = AiFactory();
 	std::vector <std::vector<int>>* simplifyVec = new std::vector <std::vector<int>>();
 	HBITMAP gameCapture = HBITMAP();
+	std::vector<unsigned char> newStateData;
 };
 

@@ -121,14 +121,12 @@ void MainWindowDeepQ::setSimpleView(QGraphicsScene* simpleView)
 
 void MainWindowDeepQ::updateActionView(){
 	for (int i = 0; i < actionLabelList.size(); i++) {
-		actionLabelList.at(i)->hide();
 		QPalette pal;
 		pal.setColor(QPalette::Window, QColor(Qt::lightGray));
 		actionLabelList.at(i)->setPalette(pal);
 	}
 	for (int i = 0; i < data->possibleActions.size(); i++) {
 		int index = data->possibleActions.at(i);
-		actionLabelList.at(index)->show();
 		actionLabelList.at(index)->setText(QString::fromStdString(MarioAction::toString(index) + "\n") + QString::number(data->agentState.getValue(index), 'g', 2));
 	}
 	QPalette pal;

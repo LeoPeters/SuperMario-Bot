@@ -16,8 +16,10 @@ AiControllerDQN::AiControllerDQN(int argc, char** argv) :
 	numberOfCycles(0)
 {
 	data = new AiData();
-	gui = new AiGui(argc, argv, this, data);
-
+	gui = new AiGuiDQN(argc, argv, this, data);
+	for (int i = 0; i < MarioAction::size; i++) {
+		data->possibleActions.push_back(MarioAction(i));
+	}
 }
 
 void AiControllerDQN::run() {
@@ -29,39 +31,40 @@ void AiControllerDQN::run() {
 				data->lastAgentState = data->agentState;
 				data->lastFeatureValues = data->featureValues;
 				data->gameState = simplifier->simplifyImage(simplifyVec);
+				env.calculateEnv(data->simpleView, data->gameState);
+				data->nextAction = agent.calculateAction(env);
+					switch (data->gameState) {
+					case GameState::MarioAlive:
+
+						data->loopCounter++;
+						data->simpleView = *simplifyVec;
+						appControl->makeAction(data->nextAction);
+						break;
+					case GameState::GameOver:
+
+						numberOfCycles++;
+						data->marioDeathCounter++;
+						data->loopCounter++;
+						appControl->restartGame();
+						break;
+					case GameState::Win:
+						numberOfCycles++;
+						data->marioWinCounter++;
+						data->loopCounter++;
+						appControl->restartGame();
+						break;
+					default:
+
+						break;
+					}
 				auto stop = std::chrono::high_resolution_clock::now();
-				switch (data->gameState) {
-				case GameState::MarioAlive:
-					data->loopCounter++;
-					data->simpleView = *simplifyVec;
-
-					appControl->makeAction(data->nextAction);
-					break;
-				case GameState::GameOver:
-					numberOfCycles++;
-
-					data->marioDeathCounter++;
-					data->loopCounter++;
-
-
-					appControl->restartGame();
-					break;
-				case GameState::Win:
-					numberOfCycles++;
-					data->marioWinCounter++;
-					data->loopCounter++;
-
-					appControl->restartGame();
-					break;
-				default:
-
-					break;
-				}
-				auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-				auto fps = duration.count();
-				data->loopTime = (int)fps;
+					auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+					auto fps = duration.count();
+					data->loopTime = (int)fps;
+					data->reward = env.getReward();
+				
+				gui->update();
 			}
-			gui->update();
 		}
 		Sleep(300);
 	}
@@ -95,7 +98,7 @@ void AiControllerDQN::notifyEndApp()
 void AiControllerDQN::startSuperMario()
 {
 	isGameStarted = false;
-	if (factory.loadSuperMarioAi()) {
+	if (factory.loadSuperMarioAi(false, true, true, true, false)) {
 		this->screenCapture = factory.getScreenCapture();
 		this->simplifier = factory.getImageScan();
 		this->appControl = factory.getAppControl();
@@ -124,7 +127,6 @@ void AiControllerDQN::loadMemory(std::string path)
 
 void AiControllerDQN::saveMemory()
 {
-
 }
 
 AiControllerDQN::~AiControllerDQN()
@@ -133,3 +135,4 @@ AiControllerDQN::~AiControllerDQN()
 		appControl->endGame();
 	}
 }
+

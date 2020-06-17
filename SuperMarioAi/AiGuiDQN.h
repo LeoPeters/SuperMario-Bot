@@ -1,5 +1,4 @@
-#ifndef aigui_h
-#define aigui_h
+#pragma once
 #include "ScreenCapture.h"
 #include "MarioAction.h"
 #include "AiData.h"
@@ -7,19 +6,19 @@
 #include "MainWindow_DeepQ.h"
 #include "MarioFeature.h"
 
-class AiGui
+class AiGuiDQN
 {
 public:
-	AiGui(int argc, char** argv, IGuiObserver*, AiData* data);
+	AiGuiDQN(int argc, char** argv, IGuiObserver*, AiData* data);
 	void setData(AiData* newData);
 
 	void runGui();
 	void end();
 	void update();
-	MainWindow* getMainWindow();
+	MainWindowDeepQ* getMainWindow();
 	IGuiObserver* getObserver();
 private:
-	MainWindow* mWindow;
+	MainWindowDeepQ* mWindow;
 	QApplication* app;
 	IGuiObserver* observer;
 	QGraphicsScene* gameView;
@@ -29,7 +28,5 @@ private:
 private:
 	AiData* data;
 
-
 };
-#endif
 

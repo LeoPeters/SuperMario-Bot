@@ -1,49 +1,45 @@
+#include "AiGuiDQN.h"
 #include <QtWin>
 #include "Globals.h"
 #include <iostream>
-#include "AiGui.h"
-AiGui::AiGui(int argc, char** argv, IGuiObserver* observer,AiData* data) :
+
+AiGuiDQN::AiGuiDQN(int argc, char** argv, IGuiObserver* observer, AiData* data) :
 	observer(observer),
 	data(data)
 {
 	app = new QApplication(argc, argv);
-	mWindow = new MainWindow(observer,data);
+	mWindow = new MainWindowDeepQ(observer, data);
 	mWindow->show();
-	
+
 	gameView = new QGraphicsScene();
 	simpleView = new QGraphicsScene();
 	mWindow->setSimpleView(simpleView);
-	mWindow->setgameView(gameView);	
+	mWindow->setgameView(gameView);
 }
-void AiGui::setData(AiData* newData) {
+void AiGuiDQN::setData(AiData* newData) {
 	data = newData;
 }
-void AiGui::runGui()
+void AiGuiDQN::runGui()
 {
 	app->exec();
 }
 
-void AiGui::end()
+void AiGuiDQN::end()
 {
 	app->quit();
 }
 
-void AiGui::update()
+void AiGuiDQN::update()
 {
 	mWindow->updateView();
 }
 
-MainWindow* AiGui::getMainWindow()
+MainWindowDeepQ* AiGuiDQN::getMainWindow()
 {
 	return mWindow;
 }
 
-IGuiObserver* AiGui::getObserver()
+IGuiObserver* AiGuiDQN::getObserver()
 {
 	return observer;
 }
-
-
-
-
-
