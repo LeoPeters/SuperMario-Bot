@@ -24,6 +24,7 @@ int main(int argc, char* argv[])
     if (DEBUG) {
         CreateConsole();
     }
+
     bool DQNskipexample = true;
     bool isDQN = true;
     if (!DQNskipexample) {

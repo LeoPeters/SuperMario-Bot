@@ -89,6 +89,9 @@
     <Filter Include="Header Files\Environment">
       <UniqueIdentifier>{d3e6d28f-fd8f-4893-97b5-0fd0f21fbbcc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DQN">
+      <UniqueIdentifier>{f76aa623-291e-49d4-9aea-ad9aeba5f703}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -407,15 +410,6 @@
     <ClInclude Include="TorchCNN.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DeepQNetwork.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DQNAgent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ExperienceReplay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AiControllerDQN.h">
       <Filter>Header Files\ControlUnit</Filter>
     </ClInclude>
@@ -430,6 +424,15 @@
     </ClInclude>
     <ClInclude Include="TorchModuleUtils.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExperienceReplay.h">
+      <Filter>Header Files\DQN</Filter>
+    </ClInclude>
+    <ClInclude Include="DQNAgent.h">
+      <Filter>Header Files\DQN</Filter>
+    </ClInclude>
+    <ClInclude Include="DeepQNetwork.h">
+      <Filter>Header Files\DQN</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

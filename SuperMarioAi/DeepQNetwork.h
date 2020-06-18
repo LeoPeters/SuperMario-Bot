@@ -30,7 +30,7 @@ struct Model : torch::nn::Module {
         //std::cout << X.sizes() << std::endl;
         X = torch::relu(hidden->forward(X));
         //std::cout << X.sizes() << std::endl;
-        X = torch::sigmoid(output->forward(X));
+        X = torch::relu(output->forward(X));
         //std::cout << X.sizes() << std::endl;
         return X;
     }

@@ -52,13 +52,15 @@ void DQNAgent::store_transition(std::vector<unsigned char> state, int64_t action
 
 int DQNAgent::choose_action(std::vector<unsigned char> observation)
 {
-	srand(time(NULL));
-	int random = rand();
-	if (((float)random / (RAND_MAX)) > epsilon) { //int* observation MUSS: [4][15][15]
+	std::random_device rd;
+	std::mt19937 e2(rd());
+	std::uniform_real_distribution<> dist(0, 1);
+	if (dist(e2) > epsilon) { 
 		auto actions = Q_eval->model.forward(get_tensor_observation(observation));
 		return at::argmax(actions).item().toInt();
 	}
-	return random % (num_actions);
+	std::uniform_int_distribution<> action_distrib(0, num_actions-1);
+	return action_distrib(e2);
 }
 
 
@@ -112,7 +114,7 @@ void DQNAgent::learn()
 
 	iter_cntr++;
 	if (epsilon > eps_min) {
-		if (iter_cntr % 3000 == 0) {
+		if (iter_cntr % 10000 == 0) {
 			std::string path = "pytorch-models/DQNmodels/";
 			path += "DQN_" + std::to_string(iter_cntr) + "_iterations.pt";
 			TorchModuleUtils::saveModule(Q_eval->model, path);
