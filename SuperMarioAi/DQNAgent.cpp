@@ -6,7 +6,7 @@
 #include <vector>
 #include <math.h>
 #include <tuple>
-
+#include "TorchModuleUtils.h"
 
 
 DQNAgent::DQNAgent(float gamma, float epsilon, float lr, float eps_min, float eps_dec, int mem_size,
@@ -61,6 +61,7 @@ int DQNAgent::choose_action(std::vector<unsigned char> observation)
 	return random % (num_actions);
 }
 
+
 void DQNAgent::learn()
 {
 	if (mem_cntr < batch_size)
@@ -111,37 +112,25 @@ void DQNAgent::learn()
 
 	iter_cntr++;
 	if (epsilon > eps_min) {
-		epsilon = epsilon - eps_dec;
-		//epsilon = eps_min + (epsilon - (double)eps_min) * exp(-1. * iter_cntr / eps_dec);
+		if (iter_cntr % 3000 == 0) {
+			std::string path = "pytorch-models/DQNmodels/";
+			path += "DQN_" + std::to_string(iter_cntr) + "_iterations.pt";
+			TorchModuleUtils::saveModule(Q_eval->model, path);
+
+			epsilon = epsilon - eps_dec;
+			//epsilon = epsilon - 0.01;
+			//epsilon = eps_min + (epsilon - (double)eps_min) * exp(-1. * iter_cntr / eps_dec);
+			std::cout << "Epsilon: " << epsilon << "\n";
+		}
 	}
 	
 	if (iter_cntr % replace_target == 0) {
-		loadstatedict(Q_eval->model, Q_next->model);	
+		TorchModuleUtils::loadstatedict(Q_eval->model, Q_next->model);
 	}
 
 }
 
-void DQNAgent::loadstatedict(torch::nn::Module& model,
-	torch::nn::Module& target_model) {
-	torch::autograd::GradMode::set_enabled(false);  // make parameters copying possible
-	auto new_params = target_model.named_parameters(); // implement this
-	auto params = model.named_parameters(true /*recurse*/);
-	auto buffers = model.named_buffers(true /*recurse*/);
-	for (auto& val : new_params) {
-		auto name = val.key();
-		auto* t = params.find(name);
-		if (t != nullptr) {
-			t->copy_(val.value());
-		}
-		else {
-			t = buffers.find(name);
-			if (t != nullptr) {
-				t->copy_(val.value());
-			}
-		}
-	}
-	torch::autograd::GradMode::set_enabled(true);
-}
+
 
 torch::Tensor DQNAgent::get_tensor_observation(std::vector<unsigned char> state)
 {

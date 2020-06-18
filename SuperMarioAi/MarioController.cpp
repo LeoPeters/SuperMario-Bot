@@ -2,14 +2,20 @@
 #include "KeyboardDefines.h"
 #include "MarioWindow.h"
 #include <iostream>
+#define MAXJUMP_COUNT_RESET 3
+
 MarioController::MarioController() :
 	keyboard(NULL),
 	window(NULL),
 	keyboardThread(NULL)
 {}
 
+
 void MarioController::makeAction(MarioAction nextAction)
 {
+
+	static int jumpcounter = 0;
+
 	isPressing = false;
 	if (keyboardThread != NULL) {
 		keyboardThread->join();
@@ -18,48 +24,65 @@ void MarioController::makeAction(MarioAction nextAction)
 	for (int i = 0; i < keyBool.size(); i++) {
 		keyBool[i] = false;
 	}
+	if (jumpcounter >= MAXJUMP_COUNT_RESET) {
+		releaseAll();
+		jumpcounter = 0;
+		//Sleep(10);
+	}
 	switch (nextAction) {
 	case MarioAction::right:
+		jumpcounter = 0;
 		keyBool[6] = true;
 		break;
 	case MarioAction::jumpRight:
+		jumpcounter++;
 		keyBool[6] = true;
 		keyBool[3] = true;
 		break;
 	case MarioAction::left:
+		jumpcounter = 0;
 		keyBool[4] = true;
 		break;
 	case MarioAction::jumpLeft:
+		jumpcounter++;
 		keyBool[4] = true;
 		keyBool[3] = true;
 		break;
 	case MarioAction::rightB:
+		jumpcounter = 0;
 		keyBool[6] = true;
 		keyBool[1] = true;
 		break;
 	case MarioAction::jumpRightB:
+		jumpcounter++;
 		keyBool[6] = true;
 		keyBool[3] = true;
 		keyBool[1] = true;
 		break;
 	case MarioAction::leftB:
+		jumpcounter = 0;
 		keyBool[4] = true;
 		keyBool[1] = true;
 		break;
 	case MarioAction::jumpLeftB:
+		jumpcounter++;
 		keyBool[4] = true;
 		keyBool[1] = true;
 		keyBool[3] = true;
 		break;
 	case MarioAction::jump:
+		jumpcounter++;
 		keyBool[3] = true;
 		break;
 	case MarioAction::B:
+		jumpcounter = 0;
 		keyBool[1] = true;
 		break;
 	case MarioAction::idle:
+		jumpcounter = 0;
 		break;
 	case MarioAction::down:
+		jumpcounter = 0;
 		keyBool[2] = true;
 		break;
 	default:
@@ -140,7 +163,6 @@ void MarioController::releaseAll() {
 
 void MarioController::pressKey()
 {
-
 	while (isPressing) {
 		releaseAll();
 		Sleep(4);
@@ -149,7 +171,5 @@ void MarioController::pressKey()
 				keyboard->pressKey(keyValue[i]);
 			}
 		}
-		
 	}
-	
 }

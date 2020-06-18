@@ -43,8 +43,6 @@ public:
 	void store_transition(std::vector<unsigned char> state, int64_t action, float reward, std::vector<unsigned char> state_, bool terminal);
 	int choose_action(std::vector<unsigned char>  observation);
 	void learn();
-
-	void loadstatedict(torch::nn::Module& model, torch::nn::Module& target_model);
 	
 
 };

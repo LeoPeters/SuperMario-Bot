@@ -235,6 +235,9 @@
     <ClCompile Include="EnvironmentDQN.cpp">
       <Filter>Source Files\Environment</Filter>
     </ClCompile>
+    <ClCompile Include="TorchModuleUtils.cpp">
+      <Filter>Source Files\DQN</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MainWindow.ui">
@@ -424,6 +427,9 @@
     </ClInclude>
     <ClInclude Include="EnvironmentDQN.h">
       <Filter>Header Files\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="TorchModuleUtils.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

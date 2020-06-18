@@ -39,6 +39,7 @@ void AiControllerDQN::run() {
 						data->loopCounter++;
 						data->simpleView = *simplifyVec;
 						appControl->makeAction(data->nextAction);
+
 						break;
 					case GameState::GameOver:
 

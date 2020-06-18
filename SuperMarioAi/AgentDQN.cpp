@@ -3,9 +3,9 @@
 #include "Globals.h"
 
 AgentDQN::AgentDQN():
-	agent(DQNAgent( /*gamma*/0.999, /*epsilon*/0.1, /*learnrate*/0.001,
-		/*eps_min*/0.001, /*eps_dec*/0.0001, /*mem_size*/10000,
-		/*batch_size*/16, /*update_target*/10, /*actions*/12,
+	agent(DQNAgent( /*gamma*/0.999, /*epsilon*/0.20, /*learnrate*/0.3,
+		/*eps_min*/0.03, /*eps_dec*/0.0005, /*mem_size*/100000,
+		/*batch_size*/64, /*update_target*/20, /*actions*/12,
 		/*input_shape: DIM, HEIGHT, WIDTH*/4, 15, 15)),
 	madeStep(false),
 	action(0)

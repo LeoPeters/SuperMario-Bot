@@ -34,16 +34,22 @@ void EnvironmentDQN::calculateReward()
 	done = false;
 	reward=0.0;
 	if (progressStep()) {
-		reward += REWARDMOVERIGHT;
+		//reward += REWARDMOVERIGHT;
+		reward += 10;
+		return;
 	}
 	if (gameState == GameState::Win) {
 		reward += REWARDWIN;
 		done = true;
+		return;
 	}
 	if (gameState == GameState::GameOver) {
-		reward += REWARDLOSE;
+		//reward += REWARDLOSE;
+		reward -= 20;
 		done = true;
+		return;
 	}
+	reward = -0.5;
 
 }
 

@@ -40,7 +40,6 @@ struct Model : torch::nn::Module {
     torch::nn::Linear hidden{ nullptr }, output{ nullptr };
 };
 
-
 class DeepQNetwork
 {
 private:
@@ -51,9 +50,7 @@ public:
     Model model;
     torch::optim::Adam optimizer;
     torch::nn::MSELoss loss;
-    
 
     DeepQNetwork(float lr, int actions);
     ~DeepQNetwork();
 };
-
