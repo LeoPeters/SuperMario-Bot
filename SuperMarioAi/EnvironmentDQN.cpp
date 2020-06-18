@@ -35,7 +35,7 @@ void EnvironmentDQN::calculateReward()
 	reward=0.0;
 	if (progressStep()) {
 		//reward += REWARDMOVERIGHT;
-		reward += 2;
+		reward += 1;
 		return;
 	}
 	if (gameState == GameState::Win) {
@@ -45,12 +45,11 @@ void EnvironmentDQN::calculateReward()
 	}
 	if (gameState == GameState::GameOver) {
 		//reward += REWARDLOSE;
-		reward -= 5;
+		reward -= 10;
 		done = true;
 		return;
 	}
-	reward = -0.25;
-
+	reward -= 0.2;
 }
 
 void EnvironmentDQN::initDQNInput() {

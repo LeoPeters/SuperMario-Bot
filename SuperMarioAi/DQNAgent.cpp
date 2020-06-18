@@ -20,6 +20,13 @@ DQNAgent::DQNAgent(float gamma, float epsilon, float lr, float eps_min, float ep
 	Q_eval = new DeepQNetwork(lr, n_actions);
 	Q_next = new DeepQNetwork(lr, n_actions);
 	
+	/*TODO: clean laden über gui. Erkennen ob es den namen schon gibt usw*/
+	/*LOAD WON STATE (muss später über gui laufen)*/
+	//WIN_DQN_10000_iterations
+	TorchModuleUtils::loadModule(Q_eval->model, "pytorch-models/DQNmodels/WON_DQN_10000_iterations.pt");
+	TorchModuleUtils::loadModule(Q_next->model, "pytorch-models/DQNmodels/WON_DQN_10000_iterations.pt");
+	iter_cntr = 10001;
+	this->epsilon = 0.125;
 }
 
 DQNAgent::~DQNAgent()
@@ -28,8 +35,15 @@ DQNAgent::~DQNAgent()
 	delete Q_next;
 }
 
+void DQNAgent::saveStateAfterWin() {
+	std::string path = "pytorch-models/DQNmodels/WON_";
+	path += "DQN_" + std::to_string(iter_cntr) + "_iterations.pt";
+	TorchModuleUtils::saveModule(Q_eval->model, path);
+}
+
 void DQNAgent::store_transition(std::vector<unsigned char> state, int64_t action, float reward, std::vector<unsigned char> state_, bool terminal)
 {
+
 	int index = mem_cntr % mem_size;
 
 	float rewards[1] = { reward };
@@ -114,20 +128,22 @@ void DQNAgent::learn()
 
 	iter_cntr++;
 	if (epsilon > eps_min) {
-		if (iter_cntr % 10000 == 0) {
-			std::string path = "pytorch-models/DQNmodels/";
-			path += "DQN_" + std::to_string(iter_cntr) + "_iterations.pt";
-			TorchModuleUtils::saveModule(Q_eval->model, path);
-
+		if (iter_cntr % 1000 == 0) {
 			epsilon = epsilon - eps_dec;
 			//epsilon = epsilon - 0.01;
 			//epsilon = eps_min + (epsilon - (double)eps_min) * exp(-1. * iter_cntr / eps_dec);
 			std::cout << "Epsilon: " << epsilon << "\n";
 		}
 	}
+
+	if (iter_cntr % 10000 == 0) {
+		std::string path = "pytorch-models/DQNmodels/";
+		path += "DQN_" + std::to_string(iter_cntr) + "_iterations.pt";
+		TorchModuleUtils::saveModule(Q_eval->model, path);
+	}
 	
 	if (iter_cntr % replace_target == 0) {
-		TorchModuleUtils::loadstatedict(Q_eval->model, Q_next->model);
+		TorchModuleUtils::loadstatedict(Q_next->model,Q_eval->model);
 	}
 
 }

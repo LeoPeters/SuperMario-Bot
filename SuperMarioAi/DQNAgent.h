@@ -40,6 +40,7 @@ public:
 	DQNAgent(float gamma, float epsilon, float lr, float eps_min, float eps_dec, int mem_size, 
 		int batch_size, int replace_target,int n_actions, int input_num, int width, int height);
 	~DQNAgent();
+	void saveStateAfterWin();
 	void store_transition(std::vector<unsigned char> state, int64_t action, float reward, std::vector<unsigned char> state_, bool terminal);
 	int choose_action(std::vector<unsigned char>  observation);
 	void learn();

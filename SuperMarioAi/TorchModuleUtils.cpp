@@ -1,12 +1,12 @@
 #include "TorchModuleUtils.h"
 
 
-void TorchModuleUtils::loadstatedict(torch::nn::Module& model,
-	torch::nn::Module& target_model) {
+void TorchModuleUtils::loadstatedict(torch::nn::Module& copy_to_this,
+	torch::nn::Module& copy_from_this) {
 	torch::autograd::GradMode::set_enabled(false);  // make parameters copying possible
-	auto new_params = target_model.named_parameters(); // implement this
-	auto params = model.named_parameters(true /*recurse*/);
-	auto buffers = model.named_buffers(true /*recurse*/);
+	auto new_params = copy_from_this.named_parameters(); // implement this
+	auto params = copy_to_this.named_parameters(true /*recurse*/);
+	auto buffers = copy_to_this.named_buffers(true /*recurse*/);
 	for (auto& val : new_params) {
 		auto name = val.key();
 		auto* t = params.find(name);
