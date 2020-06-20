@@ -23,6 +23,7 @@ AiControllerDQN::AiControllerDQN(int argc, char** argv) :
 }
 
 void AiControllerDQN::run() {
+	bool canJump = true;
 	while (isGuiRunning) {
 		while (isGameStarted) {
 			data->gameView = screenCapture->captureScreen(PNG_LNAME);
@@ -32,14 +33,19 @@ void AiControllerDQN::run() {
 				data->lastFeatureValues = data->featureValues;
 				data->gameState = simplifier->simplifyImage(simplifyVec);
 				env.calculateEnv(data->simpleView, data->gameState);
+				canJump =env.calcualateCanJump();
 				data->nextAction = agent.calculateAction(env);
 					switch (data->gameState) {
 					case GameState::MarioAlive:
 
 						data->loopCounter++;
 						data->simpleView = *simplifyVec;
+						if (!canJump) {
+							
+							data->nextAction = env.filterJump(data->nextAction);
+						}
+						
 						appControl->makeAction(data->nextAction);
-
 						break;
 					case GameState::GameOver:
 

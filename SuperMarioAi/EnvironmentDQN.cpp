@@ -1,7 +1,10 @@
 #include "EnvironmentDQN.h"
 #include "Globals.h"
+#include <iostream>
 #include "MarioObject.h"
-EnvironmentDQN::EnvironmentDQN() {
+EnvironmentDQN::EnvironmentDQN():
+	delay(false)
+{
 	initDQNInput();
 }
 void EnvironmentDQN::calculateEnv(std::vector<std::vector<int>> vec,  GameState gameState)
@@ -72,6 +75,62 @@ std::vector<unsigned char> EnvironmentDQN::getInputDQN()
 bool EnvironmentDQN::getDone()
 {
 	return done;
+}
+
+bool EnvironmentDQN::calcualateCanJump()
+{
+	if (!marioOnGround(simpleVec) && !marioOnGround(lastSimpleVec) ) {
+		delay = true;
+		return false;
+	}
+	
+	if (delay) {
+		delay = false;
+		return false;
+	}
+
+
+	return true;
+}
+MarioAction EnvironmentDQN::filterJump(MarioAction action) {
+	switch (action)
+	{
+	case MarioAction::jump:
+		return MarioAction::idle;
+	case MarioAction::jumpLeft:
+		return MarioAction::left ;
+	case MarioAction::jumpLeftB:
+		return MarioAction::leftB;
+	case MarioAction::jumpRight:
+		return MarioAction::right  ;
+	case MarioAction::jumpRightB:
+		return MarioAction::rightB;
+	default:
+		return action;
+	}
+}
+bool EnvironmentDQN::marioOnGround(std::vector<std::vector<int>> vec)
+{
+	bool marioFound = false;
+	int y = 0;
+	int x = 0;
+
+
+	for (y = 0; y < simpleVec.size(); y++) {
+		for (x = 0; x< simpleVec.at(y).size(); x++) {
+			if (simpleVec.at(y).at(x)==(int)MarioObject::mario ){
+				marioFound = true;
+				break;
+			}
+		}
+		if (marioFound == true) {
+			break;
+		}
+	}
+	if (marioFound && y < GRIDRADIUS - 1 && simpleVec.at(y + 1).at(x) == (int)MarioObject::ground) {
+		return true;
+	}
+	return false;
 }
 
 bool EnvironmentDQN::progressStep() {

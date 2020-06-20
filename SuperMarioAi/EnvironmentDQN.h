@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "GameState.h"
+#include "MarioAction.h"
 class EnvironmentDQN
 {
 public:
@@ -10,6 +11,9 @@ public:
 	double getReward();
 	std::vector<unsigned char> getInputDQN();
 	bool getDone();
+	bool calcualateCanJump();
+	MarioAction filterJump(MarioAction action);
+	bool marioOnGround(std::vector<std::vector<int>> vec);
 private:
 	std::vector<unsigned char> flattingVector(std::vector<std::vector<int>> vec);
 	void generateDQNInput(std::vector<unsigned char> flatVec);
@@ -24,5 +28,6 @@ private:
 	GameState gameState;
 	bool done;
 	double reward;
+	bool delay;
 };
 
