@@ -1386,7 +1386,7 @@
   <RecentFiles>
     <RecentItem>
       <RomFile>
-        <Path>C:\Users\michi\source\repos\SuperMario-Bot\Mesen\Super_mario_brothers.nes</Path>
+        <Path>C:\Users\luisn\source\repos\SuperMario-Bot\Mesen\Super_mario_brothers.nes</Path>
         <InnerFile />
         <InnerFileIndex>0</InnerFileIndex>
       </RomFile>
@@ -1394,7 +1394,7 @@
     </RecentItem>
     <RecentItem>
       <RomFile>
-        <Path>C:\Users\luisn\source\repos\SuperMario-Bot\Mesen\Super_mario_brothers.nes</Path>
+        <Path>C:\Users\michi\source\repos\SuperMario-Bot\Mesen\Super_mario_brothers.nes</Path>
         <InnerFile />
         <InnerFileIndex>0</InnerFileIndex>
       </RomFile>
@@ -1891,8 +1891,8 @@
   </HistoryViewerInfo>
   <GameSpecificSettings />
   <WindowLocation>
-    <X>2237</X>
-    <Y>203</Y>
+    <X>0</X>
+    <Y>0</Y>
   </WindowLocation>
   <WindowSize>
     <Width>340</Width>

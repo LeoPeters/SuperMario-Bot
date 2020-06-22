@@ -16,7 +16,7 @@ MainWindowDeepQ::MainWindowDeepQ(IGuiObserver* observer, AiData* data)
 	ui.setupUi(this);
 	signalSetup();
 	updateMemoryList();
-	setUpActionView();
+	//setUpActionView();
 
 }
 MainWindowDeepQ::~MainWindowDeepQ()
@@ -50,7 +50,7 @@ void MainWindowDeepQ::updateGUi()
 		ui.viewSimplify->scene()->addPixmap(simpleView.scaled((ui.viewSimplify->width() * 0.995), (ui.viewSimplify->height() * 0.995)));
 	}
 	ui.GameState->setText(QString::fromStdString(data->gameState.toString()));
-	updateActionView();
+	//updateActionView();
 	ui.deathCounter->setText(QString::number(data->marioDeathCounter));
 	ui.winCounter->setText(QString::number(data->marioWinCounter));
 	ui.LoopTime->setText(QString::number(data->loopTime) + " ms");
